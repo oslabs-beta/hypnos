@@ -2,7 +2,7 @@
   "name": "hypnos",
   "version": "1.0.0",
   "description": "An app to test GraphQL calls on RESTful APIs, via Apollo.",
-  "main": "index.js",
+  "main": "electron.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
