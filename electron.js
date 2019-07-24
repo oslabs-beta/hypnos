@@ -42,6 +42,7 @@ const mainMenuTemplate = [
         click() {
           app.quit();
         },
+        accelerator: 'CommandOrControl+Q',
       },
     ],
   },
