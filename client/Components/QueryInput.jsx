@@ -10,8 +10,6 @@ const QueryInput = () => {
 
     const handleSubmit = () => {
         event.preventDefault();
-        const query = textValue;
-        
         console.log("submitted!");
 
     }
