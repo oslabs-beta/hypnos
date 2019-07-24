@@ -1,16 +1,16 @@
 import React from 'react';
 import { useStateValue } from '../Context';
+import EndpointInput from '../Components/EndpointInput';
+import QueryOutput from '../Components/QueryOutput';
+import RunQueryButton from '../Components/RunQueryButton';
+
 
 const QueriesContainer = () => {
   const [{ greeting }, dispatch] = useStateValue();
 
-
-  // console.log(greeting, 'this is greeting')
-  // console.log(dispatch, 'this is dispatch')
-
   return (
     <div>
-      <h1>
+      {/* <h1>
         {greeting}
       </h1>
       <button
@@ -20,7 +20,10 @@ const QueriesContainer = () => {
         })}
       >
         Change the Greeting!
-    </button>
+      </button> */}
+    <EndpointInput />
+    <QueryOutput />
+    <RunQueryButton />
     </div>
   );
 }

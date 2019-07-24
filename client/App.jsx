@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { StateProvider } from './Context';
-import QueriesContainer from './Containers/QueriesContainer.jsx'
+import QueriesContainer from './Containers/QueriesContainer'
+import Menu from './Components/Menu'
 
 // class App extends Component {
 //   render() {
@@ -33,6 +34,7 @@ const App = () => {
     <div>
       <StateProvider initialState={initialState} reducer={reducer}>
         <QueriesContainer />
+        <Menu />
       </StateProvider>
     </div>
   );
