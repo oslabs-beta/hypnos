@@ -12,7 +12,7 @@ const QueriesContainer = () => {
     <div>
       {/* <h1>
         {greeting}
-      </h1>
+      </h1> */}
       <button
         onClick={() => dispatch({
           type: 'newGreeting',
@@ -20,7 +20,7 @@ const QueriesContainer = () => {
         })}
       >
         Change the Greeting!
-      </button> */}
+      </button>
     <EndpointInput />
     <QueryOutput />
     <RunQueryButton />
