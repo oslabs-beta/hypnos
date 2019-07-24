@@ -3,6 +3,7 @@ import { useStateValue } from '../Context';
 import EndpointInput from '../Components/EndpointInput';
 import QueryOutput from '../Components/QueryOutput';
 import RunQueryButton from '../Components/RunQueryButton';
+import QueryInput from "../Components/QueryInput"
 
 
 const QueriesContainer = () => {
@@ -21,9 +22,10 @@ const QueriesContainer = () => {
       >
         Change the Greeting!
       </button> */}
-    <EndpointInput />
-    <QueryOutput />
-    <RunQueryButton />
+      <EndpointInput />
+      <QueryInput />
+      <QueryOutput />
+      <RunQueryButton />
     </div>
   );
 }
