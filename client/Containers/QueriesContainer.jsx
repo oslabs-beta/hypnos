@@ -4,6 +4,10 @@ import { useStateValue } from '../Context';
 const QueriesContainer = () => {
   const [{ greeting }, dispatch] = useStateValue();
 
+
+  // console.log(greeting, 'this is greeting')
+  // console.log(dispatch, 'this is dispatch')
+
   return (
     <div>
       <h1>

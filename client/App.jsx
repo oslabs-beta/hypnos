@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import StateProvider from './Context';
-import QueriesContainer from './Containers/QueriesContainer'
+import { StateProvider } from './Context';
+import QueriesContainer from './Containers/QueriesContainer.jsx'
 
 // class App extends Component {
 //   render() {
@@ -15,7 +15,7 @@ import QueriesContainer from './Containers/QueriesContainer'
 
 const App = () => {
   const initialState = {
-    greeting: 'hello world'
+    greeting: 'hello Sophie'
   };
   const reducer = (state, action) => {
     switch (action.type) {
@@ -30,9 +30,11 @@ const App = () => {
   }
 
   return (
-    <StateProvider initialState={initialState} reducer={reducer}>
-      <QueriesContainer />
-    </StateProvider>
+    <div>
+      <StateProvider initialState={initialState} reducer={reducer}>
+        <QueriesContainer />
+      </StateProvider>
+    </div>
   );
 }
 
