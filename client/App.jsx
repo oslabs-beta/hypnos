@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import QueryInput from "./Components/QueryInput";
 
 class App extends Component {
     render() {
@@ -6,6 +7,7 @@ class App extends Component {
         return (
             <div>
                 <h1>Hello World</h1>
+                <QueryInput />
             </div >
         )
     }
