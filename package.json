@@ -30,6 +30,7 @@
     "apollo-client": "^2.6.3",
     "apollo-link-rest": "^0.7.3",
     "babel-core": "^6.26.3",
+    "grap": "^1.0.0",
     "graphql": "^14.4.2",
     "graphql-anywhere": "^4.2.4",
     "graphql-tag": "^2.10.1",

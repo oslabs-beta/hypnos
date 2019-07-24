@@ -1,7 +1,7 @@
 import React from 'react';
 import { useStateValue } from '../Context';
 
-const QueryOutput = () => {
+const QueryOutput = (props) => {
   // just uncomment when you want you start using Menu!
   const [{ greeting, endpoint }, dispatch] = useStateValue();
 
@@ -10,7 +10,7 @@ const QueryOutput = () => {
     <div>
       <h2>inside QueryOutput</h2>
       <h3>
-        {endpoint}
+        {props.data}
       </h3>
     </div>
   )

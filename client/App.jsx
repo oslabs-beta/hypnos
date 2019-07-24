@@ -17,6 +17,8 @@ import Menu from './Components/Menu'
 const App = () => {
   const initialState = {
     greeting: 'hello Sophie',
+    query: '',
+    endpoint: 'https://swapi.co/api'
   };
   const reducer = (state, action) => {
     switch (action.type) {
@@ -29,6 +31,11 @@ const App = () => {
         return {
           ...state,
           endpoint: action.addEndpoint
+        }
+      case 'addQuery':
+        return {
+          ...state,
+          query: action.query
         }
       default:
         return state;

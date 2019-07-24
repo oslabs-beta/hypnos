@@ -4,7 +4,9 @@ import EndpointInput from '../Components/EndpointInput';
 import QueryOutput from '../Components/QueryOutput';
 import RunQueryButton from '../Components/RunQueryButton';
 import QueryInput from "../Components/QueryInput";
-import { ApolloProvider } from 'react-apollo';
+import { ApolloProvider, graphql } from 'react-apollo';
+// we made not need GQL imported here
+// import gql from 'graphql-tag';
 import { RestLink } from "apollo-link-rest";
 import { ApolloClient } from "apollo-client";
 //may not need below if using context
@@ -22,7 +24,12 @@ const client = new ApolloClient({
 
 
 const QueriesContainer = () => {
-  const [{ greeting, endpoint }, dispatch] = useStateValue();
+  const [{ greeting, endpoint, query }, dispatch] = useStateValue();
+
+  let QueryQueryOutput;
+  if (query !== '') {
+    QueryQueryOutput = graphql(query)(QueryOutput);
+  }
 
   return (
     <div>
@@ -42,11 +49,14 @@ const QueriesContainer = () => {
       </button>
       <EndpointInput />
       <QueryInput />
-      <QueryOutput />
+      {/* <QueryQueryOutput /> */}
       <RunQueryButton />
     </div>
   );
 }
+// we may need options object to handle props
+// THIS WAS REMOVED: <QueryOutput />
+
 
 const ApolloQueryContainer = () => (
   <ApolloProvider client={client}>
