@@ -3,14 +3,14 @@ import { useStateValue } from '../Context';
 
 const QueryOutput = () => {
   // just uncomment when you want you start using Menu!
-  const [{ greeting }, dispatch] = useStateValue();
+  const [{ greeting, endpoint }, dispatch] = useStateValue();
 
 
   return (
     <div>
       <h2>inside QueryOutput</h2>
       <h3>
-        {greeting}
+        {endpoint}
       </h3>
     </div>
   )
