@@ -27,10 +27,15 @@ const App = () => {
           ...state,
           greeting: action.newGreeting
         }
-      case 'addEndpoint':
+      case 'addURL':
         return {
           ...state,
-          endpoint: action.addEndpoint
+          url: action.addURL
+        }
+      case 'submitEndpoint':
+        return {
+          ...state,
+          endpoint: action.submitEndpoint
         }
       case 'addQuery':
         return {
