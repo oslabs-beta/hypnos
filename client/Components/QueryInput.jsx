@@ -3,7 +3,7 @@ import React, { useState } from "react";
 
 const QueryInput = () => {
 
-    const [textValue, setTextValue] = useState("const query = gql")
+    const [textValue, setTextValue] = useState("const query = gql`\n#write query below\n\n`")
     console.log('textValue ', textValue)
     return (
 
