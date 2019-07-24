@@ -15,7 +15,7 @@ app.on('ready', function () {
         protocol: 'file:',
         slashes: true
     }));
-    mainWindow.webContents.openDevTools()
+
 
     //build menu from template
     const mainMenu = Menu.buildFromTemplate(mainMenuTemplate);
@@ -36,5 +36,25 @@ const mainMenuTemplate = [
             }
         ]
     },
+    {
+        label: 'View',
+        submenu: [
+            {
+                //should be available only in dev environment
+                open: false,
+                label: 'DevTools',
+                click() {
+                    if (!this.open) {
+                        mainWindow.webContents.openDevTools()
+                        this.open = true;
+                    } else {
+                        mainWindow.webContents.closeDevTools();
+                        this.open = false;
+                    }
+                },
+                accelerator: 'f12'
+            }
+        ]
+    }
 
 ];
