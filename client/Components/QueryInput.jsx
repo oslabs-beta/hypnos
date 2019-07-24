@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { graphql } from "react-apollo";
+import gql from 'graphql-tag';
 
 
 const QueryInput = () => {
@@ -8,8 +10,10 @@ const QueryInput = () => {
 
     const handleSubmit = () => {
         event.preventDefault();
-        console.log("submitted!");
+        const query = textValue;
         
+        console.log("submitted!");
+
     }
 
     return (

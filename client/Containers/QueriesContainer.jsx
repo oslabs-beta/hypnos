@@ -3,7 +3,22 @@ import { useStateValue } from '../Context';
 import EndpointInput from '../Components/EndpointInput';
 import QueryOutput from '../Components/QueryOutput';
 import RunQueryButton from '../Components/RunQueryButton';
-import QueryInput from "../Components/QueryInput"
+import QueryInput from "../Components/QueryInput";
+import { ApolloProvider } from 'react-apollo';
+import { RestLink } from "apollo-link-rest";
+import { ApolloClient } from "apollo-client";
+//may not need below if using context
+import { InMemoryCache } from "apollo-cache-inmemory";
+
+const restLink = new RestLink({
+  uri: 'https://swapi.co/api',
+});
+
+const client = new ApolloClient({
+  link: restLink,
+  //may not need below if using context:
+  cache: new InMemoryCache
+})
 
 
 const QueriesContainer = () => {
@@ -30,4 +45,10 @@ const QueriesContainer = () => {
   );
 }
 
-export default QueriesContainer;
+const ApolloQueryContainer = () => (
+  <ApolloProvider client={client}>
+    <QueriesContainer />
+  </ApolloProvider>
+)
+
+export default ApolloQueryContainer;
