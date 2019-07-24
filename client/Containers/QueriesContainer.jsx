@@ -22,11 +22,14 @@ const client = new ApolloClient({
 
 
 const QueriesContainer = () => {
-  const [{ greeting }, dispatch] = useStateValue();
+  const [{ greeting, endpoint }, dispatch] = useStateValue();
 
   return (
     <div>
-      {/* <h1>
+      <h1>
+        {endpoint}
+      </h1>
+      <h1>
         {greeting}
       </h1>
       <button
@@ -36,7 +39,7 @@ const QueriesContainer = () => {
         })}
       >
         Change the Greeting!
-      </button> */}
+      </button>
       <EndpointInput />
       <QueryInput />
       <QueryOutput />

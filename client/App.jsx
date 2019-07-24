@@ -16,7 +16,7 @@ import Menu from './Components/Menu'
 
 const App = () => {
   const initialState = {
-    greeting: 'hello Sophie'
+    greeting: 'hello Sophie',
   };
   const reducer = (state, action) => {
     switch (action.type) {
@@ -24,7 +24,12 @@ const App = () => {
         return {
           ...state,
           greeting: action.newGreeting
-        };
+        }
+      case 'addEndpoint':
+        return {
+          ...state,
+          endpoint: action.addEndpoint
+        }
       default:
         return state;
     }
