@@ -5,14 +5,13 @@
   "main": "electron.js",
   "homepage": "./",
   "scripts": {
-    "react-start": "BROWSER=none parcel -p 3000 index.html --out-dir build",
-    "react-build": "parcel build index.html --out-dir build --public-url ./",
-    "start": "npm run react-build && ELECTRON_IS_DEV=0 npm run start-electron",
-    "electron-dev": "ELECTRON_IS_DEV=1 npm run start-electron",
     "start-electron": "electron .",
     "electron-build": "electron-builder",
     "clean-build": "rm -rf build/ .cache dist/",
-    "build": "npm run clean-build && npm run react-build && npm run electron-build",
+    "react-start": "parcel -p 3000 index.html --out-dir build",
+    "react-build": "parcel build index.html --out-dir build --public-url ./",
+    "start": "npm run react-start & wait-on http://localhost:3000 && ELECTRON_IS_DEV=1 npm run start-electron",
+    "build": "npm run clean-build && npm run react-build && npm run electron-build && ELECTRON_IS_DEV=0 npm run start-electron",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
@@ -45,6 +44,7 @@
     "electron": "^5.0.7",
     "electron-builder": "^21.1.1",
     "electron-is-dev": "^1.1.0",
-    "parcel-bundler": "^1.12.3"
+    "parcel-bundler": "^1.12.3",
+    "wait-on": "^3.3.0"
   }
 }
