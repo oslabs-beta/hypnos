@@ -6,7 +6,7 @@ import { useStateValue } from '../Context';
 
 const QueryInput = () => {
 
-  const [textValue, setTextValue] = useState("const query = gql`\n#write query below\n\n`")
+  const [textValue, setTextValue] = useState("gql`\n#write query below\n\n`")
   // console.log('textValue ', textValue)
   const [{ query }, dispatch] = useStateValue();
 
@@ -17,8 +17,10 @@ const QueryInput = () => {
 
     dispatch({
       type: 'addQuery',
-      query: textValue,
+      query: gql([`${textValue}`]),
     });
+
+
 
   }
 
@@ -30,7 +32,8 @@ const QueryInput = () => {
         <input type="submit" value="Submit" />
       </form>
       <div>
-        Here's our new query string: {query}
+        {//THIS IS WHAT WAS BREAKING. SHOWING AN OBJECT}
+          `Here's our new query string: ${JSON.stringify(query)}`}
       </div>
     </div>
 

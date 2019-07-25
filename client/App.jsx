@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { StateProvider } from './Context';
 import QueriesContainer from './Containers/QueriesContainer'
 import Menu from './Components/Menu'
+import gql from 'graphql-tag';
+
 
 // class App extends Component {
 //   render() {
@@ -38,6 +40,7 @@ const App = () => {
           endpoint: action.submitEndpoint
         }
       case 'addQuery':
+        console.log('add query reducer fired');
         return {
           ...state,
           query: action.query
