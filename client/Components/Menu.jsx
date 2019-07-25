@@ -9,9 +9,13 @@ const Menu = () => {
   return (
     <div>
       <h2>inside menu</h2>
-      <h1>
-        {greeting}
-      </h1>
+      <button onClick={() => {
+        dispatch({
+        type: 'resetState'
+        })}
+        }>
+        Reset State
+      </button>
     </div>
   )
 }

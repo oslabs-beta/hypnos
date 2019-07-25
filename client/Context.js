@@ -48,6 +48,12 @@ const reducer = (state, action) => {
         queryVar: action.queryVar,
         query: action.query,
       };
+      // needs to send whatever was in intial state at the very beginning of the app
+    case 'resetState':
+      return {
+        greeting: 'hello Sophie',
+        query: '',
+      }
     default:
       return state;
   }
