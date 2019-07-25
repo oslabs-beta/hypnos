@@ -1,19 +1,15 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { useStateValue } from '../Context';
 import { jsonFormatter } from '../utils/jsonFormatter'
 
 const QueryOutput = (props) => {
-  // just uncomment when you want you start using Menu!
-
   const [{ greeting, endpoint, queryVar }, dispatch] = useStateValue();
-
-  console.log('inside of queryoutput definition: ', props);
   // pull props off
   const { loading, error } = props;
   const resultQueryVar = props[queryVar];
 
   if (loading) {
-    return (<h2>inside QueryOutput</h2>);
+    return (<h2>Loading</h2>);
   }
 
   if (error) {
@@ -22,7 +18,6 @@ const QueryOutput = (props) => {
 
   return (
     <div>
-      <h2>inside QueryOutput</h2>
       <h3>
         <pre>
           <code>
