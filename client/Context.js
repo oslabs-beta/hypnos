@@ -43,6 +43,7 @@ const reducer = (state, action) => {
         // if user changes endpoint, want to make sure query is valid
         query: '',
         queryVar: '',
+
       };
     case 'addQuery':
       console.log('add query reducer fired');
@@ -52,12 +53,13 @@ const reducer = (state, action) => {
         queryVar: action.queryVar,
         query: action.query,
       };
-      // needs to send whatever was in intial state at the very beginning of the app
+    // needs to send whatever was in intial state at the very beginning of the app
     case 'resetState':
       return {
         greeting: 'hello Sophie',
         query: '',
         queryVar: '',
+        endpoint: 'https://swapi.co/api/',
       }
     default:
       return state;
