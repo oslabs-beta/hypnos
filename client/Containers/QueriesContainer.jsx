@@ -85,26 +85,11 @@ const QueriesContainer = () => {
   console.log('query, outside if statement:', query);
 
   return (
-    <div>
-      <h1>
-        {endpoint}
-      </h1>
-      <h1>
-        {greeting}
-      </h1>
-      <button
-        onClick={() => dispatch({
-          type: 'newGreeting',
-          newGreeting: 'hello Dillon',
-        })}
-      >
-        Change the Greeting!
-      </button>
+    <div id="queries-container">
       <EndpointInput />
       <QueryInput />
-      {console.log('re-rendering')}
       {query !== '' && <QueryQueryOutput query={query} />}
-      <RunQueryButton />
+      {/* <RunQueryButton /> */}
     </div>
   );
 };

@@ -15,7 +15,7 @@ const EndpointInput = () => {
   }
 
   return (
-    <div>
+    <div id="endpoint-input">
       <form onSubmit={() => handleSubmit()}>
         <textarea  onChange={(e) => dispatch({
           type: 'addURL',

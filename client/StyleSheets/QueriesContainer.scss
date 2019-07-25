@@ -1,0 +1,23 @@
+#query-input {
+    grid-area: queryInput;
+}
+
+#query-output {
+    grid-area: queryOutput;
+}
+
+#endpoint-input {
+    grid-area: endpointInput;
+    justify-self: stretch;
+    align-self: center;
+}
+
+#queries-container {
+    display: grid;
+    grid-template-areas:
+        "endpointInput endpointInput endpointInput"
+        "queryInput . queryOutput"
+        "queryInput . queryOutput"
+        "queryInput . queryOutput"
+        "queryInput . queryOutput"
+}

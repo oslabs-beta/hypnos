@@ -1,0 +1,20 @@
+
+@import 'colors';
+@import 'QueryInput.scss';
+@import 'QueriesContainer.scss';
+@import "QueryInput.scss";
+@import "QueryOutput.scss";
+@import "EndpointInput.scss";
+$font-stack: Helvetica, sans-serif, $dark-color;
+
+#app {
+    min-width: 100vw;
+    min-height: 100vh;
+    margin: 0;
+    top:0px;
+    left:0px;
+    display: flex;
+    flex-direction: row;
+    font: $font-stack;
+    background-color: $primary-color;
+}

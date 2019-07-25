@@ -2,14 +2,15 @@ import React from 'react';
 import { StateProvider } from './Context';
 import QueriesContainer from './Containers/QueriesContainer'
 import Menu from './Components/Menu'
+import "./StyleSheets/App.scss"
 
 
 const App = () => {
   return (
-    <div>
+    <div id="app">
       <StateProvider>
-        <QueriesContainer />
         <Menu />
+        <QueriesContainer />
       </StateProvider>
     </div>
   );

@@ -23,7 +23,7 @@ const QueryInput = () => {
 
   return (
 
-    <div>
+    <div id="query-input">
       <form onSubmit={() => handleSubmit()}>
         <textarea value={textValue} onChange={e => setTextValue(e.target.value)} />
         <input type="submit" value="Submit" />
