@@ -53,6 +53,7 @@ const reducer = (state, action) => {
       return {
         greeting: 'hello Sophie',
         query: '',
+        queryVar: '',
       }
     default:
       return state;
