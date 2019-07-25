@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { useStateValue } from '../Context';
+import { jsonFormatter } from '../utils/jsonFormatter'
 
 const QueryOutput = (props) => {
   // just uncomment when you want you start using Menu!
@@ -23,7 +24,11 @@ const QueryOutput = (props) => {
     <div>
       <h2>inside QueryOutput</h2>
       <h3>
-        {props.data}
+        <pre>
+          <code>
+            {jsonFormatter(resultQueryVar)}
+          </code>
+        </pre>
       </h3>
     </div>
   );
