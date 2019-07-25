@@ -4,11 +4,12 @@ import { useStateValue } from '../Context';
 const QueryOutput = (props) => {
   // just uncomment when you want you start using Menu!
 
-  const [{ greeting, endpoint }, dispatch] = useStateValue();
+  const [{ greeting, endpoint, queryVar }, dispatch] = useStateValue();
 
   console.log('inside of queryoutput definition: ', props);
   // pull props off
-  const { loading, error, person } = props;
+  const { loading, error } = props;
+  const resultQueryVar = props[queryVar];
 
   if (loading) {
     return (<h2>inside QueryOutput</h2>);
