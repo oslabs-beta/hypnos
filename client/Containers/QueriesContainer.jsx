@@ -4,7 +4,9 @@ import EndpointInput from '../Components/EndpointInput';
 import QueryOutput from '../Components/QueryOutput';
 import RunQueryButton from '../Components/RunQueryButton';
 import QueryInput from "../Components/QueryInput";
-import { ApolloProvider } from 'react-apollo';
+import { ApolloProvider, graphql } from 'react-apollo';
+// we may not need GQL imported here
+import gql from 'graphql-tag';
 import { RestLink } from "apollo-link-rest";
 import { ApolloClient } from "apollo-client";
 //may not need below if using context
@@ -21,8 +23,30 @@ const client = new ApolloClient({
 })
 
 
+const QueryQueryOutput = (props) => {
+  console.log('query inside component method :', props.query)
+  graphql(props.query)(QueryOutput);
+}
+
+// if (query !== '') {
+//   console.log('query, in if statement: ', query)
+//   QueryQueryOutput = graphql(query)(QueryOutput);
+// }
+
+
 const QueriesContainer = () => {
-  const [{ greeting, endpoint }, dispatch] = useStateValue();
+  const [{ greeting, endpoint, query }, dispatch] = useStateValue();
+  console.log('in queries container')
+  const SWQuery = gql`
+    query luke {
+      person @rest(type: "Person", path: "people/1/") {
+        name
+      }
+    }
+  `;
+
+  // console.log(SWQuery);
+  console.log('query, outside if statement:', query)
 
   return (
     <div>
@@ -42,11 +66,15 @@ const QueriesContainer = () => {
       </button>
       <EndpointInput />
       <QueryInput />
-      <QueryOutput />
+      {console.log('re-rendering')}
+      {query !== '' ? <QueryQueryOutput query={query} /> : 'no query found'}
       <RunQueryButton />
     </div>
   );
 }
+// we may need options object to handle props
+// THIS WAS REMOVED: <QueryOutput />
+
 
 const ApolloQueryContainer = () => (
   <ApolloProvider client={client}>
