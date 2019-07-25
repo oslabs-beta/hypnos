@@ -11,7 +11,7 @@ const EndpointInput = () => {
     event.preventDefault();
     dispatch({
       type: 'submitEndpoint',
-      submitEndpoint: url,
+      submitEndpoint: urlInput,
     });
   };
 
@@ -20,6 +20,7 @@ const EndpointInput = () => {
       <form onSubmit={() => handleSubmit()}>
         <textarea onChange={(e) => {
           setUrlInput(e.target.value);
+          console.log('url input: ', urlInput);
           dispatch({
             type: 'addURL',
             addURL: urlInput,
