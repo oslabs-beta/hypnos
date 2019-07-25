@@ -5,6 +5,7 @@
  ************************** */
 
 import React, { createContext, useContext, useReducer } from 'react';
+import gql from 'graphql-tag';
 
 export const StateContext = createContext();
 
@@ -18,6 +19,7 @@ export const useStateValue = () => useContext(StateContext);
 
 const initialState = {
   greeting: 'hello Sophie',
+  query: '',
 };
 
 const reducer = (state, action) => {
@@ -25,19 +27,25 @@ const reducer = (state, action) => {
     case 'newGreeting':
       return {
         ...state,
-        greeting: action.newGreeting
-      }
+        greeting: action.newGreeting,
+      };
     case 'addURL':
       return {
         ...state,
-        url: action.addURL
-      }
+        url: action.addURL,
+      };
     case 'submitEndpoint':
       return {
         ...state,
-        endpoint: action.submitEndpoint
-      }
+        endpoint: action.submitEndpoint,
+      };
+    case 'addQuery':
+      console.log('add query reducer fired');
+      return {
+        ...state,
+        query: action.query,
+      };
     default:
       return state;
   }
-}
+};
