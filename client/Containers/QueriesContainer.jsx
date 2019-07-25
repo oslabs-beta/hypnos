@@ -1,44 +1,13 @@
 import React from 'react';
-import { ApolloProvider, graphql } from 'react-apollo';
-import gql from 'graphql-tag';
-import { RestLink } from 'apollo-link-rest';
-import { ApolloClient } from 'apollo-client';
-import { InMemoryCache } from 'apollo-cache-inmemory';
+import { graphql } from 'react-apollo';
 import { useStateValue } from '../Context';
 import EndpointInput from '../Components/EndpointInput';
 import QueryOutput from '../Components/QueryOutput';
 import RunQueryButton from '../Components/RunQueryButton';
 import QueryInput from '../Components/QueryInput';
-// we may not need GQL imported here
-// may not need below if using context
-
-const restLink = new RestLink({
-  uri: 'https://swapi.co/api/',
-});
-
-const client = new ApolloClient({
-  link: restLink,
-  // may not need below if using context:
-  cache: new InMemoryCache(),
-});
-
-
-// const QueryQueryOutput = (props) => {
-//   console.log('query inside component method :', props.query);
-//   return (graphql(props.query)(QueryOutput));
-// };
-
-
-// if (query !== '') {
-//   console.log('query, in if statement: ', query)
-//   QueryQueryOutput = graphql(query)(QueryOutput);
-// }
-
 
 const QueriesContainer = () => {
-  const [{
-    greeting, endpoint, query, queryVar,
-  }, dispatch] = useStateValue();
+  const [{ greeting, endpoint, query, queryVar }, dispatch] = useStateValue();
 
   // error thrown because it evals before anything is in query
   let QueryQueryOutput;
@@ -47,10 +16,6 @@ const QueriesContainer = () => {
     // had to pass on props with the props object. it "parses" bigass object
     // before it's passed on. one thing needed for dynamism: the name of the prop
     // on the data object. e.g. query luke { !!!PERSON }
-
-    // in here, parse query string to find key-value pair
-
-
     QueryQueryOutput = graphql(query, {
       props: ({ data }) => {
         if (data.loading) {
@@ -63,26 +28,21 @@ const QueriesContainer = () => {
             error: data.error,
           };
         }
-
         const resultObj = {
           loading: false,
-        };
+        }
         resultObj[queryVar] = data[queryVar];
         return resultObj;
       },
     })(QueryOutput);
   }
-  console.log('in queries container');
-  const SWQuery = gql`
-    query luke {
-      person @rest(type: "Person", path: "people/1/") {
-        name
-      }
-    }
-  `;
-
-  // console.log(SWQuery);
-  console.log('query, outside if statement:', query);
+  // const SWQuery = gql`
+    // query luke {
+    //   person @rest(type: "Person", path: "people/1/") {
+    //     name
+    //   }
+    // }
+  // `;
 
   return (
     <div id="queries-container">
@@ -97,10 +57,11 @@ const QueriesContainer = () => {
 // THIS WAS REMOVED: <QueryOutput />
 
 
-const ApolloQueryContainer = () => (
-  <ApolloProvider client={client}>
-    <QueriesContainer />
-  </ApolloProvider>
-);
+// const ApolloQueryContainer = () => (
+//   <ApolloProvider client={client}>
+//     <QueriesContainer />
+//   </ApolloProvider>
+// );
 
-export default ApolloQueryContainer;
+// export default ApolloQueryContainer;
+export default QueriesContainer;
