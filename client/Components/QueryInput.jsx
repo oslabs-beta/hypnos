@@ -17,6 +17,7 @@ const QueryInput = () => {
     dispatch({
       type: 'addQuery',
       query: gql([`${textValue}`]),
+      queryVar: textValue.match(/(?<=\{\W)(.*?)(?=\@)/g)[0].trim(),
     });
   };
 

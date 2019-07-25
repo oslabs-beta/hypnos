@@ -36,7 +36,9 @@ const client = new ApolloClient({
 
 
 const QueriesContainer = () => {
-  const [{ greeting, endpoint, query }, dispatch] = useStateValue();
+  const [{
+    greeting, endpoint, query, queryVar,
+  }, dispatch] = useStateValue();
 
   // error thrown because it evals before anything is in query
   let QueryQueryOutput;
@@ -45,6 +47,10 @@ const QueriesContainer = () => {
     // had to pass on props with the props object. it "parses" bigass object
     // before it's passed on. one thing needed for dynamism: the name of the prop
     // on the data object. e.g. query luke { !!!PERSON }
+
+    // in here, parse query string to find key-value pair
+
+
     QueryQueryOutput = graphql(query, {
       props: ({ data }) => {
         if (data.loading) {
@@ -58,10 +64,11 @@ const QueriesContainer = () => {
           };
         }
 
-        return {
-          person: data.person,
+        const resultObj = {
           loading: false,
         };
+        resultObj[queryVar] = data[queryVar];
+        return resultObj;
       },
     })(QueryOutput);
   }

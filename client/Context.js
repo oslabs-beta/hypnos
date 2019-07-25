@@ -20,6 +20,7 @@ export const useStateValue = () => useContext(StateContext);
 const initialState = {
   greeting: 'hello Sophie',
   query: '',
+  queryVar: '',
 };
 
 const reducer = (state, action) => {
@@ -41,8 +42,10 @@ const reducer = (state, action) => {
       };
     case 'addQuery':
       console.log('add query reducer fired');
+      console.log('queryVar: ', action.queryVar);
       return {
         ...state,
+        queryVar: action.queryVar,
         query: action.query,
       };
     default:
