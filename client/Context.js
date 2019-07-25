@@ -21,6 +21,7 @@ const initialState = {
   greeting: 'hello Sophie',
   query: '',
   queryVar: '',
+  endpoint: 'https://swapi.co/api/'
 };
 
 const reducer = (state, action) => {
@@ -39,6 +40,9 @@ const reducer = (state, action) => {
       return {
         ...state,
         endpoint: action.submitEndpoint,
+        // if user changes endpoint, want to make sure query is valid
+        query: '',
+        queryVar: '',
       };
     case 'addQuery':
       console.log('add query reducer fired');

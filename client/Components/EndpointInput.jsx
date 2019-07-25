@@ -1,10 +1,7 @@
 import React, { useState } from 'react';
 import { useStateValue } from '../Context';
-import { withApollo } from 'react-apollo';
-import { RestLink } from 'apollo-link-rest';
 
-const EndpointInput = ({ client }) => {
-  // just uncomment when you want you start using Menu!
+const EndpointInput = () => {
   const [{ endpoint, greeting, url }, dispatch] = useStateValue();
 
   const handleSubmit = () => {
@@ -13,11 +10,6 @@ const EndpointInput = ({ client }) => {
       type: 'submitEndpoint',
       submitEndpoint: url
     })
-    // seems like it's safe to have another function call after dispatch, since it only ends the execution context upon error
-    client.link = new RestLink ({
-      uri: url
-    })
-    console.log(client, 'this is client')
   }
 
   return (
@@ -37,4 +29,4 @@ const EndpointInput = ({ client }) => {
 }
 
 
-export default withApollo(EndpointInput);
+export default EndpointInput;
