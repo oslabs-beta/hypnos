@@ -1,19 +1,21 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { useStateValue } from '../Context';
 
 const QueryOutput = (props) => {
   // just uncomment when you want you start using Menu!
-  console.log('inside of queryoutput definition')
+
   const [{ greeting, endpoint }, dispatch] = useStateValue();
 
-  const { data: { loading, error, person } } = props;
+  console.log('inside of queryoutput definition: ', props);
+  // pull props off
+  const { loading, error, person } = props;
 
   if (loading) {
-    return <h2>inside QueryOutput</h2>;
+    return (<h2>inside QueryOutput</h2>);
   }
 
   if (error) {
-    return <h4>{error.message}</h4>
+    return (<h4>{error.message}</h4>);
   }
 
   return (
@@ -23,8 +25,8 @@ const QueryOutput = (props) => {
         {props.data}
       </h3>
     </div>
-  )
-}
+  );
+};
 
 
 export default QueryOutput;
