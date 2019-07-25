@@ -7,7 +7,7 @@ const EndpointInput = () => {
 
   const handleSubmit = () => {
     event.preventDefault();
-    console.log(url, 'this is textValue')
+    console.log(url, 'this is URL')
     dispatch({
       type: 'submitEndpoint',
       submitEndpoint: url
