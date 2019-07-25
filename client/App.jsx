@@ -27,8 +27,8 @@ const App = () => {
   return (
     <div id="app">
       <ApolloProvider client={client}>
-        <QueriesContainer />
         <Menu />
+        <QueriesContainer />
       </ApolloProvider>
     </div>
   );

@@ -21,9 +21,6 @@ const EndpointInput = () => {
         })} />
         <input type="submit" value="Submit" />
       </form>
-      <h3>
-        {endpoint}
-      </h3>
     </div>
   )
 }
