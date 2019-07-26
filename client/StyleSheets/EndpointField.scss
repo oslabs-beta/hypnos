@@ -3,7 +3,7 @@
     grid-area: endpointField;
     // this is not ideal to have this precise number
     // settings look best with default Electron sized window
-    width: 90vw;
+    width: 100%;
     // align-self: center;
     // form {
     //     width: 800px;
@@ -16,7 +16,7 @@
     textarea {
     // this is not ideal to have this precise number
     // settings look best with default Electron sized window
-        width: 100%;
+        width: 99.2%;
         height: 25px;
         resize: none;
         @extend %input-fields;
