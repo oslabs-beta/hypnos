@@ -1,22 +1,21 @@
 import React from 'react';
 import { graphql } from 'react-apollo';
 import { useStateValue } from '../Context';
-import EndpointInput from '../Components/EndpointInput';
-import QueryOutput from '../Components/QueryOutput';
-import RunQueryButton from '../Components/RunQueryButton';
+import EndpointField from '../Components/EndpointField';
+import QueryOutputDisplay from '../Components/QueryOutputDisplay';
 import QueryInput from '../Components/QueryInput';
 
 const QueriesContainer = () => {
-  const [{ greeting, endpoint, query, queryVar }, dispatch] = useStateValue();
+  const [{ endpoint, query, queryResultObject }, dispatch] = useStateValue();
 
   // error thrown because it evals before anything is in query
-  let QueryQueryOutput;
+  let OutputOfQuery;
   if (query !== '') {
     // if something is in query, assign QQO to output of query
     // had to pass on props with the props object. it "parses" bigass object
     // before it's passed on. one thing needed for dynamism: the name of the prop
     // on the data object. e.g. query luke { !!!PERSON }
-    QueryQueryOutput = graphql(query, {
+    OutputOfQuery = graphql(query, {
       props: ({ data }) => {
         if (data.loading) {
           return {
@@ -31,10 +30,10 @@ const QueriesContainer = () => {
         const resultObj = {
           loading: false,
         }
-        resultObj[queryVar] = data[queryVar];
+        resultObj[queryResultObject] = data[queryResultObject];
         return resultObj;
       },
-    })(QueryOutput);
+    })(QueryOutputDisplay);
   }
   // const SWQuery = gql`
     // query luke {
@@ -46,29 +45,12 @@ const QueriesContainer = () => {
 
   return (
     <div>
-      <h1>
-        {endpoint}
-      </h1>
-      <h1>
-        {greeting}
-      </h1>
-      <button
-        onClick={() => dispatch({
-          type: 'newGreeting',
-          newGreeting: 'hello Dillon',
-        })}
-      >
-        Change the Greeting!
-      </button>
-      <EndpointInput />
+      <EndpointField />
       <QueryInput />
-      {query !== '' && <QueryQueryOutput query={query} />}
-      <RunQueryButton />
+      {query !== '' && <OutputOfQuery query={query} />}
     </div>
   );
 };
-// we may need options object to handle props
-// THIS WAS REMOVED: <QueryOutput />
 
 
 // const ApolloQueryContainer = () => (

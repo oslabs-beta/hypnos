@@ -5,7 +5,6 @@
  ************************** */
 
 import React, { createContext, useContext, useReducer } from 'react';
-import gql from 'graphql-tag';
 
 export const StateContext = createContext();
 
@@ -18,19 +17,13 @@ export const StateProvider = ({ children }) => (
 export const useStateValue = () => useContext(StateContext);
 
 const initialState = {
-  greeting: 'hello Sophie',
   query: '',
-  queryVar: '',
-  endpoint: 'https://swapi.co/api/',
+  queryResultObject: '',
+  endpoint: 'https://swapi.co/api/'
 };
 
 const reducer = (state, action) => {
   switch (action.type) {
-    case 'newGreeting':
-      return {
-        ...state,
-        greeting: action.newGreeting,
-      };
     case 'addURL':
       // console.log('new url inside reducer: ', action.addURL);
       return {
@@ -43,7 +36,7 @@ const reducer = (state, action) => {
         endpoint: action.submitEndpoint,
         // if user changes endpoint, want to make sure query is valid
         query: '',
-        queryVar: '',
+        queryResultObject: '',
 
       };
     case 'runQuery':
@@ -52,7 +45,7 @@ const reducer = (state, action) => {
       // when query is run, on button press, endpoint is assigned the dynamically changing url
       return {
         ...state,
-        queryVar: action.queryVar,
+        queryResultObject: action.queryResultObject,
         query: action.query,
         endpoint: state.url,
       };

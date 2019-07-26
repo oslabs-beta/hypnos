@@ -2,11 +2,11 @@ import React from 'react';
 import { useStateValue } from '../Context';
 import { jsonFormatter } from '../utils/jsonFormatter'
 
-const QueryOutput = (props) => {
-  const [{ greeting, endpoint, queryVar }, dispatch] = useStateValue();
+const QueryOutputDisplay = (props) => {
+  const [{ endpoint, queryResultObject }, dispatch] = useStateValue();
   // pull props off
   const { loading, error } = props;
-  const resultQueryVar = props[queryVar];
+  const result = props[queryResultObject];
 
   if (loading) {
     return (<h2>Loading</h2>);
@@ -21,7 +21,7 @@ const QueryOutput = (props) => {
       <h3>
         <pre>
           <code>
-            {jsonFormatter(resultQueryVar)}
+            {jsonFormatter(result)}
           </code>
         </pre>
       </h3>
@@ -30,4 +30,4 @@ const QueryOutput = (props) => {
 };
 
 
-export default QueryOutput;
+export default QueryOutputDisplay;

@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { useStateValue } from '../Context';
 
-const EndpointInput = () => {
-  const [{ endpoint, greeting, url }, dispatch] = useStateValue();
+const EndpointField = () => {
+  const [{ endpoint, url }, dispatch] = useStateValue();
   // can be streamlined to not use local state, and maybe
   // one less value from context
   const [urlInput, setUrlInput] = useState('');
@@ -33,12 +33,9 @@ const EndpointInput = () => {
         />
         <input type="submit" value="Submit" />
       </form>
-      <h3>
-        {endpoint}
-      </h3>
     </div>
   );
 };
 
 
-export default EndpointInput;
+export default EndpointField;
