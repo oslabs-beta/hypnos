@@ -1,0 +1,11 @@
+#query-input {
+
+    textarea {
+
+        resize: none;
+        height: 70vh;
+        @extend %input-fields;
+
+    }
+
+}

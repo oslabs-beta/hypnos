@@ -16,7 +16,7 @@ const EndpointField = () => {
   };
 
   return (
-    <div>
+    <div id="endpoint-field">
       <form onSubmit={() => handleSubmit()}>
         <textarea onChange={(e) => {
           // console.log('new value from text area: ', e.target.value);
@@ -31,8 +31,7 @@ const EndpointField = () => {
           });
         }}
         />
-        {/* do not need the below button anymore */}
-        {/* <input type="submit" value="Submit" /> */}
+        <input type="submit" value="Submit" className="submit-button"/>
       </form>
     </div>
   );

@@ -1,0 +1,31 @@
+#query-input {
+    grid-area: queryInput;
+    
+    textarea {
+        resize: none;
+        height: 70vh;
+    }
+}
+
+#query-output {
+    grid-area: queryOutput;
+}
+
+#endpoint-input {
+  
+    grid-area: endpointInput;
+    align-self: center;
+
+}
+
+
+#queries-container {
+    display: grid;
+    grid-template-areas:
+        "endpointInput endpointInput"
+        "queryInput queryOutput"
+        "queryInput queryOutput"
+        "queryInput queryOutput"
+        "queryInput queryOutput";
+    background-color: $background-color;
+}

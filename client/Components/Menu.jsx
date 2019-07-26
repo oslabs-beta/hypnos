@@ -7,7 +7,7 @@ const Menu = () => {
 
 
   return (
-    <div>
+    <div id="menu">
       <button onClick={() => {
         dispatch({
           type: 'resetState'

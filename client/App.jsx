@@ -1,5 +1,6 @@
 import React from 'react';
 import { StateProvider } from './Context';
+import "./StyleSheets/App.scss"
 import QueriesContainer from './Containers/QueriesContainer';
 import Menu from './Components/Menu';
 import { RestLink } from 'apollo-link-rest';
@@ -23,10 +24,10 @@ const App = () => {
 
 
   return (
-    <div>
+    <div id="app">
       <ApolloProvider client={client}>
-        <QueriesContainer />
         <Menu />
+        <QueriesContainer />
       </ApolloProvider>
     </div>
   );
