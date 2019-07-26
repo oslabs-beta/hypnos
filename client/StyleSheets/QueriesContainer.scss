@@ -21,9 +21,9 @@
 
 #queries-container {
     display: grid;
+    // grid-template-columns: 200px;
     grid-template-areas:
         "endpointInput endpointInput"
-        "queryInput queryOutput"
         "queryInput queryOutput"
         "queryInput queryOutput"
         "queryInput queryOutput";

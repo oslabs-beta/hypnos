@@ -5,7 +5,9 @@
     
     textarea {
         width: 80vw;
+        height: 25px;
         resize: none;
         @extend %input-fields;
+        font-size: 1.3rem;
     }
 }

@@ -29,26 +29,28 @@ const QueriesContainer = () => {
         }
         const resultObj = {
           loading: false,
-        }
+        };
         resultObj[queryResultObject] = data[queryResultObject];
         return resultObj;
       },
     })(QueryOutputDisplay);
   }
   // const SWQuery = gql`
-    // query luke {
-    //   person @rest(type: "Person", path: "people/1/") {
-    //     name
-    //   }
-    // }
+  // query luke {
+  //   person @rest(type: "Person", path: "people/1/") {
+  //     name
+  //   }
+  // }
   // `;
 
   return (
-    <div id="queries-container">
+    <section id="queries-container">
       <EndpointField />
       <QueryInput />
-      {query !== '' && <OutputOfQuery query={query} />}
-    </div>
+      <article id="query-output">
+        {query !== '' && <OutputOfQuery query={query} />}
+      </article>
+    </section>
   );
 };
 
