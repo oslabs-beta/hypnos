@@ -1,10 +1,22 @@
 #endpoint-field {
   
-    // grid-area: endpointInput;
+    grid-area: endpointField;
+    // this is not ideal to have this precise number
+    // settings look best with default Electron sized window
+    width: 90vw;
     // align-self: center;
+    // form {
+    //     width: 800px;
+    // }
+
+    // form {
+    //     width: 90vw;
+    // }
     
     textarea {
-        width: 80vw;
+    // this is not ideal to have this precise number
+    // settings look best with default Electron sized window
+        width: 100%;
         height: 25px;
         resize: none;
         @extend %input-fields;

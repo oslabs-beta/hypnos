@@ -8,8 +8,13 @@
 @import "menu.scss";
 $font-stack: Helvetica, sans-serif, $dark-color;
 
+html {
+    // width: 100%;
+}
+
 body {
     margin: 0;
+    // width: 100%;
 }
 
 #app {
