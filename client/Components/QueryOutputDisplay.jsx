@@ -1,6 +1,6 @@
 import React from 'react';
 import { useStateValue } from '../Context';
-import { jsonFormatter } from '../utils/jsonFormatter'
+import { jsonFormatter } from '../utils/jsonFormatter';
 
 const QueryOutputDisplay = (props) => {
   const [{ endpoint, queryResultObject, queryResult404 }, dispatch] = useStateValue();
@@ -9,6 +9,7 @@ const QueryOutputDisplay = (props) => {
   const result = props[queryResultObject] ? props[queryResultObject] : '' ;
   console.log('result in queryoutputdisplay ', result)
 
+  // loading and error cases do not have query-output IDs
   if (loading) {
     return (<h2>Loading</h2>);
   }
@@ -18,7 +19,7 @@ const QueryOutputDisplay = (props) => {
   }
 
   return (
-    <div id="query-output">
+    <>
       <h2>inside QueryOutput</h2>
       <h3>
         <pre>
@@ -28,7 +29,8 @@ const QueryOutputDisplay = (props) => {
           </code>
         </pre>
       </h3>
-    </div>
+    </>
+
   );
 };
 

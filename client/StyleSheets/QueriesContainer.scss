@@ -11,21 +11,24 @@
     grid-area: queryOutput;
 }
 
-#endpoint-input {
-  
-    grid-area: endpointInput;
-    align-self: center;
+// moved into EndpountField file
+// #endpoint-input {
+//     grid-area: endpointInput;
+//     align-self: center;
 
-}
+// }
 
 
 #queries-container {
+    width: 100%;
     display: grid;
+    // gives fixed size for first column. intermediary column will shrink
+    // as needed. output will be as large as needed
+    grid-template-columns: minmax(250px, 1fr) minmax(1px, 1fr) 1fr;
     grid-template-areas:
-        "endpointInput endpointInput"
-        "queryInput queryOutput"
-        "queryInput queryOutput"
-        "queryInput queryOutput"
-        "queryInput queryOutput";
+        "endpointField endpointField endpointField"
+        "queryInput . queryOutput"
+        "queryInput . queryOutput"
+        "queryInput . queryOutput" ;
     background-color: $background-color;
 }

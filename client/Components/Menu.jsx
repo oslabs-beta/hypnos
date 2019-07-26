@@ -7,7 +7,7 @@ const Menu = () => {
 
 
   return (
-    <div id="menu">
+    <section id="menu">
       <button onClick={() => {
         dispatch({
           type: 'resetState'
@@ -16,7 +16,7 @@ const Menu = () => {
       >
         Reset State
       </button>
-    </div>
+    </section>
   )
 }
 

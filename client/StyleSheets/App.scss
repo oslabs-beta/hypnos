@@ -8,6 +8,15 @@
 @import "menu.scss";
 $font-stack: Helvetica, sans-serif, $dark-color;
 
+html {
+    // width: 100%;
+}
+
+body {
+    margin: 0;
+    // width: 100%;
+}
+
 #app {
     min-width: 100vw;
     min-height: 100vh;
@@ -17,11 +26,9 @@ $font-stack: Helvetica, sans-serif, $dark-color;
     display: flex;
     flex-direction: row;
     font: $font-stack;
+    background-color: $background-color;
 }
 
-body {
-    margin: 0;
-}
 
 .submit-button {
     background-color: $secondary-color;

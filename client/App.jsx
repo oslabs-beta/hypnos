@@ -1,5 +1,4 @@
 import React from 'react';
-import { StateProvider } from './Context';
 import "./StyleSheets/App.scss"
 import QueriesContainer from './Containers/QueriesContainer';
 import Menu from './Components/Menu';
@@ -7,8 +6,8 @@ import { RestLink } from 'apollo-link-rest';
 import { ApolloClient } from 'apollo-client';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import { ApolloProvider } from 'react-apollo';
+import { StateProvider } from './Context';
 import { useStateValue } from './Context';
-
 
 
 const App = () => {
@@ -24,21 +23,19 @@ const App = () => {
 
 
   return (
-    <div id="app">
+    <section id="app">
       <ApolloProvider client={client}>
         <Menu />
         <QueriesContainer />
       </ApolloProvider>
-    </div>
+    </section>
   );
-}
+};
 
-const statefulApp = () => {
-  return (
+const statefulApp = () => (
     <StateProvider>
       <App />
     </StateProvider>
-  )
-}
+  );
 
 export default statefulApp;
