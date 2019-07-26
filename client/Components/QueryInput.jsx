@@ -11,7 +11,6 @@ const QueryInput = () => {
   const handleSubmit = () => {
     event.preventDefault();
     console.log('submitted!');
-    console.log('url in handle submit ', url)
     fetch(url)
       .then(data => data.json())
       .then(data => {

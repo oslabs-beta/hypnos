@@ -17,6 +17,8 @@ const QueriesContainer = () => {
     // on the data object. e.g. query luke { !!!PERSON }
     OutputOfQuery = graphql(query, {
       props: ({ data }) => {
+        // console.log(data, 'this is data inside output of query')
+        // console.log(query, 'this is query inside output of query')
         if (data.loading) {
           return {
             loading: data.loading,
@@ -50,7 +52,7 @@ const QueriesContainer = () => {
       <QueryInput />
       <article id="query-output">
         {query !== '' && <OutputOfQuery query={query} />}
-        {queryResult404 !== '' && <h1>Endpoint does not exist</h1>}
+        {/* {queryResult404 !== '' && <h1>Endpoint does not exist</h1>} */}
       </article>
     </section>
 
