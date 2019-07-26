@@ -5,6 +5,7 @@
 @import "QueryInput.scss";
 @import "QueryOutput.scss";
 @import "EndpointInput.scss";
+@import "menu.scss";
 $font-stack: Helvetica, sans-serif, $dark-color;
 
 #app {
@@ -16,5 +17,17 @@ $font-stack: Helvetica, sans-serif, $dark-color;
     display: flex;
     flex-direction: row;
     font: $font-stack;
-    background-color: $primary-color;
+}
+
+body {
+    margin: 0;
+}
+
+.submit-button {
+    background-color: $secondary-color;
+    color: $background-color;
+}
+
+%input-fields {
+    border-color: $dark-color;
 }

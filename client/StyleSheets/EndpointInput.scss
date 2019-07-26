@@ -1,0 +1,11 @@
+#endpoint-input {
+  
+    // grid-area: endpointInput;
+    // align-self: center;
+    
+    textarea {
+        width: 80vw;
+        resize: none;
+        @extend %input-fields;
+    }
+}

@@ -7,7 +7,7 @@ const Menu = () => {
 
 
   return (
-    <div>
+    <div id="menu">
       <h2>inside menu</h2>
       <button onClick={() => {
         dispatch({

@@ -19,7 +19,7 @@ const EndpointInput = () => {
           type: 'addURL',
           addURL: e.target.value
         })} />
-        <input type="submit" value="Submit" />
+        <input type="submit" value="Submit" className="submit-button"/>
       </form>
     </div>
   )

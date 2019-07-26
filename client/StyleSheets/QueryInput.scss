@@ -1,5 +1,11 @@
-.query-input {
-    width: 100%;
-    height: 100%;
-    background-color: green;
+#query-input {
+
+    textarea {
+
+        resize: none;
+        height: 70vh;
+        @extend %input-fields;
+
+    }
+
 }

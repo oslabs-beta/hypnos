@@ -26,7 +26,7 @@ const QueryInput = () => {
     <div id="query-input">
       <form onSubmit={() => handleSubmit()}>
         <textarea value={textValue} onChange={e => setTextValue(e.target.value)} />
-        <input type="submit" value="Submit" />
+        <input type="submit" value="Submit" className="submit-button" />
       </form>
       <div>
         {// THIS IS WHAT WAS BREAKING. SHOWING AN OBJECT}
