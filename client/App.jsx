@@ -19,7 +19,6 @@ const App = () => {
 
   const client = new ApolloClient({
     link: restLink,
-    // may not need below if using context:
     cache: new InMemoryCache(),
   });
 

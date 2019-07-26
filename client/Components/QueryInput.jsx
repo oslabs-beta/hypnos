@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { graphql } from 'react-apollo';
 import gql from 'graphql-tag';
 import { useStateValue } from '../Context';
 
@@ -11,13 +10,11 @@ const QueryInput = () => {
 
   const handleSubmit = () => {
     event.preventDefault();
-
     console.log('submitted!');
-
     dispatch({
       type: 'addQuery',
       query: gql([`${textValue}`]),
-      queryVar: textValue.match(/(?<=\{\W)(.*?)(?=\@)/g)[0].trim(),
+      queryResultObject: textValue.match(/(?<=\{\W)(.*?)(?=\@)/g)[0].trim(),
     });
   };
 
@@ -28,10 +25,10 @@ const QueryInput = () => {
         <textarea value={textValue} onChange={e => setTextValue(e.target.value)} />
         <input type="submit" value="Submit" className="submit-button" />
       </form>
-      <div>
-        {// THIS IS WHAT WAS BREAKING. SHOWING AN OBJECT}
-          `Here's our new query string: ${JSON.stringify(query)}`}
-      </div>
+      {/* <div>
+        // THIS IS WHAT WAS BREAKING. SHOWING AN OBJECT}
+          `Here's our new query string: ${JSON.stringify(query)}`
+      </div> */}
     </div>
 
 

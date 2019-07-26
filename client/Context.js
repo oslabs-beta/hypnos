@@ -5,7 +5,6 @@
  ************************** */
 
 import React, { createContext, useContext, useReducer } from 'react';
-import gql from 'graphql-tag';
 
 export const StateContext = createContext();
 
@@ -18,19 +17,13 @@ export const StateProvider = ({ children }) => (
 export const useStateValue = () => useContext(StateContext);
 
 const initialState = {
-  greeting: 'hello Sophie',
   query: '',
-  queryVar: '',
+  queryResultObject: '',
   endpoint: 'https://swapi.co/api/'
 };
 
 const reducer = (state, action) => {
   switch (action.type) {
-    case 'newGreeting':
-      return {
-        ...state,
-        greeting: action.newGreeting,
-      };
     case 'addURL':
       return {
         ...state,
@@ -42,22 +35,23 @@ const reducer = (state, action) => {
         endpoint: action.submitEndpoint,
         // if user changes endpoint, want to make sure query is valid
         query: '',
-        queryVar: '',
+        queryResultObject: '',
+
       };
     case 'addQuery':
       console.log('add query reducer fired');
-      console.log('queryVar: ', action.queryVar);
+      console.log('queryResultObject: ', action.queryResultObject);
       return {
         ...state,
-        queryVar: action.queryVar,
+        queryResultObject: action.queryResultObject,
         query: action.query,
       };
-      // needs to send whatever was in intial state at the very beginning of the app
+    // needs to send whatever was in intial state at the very beginning of the app
     case 'resetState':
       return {
-        greeting: 'hello Sophie',
         query: '',
-        queryVar: '',
+        queryResultObject: '',
+        endpoint: 'https://swapi.co/api/',
       }
     default:
       return state;
