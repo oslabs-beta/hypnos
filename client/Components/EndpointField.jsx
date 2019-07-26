@@ -16,7 +16,7 @@ const EndpointField = () => {
   };
 
   return (
-    <div>
+    <div id="endpoint-field">
       <form onSubmit={() => handleSubmit()}>
         <textarea onChange={(e) => {
           setUrlInput(e.target.value);
@@ -27,7 +27,7 @@ const EndpointField = () => {
           });
         }}
         />
-        <input type="submit" value="Submit" />
+        <input type="submit" value="Submit" className="submit-button"/>
       </form>
     </div>
   );

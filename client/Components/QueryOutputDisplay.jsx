@@ -17,7 +17,8 @@ const QueryOutputDisplay = (props) => {
   }
 
   return (
-    <div>
+    <div id="query-output">
+      <h2>inside QueryOutput</h2>
       <h3>
         <pre>
           <code>

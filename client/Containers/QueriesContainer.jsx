@@ -44,7 +44,7 @@ const QueriesContainer = () => {
   // `;
 
   return (
-    <div>
+    <div id="queries-container">
       <EndpointField />
       <QueryInput />
       {query !== '' && <OutputOfQuery query={query} />}
