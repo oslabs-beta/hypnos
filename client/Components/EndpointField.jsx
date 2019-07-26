@@ -15,6 +15,7 @@ const EndpointField = () => {
     });
   };
 
+  // do not need handle submit method on form anymore
   return (
     <div id="endpoint-field">
       <form onSubmit={() => handleSubmit()}>
@@ -31,7 +32,6 @@ const EndpointField = () => {
           });
         }}
         />
-        <input type="submit" value="Submit" className="submit-button"/>
       </form>
     </div>
   );
