@@ -31,7 +31,8 @@ const EndpointField = () => {
           });
         }}
         />
-        <input type="submit" value="Submit" />
+        {/* do not need the below button anymore */}
+        {/* <input type="submit" value="Submit" /> */}
       </form>
     </div>
   );
