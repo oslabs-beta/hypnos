@@ -9,14 +9,14 @@ import { useStateValue } from '../Context';
 
 const RunQueryButton = () => {
   // just uncomment when you want you start using Menu!
-  const [{  }, dispatch] = useStateValue();
+  const [{ }, dispatch] = useStateValue();
 
 
   return (
     <div>
       <h2>inside RunQueryButton</h2>
     </div>
-  )
-}
+  );
+};
 
-export default RunQueryButton
+export default RunQueryButton;

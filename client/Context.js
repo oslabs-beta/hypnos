@@ -5,6 +5,7 @@
  ************************** */
 
 import React, { createContext, useContext, useReducer } from 'react';
+import * as types from './Constants/actionTypes';
 
 export const StateContext = createContext();
 
@@ -25,24 +26,21 @@ const initialState = {
 
 const reducer = (state, action) => {
   switch (action.type) {
-    case 'addURL':
-      // console.log('new url inside reducer: ', action.addURL);
+    case types.ADD_URL:
       return {
         ...state,
         url: action.addURL,
       };
-    case 'submitEndpoint':
+    case types.SUBMIT_ENDPOINT:
       return {
         ...state,
-        endpoint: action.submitEndpoint,
         // if user changes endpoint, want to make sure query is valid
+        endpoint: action.submitEndpoint,
         query: '',
         queryResultObject: '',
 
       };
-    case 'runQuery':
-      // console.log('add query reducer fired');
-      // console.log('state.url: ', state.url);
+    case types.RUN_QUERY:
       // when query is run, on button press, endpoint is assigned the dynamically changing url
       return {
         ...state,
@@ -52,20 +50,14 @@ const reducer = (state, action) => {
         endpoint: state.url ? state.url : state.endpoint,
       };
     // needs to send whatever was in intial state at the very beginning of the app
-    case 'resetState':
+    case types.RESET_STATE:
       return initialState;
-      // return {
-      //   greeting: 'hello Sophie',
-      //   query: '',
-      //   queryVar: '',
-      //   endpoint: 'https://swapi.co/api/',
-      // };
-    case '404Error':
+    case types.ERROR_404:
       return {
         ...state,
         queryResultObject: '',
         queryResult404: action.result404,
-      }
+      };
     default:
       return state;
   }

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useStateValue } from '../Context';
+import * as types from '../Constants/actionTypes';
 
 const EndpointField = () => {
   const [{ endpoint, url }, dispatch] = useStateValue();
@@ -10,7 +11,7 @@ const EndpointField = () => {
   const handleSubmit = () => {
     event.preventDefault();
     dispatch({
-      type: 'submitEndpoint',
+      type: types.SUBMIT_ENDPOINT,
       submitEndpoint: urlInput,
     });
   };
@@ -27,7 +28,7 @@ const EndpointField = () => {
           setUrlInput(newUrl);
           // console.log('url input inside onChange in EI: ', urlInput);
           dispatch({
-            type: 'addURL',
+            type: types.ADD_URL,
             addURL: newUrl,
           });
         }}

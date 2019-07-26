@@ -1,13 +1,12 @@
 import React from 'react';
-import "./StyleSheets/App.scss"
-import QueriesContainer from './Containers/QueriesContainer';
-import Menu from './Components/Menu';
+import './StyleSheets/App.scss';
 import { RestLink } from 'apollo-link-rest';
 import { ApolloClient } from 'apollo-client';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import { ApolloProvider } from 'react-apollo';
-import { StateProvider } from './Context';
-import { useStateValue } from './Context';
+import Menu from './Components/Menu';
+import QueriesContainer from './Containers/QueriesContainer';
+import { StateProvider, useStateValue } from './Context';
 
 
 const App = () => {
@@ -33,9 +32,9 @@ const App = () => {
 };
 
 const statefulApp = () => (
-    <StateProvider>
-      <App />
-    </StateProvider>
-  );
+  <StateProvider>
+    <App />
+  </StateProvider>
+);
 
 export default statefulApp;

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import gql from 'graphql-tag';
 import { useStateValue } from '../Context';
+import * as types from '../Constants/actionTypes';
 
 
 const QueryInput = () => {
@@ -13,20 +14,20 @@ const QueryInput = () => {
     console.log('submitted!');
     fetch(url)
       .then(data => data.json())
-      .then(data => {
+      .then((data) => {
         dispatch({
-          type: 'runQuery',
+          type: types.RUN_QUERY,
           query: gql([`${textValue}`]),
           queryResultObject: textValue.match(/(?<=\{\W)(.*?)(?=\@)/g)[0].trim(),
-        })
+        });
       })
       .catch((error) => {
         console.log('error in fetch ', error);
-        console.log('textValue ', textValue.match(/(?<=\{\W)(.*?)(?=\@)/g)[0].trim())
+        console.log('textValue ', textValue.match(/(?<=\{\W)(.*?)(?=\@)/g)[0].trim());
         dispatch({
-          type: '404Error',
-          result404: 'Endpoint incorrect. Please doublecheck your endpoint.'
-        })
+          type: types.ERROR_404,
+          result404: 'Endpoint incorrect. Please doublecheck your endpoint.',
+        });
       });
   };
 
