@@ -19,7 +19,7 @@ export const useStateValue = () => useContext(StateContext);
 const initialState = {
   query: '',
   queryResultObject: '',
-  endpoint: 'https://swapi.co/api/'
+  endpoint: 'https://swapi.co/api/',
 };
 
 const reducer = (state, action) => {
@@ -47,7 +47,7 @@ const reducer = (state, action) => {
         ...state,
         queryResultObject: action.queryResultObject,
         query: action.query,
-        endpoint: state.url,
+        endpoint: state.url ? state.url : state.endpoint,
       };
     // needs to send whatever was in intial state at the very beginning of the app
     case 'resetState':
