@@ -15,7 +15,7 @@ const QueryInput = () => {
     console.log('submitted!');
 
     dispatch({
-      type: 'addQuery',
+      type: 'runQuery',
       query: gql([`${textValue}`]),
       queryVar: textValue.match(/(?<=\{\W)(.*?)(?=\@)/g)[0].trim(),
     });
@@ -28,10 +28,6 @@ const QueryInput = () => {
         <textarea value={textValue} onChange={e => setTextValue(e.target.value)} />
         <input type="submit" value="Submit" />
       </form>
-      <div>
-        {// THIS IS WHAT WAS BREAKING. SHOWING AN OBJECT}
-          `Here's our new query string: ${JSON.stringify(query)}`}
-      </div>
     </div>
 
 

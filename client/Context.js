@@ -21,7 +21,7 @@ const initialState = {
   greeting: 'hello Sophie',
   query: '',
   queryVar: '',
-  endpoint: 'https://swapi.co/api/'
+  endpoint: 'https://swapi.co/api/',
 };
 
 const reducer = (state, action) => {
@@ -32,6 +32,7 @@ const reducer = (state, action) => {
         greeting: action.newGreeting,
       };
     case 'addURL':
+      // console.log('new url inside reducer: ', action.addURL);
       return {
         ...state,
         url: action.addURL,
@@ -45,22 +46,25 @@ const reducer = (state, action) => {
         queryVar: '',
 
       };
-    case 'addQuery':
-      console.log('add query reducer fired');
-      console.log('queryVar: ', action.queryVar);
+    case 'runQuery':
+      // console.log('add query reducer fired');
+      // console.log('state.url: ', state.url);
+      // when query is run, on button press, endpoint is assigned the dynamically changing url
       return {
         ...state,
         queryVar: action.queryVar,
         query: action.query,
+        endpoint: state.url,
       };
     // needs to send whatever was in intial state at the very beginning of the app
     case 'resetState':
-      return {
-        greeting: 'hello Sophie',
-        query: '',
-        queryVar: '',
-        endpoint: 'https://swapi.co/api/',
-      }
+      return initialState;
+      // return {
+      //   greeting: 'hello Sophie',
+      //   query: '',
+      //   queryVar: '',
+      //   endpoint: 'https://swapi.co/api/',
+      // };
     default:
       return state;
   }
