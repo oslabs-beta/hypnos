@@ -6,7 +6,7 @@ import QueryOutputDisplay from '../Components/QueryOutputDisplay';
 import QueryInput from '../Components/QueryInput';
 
 const QueriesContainer = () => {
-  const [{ endpoint, query, queryResultObject }, dispatch] = useStateValue();
+  const [{ endpoint, query, queryResultObject, queryResult404 }, dispatch] = useStateValue();
 
   // error thrown because it evals before anything is in query
   let OutputOfQuery;
@@ -23,6 +23,7 @@ const QueriesContainer = () => {
           };
         }
         if (data.error) {
+          console.log('error is ', data.error)
           return {
             error: data.error,
           };
@@ -48,6 +49,7 @@ const QueriesContainer = () => {
       <EndpointField />
       <QueryInput />
       {query !== '' && <OutputOfQuery query={query} />}
+      {queryResult404 !== '' && <h1>Endpoint does not exist</h1>}
     </div>
   );
 };

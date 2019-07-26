@@ -19,6 +19,7 @@ export const useStateValue = () => useContext(StateContext);
 const initialState = {
   query: '',
   queryResultObject: '',
+  queryResult404: '',
   endpoint: 'https://swapi.co/api/',
 };
 
@@ -45,6 +46,7 @@ const reducer = (state, action) => {
       // when query is run, on button press, endpoint is assigned the dynamically changing url
       return {
         ...state,
+        queryResult404: '',
         queryResultObject: action.queryResultObject,
         query: action.query,
         endpoint: state.url ? state.url : state.endpoint,
@@ -58,6 +60,12 @@ const reducer = (state, action) => {
       //   queryVar: '',
       //   endpoint: 'https://swapi.co/api/',
       // };
+    case '404Error':
+      return {
+        ...state,
+        queryResultObject: '',
+        queryResult404: action.result404,
+      }
     default:
       return state;
   }

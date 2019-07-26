@@ -3,10 +3,11 @@ import { useStateValue } from '../Context';
 import { jsonFormatter } from '../utils/jsonFormatter'
 
 const QueryOutputDisplay = (props) => {
-  const [{ endpoint, queryResultObject }, dispatch] = useStateValue();
+  const [{ endpoint, queryResultObject, queryResult404 }, dispatch] = useStateValue();
   // pull props off
   const { loading, error } = props;
-  const result = props[queryResultObject];
+  const result = props[queryResultObject] ? props[queryResultObject] : '' ;
+  console.log('result in queryoutputdisplay ', result)
 
   if (loading) {
     return (<h2>Loading</h2>);
@@ -23,6 +24,7 @@ const QueryOutputDisplay = (props) => {
         <pre>
           <code>
             {jsonFormatter(result)}
+            {/* {result} */}
           </code>
         </pre>
       </h3>
