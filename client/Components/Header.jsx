@@ -4,7 +4,7 @@ const header = () => {
 
     return (
         <header id="header">
-            <h1>HYPNOS</h1>
+            <h1>Hypnos</h1>
         </header>
     )
 
