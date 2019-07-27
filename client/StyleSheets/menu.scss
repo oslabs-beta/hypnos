@@ -7,6 +7,7 @@
     background-color: $dark-color;
     grid-area: menu;
     display: grid;
+    @extend %headers;
     
     button {
         font-family: Helvetica, sans-serif;
