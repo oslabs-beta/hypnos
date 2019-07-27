@@ -6,6 +6,7 @@
 @import "QueryOutputDisplay.scss";
 @import "EndpointField.scss";
 @import "menu.scss";
+@import "header.scss";
 $font-stack: Helvetica, sans-serif, $dark-color;
 
 html {
@@ -23,10 +24,14 @@ body {
     margin: 0;
     top:0px;
     left:0px;
-    display: flex;
-    flex-direction: row;
+    display: grid;
+    grid-template-rows: 50px 1fr;
+    grid-template-columns: 50px 1fr;
+    grid-template-areas: 
+        "header header"
+        "menu queryContainer";
     font: $font-stack;
-    background-color: white;
+    background-color: $background-color;
 }
 
 

@@ -20,6 +20,7 @@
 
 
 #queries-container {
+    grid-area: queryContainer;
     width: 100%;
     display: grid;
     // gives fixed size for first column. intermediary column will shrink
@@ -30,5 +31,5 @@
         "queryInput . queryOutput"
         "queryInput . queryOutput"
         "queryInput . queryOutput" ;
-    background-color: white;
+    background-color: #fffaf0;
 }
