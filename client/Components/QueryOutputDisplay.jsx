@@ -37,8 +37,8 @@ const QueryOutputDisplay = (props) => {
   if (testNull) {
     return (
       <>
-        <h4>Null values returned from query. Please check these properties:</h4>
-        <ul>
+        <h4 font="helevtica">Null values returned from query. Please check these properties:</h4>
+        <ul font="helevtica" list-style="none">
           {nullVals}
         </ul>
       </>

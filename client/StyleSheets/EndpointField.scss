@@ -1,9 +1,9 @@
 #endpoint-field {
   
     grid-area: endpointField;
-
     width: 100%;
     justify-self: center;
+    
     input {
         width: 100%;
         height: 30px;
@@ -14,8 +14,7 @@
         text-align: left;
         padding: 10px;
         outline: none;
-        border-radius: 3px;
-        box-shadow: 1px 4px 3px $primary-color;
+        box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
 
     }
 }

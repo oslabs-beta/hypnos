@@ -16,9 +16,11 @@
     display: grid;
     // gives fixed size for first column. intermediary column will shrink
     // as needed. output will be as large as needed
-    grid-template-columns: auto 30px auto;
+    grid-template-columns: 1fr 30px 1fr;
+    grid-template-rows: auto minmax(15px, 15px) auto;
     grid-template-areas:
         "endpointField endpointField endpointField"
+        ". . ."
         "queryInput . queryOutput"
         "queryInput . queryOutput"
         "queryInput . queryOutput" ;

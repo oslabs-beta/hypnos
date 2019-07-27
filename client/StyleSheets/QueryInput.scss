@@ -1,25 +1,11 @@
 #query-input {
 
-    textarea {
-
-        resize: none;
-        height: 70vh;
-        width: 100%;
-        @extend %input-fields;
-        box-shadow: 6px 1px 3px $secondary-color;
-        border-radius: 3px;
-        background-color: white;
-        outline: none;
-        border-width: 2px;
-
-    }
-
     .submit-button {
         border-radius: 4px;
+        box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
         height: 30px;
         width: 80px;
         border: $dark-color;
-        box-shadow: 1px 1px 1px $dark-color;
         margin-left: 5px;
         outline: none;
         font-size: 13px;
@@ -31,11 +17,12 @@
     .submit-button:hover {
         color: white;
         background-color: $dark-color;
-        box-shadow: 1px 1px 1px black;
+        box-shadow: 6px 1px 3px $secondary-color;
     }
 
     .react-codemirror2 {
-        // added simple border to show code mirror text area
-        border: 1px solid black;
+        border-radius: 3px;
+        box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+        height: 70vh;
     }
 }
