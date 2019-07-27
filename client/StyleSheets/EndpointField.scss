@@ -1,30 +1,20 @@
 #endpoint-field {
   
     grid-area: endpointField;
-    // this is not ideal to have this precise number
-    // settings look best with default Electron sized window
     width: 100%;
-    // align-self: center;
-    // form {
-    //     width: 800px;
-    // }
-
-    // form {
-    //     width: 90vw;
-    // }
+    justify-self: center;
     
-    textarea {
-    // this is not ideal to have this precise number
-    // settings look best with default Electron sized window
-        width: 99.2%;
-        height: 25px;
+    input {
+        width: 100%;
+        height: 30px;
         resize: none;
         @extend %input-fields;
         font-size: 1.1rem;
         background-color: white;
+        text-align: left;
+        padding: 10px;
         outline: none;
-        border-radius: 3px;
-        box-shadow: 1px 4px 3px $primary-color;
+        box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
 
     }
 }

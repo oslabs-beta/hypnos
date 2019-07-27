@@ -1,13 +1,25 @@
 #menu {
-    background-color: $primary-color;
-    box-shadow: 1px 1px 1px $dark-color;
-    border-right: $dark-color;
-
-}
-
-#reset-button {
-    background-color: white;
-    border-color: $dark-color;
-    border-radius: 3px;
-    outline: none;
+    justify-self: stretch;
+    text-align: right;
+    align-items: center;
+    padding-left: 20px;
+    color: white;
+    background-color: $dark-color;
+    grid-area: menu;
+    display: grid;
+    @extend %headers;
+    
+    button {
+        font-family: Helvetica, sans-serif;
+        font-size: 20px;
+        background-color: white;
+        width: 70px;
+        height: 30px;
+        color: $dark-color;
+        align-items: center;
+        border-color: $dark-color;
+        border-radius: 3px;
+        place-self: center stretch;
+        outline: none;
+    }
 }

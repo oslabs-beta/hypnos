@@ -1,0 +1,18 @@
+#header {
+    grid-area: header;
+    display: grid;
+    justify-self: stretch;
+    text-align: right;
+    align-items: center;
+    padding-right: 20px;
+    color: white;
+    @extend %headers;
+    // background-color: $dark-color;
+    font-family: 'Special Elite', Helvetica, cursive;
+
+
+
+    h1 {
+        place-self: center stretch;
+    }
+}

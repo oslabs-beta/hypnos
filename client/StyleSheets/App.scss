@@ -6,6 +6,7 @@
 @import "QueryOutputDisplay.scss";
 @import "EndpointField.scss";
 @import "menu.scss";
+@import "header.scss";
 $font-stack: Helvetica, sans-serif, $dark-color;
 
 html {
@@ -23,10 +24,15 @@ body {
     margin: 0;
     top:0px;
     left:0px;
-    display: flex;
-    flex-direction: row;
+    display: grid;
+    grid-template-rows: 50px 45px 1fr;
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas: 
+        "menu header"
+        ". ."
+        "queryContainer queryContainer";
     font: $font-stack;
-    background-color: white;
+    background-color: $background-color;
 }
 
 
@@ -36,5 +42,30 @@ body {
 }
 
 %input-fields {
-    border-color: $highlight-color;
+    border-left: 1px solid $highlight-color;
+}
+
+@-webkit-keyframes colorchange
+{
+0%   {background: #0D5C63;}
+25%  {background: #247B7B;}
+50%  {background: #78CDD7;}
+75%  {background: #247B7B;}
+100% {background: #0D5C63;}
+}
+
+// @-webkit-keyframes colorchange
+// {
+// 0%   {background: #E5446D;}
+// 25%  {background: #FF6B6B;}
+// 50%  {background: #FF8966;}
+// 75%  {background: #FF6B6B;}
+// 100% {background: #E5446D;}
+// }
+
+
+%headers {
+    -webkit-animation: colorchange 20s;
+    animation: colorchange 20s;
+    animation-iteration-count: infinite;
 }
