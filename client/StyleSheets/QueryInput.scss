@@ -1,33 +1,36 @@
 #query-input {
-    margin-left: 10px;
+    margin-left: 20px;
 
     textarea {
 
         resize: none;
         height: 70vh;
         @extend %input-fields;
-        box-shadow: 1px 1px 1px $dark-color;
-        border-radius: 12px;
-        background-color: $highlight-color;
+        box-shadow: 6px 1px 3px $secondary-color;
+        border-radius: 3px;
+        background-color: white;
         outline: none;
+        border-width: 2px;
 
     }
 
     .submit-button {
-        border-radius: 18px;
+        border-radius: 4px;
         height: 30px;
         width: 80px;
-        border-color: $dark-color;
+        border: $dark-color;
         box-shadow: 1px 1px 1px $dark-color;
         margin-left: 5px;
         outline: none;
         font-size: 13px;
-        color: white;
+        color: $dark-color;
+        background-color: white;
+        font-weight: bold;
     }
 
     .submit-button:hover {
         color: white;
-        background-color: $primary-color;
+        background-color: $dark-color;
         box-shadow: 1px 1px 1px black;
     }
 }
