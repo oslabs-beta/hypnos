@@ -1,11 +1,33 @@
 #query-input {
+    margin-left: 10px;
 
     textarea {
 
         resize: none;
         height: 70vh;
         @extend %input-fields;
+        box-shadow: 1px 1px 1px $dark-color;
+        border-radius: 12px;
+        background-color: $highlight-color;
+        outline: none;
 
     }
 
+    .submit-button {
+        border-radius: 18px;
+        height: 30px;
+        width: 80px;
+        border-color: $dark-color;
+        box-shadow: 1px 1px 1px $dark-color;
+        margin-left: 5px;
+        outline: none;
+        font-size: 13px;
+        color: white;
+    }
+
+    .submit-button:hover {
+        color: white;
+        background-color: $primary-color;
+        box-shadow: 1px 1px 1px black;
+    }
 }
