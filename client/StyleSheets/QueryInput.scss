@@ -25,4 +25,18 @@
         box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
         height: 70vh;
     }
+
+    #reset-button {
+        border-radius: 4px;
+        box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+        height: 30px;
+        width: 80px;
+        border: $dark-color;
+        margin-left: 5px;
+        outline: none;
+        font-size: 13px;
+        color: $dark-color;
+        background-color: white;
+        font-weight: bold;
+    }
 }

@@ -10,17 +10,7 @@ const Menu = () => {
 
   return (
     <section id="menu">
-      <button
-        id="reset-button"
-        onClick={() => {
-          dispatch({
-            type: types.RESET_STATE,
-          });
-        }
-      }
-      >
-        Reset
-      </button>
+      
     </section>
   );
 };

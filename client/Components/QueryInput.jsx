@@ -74,6 +74,7 @@ const QueryInput = () => {
   return (
     <>
       <EndpointField setNewAPIEndpoint={setNewAPIEndpoint} />
+      
       <article id="query-input">
         <form onSubmit={() => handleSubmit()}>
           <CodeMirror
@@ -88,7 +89,17 @@ const QueryInput = () => {
           />
           {/* <textarea value={textValue} placeholder={exampleQuery} onChange={(e) => { console.log('typing'); setTextValue(e.target.value); }} /> */}
           <input type="submit" value="Submit" className="submit-button" />
-        </form>
+          <input
+            value='Reset'
+            id="reset-button"
+            onClick={() => {
+              dispatch({
+                type: types.RESET_STATE,
+              });
+            }
+            }
+          />
+        </form>   
       </article>
     </>
 
