@@ -53,7 +53,7 @@ const reducer = (state, action) => {
         queryResultObject: action.queryResultObject,
         query: action.query,
         // we should probably only need one of these, b/w url and endpoint
-        endpoint: state.url ? state.url : state.endpoint,
+        endpoint: action.newEndpoint ? action.newEndpoint : state.endpoint,
       };
     // needs to send whatever was in intial state at the very beginning of the app
     case types.RESET_STATE:
