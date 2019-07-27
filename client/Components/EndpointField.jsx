@@ -22,7 +22,6 @@ const EndpointField = (props) => {
   // do not need handle submit method on form anymore
   return (
     <article id="endpoint-field">
-      <form onSubmit={() => handleSubmit()}>
         <input
           type="text"
           placeholder={`Current endpoint: ${endpoint}`}
@@ -43,7 +42,6 @@ const EndpointField = (props) => {
             // });
           }}
         />
-      </form>
     </article>
   );
 };
