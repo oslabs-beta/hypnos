@@ -1,3 +1,13 @@
 #menu {
     background-color: $primary-color;
+    box-shadow: 1px 1px 1px $dark-color;
+    border-right: $dark-color;
+
+}
+
+#reset-button {
+    background-color: white;
+    border-color: $dark-color;
+    border-radius: 3px;
+    outline: none;
 }

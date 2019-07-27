@@ -26,7 +26,7 @@ body {
     display: flex;
     flex-direction: row;
     font: $font-stack;
-    background-color: $background-color;
+    background-color: white;
 }
 
 
@@ -36,5 +36,5 @@ body {
 }
 
 %input-fields {
-    border-color: $dark-color;
+    border-color: $highlight-color;
 }
