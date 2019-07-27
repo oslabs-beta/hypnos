@@ -25,10 +25,11 @@ body {
     top:0px;
     left:0px;
     display: grid;
-    grid-template-rows: 50px 1fr;
+    grid-template-rows: 50px 45px 1fr;
     grid-template-columns: 50px 1fr;
     grid-template-areas: 
         "menu header"
+        ". ."
         "queryContainer queryContainer";
     font: $font-stack;
     background-color: $background-color;
