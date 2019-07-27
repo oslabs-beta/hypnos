@@ -20,7 +20,7 @@ const EndpointField = () => {
   return (
     <article id="endpoint-field">
       <form onSubmit={() => handleSubmit()}>
-        <textarea
+        <input type="text"
           placeholder={`Current endpoint: ${endpoint}`}
           onChange={(e) => {
             // console.log('new value from text area: ', e.target.value);

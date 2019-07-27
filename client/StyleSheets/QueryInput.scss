@@ -4,6 +4,7 @@
 
         resize: none;
         height: 70vh;
+        width: 100%;
         @extend %input-fields;
         box-shadow: 6px 1px 3px $secondary-color;
         border-radius: 3px;
