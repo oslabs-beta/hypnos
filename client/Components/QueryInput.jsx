@@ -23,12 +23,17 @@ query luke {
 const QueryInput = () => {
   const [textValue, setTextValue] = useState(exampleQuery);
   // console.log('textValue ', textValue)
-  const [{ query, url }, dispatch] = useStateValue();
+  const [{ query, url, endpoint }, dispatch] = useStateValue();
+  // should be able to use endpoint
+  const [newAPIEndpoint, setNewAPIEndpoint] = useState('');
+
+  console.log('new api endpoint var: ', newAPIEndpoint);
 
   const handleSubmit = () => {
+    const urlToSend = newAPIEndpoint || endpoint;
     event.preventDefault();
-    console.log('submitted!: ', url);
-    fetch(proxy + url, {
+    console.log('submitted!: ', newAPIEndpoint);
+    fetch(proxy + urlToSend, {
       // mode: 'no-cors',
       headers: {
         // 'Access-Control-Allow-Origin': '*',
@@ -48,11 +53,14 @@ const QueryInput = () => {
       .then((data) => {
         // if get request is successful, parse it here. fire dispatch to run query
         console.log('data from query: ', data);
+        console.log('new api endpoint before dispatch: ', urlToSend);
         dispatch({
           type: types.RUN_QUERY,
           query: gql([`${textValue}`]),
           queryResultObject: textValue.match(/(?<=\{\W)(.*?)(?=\@)/g)[0].trim(),
+          newEndpoint: urlToSend,
         });
+        setNewAPIEndpoint('');
       })
       .catch((error) => {
         // catches any non-404 erroes in the fetch process. moved dispatch away from here
@@ -61,9 +69,11 @@ const QueryInput = () => {
       });
   };
 
+  console.log('changing new api endpoint: ', newAPIEndpoint);
+
   return (
     <>
-      <EndpointField />
+      <EndpointField setNewAPIEndpoint={setNewAPIEndpoint} />
       <article id="query-input">
         <form onSubmit={() => handleSubmit()}>
           <CodeMirror
