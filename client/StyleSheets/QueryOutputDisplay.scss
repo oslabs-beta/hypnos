@@ -1,5 +1,11 @@
-#query-output h4 {
+#query-output {
     // id was already assigned to container. target h4 inside it
     color: $primary-color;
-    
+    height: 70vh;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    border-radius: 3px;
+    background-color: white;
+    outline: none;
+    font-family: Helevtica, sans-serif;
+    padding-left: 20px;
 }

@@ -16,7 +16,7 @@ let mainWindow;
 // listen for app to be ready
 app.on('ready', () => {
   // create new window
-  mainWindow = new BrowserWindow({});
+  mainWindow = new BrowserWindow({width: 1170, height: 760});
   // load html into the window
   console.log('is dev: ', isDev);
   //   console.log('is dev2: ', isDev2);
