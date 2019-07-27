@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import gql from 'graphql-tag';
 import { useStateValue } from '../Context';
 import * as types from '../Constants/actionTypes';
-
+// using a proxy to get around CORS. WE PROBABLY NEED A SERVER NOW.
 const proxy = 'https://cors-anywhere.herokuapp.com/';
 
 
