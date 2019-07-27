@@ -21,6 +21,7 @@ const initialState = {
   query: '',
   queryResultObject: '',
   queryResult404: '',
+  // we should probably only need one of these, b/w url and endpoint
   endpoint: 'https://swapi.co/api/',
   // need to instantiate url or else query without a user input will not run
   url: 'https://swapi.co/api/',
@@ -47,17 +48,22 @@ const reducer = (state, action) => {
       console.log('query being run');
       return {
         ...state,
+        // if a query is run, that means no 404 happened
         queryResult404: '',
         queryResultObject: action.queryResultObject,
         query: action.query,
+        // we should probably only need one of these, b/w url and endpoint
         endpoint: state.url ? state.url : state.endpoint,
       };
     // needs to send whatever was in intial state at the very beginning of the app
     case types.RESET_STATE:
       return initialState;
     case types.ERROR_404:
+      console.log('404 reducer fired');
       return {
         ...state,
+        // on a 404, reset query. no query is actually run
+        query: '',
         queryResultObject: '',
         queryResult404: action.result404,
       };

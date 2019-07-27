@@ -21,11 +21,14 @@ const EndpointField = () => {
     <article id="endpoint-field">
       <form onSubmit={() => handleSubmit()}>
         <textarea
-          placeholder="default api: SWAPI"
+          placeholder={`Current endpoint: ${endpoint}`}
           onChange={(e) => {
             // console.log('new value from text area: ', e.target.value);
             // have to assign value from text area instead of local state, since state setter
             // and dispatch are async
+
+            // changing this state refreshes the query output display component
+            // this component should be somewhere else or the state should be passed down/stored elsewhere
             const newUrl = e.target.value;
             setUrlInput(newUrl);
             // console.log('url input inside onChange in EI: ', urlInput);

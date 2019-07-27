@@ -56,7 +56,7 @@ const QueriesContainer = () => {
       <QueryInput />
       <article id="query-output">
         {query !== '' && <OutputOfQuery query={query} />}
-        {/* {queryResult404 !== '' && <h1>Endpoint does not exist</h1>} */}
+        {queryResult404 !== '' && <h4>{queryResult404}</h4>}
       </article>
     </section>
 

@@ -5,9 +5,16 @@ import * as types from '../Constants/actionTypes';
 // using a proxy to get around CORS. WE PROBABLY NEED A SERVER NOW.
 const proxy = 'https://cors-anywhere.herokuapp.com/';
 
+// wrote example query so it can be used as a placeholder in textarea
+const exampleQuery = `# Example query:
+query luke {
+  person @rest(type: "Person", path: "people/1/") {
+    name
+  }
+}`;
 
 const QueryInput = () => {
-  const [textValue, setTextValue] = useState('gql`\n#write query below\n\n`');
+  const [textValue, setTextValue] = useState(exampleQuery);
   // console.log('textValue ', textValue)
   const [{ query, url }, dispatch] = useStateValue();
 
@@ -21,8 +28,18 @@ const QueryInput = () => {
         'Content-Type': 'application/json',
       },
     })
-      .then(data => data.json())
+      .then((response) => {
+        if (response.status === 404) {
+          // moved 404 check into first then, to actually check for status code
+          dispatch({
+            type: types.ERROR_404,
+            result404: 'Endpoint is invalid. Please double check your endpoint.',
+          });
+          throw new Error('Endpoint is invalid. Please double check your endpoint.');
+        } else return response.json();
+      })
       .then((data) => {
+        // if get request is successful, parse it here. fire dispatch to run query
         console.log('data from query: ', data);
         dispatch({
           type: types.RUN_QUERY,
@@ -31,12 +48,9 @@ const QueryInput = () => {
         });
       })
       .catch((error) => {
+        // catches any non-404 erroes in the fetch process. moved dispatch away from here
         console.log('error in fetch ', error);
         console.log('textValue ', textValue.match(/(?<=\{\W)(.*?)(?=\@)/g)[0].trim());
-        dispatch({
-          type: types.ERROR_404,
-          result404: 'Endpoint incorrect. Please doublecheck your endpoint.',
-        });
       });
   };
 
@@ -44,7 +58,7 @@ const QueryInput = () => {
 
     <article id="query-input">
       <form onSubmit={() => handleSubmit()}>
-        <textarea value={textValue} onChange={e => setTextValue(e.target.value)} />
+        <textarea value={textValue} placeholder={exampleQuery} onChange={e => setTextValue(e.target.value)} />
         <input type="submit" value="Submit" className="submit-button" />
       </form>
     </article>

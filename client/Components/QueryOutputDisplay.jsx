@@ -6,30 +6,54 @@ const QueryOutputDisplay = (props) => {
   const [{ endpoint, queryResultObject, queryResult404 }, dispatch] = useStateValue();
   // pull props off
   const { loading, error } = props;
+  // this shouldn't be how this is rendered. it will only show up if comp is rendered
   const result = props[queryResultObject] ? props[queryResultObject] : queryResult404;
   // console.log('result in queryoutputdisplay ', result)
   const testNull = Object.values(result).includes(null);
+  let nullVals;
+  if (testNull) {
+    nullVals = Object.keys(result).reduce((acc, curVal) => {
+      if (result[curVal] === null) {
+        acc.push(
+          <li>
+            {curVal}
+          </li>,
+        );
+      }
+      return acc;
+    }, []);
+  }
 
   // loading and error cases do not have query-output IDs
   if (loading) {
-    return (<h2>Loading</h2>);
+    // return (<h4>Loading</h4>);
+    return (<></>);
   }
 
   if (error) {
     return (<h4>{error.message}</h4>);
   }
 
-  if (testNull) return (<h4>Error in GQL types</h4>);
+  if (testNull) {
+    return (
+      <>
+        <h4>Null values returned from query. Please check these properties:</h4>
+        <ul>
+          {nullVals}
+        </ul>
+      </>
+    );
+  }
 
   return (
     <>
-      <h3 id='query-output'>
-        <pre >
+      <h4>
+        <pre>
           <code>
             {jsonFormatter(result)}
           </code>
         </pre>
-      </h3>
+      </h4>
     </>
   );
 };
