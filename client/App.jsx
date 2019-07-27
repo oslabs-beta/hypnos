@@ -18,6 +18,9 @@ const App = () => {
   const client = new ApolloClient({
     link: restLink,
     cache: new InMemoryCache(),
+    // fetchOptions: {
+    //   mode: 'no-cors',
+    // },
   });
 
 

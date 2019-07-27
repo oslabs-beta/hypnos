@@ -20,18 +20,20 @@ const EndpointField = () => {
   return (
     <article id="endpoint-field">
       <form onSubmit={() => handleSubmit()}>
-        <textarea onChange={(e) => {
-          // console.log('new value from text area: ', e.target.value);
-          // have to assign value from text area instead of local state, since state setter
-          // and dispatch are async
-          const newUrl = e.target.value;
-          setUrlInput(newUrl);
-          // console.log('url input inside onChange in EI: ', urlInput);
-          dispatch({
-            type: types.ADD_URL,
-            addURL: newUrl,
-          });
-        }}
+        <textarea
+          placeholder="default api: SWAPI"
+          onChange={(e) => {
+            // console.log('new value from text area: ', e.target.value);
+            // have to assign value from text area instead of local state, since state setter
+            // and dispatch are async
+            const newUrl = e.target.value;
+            setUrlInput(newUrl);
+            // console.log('url input inside onChange in EI: ', urlInput);
+            dispatch({
+              type: types.ADD_URL,
+              addURL: newUrl,
+            });
+          }}
         />
       </form>
     </article>

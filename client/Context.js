@@ -22,6 +22,8 @@ const initialState = {
   queryResultObject: '',
   queryResult404: '',
   endpoint: 'https://swapi.co/api/',
+  // need to instantiate url or else query without a user input will not run
+  url: 'https://swapi.co/api/',
 };
 
 const reducer = (state, action) => {
@@ -42,6 +44,7 @@ const reducer = (state, action) => {
       };
     case types.RUN_QUERY:
       // when query is run, on button press, endpoint is assigned the dynamically changing url
+      console.log('query being run');
       return {
         ...state,
         queryResult404: '',

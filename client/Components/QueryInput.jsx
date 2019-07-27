@@ -3,6 +3,8 @@ import gql from 'graphql-tag';
 import { useStateValue } from '../Context';
 import * as types from '../Constants/actionTypes';
 
+const proxy = 'https://cors-anywhere.herokuapp.com/';
+
 
 const QueryInput = () => {
   const [textValue, setTextValue] = useState('gql`\n#write query below\n\n`');
@@ -11,10 +13,17 @@ const QueryInput = () => {
 
   const handleSubmit = () => {
     event.preventDefault();
-    console.log('submitted!');
-    fetch(url)
+    console.log('submitted!: ', url);
+    fetch(proxy + url, {
+      // mode: 'no-cors',
+      headers: {
+        // 'Access-Control-Allow-Origin': '*',
+        'Content-Type': 'application/json',
+      },
+    })
       .then(data => data.json())
       .then((data) => {
+        console.log('data from query: ', data);
         dispatch({
           type: types.RUN_QUERY,
           query: gql([`${textValue}`]),
