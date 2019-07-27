@@ -3,8 +3,11 @@ import gql from 'graphql-tag';
 import { Controlled as CodeMirror } from 'react-codemirror2';
 import { useStateValue } from '../Context';
 import * as types from '../Constants/actionTypes';
-// import Code Mirror styling at once
-import '../StyleSheets/external/CodeMirror';
+
+// import Code Mirror styling all at once
+import '../StyleSheets/external/CodeMirror.css';
+
+
 // using a proxy to get around CORS. WE PROBABLY NEED A SERVER NOW.
 const proxy = 'https://cors-anywhere.herokuapp.com/';
 
@@ -68,6 +71,7 @@ const QueryInput = () => {
           options={{
             lineNumbers: true,
             tabSize: 2,
+            lineWrapping: true,
           }}
         />
         {/* <textarea value={textValue} placeholder={exampleQuery} onChange={(e) => { console.log('typing'); setTextValue(e.target.value); }} /> */}
