@@ -1,6 +1,7 @@
 import React from 'react';
 import { graphql } from 'react-apollo';
 import { useStateValue } from '../Context';
+// NOTE: moved endpoint field to inside query
 import EndpointField from '../Components/EndpointField';
 import QueryOutputDisplay from '../Components/QueryOutputDisplay';
 import QueryInput from '../Components/QueryInput';
@@ -50,9 +51,9 @@ const QueriesContainer = () => {
   // }
   // `;
 
+  // NOTE: moved endpoint field to inside query
   return (
     <section id="queries-container">
-      <EndpointField />
       <QueryInput />
       <article id="query-output">
         {query !== '' && <OutputOfQuery query={query} />}

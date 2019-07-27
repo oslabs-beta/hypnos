@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import gql from 'graphql-tag';
 import { Controlled as CodeMirror } from 'react-codemirror2';
 import { useStateValue } from '../Context';
+import EndpointField from './EndpointField';
 import * as types from '../Constants/actionTypes';
 
 // import Code Mirror styling all at once
@@ -61,23 +62,25 @@ const QueryInput = () => {
   };
 
   return (
-
-    <article id="query-input">
-      <form onSubmit={() => handleSubmit()}>
-        <CodeMirror
-          value={textValue}
-          onBeforeChange={(editor, data, value) => setTextValue(value)}
-          onChange={(editor, data, value) => { console.log('typing'); console.log('editor: ', editor); console.log('data: ', data); console.log('value: ', value); setTextValue(value); }}
-          options={{
-            lineNumbers: true,
-            tabSize: 2,
-            lineWrapping: true,
-          }}
-        />
-        {/* <textarea value={textValue} placeholder={exampleQuery} onChange={(e) => { console.log('typing'); setTextValue(e.target.value); }} /> */}
-        <input type="submit" value="Submit" className="submit-button" />
-      </form>
-    </article>
+    <>
+      <EndpointField />
+      <article id="query-input">
+        <form onSubmit={() => handleSubmit()}>
+          <CodeMirror
+            value={textValue}
+            onBeforeChange={(editor, data, value) => setTextValue(value)}
+            onChange={(editor, data, value) => { console.log('typing'); console.log('editor: ', editor); console.log('data: ', data); console.log('value: ', value); setTextValue(value); }}
+            options={{
+              lineNumbers: true,
+              tabSize: 2,
+              lineWrapping: true,
+            }}
+          />
+          {/* <textarea value={textValue} placeholder={exampleQuery} onChange={(e) => { console.log('typing'); setTextValue(e.target.value); }} /> */}
+          <input type="submit" value="Submit" className="submit-button" />
+        </form>
+      </article>
+    </>
 
 
   );
