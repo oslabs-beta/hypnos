@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
 import gql from 'graphql-tag';
+import { Controlled as CodeMirror } from 'react-codemirror2';
 import { useStateValue } from '../Context';
 import * as types from '../Constants/actionTypes';
+// import Code Mirror styling at once
+import '../StyleSheets/external/CodeMirror';
 // using a proxy to get around CORS. WE PROBABLY NEED A SERVER NOW.
 const proxy = 'https://cors-anywhere.herokuapp.com/';
 
@@ -58,7 +61,16 @@ const QueryInput = () => {
 
     <article id="query-input">
       <form onSubmit={() => handleSubmit()}>
-        <textarea value={textValue} placeholder={exampleQuery} onChange={e => setTextValue(e.target.value)} />
+        <CodeMirror
+          value={textValue}
+          onBeforeChange={(editor, data, value) => setTextValue(value)}
+          onChange={(editor, data, value) => { console.log('typing'); console.log('editor: ', editor); console.log('data: ', data); console.log('value: ', value); setTextValue(value); }}
+          options={{
+            lineNumbers: true,
+            tabSize: 2,
+          }}
+        />
+        {/* <textarea value={textValue} placeholder={exampleQuery} onChange={(e) => { console.log('typing'); setTextValue(e.target.value); }} /> */}
         <input type="submit" value="Submit" className="submit-button" />
       </form>
     </article>
