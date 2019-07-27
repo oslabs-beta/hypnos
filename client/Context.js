@@ -5,6 +5,7 @@
  ************************** */
 
 import React, { createContext, useContext, useReducer } from 'react';
+import * as types from './Constants/actionTypes';
 
 export const StateContext = createContext();
 
@@ -20,52 +21,52 @@ const initialState = {
   query: '',
   queryResultObject: '',
   queryResult404: '',
+  // we should probably only need one of these, b/w url and endpoint
   endpoint: 'https://swapi.co/api/',
+  // need to instantiate url or else query without a user input will not run
+  url: 'https://swapi.co/api/',
 };
 
 const reducer = (state, action) => {
   switch (action.type) {
-    case 'addURL':
-      // console.log('new url inside reducer: ', action.addURL);
+    case types.ADD_URL:
       return {
         ...state,
         url: action.addURL,
       };
-    case 'submitEndpoint':
+    case types.SUBMIT_ENDPOINT:
       return {
         ...state,
-        endpoint: action.submitEndpoint,
         // if user changes endpoint, want to make sure query is valid
+        endpoint: action.submitEndpoint,
         query: '',
         queryResultObject: '',
 
       };
-    case 'runQuery':
-      // console.log('add query reducer fired');
-      // console.log('state.url: ', state.url);
+    case types.RUN_QUERY:
       // when query is run, on button press, endpoint is assigned the dynamically changing url
+      console.log('query being run');
       return {
         ...state,
+        // if a query is run, that means no 404 happened
         queryResult404: '',
         queryResultObject: action.queryResultObject,
         query: action.query,
+        // we should probably only need one of these, b/w url and endpoint
         endpoint: state.url ? state.url : state.endpoint,
       };
     // needs to send whatever was in intial state at the very beginning of the app
-    case 'resetState':
+    case types.RESET_STATE:
       return initialState;
-      // return {
-      //   greeting: 'hello Sophie',
-      //   query: '',
-      //   queryVar: '',
-      //   endpoint: 'https://swapi.co/api/',
-      // };
-    case '404Error':
+    case types.ERROR_404:
+      console.log('404 reducer fired');
       return {
         ...state,
+        // on a 404, reset query. no query is actually run
+        query: '',
         queryResultObject: '',
         queryResult404: action.result404,
-      }
+      };
     default:
       return state;
   }
