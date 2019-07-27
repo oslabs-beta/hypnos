@@ -28,8 +28,8 @@ body {
     grid-template-rows: 50px 1fr;
     grid-template-columns: 50px 1fr;
     grid-template-areas: 
-        "header header"
-        "menu queryContainer";
+        "menu header"
+        "queryContainer queryContainer";
     font: $font-stack;
     background-color: $background-color;
 }

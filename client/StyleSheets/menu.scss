@@ -1,13 +1,17 @@
 #menu {
-    background-color: $primary-color;
-    box-shadow: 1px 1px 1px $dark-color;
-    border-right: $dark-color;
+    justify-self: stretch;
+    text-align: right;
+    align-items: center;
+    padding-left: 20px;
+    color: white;
+    background-color: $dark-color;
+    font-family: 'Special Elite', Helvetica, cursive;
     grid-area: menu;
-}
 
-#reset-button {
-    background-color: white;
-    border-color: $dark-color;
-    border-radius: 3px;
-    outline: none;
+    button {
+        background-color: white;
+        border-color: $dark-color;
+        border-radius: 3px;
+        outline: none;
+    }
 }

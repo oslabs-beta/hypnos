@@ -19,7 +19,7 @@ const Menu = () => {
         }
       }
       >
-        Reset State
+        Reset
       </button>
     </section>
   );
