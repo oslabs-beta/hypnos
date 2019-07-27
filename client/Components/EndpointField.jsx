@@ -11,14 +11,6 @@ const EndpointField = (props) => {
 
   const { setNewAPIEndpoint } = props;
 
-  const handleSubmit = () => {
-    event.preventDefault();
-    dispatch({
-      type: types.SUBMIT_ENDPOINT,
-      submitEndpoint: urlInput,
-    });
-  };
-
   // do not need handle submit method on form anymore
   return (
     <article id="endpoint-field">
