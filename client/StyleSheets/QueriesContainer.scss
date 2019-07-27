@@ -11,17 +11,11 @@
     grid-area: queryOutput;
 }
 
-// moved into EndpountField file
-// #endpoint-input {
-//     grid-area: endpointInput;
-//     align-self: center;
-
-// }
-
 
 #queries-container {
     grid-area: queryContainer;
-    width: 100%;
+    width: 80%;
+    justify-self: center;
     display: grid;
     // gives fixed size for first column. intermediary column will shrink
     // as needed. output will be as large as needed
