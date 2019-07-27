@@ -23,8 +23,8 @@ const QueryOutputDisplay = (props) => {
 
   return (
     <>
-      <h3>
-        <pre>
+      <h3 id='query-output'>
+        <pre >
           <code>
             {jsonFormatter(result)}
           </code>
