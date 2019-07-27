@@ -9,17 +9,5 @@
     display: grid;
     @extend %headers;
     
-    button {
-        font-family: Helvetica, sans-serif;
-        font-size: 20px;
-        background-color: white;
-        width: 70px;
-        height: 30px;
-        color: $dark-color;
-        align-items: center;
-        border-color: $dark-color;
-        border-radius: 3px;
-        place-self: center stretch;
-        outline: none;
-    }
+    
 }
