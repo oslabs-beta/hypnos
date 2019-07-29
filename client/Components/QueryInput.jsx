@@ -20,19 +20,17 @@ query luke {
   }
 }`;
 
+
 const QueryInput = () => {
   const [textValue, setTextValue] = useState(exampleQuery);
-  // console.log('textValue ', textValue)
-  const [{ query, url, endpoint }, dispatch] = useStateValue();
-  // should be able to use endpoint
+  const [{ endpoint }, dispatch] = useStateValue();
   const [newAPIEndpoint, setNewAPIEndpoint] = useState('');
 
-  console.log('new api endpoint var: ', newAPIEndpoint);
-
   const handleSubmit = () => {
+    // if there's a value in api endpoint, replace endpoint. if it's empty, use endpoint in context
     const urlToSend = newAPIEndpoint || endpoint;
     event.preventDefault();
-    console.log('submitted!: ', newAPIEndpoint);
+    console.log('submitted to: ', urlToSend);
     fetch(proxy + urlToSend, {
       // mode: 'no-cors',
       headers: {
@@ -52,8 +50,6 @@ const QueryInput = () => {
       })
       .then((data) => {
         // if get request is successful, parse it here. fire dispatch to run query
-        console.log('data from query: ', data);
-        console.log('new api endpoint before dispatch: ', urlToSend);
         dispatch({
           type: types.RUN_QUERY,
           query: gql([`${textValue}`]),
@@ -64,42 +60,62 @@ const QueryInput = () => {
       })
       .catch((error) => {
         // catches any non-404 erroes in the fetch process. moved dispatch away from here
-        console.log('error in fetch ', error);
-        console.log('textValue ', textValue.match(/(?<=\{\W)(.*?)(?=\@)/g)[0].trim());
+        console.log('Error in fetch process: ', error);
+        console.log('textValue in error fetch is: ', textValue.match(/(?<=\{\W)(.*?)(?=\@)/g)[0].trim());
       });
   };
-
-  console.log('changing new api endpoint: ', newAPIEndpoint);
 
   return (
     <>
       <EndpointField setNewAPIEndpoint={setNewAPIEndpoint} />
-      
+
       <article id="query-input">
         <form onSubmit={() => handleSubmit()}>
           <CodeMirror
             value={textValue}
             onBeforeChange={(editor, data, value) => setTextValue(value)}
-            onChange={(editor, data, value) => { console.log('typing'); console.log('editor: ', editor); console.log('data: ', data); console.log('value: ', value); setTextValue(value); }}
+            onChange={(editor, data, value) => { setTextValue(value); }}
             options={{
               lineNumbers: true,
               tabSize: 2,
               lineWrapping: true,
             }}
           />
-          {/* <textarea value={textValue} placeholder={exampleQuery} onChange={(e) => { console.log('typing'); setTextValue(e.target.value); }} /> */}
           <input type="submit" value="Submit" className="submit-button" />
-          <input
-            value='Reset'
+          {/* <input
+            value="Reset"
             id="reset-button"
             onClick={() => {
               dispatch({
                 type: types.RESET_STATE,
               });
-            }
-            }
-          />
-        </form>   
+              console.log('resetting');
+            }}
+          /> */}
+
+        </form>
+        <button
+          type="submit"
+          id="reset-button"
+          onClick={() => {
+            dispatch({
+              type: types.RESET_STATE,
+            });
+            // after reseting state, reset endpoint field to empty string. in state, it will be SWAPI
+            // moved button out of form
+
+            // vanilla DOM manipulation was the best way to change the input field value
+            const inputField = document.querySelector('#endpoint-field input');
+            inputField.value = '';
+            // reset textValue field to exampleQuery
+            setTextValue(exampleQuery);
+            // reset api endpoint to blank string
+            setNewAPIEndpoint('');
+          }}
+        >
+Reset
+        </button>
+
       </article>
     </>
 
