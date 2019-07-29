@@ -20,18 +20,17 @@ query luke {
   }
 }`;
 
+
 const QueryInput = () => {
   const [textValue, setTextValue] = useState(exampleQuery);
-  // console.log('textValue ', textValue)
-  const [{ query, url, endpoint }, dispatch] = useStateValue();
-  // should be able to use endpoint
+  const [{ endpoint }, dispatch] = useStateValue();
   const [newAPIEndpoint, setNewAPIEndpoint] = useState('');
 
-
   const handleSubmit = () => {
+    // if there's a value in api endpoint, replace endpoint. if it's empty, use endpoint in context
     const urlToSend = newAPIEndpoint || endpoint;
     event.preventDefault();
-    console.log('submitted!: ', newAPIEndpoint);
+    console.log('submitted to: ', urlToSend);
     fetch(proxy + urlToSend, {
       // mode: 'no-cors',
       headers: {
@@ -64,12 +63,12 @@ const QueryInput = () => {
         if (error.message.slice(0, 29) === 'Syntax Error: Unexpected Name') {
           dispatch({
             type: types.GQL_ERROR,
-            result404: 'Query method is invalid. Please double check your query'
+            result404: 'Query method is invalid. Please double check your query',
           });
-        } else if (error.message.slice(0, 27) === "Syntax Error: Expected Name") {
+        } else if (error.message.slice(0, 27) === 'Syntax Error: Expected Name') {
           dispatch({
             type: types.GQL_ERROR,
-            result404: 'Query path is invalid. Please double check your query path'
+            result404: 'Query path is invalid. Please double check your query path',
           });
         } else {
           console.log('error in fetch ', error);
@@ -82,7 +81,7 @@ const QueryInput = () => {
       <EndpointField setNewAPIEndpoint={setNewAPIEndpoint} />
       <article id="query-input">
         <form id="query-input-form" onSubmit={() => handleSubmit()}>
-          <CodeMirror 
+          <CodeMirror
             id="code-mirror"
             value={textValue}
             onBeforeChange={(editor, data, value) => setTextValue(value)}
@@ -93,21 +92,57 @@ const QueryInput = () => {
               lineWrapping: true,
             }}
           />
-          <div id="buttons">
-          <input
-            id="reset-button"
-            value='Reset'
-            className="submit-button"
-            onClick={() => {
-              dispatch({
-                type: types.RESET_STATE,
-              });
-            }
-          }
-          />
-          <input id="submit-button" type="submit" value="Submit" className="submit-button" />
-          </div>
-        </form>   
+          <section id="buttons">
+            {/* NOTE: THIS IS PRESENTLY OK INSIDE THE FORM */}
+            <input
+              readOnly
+              value="Reset"
+              id="reset-button"
+              className="submit-button"
+              onClick={() => {
+                dispatch({
+                  type: types.RESET_STATE,
+                });
+                // after reseting state, reset endpoint field to empty string. in state, it will be SWAPI
+                // moved button out of form
+
+                // vanilla DOM manipulation was the best way to change the input field value
+                const inputField = document.querySelector('#endpoint-field input');
+                inputField.value = '';
+                // reset textValue field to exampleQuery
+                setTextValue(exampleQuery);
+                // reset api endpoint to blank string
+                setNewAPIEndpoint('');
+              }}
+            />
+            <input id="submit-button" type="submit" value="Submit" className="submit-button" />
+          </section>
+
+        </form>
+
+        {/* NOTE: IN CASE THERE ARE RESET/IMMEDIATELY QUERY ISSUES, USE BUTTON OUTSIDE FORM */}
+        {/* <button
+          type="submit"
+          id="reset-button"
+          onClick={() => {
+            dispatch({
+              type: types.RESET_STATE,
+            });
+            // after reseting state, reset endpoint field to empty string. in state, it will be SWAPI
+            // moved button out of form
+
+            // vanilla DOM manipulation was the best way to change the input field value
+            const inputField = document.querySelector('#endpoint-field input');
+            inputField.value = '';
+            // reset textValue field to exampleQuery
+            setTextValue(exampleQuery);
+            // reset api endpoint to blank string
+            setNewAPIEndpoint('');
+          }}
+        >
+Reset
+        </button> */}
+
       </article>
     </>
 
