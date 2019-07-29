@@ -76,7 +76,7 @@ const QueryInput = () => {
       <EndpointField setNewAPIEndpoint={setNewAPIEndpoint} />
       
       <article id="query-input">
-        <form onSubmit={() => handleSubmit()}>
+        <form id="query-input-form" onSubmit={() => handleSubmit()}>
           <CodeMirror 
             id="code-mirror"
             value={textValue}
@@ -90,6 +90,7 @@ const QueryInput = () => {
           />
           <div id="buttons">
           <input
+            id="reset-button"
             value='Reset'
             className="submit-button"
             onClick={() => {
@@ -99,7 +100,7 @@ const QueryInput = () => {
             }
           }
           />
-          <input type="submit" value="Submit" className="submit-button" />
+          <input id="submit-button" type="submit" value="Submit" className="submit-button" />
           </div>
         </form>   
       </article>

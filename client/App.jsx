@@ -38,7 +38,6 @@ const App = () => {
     <section id="app">
       <ApolloProvider client={client}>
         <Header />
-        <Menu />
         <QueriesContainer />
       </ApolloProvider>
     </section>

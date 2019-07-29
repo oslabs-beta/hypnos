@@ -1,46 +1,27 @@
 #query-input {
-    #code-mirror {
-        grid-area: codeMirror
-    }
-
-    #buttons {
-        grid-area: buttons
-    }
-
+    
     display: grid; 
     grid-template-columns: 1fr;
     grid-template-rows: 1fr 30px;
     grid-template-areas:
-        "codeMirror"
-        "buttons" ;
+    "codeMirror"
+    "buttons" ;
 
-    %button {
-        height: 40px;
-        justify-self: stretch;
-        border: $dark-color;
-        // margin-left: 5px;
-        outline: none;
-        font-size: 13px;
-        color: $dark-color;
-        font-weight: bold;
+    #code-mirror {
+        grid-area: codeMirror
     }
-    .submit-button {
-        @extend %button;
+    
+    #buttons {
+        grid-area: buttons
     }
+    
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
 
-    .buttons {
-        justify-self: stretch;
-        width: 100vw;
-    }
-
-    .submit-button:hover {
-        color: white;
-        background-color: $dark-color;
-    }
 
     .react-codemirror2 {
         border-radius: 3px;
-        height: 65vh;
+        height: 100%;
+        overflow-y: scroll;
     }
 
 }

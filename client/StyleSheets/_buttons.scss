@@ -1,0 +1,32 @@
+%button {
+    height: 40px;
+    justify-self: stretch;
+    border: $dark-color;
+    text-align: center;
+    outline: none;
+    font-size: 13px;
+    color: $dark-color;
+    font-weight: bold;
+    background-color: $highlight-color;
+}
+
+#buttons {
+    justify-self: stretch;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+}
+
+#submit-button {
+    @extend %button;
+}
+
+#reset-button {
+    @extend %button;
+}
+
+
+.submit-button:hover {
+    color: white;
+    background-color: $dark-color;
+}
