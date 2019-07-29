@@ -26,8 +26,8 @@ const QueryOutputDisplay = (props) => {
 
   // loading and error cases do not have query-output IDs
   if (loading) {
-    // return (<h4>Loading</h4>);
-    return (<></>);
+    return (<h4>Loading...</h4>);
+    // return (<></>);
   }
 
   if (error) {

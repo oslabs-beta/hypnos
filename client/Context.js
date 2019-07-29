@@ -45,7 +45,7 @@ const reducer = (state, action) => {
       };
     case types.RUN_QUERY:
       // when query is run, on button press, endpoint is assigned the dynamically changing url
-      console.log('query being run');
+      // console.log('query being run');
       return {
         ...state,
         // if a query is run, that means no 404 happened
@@ -58,8 +58,8 @@ const reducer = (state, action) => {
     // needs to send whatever was in intial state at the very beginning of the app
     case types.RESET_STATE:
       return initialState;
-    case types.ERROR_404:
-      console.log('404 reducer fired');
+    case types.GQL_ERROR:
+      console.log('GQL reducer fired');
       return {
         ...state,
         // on a 404, reset query. no query is actually run
