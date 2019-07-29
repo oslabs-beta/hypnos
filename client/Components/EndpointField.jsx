@@ -14,26 +14,26 @@ const EndpointField = (props) => {
   // do not need handle submit method on form anymore
   return (
     <article id="endpoint-field">
-        <input
-          type="text"
-          placeholder={`Current endpoint: ${endpoint}`}
-          onChange={(e) => {
-            // console.log('new value from text area: ', e.target.value);
-            // have to assign value from text area instead of local state, since state setter
-            // and dispatch are async
+      <input
+        type="text"
+        placeholder={`Current endpoint: ${endpoint}`}
+        onChange={(e) => {
+          // console.log('new value from text area: ', e.target.value);
+          // have to assign value from text area instead of local state, since state setter
+          // and dispatch are async
 
-            // changing this state refreshes the query output display component
-            // this component should be somewhere else or the state should be passed down/stored elsewhere
-            const newUrl = e.target.value;
-            setNewAPIEndpoint(newUrl);
-            // setUrlInput(newUrl);
-            // console.log('url input inside onChange in EI: ', urlInput);
-            // dispatch({
-            //   type: types.ADD_URL,
-            //   addURL: newUrl,
-            // });
-          }}
-        />
+          // changing this state refreshes the query output display component
+          // this component should be somewhere else or the state should be passed down/stored elsewhere
+          const newUrl = e.target.value;
+          setNewAPIEndpoint(newUrl);
+          // setUrlInput(newUrl);
+          // console.log('url input inside onChange in EI: ', urlInput);
+          // dispatch({
+          //   type: types.ADD_URL,
+          //   addURL: newUrl,
+          // });
+        }}
+      />
     </article>
   );
 };

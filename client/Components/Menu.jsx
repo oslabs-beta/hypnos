@@ -9,9 +9,7 @@ const Menu = () => {
   // try making button type reset
 
   return (
-    <section id="menu">
-      
-    </section>
+    <section id="menu" />
   );
 };
 
