@@ -68,7 +68,12 @@ const QueryInput = () => {
         } else if (error.message.slice(0, 27) === 'Syntax Error: Expected Name') {
           dispatch({
             type: types.GQL_ERROR,
-            result404: 'Query path is invalid. Please double check your query path',
+            result404: `@rest must have a 'path' property. Please check the example for reference`,
+          });
+        } else if (error.message.slice(0, 24) === 'Syntax Error: Expected {') {
+          dispatch({
+            type: types.GQL_ERROR,
+            result404: 'Query must be wrapped in curly braces.',
           });
         } else {
           console.log('error in fetch ', error);
