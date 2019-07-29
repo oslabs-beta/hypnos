@@ -80,8 +80,9 @@ const QueryInput = () => {
     <>
       <EndpointField setNewAPIEndpoint={setNewAPIEndpoint} />
       <article id="query-input">
-        <form onSubmit={() => handleSubmit()}>
+        <form id="query-input-form" onSubmit={() => handleSubmit()}>
           <CodeMirror
+            id="code-mirror"
             value={textValue}
             onBeforeChange={(editor, data, value) => setTextValue(value)}
             onChange={(editor, data, value) => setTextValue(value)}
@@ -91,28 +92,31 @@ const QueryInput = () => {
               lineWrapping: true,
             }}
           />
-          <input type="submit" value="Submit" className="submit-button" />
-          {/* NOTE: THIS IS PRESENTLY OK INSIDE THE FORM */}
-          <input
-            readOnly
-            value="Reset"
-            id="reset-button"
-            onClick={() => {
-              dispatch({
-                type: types.RESET_STATE,
-              });
-              // after reseting state, reset endpoint field to empty string. in state, it will be SWAPI
-              // moved button out of form
+          <section id="buttons">
+            {/* NOTE: THIS IS PRESENTLY OK INSIDE THE FORM */}
+            <input
+              readOnly
+              value="Reset"
+              id="reset-button"
+              className="submit-button"
+              onClick={() => {
+                dispatch({
+                  type: types.RESET_STATE,
+                });
+                // after reseting state, reset endpoint field to empty string. in state, it will be SWAPI
+                // moved button out of form
 
-              // vanilla DOM manipulation was the best way to change the input field value
-              const inputField = document.querySelector('#endpoint-field input');
-              inputField.value = '';
-              // reset textValue field to exampleQuery
-              setTextValue(exampleQuery);
-              // reset api endpoint to blank string
-              setNewAPIEndpoint('');
-            }}
-          />
+                // vanilla DOM manipulation was the best way to change the input field value
+                const inputField = document.querySelector('#endpoint-field input');
+                inputField.value = '';
+                // reset textValue field to exampleQuery
+                setTextValue(exampleQuery);
+                // reset api endpoint to blank string
+                setNewAPIEndpoint('');
+              }}
+            />
+            <input id="submit-button" type="submit" value="Submit" className="submit-button" />
+          </section>
 
         </form>
 

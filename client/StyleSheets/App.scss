@@ -1,13 +1,19 @@
 
-@import 'colors';
-@import 'QueryInput.scss';
-@import 'QueriesContainer.scss';
-@import "QueryInput.scss";
-@import "QueryOutputDisplay.scss";
-@import "EndpointField.scss";
-@import "menu.scss";
-@import "header.scss";
+@import 'variables';
+@import '_queryInput.scss';
+@import '_queriesContainer.scss';
+@import "_queryInput.scss";
+@import "_queryOutputDisplay.scss";
+@import "_endpointField.scss";
+@import "_menu.scss";
+@import "_header.scss";
+@import "_buttons.scss";
 $font-stack: Helvetica, sans-serif, $dark-color;
+
+* {
+    margin: 0;
+    padding: 0;
+}
 
 html {
     // width: 100%;
@@ -21,24 +27,15 @@ body {
 #app {
     min-width: 100vw;
     min-height: 100vh;
-    margin: 0;
-    top:0px;
-    left:0px;
     display: grid;
     grid-template-rows: 50px 45px 1fr;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr;
     grid-template-areas: 
-        "menu header"
-        ". ."
-        "queryContainer queryContainer";
+        "header"
+        "."
+        "queryContainer";
     font: $font-stack;
     background-color: $background-color;
-}
-
-
-.submit-button {
-    background-color: $secondary-color;
-    color: $background-color;
 }
 
 %input-fields {
@@ -48,9 +45,9 @@ body {
 @-webkit-keyframes colorchange
 {
 0%   {background: #0D5C63;}
-25%  {background: #247B7B;}
+// 25%  {background: #247B7B;}
 50%  {background: #78CDD7;}
-75%  {background: #247B7B;}
+// 75%  {background: #247B7B;}
 100% {background: #0D5C63;}
 }
 

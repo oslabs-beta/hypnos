@@ -1,23 +1,19 @@
 #query-input {
     grid-area: queryInput;
     resize: none;
-    height: 70vh;
+    // height: 70vh;
 }
-
-#query-output {
-    grid-area: queryOutput;
-}
-
 
 #queries-container {
     grid-area: queryContainer;
     width: 80%;
+    margin-bottom: 50px;
     justify-self: center;
     display: grid;
     // gives fixed size for first column. intermediary column will shrink
     // as needed. output will be as large as needed
     grid-template-columns: 1fr 30px 1fr;
-    grid-template-rows: auto minmax(15px, 15px) auto;
+    grid-template-rows: auto 15px auto auto auto;
     grid-template-areas:
         "endpointField endpointField endpointField"
         ". . ."
