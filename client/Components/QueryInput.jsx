@@ -77,7 +77,8 @@ const QueryInput = () => {
       
       <article id="query-input">
         <form onSubmit={() => handleSubmit()}>
-          <CodeMirror
+          <CodeMirror 
+            id="code-mirror"
             value={textValue}
             onBeforeChange={(editor, data, value) => setTextValue(value)}
             onChange={(editor, data, value) => { console.log('typing'); console.log('editor: ', editor); console.log('data: ', data); console.log('value: ', value); setTextValue(value); }}
@@ -87,18 +88,19 @@ const QueryInput = () => {
               lineWrapping: true,
             }}
           />
-          {/* <textarea value={textValue} placeholder={exampleQuery} onChange={(e) => { console.log('typing'); setTextValue(e.target.value); }} /> */}
-          <input type="submit" value="Submit" className="submit-button" />
+          <div id="buttons">
           <input
             value='Reset'
-            id="reset-button"
+            className="submit-button"
             onClick={() => {
               dispatch({
                 type: types.RESET_STATE,
               });
             }
-            }
+          }
           />
+          <input type="submit" value="Submit" className="submit-button" />
+          </div>
         </form>   
       </article>
     </>
