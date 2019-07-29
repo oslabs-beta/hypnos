@@ -1,9 +1,3 @@
-#query-input {
-    grid-area: queryInput;
-    resize: none;
-    // height: 70vh;
-}
-
 #queries-container {
     grid-area: queryContainer;
     width: 80%;
@@ -20,5 +14,5 @@
         "queryInput . queryOutput"
         "queryInput . queryOutput"
         "queryInput . queryOutput" ;
-    background-color: $background-color;
+    background-color: pink;
 }
