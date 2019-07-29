@@ -4,7 +4,6 @@ import * as types from '../Constants/actionTypes';
 
 const EndpointField = (props) => {
   const [{ endpoint, url }, dispatch] = useStateValue();
-  console.log('what is endpoint: ', endpoint);
   // can be streamlined to not use local state, and maybe
   // one less value from context
   const [urlInput, setUrlInput] = useState(endpoint);

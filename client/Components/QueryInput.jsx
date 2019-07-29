@@ -42,7 +42,7 @@ const QueryInput = () => {
         if (response.status === 404) {
           // moved 404 check into first then, to actually check for status code
           dispatch({
-            type: types.ERROR_404,
+            type: types.GQL_ERROR,
             result404: 'Endpoint is invalid. Please double check your endpoint.',
           });
           throw new Error('Endpoint is invalid. Please double check your endpoint.');
@@ -59,22 +59,32 @@ const QueryInput = () => {
         setNewAPIEndpoint('');
       })
       .catch((error) => {
-        // catches any non-404 erroes in the fetch process. moved dispatch away from here
-        console.log('Error in fetch process: ', error);
-        console.log('textValue in error fetch is: ', textValue.match(/(?<=\{\W)(.*?)(?=\@)/g)[0].trim());
+        // catches any non-404 errors in the fetch process. moved dispatch away from here
+        if (error.message.slice(0, 29) === 'Syntax Error: Unexpected Name') {
+          dispatch({
+            type: types.GQL_ERROR,
+            result404: 'Query method is invalid. Please double check your query',
+          });
+        } else if (error.message.slice(0, 27) === 'Syntax Error: Expected Name') {
+          dispatch({
+            type: types.GQL_ERROR,
+            result404: 'Query path is invalid. Please double check your query path',
+          });
+        } else {
+          console.log('error in fetch ', error);
+        }
       });
   };
 
   return (
     <>
       <EndpointField setNewAPIEndpoint={setNewAPIEndpoint} />
-
       <article id="query-input">
         <form onSubmit={() => handleSubmit()}>
           <CodeMirror
             value={textValue}
             onBeforeChange={(editor, data, value) => setTextValue(value)}
-            onChange={(editor, data, value) => { setTextValue(value); }}
+            onChange={(editor, data, value) => setTextValue(value)}
             options={{
               lineNumbers: true,
               tabSize: 2,
