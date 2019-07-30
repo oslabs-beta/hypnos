@@ -100,12 +100,12 @@ const QueryInput = () => {
         } else if (error.message === 'Syntax Error: Expected Name, found }') {
           dispatch({
             type: types.GQL_ERROR,
-            result404: 'Query fields cannot be blank. Please click "Reset" and check line 4 of the example for reference',
+            result404: 'Query fields cannot be blank. Please click "Reset" and check line 4 of the example for reference.',
           });
         } else if (error.message.slice(0, 24) === 'Syntax Error: Expected :') {
           dispatch({
             type: types.GQL_ERROR,
-            result404: 'Inside @rest, type must be followed by a colon, i.e. type:',
+            result404: 'Inside @rest, type must be followed by a colon (e.g. type:).',
           });
         } else {
           console.log('Error in fetch: ', error);
