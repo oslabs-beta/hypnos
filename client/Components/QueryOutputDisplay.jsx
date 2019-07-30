@@ -8,11 +8,13 @@ const QueryOutputDisplay = (props) => {
   const { loading, error } = props;
   // this shouldn't be how this is rendered. it will only show up if comp is rendered
   const result = props[queryResultObject] ? props[queryResultObject] : queryResult404;
+  
   // checking if __typeName on the result object exists. If it doesn't, we send an error message
-  console.log(Object.keys(result).includes('__typename'))
-  if (!Object.keys(result).includes('__typename')) {
+  // console.log(Object.keys(result).includes('__typename'))
+  if (loading === false && !Object.keys(result).includes('__typename')) {
     return <h4>Query does not have a properly formatted type within @rest</h4>
   }
+  //checking to see if there are any null values on the results object - means that the query field was improperly named or doesn't exist
   const testNull = Object.values(result).includes(null);
   let nullVals;
   if (testNull) {
