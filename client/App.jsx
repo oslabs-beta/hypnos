@@ -4,7 +4,6 @@ import { RestLink } from 'apollo-link-rest';
 import { ApolloClient } from 'apollo-client';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import { ApolloProvider } from 'react-apollo';
-import Menu from './Components/Menu';
 import Header from './Components/Header'
 import QueriesContainer from './Containers/QueriesContainer';
 import { StateProvider, useStateValue } from './Context';
