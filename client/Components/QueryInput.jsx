@@ -113,13 +113,6 @@ const QueryInput = () => {
             type: types.GQL_ERROR,
             result404: 'Variable before "@rest" cannot be blank. Please click reset and check line 3 of the example for reference.',
           });
-          // ! TODO: this needs work. There are several errors that come through with the same error name and we'll have to figure out how best to parse them
-          // ! fires if string after "type" is empty
-        } else if (error.message.slice(0, 27) === 'Syntax Error: Expected Name') {
-          dispatch({
-            type: types.GQL_ERROR,
-            result404: '@rest must have a \'path\' and \'type\' property. Please click reset to check the example for reference.',
-          });
           // if query does not have proper curly brackets
           // ! TODO: this didn't look like it fired for inner right bracket being closed. Or final right bracket
         } else if (error.message === 'Syntax Error: Expected Name, found <EOF>' || error.message.slice(0, 24) === 'Syntax Error: Expected {' || error.message.slice(0, 26) === 'Syntax Error: Unexpected }') {
@@ -138,6 +131,13 @@ const QueryInput = () => {
           dispatch({
             type: types.GQL_ERROR,
             result404: 'Inside @rest, "type" must be followed by a colon (e.g. type:).',
+          });
+          // ! TODO: this needs work. There are several errors that come through with the same error name and we'll have to figure out how best to parse them
+          // ! fires if string after "type" is empty
+        } else if (error.message.slice(0, 27) === 'Syntax Error: Expected Name') {
+          dispatch({
+            type: types.GQL_ERROR,
+            result404: '@rest must have a \'path\' and \'type\' property. Please click reset to check the example for reference.',
           });
         } else {
           console.log('Error in fetch: ', error);
