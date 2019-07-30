@@ -65,6 +65,7 @@ const QueryInput = () => {
             type: types.GQL_ERROR,
             result404: 'Query method is invalid. Please double check your query on line 1',
           });
+          // this needs work. There are several errors that come through with the same error name and we'll have to figure out how best to parse them
         } else if (error.message.slice(0, 2) === 'Syntax Error: Expected Name') {
           dispatch({
             type: types.GQL_ERROR,
