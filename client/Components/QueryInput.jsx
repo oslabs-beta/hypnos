@@ -59,7 +59,7 @@ const QueryInput = () => {
         setNewAPIEndpoint('');
       })
       .catch((error) => {
-        // catches any non-404 errors in the fetch process. moved dispatch away from here
+        // if Gql query does not start with 'query'
         if (error.message.slice(0, 29) === 'Syntax Error: Unexpected Name') {
           dispatch({
             type: types.GQL_ERROR,
@@ -71,16 +71,19 @@ const QueryInput = () => {
             type: types.GQL_ERROR,
             result404: `@rest must have a 'path' and 'type' property. Please click reset to check the example for reference`,
           });
+          // if query does not have proper curly braces
         } else if (error.message === 'Syntax Error: Expected Name, found <EOF>' || error.message.slice(0, 24) === 'Syntax Error: Expected {' || error.message.slice(0, 26) === 'Syntax Error: Unexpected }') {
           dispatch({
             type: types.GQL_ERROR,
             result404: 'Query must be wrapped in curly braces.',
           });
+          // if the variable before @rest does not exist
         } else if (error.message === 'Syntax Error: Expected Name, found @') {
           dispatch({
             type: types.GQL_ERROR,
             result404: 'Variable before @rest cannot be blank. Please click reset and check line 3 of the example for reference.',
           });
+          // if the query fields are blank
         } else if (error.message === 'Syntax Error: Expected Name, found }') {
           dispatch({
             type: types.GQL_ERROR,
