@@ -9,15 +9,24 @@
     height: 70vh;
 
     #code-mirror {
-        grid-area: codeMirror
+        grid-area: codeMirror;
     }
     
     #buttons {
-        grid-area: buttons
+        grid-area: buttons;
     }
-    
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
 
+    background-color: $background-color;
+    height: 70vh;
+    grid-area: queryInput;
+    resize: none;
+    display: grid; 
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 40px;
+    grid-template-areas:
+    "codeMirror"
+    "buttons" ;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
 
     .react-codemirror2 {
         max-height: 66.5vh;

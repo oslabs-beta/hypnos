@@ -10,6 +10,16 @@
     background-color: $highlight-color;
 }
 
+%button-hover {
+    color: white;
+    background-color: $dark-color;
+}
+
+%button-active {
+    color: $dark-color;
+    background-color: $highlight-color;
+}
+
 #buttons {
     justify-self: stretch;
     display: grid;
@@ -26,7 +36,18 @@
 }
 
 
-.submit-button:hover {
-    color: white;
-    background-color: $dark-color;
+#submit-button:hover {
+    @extend %button-hover;
+}
+
+#reset-button:hover {
+    @extend %button-hover;
+}
+
+#submit-button:active {
+    @extend %button-active;
+}
+
+#reset-button:active {
+    @extend %button-active;
 }

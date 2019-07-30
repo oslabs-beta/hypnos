@@ -1,15 +1,17 @@
 #query-output {
     // id was already assigned to container. target h4 inside it
     grid-area: queryOutput;
+    box-sizing: border-box;
     color: $primary-color;
-    height: 72vh;
+    padding:10px 20px;
+    height: 70vh;
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
     border-radius: 3px;
     background-color: white;
     outline: none;
     font-family: Helevtica, sans-serif;
-    padding-left: 20px;
     overflow-y: auto;
+    overflow-x: auto;
     
     ul {
         list-style: none;
