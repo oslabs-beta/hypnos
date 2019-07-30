@@ -1,12 +1,16 @@
 #query-input {
     
+    grid-area: queryInput;
     display: grid; 
     grid-template-columns: 1fr;
-    grid-template-rows: 1fr 30px;
+    grid-template-rows: 1fr 40px;
     grid-template-areas:
     "codeMirror"
     "buttons" ;
     height: 70vh;
+    background-color: $background-color;
+    resize: none;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
 
     #code-mirror {
         grid-area: codeMirror;
@@ -15,18 +19,6 @@
     #buttons {
         grid-area: buttons;
     }
-
-    background-color: $background-color;
-    height: 70vh;
-    grid-area: queryInput;
-    resize: none;
-    display: grid; 
-    grid-template-columns: 1fr;
-    grid-template-rows: 1fr 40px;
-    grid-template-areas:
-    "codeMirror"
-    "buttons" ;
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
 
     .react-codemirror2 {
         max-height: 64.5vh;

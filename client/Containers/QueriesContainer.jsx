@@ -43,13 +43,7 @@ const QueriesContainer = () => {
       },
     })(QueryOutputDisplay);
   }
-  // const SWQuery = gql`
-  // query luke {
-  //   person @rest(type: "Person", path: "people/1/") {
-  //     name
-  //   }
-  // }
-  // `;
+
 
   // NOTE: moved endpoint field to inside query
   return (
@@ -64,12 +58,4 @@ const QueriesContainer = () => {
   );
 };
 
-
-// const ApolloQueryContainer = () => (
-//   <ApolloProvider client={client}>
-//     <QueriesContainer />
-//   </ApolloProvider>
-// );
-
-// export default ApolloQueryContainer;
 export default QueriesContainer;

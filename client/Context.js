@@ -24,11 +24,13 @@ const initialState = {
   // we should probably only need one of these, b/w url and endpoint
   endpoint: 'https://swapi.co/api/',
   // need to instantiate url or else query without a user input will not run
+  // url can be deleted, pretty sure
   url: 'https://swapi.co/api/',
 };
 
 const reducer = (state, action) => {
   switch (action.type) {
+    // think this can be deleted
     case types.ADD_URL:
       return {
         ...state,
@@ -53,6 +55,7 @@ const reducer = (state, action) => {
         queryResultObject: action.queryResultObject,
         query: action.query,
         // we should probably only need one of these, b/w url and endpoint
+        // this logic might not be needed
         endpoint: action.newEndpoint ? action.newEndpoint : state.endpoint,
       };
     // needs to send whatever was in intial state at the very beginning of the app
