@@ -59,7 +59,7 @@ const reducer = (state, action) => {
     case types.RESET_STATE:
       return initialState;
     case types.GQL_ERROR:
-      console.log('GQL reducer fired');
+      console.log('GQL reducer fired.');
       return {
         ...state,
         // on a 404, reset query. no query is actually run

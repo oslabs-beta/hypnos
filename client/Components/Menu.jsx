@@ -9,7 +9,7 @@ import * as types from '../Constants/actionTypes';
 
 const Menu = () => {
   // just uncomment when you want you start using Menu!
-  const [{ }, dispatch] = useStateValue();
+  const [dispatch] = useStateValue();
 
   // try making button type reset
 
