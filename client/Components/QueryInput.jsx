@@ -64,12 +64,27 @@ const QueryInput = () => {
         if (error.message.slice(0, 29) === 'Syntax Error: Unexpected Name') {
           dispatch({
             type: types.GQL_ERROR,
-            result404: 'Query method is invalid. Please double check your query',
+            result404: 'Query method is invalid. Please double check your query on line 1',
           });
-        } else if (error.message.slice(0, 27) === 'Syntax Error: Expected Name') {
+        } else if (error.message.slice(0, 2) === 'Syntax Error: Expected Name') {
           dispatch({
             type: types.GQL_ERROR,
-            result404: 'Query path is invalid. Please double check your query path.',
+            result404: '@rest must have a \'path\' and \'type\' property. Please click reset to check the example for reference',
+          });
+        } else if (error.message === 'Syntax Error: Expected Name, found <EOF>' || error.message.slice(0, 24) === 'Syntax Error: Expected {' || error.message.slice(0, 26) === 'Syntax Error: Unexpected }') {
+          dispatch({
+            type: types.GQL_ERROR,
+            result404: 'Query must be wrapped in curly braces.',
+          });
+        } else if (error.message === 'Syntax Error: Expected Name, found @') {
+          dispatch({
+            type: types.GQL_ERROR,
+            result404: 'Variable before @rest cannot be blank. Please click reset and check line 3 of the example for reference.',
+          });
+        } else if (error.message === 'Syntax Error: Expected Name, found }') {
+          dispatch({
+            type: types.GQL_ERROR,
+            result404: 'Query fields cannot be blank. Please click reset and check line 4 of the example for reference',
           });
         } else {
           console.log('Error in fetch: ', error);
