@@ -22,7 +22,7 @@ const QueriesContainer = () => {
     // on the data object. e.g. query luke { !!!PERSON }
     OutputOfQuery = graphql(query, {
       props: ({ data }) => {
-        console.log(data, 'this is data inside output of query')
+        console.log(data, 'this is data inside output of query');
         // console.log(query, 'this is query inside output of query')
         if (data.loading) {
           return {
@@ -51,6 +51,7 @@ const QueriesContainer = () => {
       <QueryInput />
       <article id="query-output">
         {query !== '' && <OutputOfQuery query={query} />}
+        {/* NOTE: ERRORS ARE MOSTLY BEING RENDERED HERE, NOT INSIDE QUERY OUTPUT DISPLAY  */}
         {queryResult404 !== '' && <h4>{queryResult404}</h4>}
       </article>
     </section>
