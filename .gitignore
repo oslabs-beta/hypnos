@@ -4,4 +4,4 @@ dist/
 package-lock.json
 .cache/
 .env
-.vscode
+.vscode/
