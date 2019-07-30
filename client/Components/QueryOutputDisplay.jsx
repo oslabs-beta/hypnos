@@ -33,7 +33,10 @@ const QueryOutputDisplay = (props) => {
   // checking if there are any values from our result that look like a url (surface level only)
   let urlAsPropCheck = false;
   if (typeof result === 'object') {
-    urlAsPropCheck = Object.values(result).reduce((acc, curVal) => curVal.includes('http') || acc, false);
+    urlAsPropCheck = Object.values(result).reduce((acc, curVal) => {
+      if (curVal !== null) return curVal.includes('http') || acc;
+      else return acc;
+    }, false);
   }
 
   // if there are any values from our result that look like a url, make an array of LIs
