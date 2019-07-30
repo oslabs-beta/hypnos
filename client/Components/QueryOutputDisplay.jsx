@@ -10,9 +10,9 @@ const QueryOutputDisplay = (props) => {
 
   // checking if __typeName on the result object exists. If it doesn't, we send an error message
   // console.log(Object.keys(result).includes('__typename'))
-  if (loading === false && !Object.keys(result).includes('__typename')) return <h4>Query does not have a properly formatted type within @rest</h4>
+  if (loading === false && !Object.keys(result).includes('__typename')) return <h4>Query does not have a properly formatted type within @rest</h4>;
 
-  //checking to see if there are any null values on the results object - means that the query field was improperly named or doesn't exist
+  // checking to see if there are any null values on the results object - means that the query field was improperly named or doesn't exist
   const testNull = Object.values(result).includes(null);
   let nullVals;
   if (testNull) {
@@ -43,7 +43,7 @@ const QueryOutputDisplay = (props) => {
     return (
       <>
         <h4 font="helevtica">Null values returned from query. Please check these properties:</h4>
-        <ul font="helevtica" >
+        <ul font="helevtica">
           {nullVals}
         </ul>
       </>
@@ -52,13 +52,13 @@ const QueryOutputDisplay = (props) => {
 
   return (
     <>
-      <p>
-        
+      <article>
+        <pre>
           <code>
             {jsonFormatter(result)}
           </code>
-        
-      </p>
+        </pre>
+      </article>
     </>
   );
 };

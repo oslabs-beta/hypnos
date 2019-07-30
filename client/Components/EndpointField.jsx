@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useStateValue } from '../Context';
 
 const EndpointField = (props) => {
@@ -14,9 +14,6 @@ const EndpointField = (props) => {
         onChange={(e) => {
           // have to assign value from text area instead of local state, since state setter
           // and dispatch are async
-
-          // changing this state refreshes the query output display component
-          // this component should be somewhere else or the state should be passed down/stored elsewhere
 
           const newUrl = e.target.value;
           setNewAPIEndpoint(newUrl);
