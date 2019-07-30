@@ -6,14 +6,12 @@ const QueryOutputDisplay = (props) => {
   const [{ endpoint, queryResultObject, queryResult404 }, dispatch] = useStateValue();
   // pull props off
   const { loading, error } = props;
-  // this shouldn't be how this is rendered. it will only show up if comp is rendered
   const result = props[queryResultObject] ? props[queryResultObject] : queryResult404;
-  
+
   // checking if __typeName on the result object exists. If it doesn't, we send an error message
   // console.log(Object.keys(result).includes('__typename'))
-  if (loading === false && !Object.keys(result).includes('__typename')) {
-    return <h4>Query does not have a properly formatted type within @rest</h4>
-  }
+  if (loading === false && !Object.keys(result).includes('__typename')) return <h4>Query does not have a properly formatted type within @rest</h4>
+
   //checking to see if there are any null values on the results object - means that the query field was improperly named or doesn't exist
   const testNull = Object.values(result).includes(null);
   let nullVals;
@@ -35,6 +33,7 @@ const QueryOutputDisplay = (props) => {
     return (<h4>Loading...</h4>);
     // return (<></>);
   }
+  // need to figure out how to deal with this one Tuesday at 11:00 am
   // if (error.message === 'Network error: forward is not a function')
   if (error) {
     return (<h4>{error.message}</h4>);
