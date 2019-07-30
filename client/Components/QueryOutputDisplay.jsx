@@ -3,8 +3,8 @@ import { useStateValue } from '../Context';
 import { jsonFormatter } from '../utils/jsonFormatter';
 
 const QueryOutputDisplay = (props) => {
-  const [{ endpoint, queryResultObject, queryResult404 }, dispatch] = useStateValue();
-  // pull props off
+  const [{ queryResultObject, queryResult404 }] = useStateValue();
+  // pull props off from graphQL query
   const { loading, error } = props;
   // this shouldn't be how this is rendered. it will only show up if comp is rendered
   const result = props[queryResultObject] ? props[queryResultObject] : queryResult404;
@@ -38,7 +38,7 @@ const QueryOutputDisplay = (props) => {
     return (
       <>
         <h4 font="helevtica">Null values returned from query. Please check these properties:</h4>
-        <ul font="helevtica" list-style="none">
+        <ul font="helevtica" >
           {nullVals}
         </ul>
       </>
