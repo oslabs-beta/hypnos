@@ -3,8 +3,8 @@ import { useStateValue } from '../Context';
 import { jsonFormatter } from '../utils/jsonFormatter';
 
 const QueryOutputDisplay = (props) => {
-  const [{ endpoint, queryResultObject, queryResult404 }, dispatch] = useStateValue();
-  // pull props off
+  const [{ queryResultObject, queryResult404 }] = useStateValue();
+  // pull props off from graphQL query
   const { loading, error } = props;
   // this shouldn't be how this is rendered. it will only show up if comp is rendered
   const result = props[queryResultObject] ? props[queryResultObject] : queryResult404;

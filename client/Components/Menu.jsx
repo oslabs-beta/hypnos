@@ -1,3 +1,8 @@
+/**
+ *  THIS COMPONENT MIGHT NOT BE NEEDED ANYMORE
+ *
+ * */
+
 import React from 'react';
 import { useStateValue } from '../Context';
 import * as types from '../Constants/actionTypes';
