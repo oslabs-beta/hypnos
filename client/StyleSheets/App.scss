@@ -5,23 +5,13 @@
 @import "_queryInput.scss";
 @import "_queryOutputDisplay.scss";
 @import "_endpointField.scss";
-@import "_menu.scss";
 @import "_header.scss";
 @import "_buttons.scss";
-$font-stack: Helvetica, sans-serif, $dark-color;
+
 
 * {
     margin: 0;
     padding: 0;
-}
-
-html {
-    // width: 100%;
-}
-
-body {
-    margin: 0;
-    // width: 100%;
 }
 
 #app {
