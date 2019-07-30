@@ -53,11 +53,11 @@ const QueryOutputDisplay = (props) => {
   return (
     <>
       <p>
-        <pre>
+        
           <code>
             {jsonFormatter(result)}
           </code>
-        </pre>
+        
       </p>
     </>
   );
