@@ -31,6 +31,8 @@ const QueryInput = () => {
   // this should be added into a different file and imported. might be a heavy lift because of all the variables
 
   const handleSubmit = () => {
+    const path = 
+    console.log(textValue.match(/(?<=path:\W*\")\S*(?=\")/gi)[0].trim(), 'this is textValue inside .then response')
     // if there's a value in api endpoint, replace endpoint. if it's empty, use endpoint in context state
     const urlToSend = newAPIEndpoint || endpoint;
     // prevent refresh
@@ -52,7 +54,7 @@ const QueryInput = () => {
             result404: 'Endpoint is invalid. Please double check your endpoint.',
           });
           throw new Error('Endpoint is invalid. Please double check your endpoint.');
-        } else return response.json();
+        } else return fetch()
       })
       .then((data) => {
         // if get request is successful, parse it here. fire dispatch to run query
