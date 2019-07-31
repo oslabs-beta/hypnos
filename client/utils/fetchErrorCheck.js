@@ -38,7 +38,7 @@ const fetchErrorCheck = (error, dispatch) => {
   } else if (error.message === 'Cannot read property \'0\' of null') {
     dispatch({
       type: types.GQL_ERROR,
-      gqlError: 'Query must has an @rest call.'
+      gqlError: 'Query must have an @rest call.'
     })
     // ! TODO: this needs work. There are several errors that come through with the same error name and we'll have to figure out how best to parse them
     // ! fires if string after "type" is empty
