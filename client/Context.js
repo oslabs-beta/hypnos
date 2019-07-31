@@ -27,7 +27,7 @@ const initialState = {
   queryResultObject: '',
   queryGQLError: '',
   // we should probably only need one of these, b/w url and endpoint
-  endpoint: 'https://swapi.co/api/',
+  endpoint: 'https://pokeapi.co/api/v2/pokemon/',
   // need to instantiate url or else query without a user input will not run
 };
 

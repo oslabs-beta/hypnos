@@ -18,7 +18,7 @@ const QueriesContainer = () => {
     // if something is in query, assign QQO to output of query
     // had to pass on props with the props object. it "parses" bigass object
     // before it's passed on. one thing needed for dynamism: the name of the prop
-    // on the data object. e.g. query luke { !!!PERSON }
+    // on the data object. e.g. query ditto { !!!POKEMON }
     OutputOfQuery = graphql(query, {
       props: ({ data }) => {
         // console.log(data, 'this is data inside output of query');

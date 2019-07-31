@@ -15,9 +15,10 @@ const proxy = 'https://cors-anywhere.herokuapp.com/';
 
 // wrote example query so it can be used as a placeholder in textarea
 const exampleQuery = `# Example query:
-query luke {
-  person @rest(type: "Person", path: "people/1/") {
+query ditto {
+  pokemon @rest(type: "Pokemon", path: "ditto/") {
     name
+    abilities
   }
 }`;
 
@@ -140,7 +141,7 @@ const QueryInput = () => {
                   type: types.RESET_STATE,
                 });
                 // after reseting state, reset endpoint field to empty string. in state,
-                // it will be SWAPI
+                // it will be POKEAPI
 
                 // vanilla DOM manipulation was the best way to change the input field value
                 const inputField = document.querySelector('#endpoint-field input');

@@ -11,7 +11,7 @@ const QueryOutputDisplay = (props) => {
   const result = props[queryResultObject] ? props[queryResultObject] : queryGQLError;
 
   // checking if __typeName on the result object exists. If it doesn't, we send an error message
-  if (loading === false && !Object.keys(result).includes('__typename')) return <h4>Query does not have a properly formatted type within @rest.</h4>;
+  if (loading === false && !Object.keys(result).includes('__typename')) return <p>Query does not have a properly formatted type within @rest.</p>;
 
   // checking to see if there are any null values on the results object
   // if so, means that the query field was improperly named or doesn't exist

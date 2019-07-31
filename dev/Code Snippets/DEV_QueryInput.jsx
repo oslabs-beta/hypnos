@@ -6,7 +6,7 @@
             dispatch({
               type: types.RESET_STATE,
             });
-            // after reseting state, reset endpoint field to empty string. in state, it will be SWAPI
+            // after reseting state, reset endpoint field to empty string. in state, it will be POKEAPI
             // moved button out of form
 
             // vanilla DOM manipulation was the best way to change the input field value
