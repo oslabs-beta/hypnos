@@ -21,7 +21,7 @@ const QueriesContainer = () => {
     // on the data object. e.g. query luke { !!!PERSON }
     OutputOfQuery = graphql(query, {
       props: ({ data }) => {
-        console.log(data, 'this is data inside output of query');
+        // console.log(data, 'this is data inside output of query');
         // console.log(query, 'this is query inside output of query')
         if (data.loading) {
           return {
@@ -29,28 +29,32 @@ const QueriesContainer = () => {
           };
         }
         if (data.error) {
-          console.log('error is ', data.error);
           return {
             error: data.error,
           };
         }
+        // if query successful, instantiate result obj.
         const resultObj = {
           loading: false,
         };
+        // separately assign queryResultVar to output obj
         resultObj[queryResultObject] = data[queryResultObject];
         return resultObj;
       },
+      // render QOD with props from GraphQL query
     })(QueryOutputDisplay);
   }
 
 
   // NOTE: moved endpoint field to inside query
+  // NOTE: ERRORS ARE MOSTLY BEING RENDERED HERE, NOT INSIDE QUERY OUTPUT DISPLAY.
+  // ERRORS RENDERED INSIDE OF QOD ARE UNCAUGHT GQL ERRORS
+
   return (
     <section id="queries-container">
       <QueryInput />
       <article id="query-output">
         {query !== '' && <OutputOfQuery query={query} />}
-        {/* NOTE: ERRORS ARE MOSTLY BEING RENDERED HERE, NOT INSIDE QUERY OUTPUT DISPLAY  */}
         {queryGQLError !== '' && <h4>{queryGQLError}</h4>}
       </article>
     </section>
