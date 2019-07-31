@@ -79,12 +79,12 @@ const QueryOutputDisplay = (props) => {
   // NOTE: If this is true, then successful query results will now be shown at all, which is OK.
   if (testNull) {
     return (
-      <>
+      <article>
         <h4 font="helevtica">Null values returned from query. Please check these properties:</h4>
         <ul font="helevtica">
           {nullVals}
         </ul>
-      </>
+      </article>
     );
   }
 
@@ -100,7 +100,7 @@ const QueryOutputDisplay = (props) => {
         <>
           {urlAsPropCheck
             ? (
-              <>
+              <article>
                 <p>
                   Note: The following data on the prop(s) below resemble a URL. If it is, you
                   will have to reformat your query to access data at that API:
@@ -108,7 +108,7 @@ const QueryOutputDisplay = (props) => {
                 <ul>
                   {urlPropNames}
                 </ul>
-              </>
+              </article>
             )
             : ''}
         </>
