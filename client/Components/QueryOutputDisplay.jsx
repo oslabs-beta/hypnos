@@ -18,6 +18,7 @@ const QueryOutputDisplay = (props) => {
   const testNull = Object.values(result).includes(null);
   let nullVals;
   if (testNull) {
+    console.log('inside url as prop builder, Obj vals of result: ', Object.values(result));
     nullVals = Object.keys(result).reduce((acc, curVal) => {
       if (result[curVal] === null) {
         acc.push(
@@ -33,17 +34,19 @@ const QueryOutputDisplay = (props) => {
   // checking if there are any values from our result that look like a url (surface level only)
   let urlAsPropCheck = false;
   if (typeof result === 'object') {
+    console.log('inside url as prop, Obj vals of result: ', Object.values(result));
     urlAsPropCheck = Object.values(result).reduce((acc, curVal) => {
-      if (curVal !== null) return curVal.includes('http') || acc;
-      else return acc;
+      if (curVal !== null && typeof curVal === 'string') return curVal.includes('http') || acc;
+      return acc;
     }, false);
   }
 
   // if there are any values from our result that look like a url, make an array of LIs
   let urlPropNames;
   if (urlAsPropCheck) {
+    console.log('inside url as prop builder, Obj vals of result: ', Object.values(result));
     urlPropNames = Object.keys(result).reduce((acc, curVal) => {
-      if (result[curVal].includes('http')) {
+      if (typeof result[curVal] === 'string' && result[curVal].includes('http')) {
         acc.push(
           <li>
             {curVal}
