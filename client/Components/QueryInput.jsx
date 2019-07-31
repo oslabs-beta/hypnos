@@ -43,6 +43,18 @@ const QueryInput = () => {
 
 
     // ! NOTE: USE RUN QUERY DISPATCH HERE TO TEST FOR NESTED QUERIES
+    // dispatch({
+    //   type: types.RUN_QUERY,
+    //   // decontructed using of gql tag to make query object. need to pass in a stringliteral.
+    //   query: gql([`${textValue}`]),
+    //   // pulls of key for where data will be in result obj
+    //   queryResultObject: textValue.match(/(?<=\{\W)(.*?)(?=\@)/g)[0].trim(),
+    //   newEndpoint: urlToSend,
+    // });
+    // // reset local api endpoint
+    // setNewAPIEndpoint('');
+    // return;
+    // ! END OF NESTED TEST
 
     fetch(proxy + urlToSend, {
       // mode: 'no-cors',
