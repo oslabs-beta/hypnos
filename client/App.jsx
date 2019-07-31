@@ -4,7 +4,7 @@ import { RestLink } from 'apollo-link-rest';
 import { ApolloClient } from 'apollo-client';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import { ApolloProvider } from 'react-apollo';
-import Header from './Components/Header'
+import Header from './Components/Header';
 import QueriesContainer from './Containers/QueriesContainer';
 import { StateProvider, useStateValue } from './Context';
 // using a proxy to get around CORS. WE PROBABLY NEED A SERVER NOW.
@@ -12,7 +12,7 @@ const proxy = 'https://cors-anywhere.herokuapp.com/';
 
 
 const App = () => {
-  const [{ endpoint, url }, dispatch] = useStateValue();
+  const [{ endpoint }] = useStateValue();
   const restLink = new RestLink({
     // might be able to use custom fetch here for error checking?
     uri: proxy + endpoint,

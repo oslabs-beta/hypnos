@@ -1,3 +1,8 @@
+/**
+* ERROR CHECKING FOR FETCH REQ IN QUERY INPUT. IMPORTED TO QI
+*
+*/
+
 import * as types from '../Constants/actionTypes';
 
 const fetchErrorCheck = (error, dispatch) => {

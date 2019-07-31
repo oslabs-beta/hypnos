@@ -3,6 +3,7 @@
   Allows hooks to be utilized
 
   ! IMPORTANT NOTES FOR ADVANCED QUERIES
+  ! THESE TARGET SOME QUERY VARS
   ! QUERYOBJ.kind.definitions[0].name.kind.value = query name (e.g.)
   ! QUERYOBJ.kind.definitions[0].selectionSet.selections[0].name.value = valBeforeRest (e.g.)
   ! QUERYOBJ.definitions[""0""].selectionSet.selections[""0""].selectionSet.selections[""0""].directives[""0""].arguments[""0""].value.value === FIRST PARAM?
@@ -28,18 +29,10 @@ const initialState = {
   // we should probably only need one of these, b/w url and endpoint
   endpoint: 'https://swapi.co/api/',
   // need to instantiate url or else query without a user input will not run
-  // url can be deleted, pretty sure
-  url: 'https://swapi.co/api/',
 };
 
 const reducer = (state, action) => {
   switch (action.type) {
-    // think this can be deleted
-    case types.ADD_URL:
-      return {
-        ...state,
-        url: action.addURL,
-      };
     case types.SUBMIT_ENDPOINT:
       return {
         ...state,
@@ -51,7 +44,6 @@ const reducer = (state, action) => {
       };
     case types.RUN_QUERY:
       // when query is run, on button press, endpoint is assigned the dynamically changing url
-      console.log('query being run, obj: ', action.query);
       return {
         ...state,
         // if a query is run, that means no 404 happened
@@ -66,7 +58,6 @@ const reducer = (state, action) => {
     case types.RESET_STATE:
       return initialState;
     case types.GQL_ERROR:
-      console.log('GQL reducer fired.');
       return {
         ...state,
         // on a 404, reset query. no query is actually run
