@@ -40,6 +40,22 @@ const QueryInput = () => {
     // console.log(textValue.match(/(?<=path:\W*\")\S*(?=\")/gi)[0].trim())
     // console.log('submitted to: ', urlToSend);
     // make initial fetch to api, to ensure endpoint is valid. proxy to get around CORS
+
+
+    // ! NOTE: USE RUN QUERY DISPATCH HERE TO TEST FOR NESTED QUERIES
+    // dispatch({
+    //   type: types.RUN_QUERY,
+    //   // decontructed using of gql tag to make query object. need to pass in a stringliteral.
+    //   query: gql([`${textValue}`]),
+    //   // pulls of key for where data will be in result obj
+    //   queryResultObject: textValue.match(/(?<=\{\W)(.*?)(?=\@)/g)[0].trim(),
+    //   newEndpoint: urlToSend,
+    // });
+    // // reset local api endpoint
+    // setNewAPIEndpoint('');
+    // return;
+    // ! END OF NESTED TEST
+
     fetch(proxy + urlToSend, {
       // mode: 'no-cors',
       headers: {
@@ -49,18 +65,18 @@ const QueryInput = () => {
     })
       .then((response) => {
         // catch all for when textValue is null
-        const pathRegex = textValue.match(/(?<=path:\W*\")\S*(?=\")/gi)
+        const pathRegex = textValue.match(/(?<=path:\W*\")\S*(?=\")/gi);
         if (response.status === 404) {
           // moved 404 check into first then, to actually check for status code
           dispatch({
             type: types.GQL_ERROR,
-            result404: 'Endpoint is invalid. Please double check your endpoint.',
+            gqlError: 'Endpoint is invalid. Please double check your endpoint.',
           });
           throw new Error('Endpoint is invalid. Please double check your endpoint.');
         } else if (pathRegex === null) {
           dispatch({
             type: types.GQL_ERROR,
-            result404: '@rest must have a \'path\' and \'type\' property. Please click reset to check the example for reference.',
+            gqlError: '@rest must have a \'path\' and \'type\' property. Please click reset to check the example for reference.',
           });
           throw new Error('Path is invalid. Please double check your path.');
         } else {
@@ -69,15 +85,15 @@ const QueryInput = () => {
             headers: {
               'Content-Type': 'application/json',
             },
-          })
-        };
+          });
+        }
       })
       // for checking if the path is correct
       .then((response) => {
         if (response.status === 404) {
           dispatch({
             type: types.GQL_ERROR,
-            result404: 'Path is invalid. Please double check your path.',
+            gqlError: 'Path is invalid. Please double check your path.',
           });
           throw new Error('Path is invalid. Please double check your path.');
         } else return response.json();
@@ -96,52 +112,8 @@ const QueryInput = () => {
         setNewAPIEndpoint('');
       })
       .catch((error) => {
-        // fetchErrorCheck(error, dispatch);
-        // // if Gql query does not start with 'query'
-        // return;
-
-        if (error.message.slice(0, 29) === 'Syntax Error: Unexpected Name') {
-          dispatch({
-            type: types.GQL_ERROR,
-            // line 1 is hardcoded in.
-            result404: 'Query method is invalid. Please double check your query on line 1.',
-          });
-          // if the variable before @rest does not exist
-          // ! TODO: this doesn't look like it's firing.
-        } else if (error.message === 'Syntax Error: Expected Name, found @') {
-          dispatch({
-            type: types.GQL_ERROR,
-            result404: 'Variable before "@rest" cannot be blank. Please click reset and check line 3 of the example for reference.',
-          });
-          // if query does not have proper curly brackets
-          // ! TODO: this didn't look like it fired for inner right bracket being closed. Or final right bracket
-        } else if (error.message === 'Syntax Error: Expected Name, found <EOF>' || error.message.slice(0, 24) === 'Syntax Error: Expected {' || error.message.slice(0, 26) === 'Syntax Error: Unexpected }') {
-          dispatch({
-            type: types.GQL_ERROR,
-            result404: 'Query must be wrapped in curly brackets.',
-          });
-          // if the query fields are blank
-          // ! TODO: this doesn't look like it's firing
-        } else if (error.message === 'Syntax Error: Expected Name, found }') {
-          dispatch({
-            type: types.GQL_ERROR,
-            result404: 'Query fields cannot be blank. Please click "Reset" and check line 4 of the example for reference.',
-          });
-        } else if (error.message.slice(0, 24) === 'Syntax Error: Expected :') {
-          dispatch({
-            type: types.GQL_ERROR,
-            result404: 'Inside @rest, "type" must be followed by a colon (e.g. type:).',
-          });
-          // ! TODO: this needs work. There are several errors that come through with the same error name and we'll have to figure out how best to parse them
-          // ! fires if string after "type" is empty
-        } else if (error.message.slice(0, 27) === 'Syntax Error: Expected Name') {
-          dispatch({
-            type: types.GQL_ERROR,
-            result404: '@rest must have a \'path\' and \'type\' property. Please click reset to check the example for reference.',
-          });
-        } else {
-          console.log('Error in fetch: ', error);
-        }
+        // moved error checking to other file for code clarity
+        fetchErrorCheck(error, dispatch);
       });
   };
 

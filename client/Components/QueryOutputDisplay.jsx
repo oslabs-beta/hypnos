@@ -4,10 +4,10 @@ import { jsonFormatter } from '../utils/jsonFormatter';
 
 const QueryOutputDisplay = (props) => {
   // ! TODO: MOVE ERROR CHECKING INTO A DIFFERENT FILE BECAUSE THIS IS A LOT
-  const [{ endpoint, queryResultObject, queryResult404 }, dispatch] = useStateValue();
+  const [{ endpoint, queryResultObject, queryGQLError }, dispatch] = useStateValue();
   // pull props off
   const { loading, error } = props;
-  const result = props[queryResultObject] ? props[queryResultObject] : queryResult404;
+  const result = props[queryResultObject] ? props[queryResultObject] : queryGQLError;
 
   // checking if __typeName on the result object exists. If it doesn't, we send an error message
   // console.log(Object.keys(result).includes('__typename'))
@@ -18,6 +18,7 @@ const QueryOutputDisplay = (props) => {
   const testNull = Object.values(result).includes(null);
   let nullVals;
   if (testNull) {
+    console.log('inside url as prop builder, Obj vals of result: ', Object.values(result));
     nullVals = Object.keys(result).reduce((acc, curVal) => {
       if (result[curVal] === null) {
         acc.push(
@@ -33,17 +34,19 @@ const QueryOutputDisplay = (props) => {
   // checking if there are any values from our result that look like a url (surface level only)
   let urlAsPropCheck = false;
   if (typeof result === 'object') {
+    console.log('inside url as prop, Obj vals of result: ', Object.values(result));
     urlAsPropCheck = Object.values(result).reduce((acc, curVal) => {
-      if (curVal !== null) return curVal.includes('http') || acc;
-      else return acc;
+      if (curVal !== null && typeof curVal === 'string') return curVal.includes('http') || acc;
+      return acc;
     }, false);
   }
 
   // if there are any values from our result that look like a url, make an array of LIs
   let urlPropNames;
   if (urlAsPropCheck) {
+    console.log('inside url as prop builder, Obj vals of result: ', Object.values(result));
     urlPropNames = Object.keys(result).reduce((acc, curVal) => {
-      if (result[curVal].includes('http')) {
+      if (typeof result[curVal] === 'string' && result[curVal].includes('http')) {
         acc.push(
           <li>
             {curVal}
@@ -90,7 +93,7 @@ const QueryOutputDisplay = (props) => {
           {urlAsPropCheck
             ? (
               <>
-                <p>Note: The following props respective data look like a URL. If it is, You will have to reformat your query to access data at that API:</p>
+                <p>Note: The following data on the prop(s) below resemble a URL. If it is, you will have to reformat your query to access data at that API:</p>
                 <ul>
                   {urlPropNames}
                 </ul>

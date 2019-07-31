@@ -9,7 +9,7 @@ import QueryInput from '../Components/QueryInput';
 const QueriesContainer = () => {
   const [
     {
-      endpoint, query, queryResultObject, queryResult404,
+      endpoint, query, queryResultObject, queryGQLError,
     }, dispatch,
   ] = useStateValue();
 
@@ -52,7 +52,7 @@ const QueriesContainer = () => {
       <article id="query-output">
         {query !== '' && <OutputOfQuery query={query} />}
         {/* NOTE: ERRORS ARE MOSTLY BEING RENDERED HERE, NOT INSIDE QUERY OUTPUT DISPLAY  */}
-        {queryResult404 !== '' && <h4>{queryResult404}</h4>}
+        {queryGQLError !== '' && <h4>{queryGQLError}</h4>}
       </article>
     </section>
 
