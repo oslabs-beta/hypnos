@@ -67,7 +67,11 @@ const QueryOutputDisplay = (props) => {
   // need to figure out how to deal with this one Tuesday at 11:00 am
   // if (error.message === 'Network error: forward is not a function')
   if (error) {
-    return (<h4>{error.message}</h4>);
+    if (error.message === 'Network error: forward is not a function'){
+      return(<p>Query submitted did not have '@rest' formatted correctly. For an example, press 'reset' and refer to line 3.</p>)
+    } else  {
+      return (<h4>{error.message}</h4>);
+    }
   }
 
   if (testNull) {
