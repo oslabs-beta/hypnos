@@ -42,21 +42,7 @@ const QueryInput = () => {
     // make initial fetch to api, to ensure endpoint is valid. proxy to get around CORS
 
 
-    // // ! THIS IS A TEST FOR NESTED QUERIES:
-    // dispatch({
-    //   type: types.RUN_QUERY,
-    //   // decontructed using of gql tag to make query object. need to pass in a stringliteral.
-    //   query: gql([`${textValue}`]),
-    //   // pulls of key for where data will be in result obj
-    //   queryResultObject: textValue.match(/(?<=\{\W)(.*?)(?=\@)/g)[0].trim(),
-    //   newEndpoint: urlToSend,
-    // });
-    // // reset local api endpoint
-    // setNewAPIEndpoint('');
-
-    // return;
-    // // ! END OF TEST FOR NESTED QUERIES
-
+    // ! NOTE: USE RUN QUERY DISPATCH HERE TO TEST FOR NESTED QUERIES
 
     fetch(proxy + urlToSend, {
       // mode: 'no-cors',
@@ -72,13 +58,13 @@ const QueryInput = () => {
           // moved 404 check into first then, to actually check for status code
           dispatch({
             type: types.GQL_ERROR,
-            result404: 'Endpoint is invalid. Please double check your endpoint.',
+            gqlError: 'Endpoint is invalid. Please double check your endpoint.',
           });
           throw new Error('Endpoint is invalid. Please double check your endpoint.');
         } else if (pathRegex === null) {
           dispatch({
             type: types.GQL_ERROR,
-            result404: '@rest must have a \'path\' and \'type\' property. Please click reset to check the example for reference.',
+            gqlError: '@rest must have a \'path\' and \'type\' property. Please click reset to check the example for reference.',
           });
           throw new Error('Path is invalid. Please double check your path.');
         } else {
@@ -95,7 +81,7 @@ const QueryInput = () => {
         if (response.status === 404) {
           dispatch({
             type: types.GQL_ERROR,
-            result404: 'Path is invalid. Please double check your path.',
+            gqlError: 'Path is invalid. Please double check your path.',
           });
           throw new Error('Path is invalid. Please double check your path.');
         } else return response.json();

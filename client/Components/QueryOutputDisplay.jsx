@@ -4,10 +4,10 @@ import { jsonFormatter } from '../utils/jsonFormatter';
 
 const QueryOutputDisplay = (props) => {
   // ! TODO: MOVE ERROR CHECKING INTO A DIFFERENT FILE BECAUSE THIS IS A LOT
-  const [{ endpoint, queryResultObject, queryResult404 }, dispatch] = useStateValue();
+  const [{ endpoint, queryResultObject, queryGQLError }, dispatch] = useStateValue();
   // pull props off
   const { loading, error } = props;
-  const result = props[queryResultObject] ? props[queryResultObject] : queryResult404;
+  const result = props[queryResultObject] ? props[queryResultObject] : queryGQLError;
 
   // checking if __typeName on the result object exists. If it doesn't, we send an error message
   // console.log(Object.keys(result).includes('__typename'))

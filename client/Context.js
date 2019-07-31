@@ -24,7 +24,7 @@ export const useStateValue = () => useContext(StateContext);
 const initialState = {
   query: '',
   queryResultObject: '',
-  queryResult404: '',
+  queryGQLError: '',
   // we should probably only need one of these, b/w url and endpoint
   endpoint: 'https://swapi.co/api/',
   // need to instantiate url or else query without a user input will not run
@@ -55,7 +55,7 @@ const reducer = (state, action) => {
       return {
         ...state,
         // if a query is run, that means no 404 happened
-        queryResult404: '',
+        queryGQLError: '',
         queryResultObject: action.queryResultObject,
         query: action.query,
         // we should probably only need one of these, b/w url and endpoint
@@ -72,7 +72,7 @@ const reducer = (state, action) => {
         // on a 404, reset query. no query is actually run
         query: '',
         queryResultObject: '',
-        queryResult404: action.result404,
+        queryGQLError: action.gqlError,
       };
     default:
       return state;
