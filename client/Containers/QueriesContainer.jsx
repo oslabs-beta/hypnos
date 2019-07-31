@@ -55,7 +55,7 @@ const QueriesContainer = () => {
       <QueryInput />
       <article id="query-output">
         {query !== '' && <OutputOfQuery query={query} />}
-        {queryGQLError !== '' && <h4>{queryGQLError}</h4>}
+        {queryGQLError !== '' && <p>{queryGQLError}</p>}
       </article>
     </section>
 

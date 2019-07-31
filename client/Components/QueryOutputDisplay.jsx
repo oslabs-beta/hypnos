@@ -64,7 +64,8 @@ const QueryOutputDisplay = (props) => {
   // loading and error cases do not have query-output IDs
   // loading and error come from GraphQL query result
   if (loading) {
-    return (<h4>Loading...</h4>);
+    return (<div className="lds-circle"><div /></div>);
+
     // return (<></>);
   }
 
@@ -73,14 +74,21 @@ const QueryOutputDisplay = (props) => {
 
   // any error from a graphql query that's not already accounted for is rendered here
   if (error) {
-    return (<h4>{error.message}</h4>);
+    if (error.message === 'Network error: forward is not a function') {
+      return (<p>Query submitted did not have '@rest' formatted correctly. For an example, press 'reset' and refer to line 3.</p>);
+    }
+    return (<p>{error.message}</p>);
   }
 
   // NOTE: If this is true, then successful query results will now be shown at all, which is OK.
   if (testNull) {
     return (
       <article>
-        <h4 font="helevtica">Null values returned from query. Please check these properties:</h4>
+        <p font="helevtica">
+Null values returned from query. Please check these properties:
+          <br />
+          <br />
+        </p>
         <ul font="helevtica">
           {nullVals}
         </ul>
@@ -97,13 +105,16 @@ const QueryOutputDisplay = (props) => {
             {jsonFormatter(result)}
           </code>
         </pre>
+        <br />
+        <br />
         <>
           {urlAsPropCheck
             ? (
               <article>
                 <p>
-                  Note: The following data on the prop(s) below resemble a URL. If it is, you
-                  will have to reformat your query to access data at that API:
+Note: The following data on the prop(s) below resemble a URL. If it is, you will have to reformat your query to access data at that API:
+                  <br />
+                  <br />
                 </p>
                 <ul>
                   {urlPropNames}
