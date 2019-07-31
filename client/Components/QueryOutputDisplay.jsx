@@ -70,14 +70,14 @@ const QueryOutputDisplay = (props) => {
     if (error.message === 'Network error: forward is not a function'){
       return(<p>Query submitted did not have '@rest' formatted correctly. For an example, press 'reset' and refer to line 3.</p>)
     } else  {
-      return (<h4>{error.message}</h4>);
+      return (<p>{error.message}</p>);
     }
   }
 
   if (testNull) {
     return (
       <>
-        <h4 font="helevtica">Null values returned from query. Please check these properties:</h4>
+        <p font="helevtica">Null values returned from query. Please check these properties:<br></br><br></br></p>
         <ul font="helevtica">
           {nullVals}
         </ul>
@@ -94,11 +94,12 @@ const QueryOutputDisplay = (props) => {
             {jsonFormatter(result)}
           </code>
         </pre>
+        <br></br><br></br>
         <>
           {urlAsPropCheck
             ? (
               <>
-                <p>Note: The following data on the prop(s) below resemble a URL. If it is, you will have to reformat your query to access data at that API:</p>
+                <p>Note: The following data on the prop(s) below resemble a URL. If it is, you will have to reformat your query to access data at that API:<br></br><br></br></p>
                 <ul>
                   {urlPropNames}
                 </ul>
