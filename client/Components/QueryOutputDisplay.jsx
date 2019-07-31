@@ -4,7 +4,7 @@ import { jsonFormatter } from '../utils/jsonFormatter';
 
 const QueryOutputDisplay = (props) => {
   // ! TODO: MOVE ERROR CHECKING INTO A DIFFERENT FILE BECAUSE THIS IS A LOT
-  const [{ endpoint, queryResultObject, queryGQLError }, dispatch] = useStateValue();
+  const [{ queryResultObject, queryGQLError }, dispatch] = useStateValue();
   // pull props off
   const { loading, error } = props;
   const result = props[queryResultObject] ? props[queryResultObject] : queryGQLError;
