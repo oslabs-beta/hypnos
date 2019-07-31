@@ -2,7 +2,11 @@
   Context to be used throughout the application
   Allows hooks to be utilized
 
- ************************** */
+  ! IMPORTANT NOTES FOR ADVANCED QUERIES
+  ! QUERYOBJ.kind.definitions[0].name.kind.value = query name (e.g.)
+  ! QUERYOBJ.kind.definitions[0].selectionSet.selections[0].name.value = valBeforeRest (e.g.)
+  ! QUERYOBJ.definitions[""0""].selectionSet.selections[""0""].selectionSet.selections[""0""].directives[""0""].arguments[""0""].value.value === FIRST PARAM?
+  ************************** */
 
 import React, { createContext, useContext, useReducer } from 'react';
 import * as types from './Constants/actionTypes';
