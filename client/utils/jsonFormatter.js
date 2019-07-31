@@ -1,3 +1,8 @@
+/**
+ * JSON FORMATTER FOR RESULT OF GQL QUERY. IMPORTED INTO QUERY OUTPUT DISPLAY
+ *
+ */
+
 export const jsonFormatter = (obj) => {
   const strObj = JSON.stringify(obj);
   let resultStr = '';
@@ -24,6 +29,3 @@ export const jsonFormatter = (obj) => {
   }
   return resultStr;
 };
-
-
-// console.log(jsonFormatter({ name: 'Dillon', instrument: 'bass', age: '26', address: {house: '540', street: '4th ave'}}))

@@ -1,12 +1,10 @@
 const electron = require('electron');
+// not presently using clipboard
 const { clipboard } = require('electron');
 const url = require('url');
 const path = require('path');
-// const { ELECTRON_IS_DEV: isDev2 } = require('dotenv').config();
-// require('dotenv').config();
 
-// console.log('process env: ', process.env);
-// const isDev2 = Number(process.env.ELECTRON_IS_DEV);
+// to determine whether a dev environ is being un
 const isDev = require('electron-is-dev');
 
 const { app, BrowserWindow, Menu } = electron;
@@ -16,16 +14,14 @@ let mainWindow;
 // listen for app to be ready
 app.on('ready', () => {
   // create new window
-  mainWindow = new BrowserWindow({width: 1170, height: 760});
+  mainWindow = new BrowserWindow({ width: 1170, height: 760 });
   // load html into the window
-  console.log('is dev: ', isDev);
-  //   console.log('is dev2: ', isDev2);
+  console.log('Dev environment on: ', isDev);
   mainWindow.loadURL(url.format({
     pathname: isDev ? '//localhost:3000' : path.join(__dirname, './build/index.html'),
     protocol: isDev ? 'http:' : 'file:',
     slashes: true,
   }));
-
 
   // build menu from template
   const mainMenu = Menu.buildFromTemplate(mainMenuTemplate);
@@ -82,5 +78,4 @@ const mainMenuTemplate = [
       },
     ],
   },
-
 ];
