@@ -100,7 +100,10 @@ const QueryOutputDisplay = (props) => {
           {urlAsPropCheck
             ? (
               <>
-                <p>Note: The following data on the prop(s) below resemble a URL. If it is, you will have to reformat your query to access data at that API:</p>
+                <p>
+                  Note: The following data on the prop(s) below resemble a URL. If it is, you
+                  will have to reformat your query to access data at that API:
+                </p>
                 <ul>
                   {urlPropNames}
                 </ul>
