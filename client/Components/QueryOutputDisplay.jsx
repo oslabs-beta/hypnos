@@ -76,6 +76,7 @@ const QueryOutputDisplay = (props) => {
     return (<h4>{error.message}</h4>);
   }
 
+  // NOTE: If this is true, then successful query results will now be shown at all, which is OK.
   if (testNull) {
     return (
       <>
