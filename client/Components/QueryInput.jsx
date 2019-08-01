@@ -34,7 +34,7 @@ const QueryInput = () => {
 
     // this goes directly to dev server
     // works with localhost:3030. need to have server SERVE up app
-    fetch('http://localhost:3030/api')
+    fetch('/api')
       .then(response => response.json())
       .then((data) => {
         console.log('response: ', data.msg);
@@ -48,8 +48,8 @@ const QueryInput = () => {
   // ! TO DELETE: TEST METHOD TO SEE IF FRONTEND CONNECTS TO SERVER
     event.preventDefault();
 
-    serverCheck();
-    return;
+    // serverCheck();
+    // return;
     // ! END OF SERVER TEST
 
     // if there's a value in api endpoint, replace endpoint.

@@ -7,6 +7,7 @@
   "scripts": {
     "start-electron": "electron .",
     "electron-build": "electron-builder",
+    "server": "node_modules/nodemon/bin/nodemon.js server/server.js",
     "clean-build": "rm -rf build/ .cache dist/",
     "react-start": "parcel -p 3000 index.html --out-dir build",
     "react-build": "parcel build index.html --out-dir build --public-url ./",

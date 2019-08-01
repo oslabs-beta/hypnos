@@ -4,14 +4,12 @@ const cors = require('cors');
 const path = require('path');
 
 const app = express();
+console.log('app assigned');
 
 // localhost is running on 3000
-const port = 3030;
+const port = 8080;
+console.log('port assigned');
 
-// more options here for cors package: https://www.npmjs.com/package/cors
-app.use(cors());
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
 
 // not sure if next is needed
 // app.use((req, res, next) => {
@@ -20,18 +18,16 @@ app.use(bodyParser.json());
 //   next();
 // });
 
-// do we need a default route? not sure
-app.use('/static', express.static(path.join(__dirname, '../build')));
-app.get('/', (req, res) => res.status(200).sendFile(path.resolve(__dirname, '../index.html')));
+app.use(cors());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 
+// do we need a default route? not sure
+app.use(express.static('build'));
 app.get('/api', (req, res) => {
   console.log('at api endpoint');
   return res.status(200).json({ msg: 'api queried' });
 });
-
-// 404 check. our server should only be making calls to '/api'
-app.get('*', (req, res) => {
-  res.status(404).send('Path does not exist.');
-});
+// app.get('/', (req, res) => res.status(200).sendFile(path.resolve(__dirname, '../build/index.html')));
 
 app.listen(port, () => console.log(`Listening on port ${port}.`));
