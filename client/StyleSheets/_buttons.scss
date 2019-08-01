@@ -7,7 +7,7 @@
     font-size: 13px;
     color: $highlight-color;
     font-weight: bold;
-    background-color: $dark-color;
+    // background-color: $loading-color;
 }
 
 %button-hover {
@@ -29,15 +29,19 @@
 
 #submit-button {
     @extend %button;
+    background-color: $loading-color;
+
 }
 
 #reset-button {
     @extend %button;
+    background-color: $dark-color;
 }
 
 
 #submit-button:hover {
-    @extend %button-hover;
+    // @extend %button-hover;
+    background-color: $loading-color-hover;
 }
 
 #reset-button:hover {
@@ -45,7 +49,8 @@
 }
 
 #submit-button:active {
-    @extend %button-active;
+    // @extend %button-active;
+    background-color: $loading-color;
 }
 
 #reset-button:active {
