@@ -1,0 +1,59 @@
+
+@import 'variables';
+@import '_queryInput.scss';
+@import '_queriesContainer.scss';
+@import "_queryInput.scss";
+@import "_queryOutputDisplay.scss";
+@import "_endpointField.scss";
+@import "_header.scss";
+@import "_buttons.scss";
+@import "_spinner.scss";
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+#app {
+    min-width: 100vw;
+    min-height: 100vh;
+    display: grid;
+    grid-template-rows: 50px 45px 1fr;
+    grid-template-columns: 1fr;
+    grid-template-areas: 
+        "header"
+        "."
+        "queryContainer";
+    font: $font-stack;
+    background-color: $background-color;
+}
+
+%input-fields {
+    border-left: 1px solid $highlight-color;
+}
+
+@-webkit-keyframes colorchange
+{
+0%   {background: #0D5C63;}
+// 25%  {background: #247B7B;}
+50%  {background: #78CDD7;}
+// 75%  {background: #247B7B;}
+100% {background: #0D5C63;}
+}
+
+// @-webkit-keyframes colorchange
+// {
+// 0%   {background: #E5446D;}
+// 25%  {background: #FF6B6B;}
+// 50%  {background: #FF8966;}
+// 75%  {background: #FF6B6B;}
+// 100% {background: #E5446D;}
+// }
+
+
+%headers {
+    background-color: $dark-color;
+    // -webkit-animation: colorchange 20s;
+    // animation: colorchange 20s;
+    // animation-iteration-count: infinite;
+}

@@ -1,0 +1,25 @@
+#query-output {
+    // id was already assigned to container. target h4 inside it
+    grid-area: queryOutput;
+    display: grid;
+    box-sizing: border-box;
+    color: $dark-color;
+    padding:20px 20px;
+    height: 70vh;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    border-radius: 3px;
+    background-color: white;
+    outline: none;
+    font-family: Helevtica, sans-serif;
+    overflow-y: auto;
+    overflow-x: auto;
+    
+    ul {
+        list-style: none;
+    }
+
+    .lds-circle {
+        place-self: center;
+    }
+}
+

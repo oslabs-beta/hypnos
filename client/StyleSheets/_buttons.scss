@@ -1,0 +1,58 @@
+%button {
+    height: 40px;
+    justify-self: stretch;
+    border: $dark-color;
+    text-align: center;
+    outline: none;
+    font-size: 13px;
+    color: $highlight-color;
+    font-weight: bold;
+    // background-color: $loading-color;
+}
+
+%button-hover {
+    color: $highlight-color;
+    background-color: $secondary-color;
+}
+
+%button-active {
+    color: $highlight-color;
+    background-color: $dark-color;
+}
+
+#buttons {
+    justify-self: stretch;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+}
+
+#submit-button {
+    @extend %button;
+    background-color: $loading-color;
+
+}
+
+#reset-button {
+    @extend %button;
+    background-color: $dark-color;
+}
+
+
+#submit-button:hover {
+    // @extend %button-hover;
+    background-color: $loading-color-hover;
+}
+
+#reset-button:hover {
+    @extend %button-hover;
+}
+
+#submit-button:active {
+    // @extend %button-active;
+    background-color: $loading-color;
+}
+
+#reset-button:active {
+    @extend %button-active;
+}

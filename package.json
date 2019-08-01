@@ -2,13 +2,23 @@
   "name": "hypnos",
   "version": "1.0.0",
   "description": "An app to test GraphQL calls on RESTful APIs, via Apollo.",
-  "main": "index.js",
+  "main": "electron.js",
+  "homepage": "./",
   "scripts": {
+    "start-electron": "electron .",
+    "electron-build": "electron-builder",
+    "clean-build": "rm -rf build/ .cache dist/",
+    "react-start": "parcel -p 3000 index.html --out-dir build",
+    "react-build": "parcel build index.html --out-dir build --public-url ./",
+    "start": "npm run react-start & wait-on http://localhost:3000 && ELECTRON_IS_DEV=1 npm run start-electron",
+    "build": "npm run clean-build && npm run react-build && npm run electron-build && ELECTRON_IS_DEV=0 npm run start-electron",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
     "Apollo",
     "Apollo-Link-Rest",
+    "Electron",
+    "Parcel",
     "GraphQL",
     "REST API",
     "API",
@@ -16,5 +26,35 @@
     "Mutation"
   ],
   "author": "Dillon Garrett, Sophie Nye & Will Robinson",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "apollo-cache-inmemory": "^1.6.2",
+    "apollo-client": "^2.6.3",
+    "apollo-link-rest": "^0.7.3",
+    "babel-core": "^6.26.3",
+    "codemirror": "^5.48.2",
+    "css-loader": "^3.1.0",
+    "grap": "^1.0.0",
+    "graphql": "^14.4.2",
+    "graphql-anywhere": "^4.2.4",
+    "graphql-tag": "^2.10.1",
+    "react": "^16.8.6",
+    "react-apollo": "^2.5.8",
+    "react-codemirror2": "^6.0.0",
+    "react-dom": "^16.8.6",
+    "sass": "^1.22.7",
+    "sass-loader": "^7.1.0",
+    "style-loader": "^0.23.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.5.5",
+    "@babel/preset-env": "^7.5.5",
+    "@babel/preset-react": "^7.0.0",
+    "babel-preset-env": "^1.7.0",
+    "electron": "^5.0.7",
+    "electron-builder": "^21.1.1",
+    "electron-is-dev": "^1.1.0",
+    "parcel-bundler": "^1.12.3",
+    "wait-on": "^3.3.0"
+  }
 }
