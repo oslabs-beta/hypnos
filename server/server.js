@@ -3,6 +3,7 @@ const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 
+// localhost frontend is 3000
 const port = 3030;
 
 // more options here for cors package

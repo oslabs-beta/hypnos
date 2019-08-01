@@ -41,6 +41,7 @@
     "graphql": "^14.4.2",
     "graphql-anywhere": "^4.2.4",
     "graphql-tag": "^2.10.1",
+    "nodemon": "^1.19.1",
     "react": "^16.8.6",
     "react-apollo": "^2.5.8",
     "react-codemirror2": "^6.0.0",
