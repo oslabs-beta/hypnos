@@ -11,7 +11,7 @@ const QueryOutputDisplay = (props) => {
   const result = props[queryResultObject] ? props[queryResultObject] : queryGQLError;
 
   // checking if __typeName on the result object exists. If it doesn't, we send an error message
-  if (loading === false && !Object.keys(result).includes('__typename')) return <p>Query does not have a properly formatted type within @rest.</p>;
+  if (loading === false && !Object.keys(result).includes('__typename')) return <p className='error'>Query does not have a properly formatted type within @rest.</p>;
 
   // checking to see if there are any null values on the results object
   // if so, means that the query field was improperly named or doesn't exist
@@ -75,16 +75,16 @@ const QueryOutputDisplay = (props) => {
   // any error from a graphql query that's not already accounted for is rendered here
   if (error) {
     if (error.message === 'Network error: forward is not a function') {
-      return (<p>Query submitted did not have '@rest' formatted correctly. For an example, press 'reset' and refer to line 3.</p>);
+      return (<p className='error'>Query submitted did not have '@rest' formatted correctly. For an example, press 'reset' and refer to line 3.</p>);
     }
-    return (<p>{error.message}</p>);
+    return (<p className='error'>{error.message}</p>);
   }
 
   // NOTE: If this is true, then successful query results will now be shown at all, which is OK.
   if (testNull) {
     return (
       <article>
-        <p font="helevtica">
+        <p font="helevtica" className='error'>
 Null values returned from query. Please check these properties:
           <br />
           <br />
@@ -111,7 +111,7 @@ Null values returned from query. Please check these properties:
           {urlAsPropCheck
             ? (
               <article>
-                <p>
+                <p className='error'>
 Note: The following data on the prop(s) below resemble a URL. If it is, you will have to reformat your query to access data at that API:
                   <br />
                   <br />
