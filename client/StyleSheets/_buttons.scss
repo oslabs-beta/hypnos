@@ -5,19 +5,19 @@
     text-align: center;
     outline: none;
     font-size: 13px;
-    color: $dark-color;
+    color: $highlight-color;
     font-weight: bold;
-    background-color: $highlight-color;
-}
-
-%button-hover {
-    color: white;
     background-color: $dark-color;
 }
 
+%button-hover {
+    color: $highlight-color;
+    background-color: $secondary-color;
+}
+
 %button-active {
-    color: $dark-color;
-    background-color: $highlight-color;
+    color: $highlight-color;
+    background-color: $dark-color;
 }
 
 #buttons {

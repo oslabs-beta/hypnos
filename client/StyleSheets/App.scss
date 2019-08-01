@@ -8,7 +8,6 @@
 @import "_header.scss";
 @import "_buttons.scss";
 @import "_spinner.scss";
-@import "ball-newton-cradle.min.scss";
 
 * {
     margin: 0;
@@ -53,7 +52,8 @@
 
 
 %headers {
-    -webkit-animation: colorchange 20s;
-    animation: colorchange 20s;
-    animation-iteration-count: infinite;
+    background-color: $dark-color;
+    // -webkit-animation: colorchange 20s;
+    // animation: colorchange 20s;
+    // animation-iteration-count: infinite;
 }
