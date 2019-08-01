@@ -46,7 +46,7 @@ const QueryInput = () => {
   // and imported. might be a heavy lift because of all the variables
   const handleSubmit = () => {
   // ! TO DELETE: TEST METHOD TO SEE IF FRONTEND CONNECTS TO SERVER
-    event.preventDefault();
+    // event.preventDefault();
 
     // serverCheck();
     // return;
