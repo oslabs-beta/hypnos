@@ -18,13 +18,10 @@ const HistoryDisplay = () => {
       })
   }, [])
 
-
-  console.log(queriesHistory)
   const historyList = queriesHistory.map(el => {
     return <li id='el.id'>{el.query}</li>
   })
 
-  console.log('historyList ', historyList)
   return (
     <div>
       <ul id="history-display">
