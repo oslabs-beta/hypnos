@@ -7,11 +7,9 @@
   "scripts": {
     "start-electron": "electron .",
     "electron-build": "electron-builder",
-    "server": "node_modules/nodemon/bin/nodemon.js server/server.js",
     "clean-build": "rm -rf build/ .cache dist/",
     "react-start": "NODE_ENV=development parcel -p 3000 index.html --out-dir build",
     "react-build": "NODE_ENV=production parcel build index.html --out-dir build --public-url ./",
-    "server-test": "npm run react-start & wait-on http://localhost:3000 && npm run server & wait-on http://localhost:8080 && ELECTRON_IS_DEV=1 npm run start-electron",
     "start": "npm run react-start & wait-on http://localhost:3000 && ELECTRON_IS_DEV=1 npm run start-electron",
     "build": "npm run clean-build && npm run react-build && npm run electron-build && ELECTRON_IS_DEV=0 npm run start-electron",
     "test": "echo \"Error: no test specified\" && exit 1"
