@@ -48,7 +48,8 @@ const objectTest = {
   age: 90,
 };
 
-console.log(nullResultCheck(objectTest));
+// should be array of strings
+// console.log(nullResultCheck(objectTest));
 
 
 export default nullResultCheck;

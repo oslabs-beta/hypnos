@@ -1,5 +1,4 @@
 /* eslint-disable no-restricted-syntax */
-
 const nullChecker = (object) => {
   // pull keys off object passed in
   const objKeys = Object.keys(object);
@@ -37,6 +36,6 @@ const objectTest = {
 };
 
 // should be boolean
-console.log(nullChecker(objectTest));
+// console.log(nullChecker(objectTest));
 
 export default nullChecker;
