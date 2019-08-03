@@ -10,11 +10,8 @@ import * as types from '../Constants/actionTypes';
 // import Code Mirror styling all at once
 import '../StyleSheets/external/CodeMirror.css';
 
-
-// using a proxy to get around CORS. WE PROBABLY NEED A SERVER NOW.
-// const proxy = 'https://cors-anywhere.herokuapp.com/';
-console.log('env is dev: ', process.env.IS_DEV);
-const proxy = process.env.IS_DEV ? 'https://cors-anywhere.herokuapp.com/' : '';
+// using a proxy to get around CORS. We do not need a server.
+const proxy = Number(process.env.IS_DEV) === 1 ? 'https://cors-anywhere.herokuapp.com/' : '';
 
 // wrote example query so it can be used as a placeholder in textarea
 const exampleQuery = `# Example query:
