@@ -19,11 +19,11 @@
     min-height: 100vh;
     display: grid;
     grid-template-rows: 50px 45px 1fr;
-    grid-template-columns: 1fr;
+    grid-template-columns: 15% 1fr;
     grid-template-areas: 
-        "header"
-        "."
-        "queryContainer";
+        "header header"
+        "historyDisplay ."
+        "historyDisplay queryContainer";
     font: $font-stack;
     background-color: $background-color;
 }
