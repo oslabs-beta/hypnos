@@ -49,7 +49,7 @@ const reducer = (state, action) => {
         // if a query is run, that means no 404 happened
         queryGQLError: '',
         queryResultObject: action.queryResultObject,
-        query: action.query,
+        query: Object.assign({}, action.query),
         // we should probably only need one of these, b/w url and endpoint
         // this logic might not be needed
         endpoint: action.newEndpoint ? action.newEndpoint : state.endpoint,

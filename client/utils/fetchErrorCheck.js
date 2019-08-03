@@ -13,6 +13,11 @@ const fetchErrorCheck = (error, dispatch) => {
       // line 1 is hardcoded in.
       gqlError: 'Query method is invalid. Please double check your query on line 1.',
     });
+  } else if (error.message.slice(0, 12) === 'react-apollo') {
+    dispatch({
+      type: types.GQL_ERROR,
+      gqlError: 'Currently attempting to run multiple queries, but only one query, subscription, or mutation may be run at one time',
+    });
     // if the variable before @rest does not exist
     // ! TODO: this doesn't look like it's firing.
   } else if (error.message === 'Syntax Error: Expected Name, found @') {
