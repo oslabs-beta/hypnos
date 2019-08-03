@@ -4,45 +4,66 @@ import { useStateValue } from '../Context';
 // NOTE: moved endpoint field to inside query
 import QueryOutputDisplay from '../Components/QueryOutputDisplay';
 import QueryInput from '../Components/QueryInput';
+import * as types from '../Constants/actionTypes';
 
 const QueriesContainer = () => {
-  const [
-    {
-      query, queryResultObject, queryGQLError,
-    },
-  ] = useStateValue();
+  const [{ query, queryResultObject, queryGQLError }, dispatch] = useStateValue();
 
   // error thrown because it evals before anything is in query
   let OutputOfQuery;
   if (query !== '') {
-    // if something is in query, assign QQO to output of query
+    // if something is in query, assign QoQ to output of query
     // had to pass on props with the props object. it "parses" bigass object
     // before it's passed on. one thing needed for dynamism: the name of the prop
     // on the data object. e.g. query ditto { !!!POKEMON }
-    OutputOfQuery = graphql(query, {
-      props: ({ data }) => {
-        // console.log(data, 'this is data inside output of query');
-        // console.log(query, 'this is query inside output of query')
-        if (data.loading) {
-          return {
-            loading: data.loading,
-          };
-        }
-        if (data.error) {
-          return {
-            error: data.error,
-          };
-        }
-        // if query successful, instantiate result obj.
-        const resultObj = {
+    // if query.definitions is an array with the number of queries. It should not be greater than 1
+    if (query.definitions.length > 1) {
+      // dispatch({
+      //   type: types.GQL_ERROR,
+      //   gqlError: 'Currently attempting to run multiple queries, but only one query, subscription, or mutation may be run at one time',
+      // });
+      // OutputOfQuery = {
+      //   props: () => {
+      //     return {
+      //       loading: false,
+      //       error: 'Currently attempting to run multiple queries, but only one query, subscription, or mutation may be run at one time',
+      //     };
+      //   }
+      // }(QueryOutputDisplay);
+
+      const myprops = () => {
+        return {
           loading: false,
-        };
-        // separately assign queryResultVar to output obj
-        resultObj[queryResultObject] = data[queryResultObject];
-        return resultObj;
-      },
-      // render QOD with props from GraphQL query
-    })(QueryOutputDisplay);
+          error: 'Currently attempting to run multiple queries, but only one query, subscription, or mutation may be run at one time',
+        }
+      };
+      myprops()(QueryOutputDisplay);
+    } else {
+      OutputOfQuery = graphql(query, {
+        props: ({ data }) => {
+          // console.log(data, 'this is data inside output of query');
+          // console.log(query, 'this is query inside output of query')
+          if (data.loading) {
+            return {
+              loading: data.loading,
+            };
+          }
+          if (data.error) {
+            return {
+              error: data.error,
+            };
+          }
+          // if query successful, instantiate result obj.
+          const resultObj = {
+            loading: false,
+          };
+          // separately assign queryResultVar to output obj
+          resultObj[queryResultObject] = data[queryResultObject];
+          return resultObj;
+        },
+        // render QOD with props from GraphQL query
+      })(QueryOutputDisplay);
+    }
   }
 
 
