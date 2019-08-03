@@ -18,26 +18,17 @@ const QueriesContainer = () => {
     // on the data object. e.g. query ditto { !!!POKEMON }
     // if query.definitions is an array with the number of queries. It should not be greater than 1
     if (query.definitions.length > 1) {
-      // dispatch({
-      //   type: types.GQL_ERROR,
-      //   gqlError: 'Currently attempting to run multiple queries, but only one query, subscription, or mutation may be run at one time',
-      // });
-      // OutputOfQuery = {
-      //   props: () => {
-      //     return {
-      //       loading: false,
-      //       error: 'Currently attempting to run multiple queries, but only one query, subscription, or mutation may be run at one time',
-      //     };
-      //   }
-      // }(QueryOutputDisplay);
-
-      const myprops = () => {
-        return {
-          loading: false,
-          error: 'Currently attempting to run multiple queries, but only one query, subscription, or mutation may be run at one time',
-        }
-      };
-      myprops()(QueryOutputDisplay);
+      // GraphQL can only run one query at a time, so even though this if statement block is to check for error, we need to send only one query to GQL so that the app doesn't break
+      query.definitions = [query.definitions[0]];
+      OutputOfQuery = graphql(query, {
+        props: ({ data }) => {
+          // to sanitize our context and render the error
+          dispatch({
+            type: types.GQL_ERROR,
+            gqlError: 'Currently attempting to run multiple queries, but only one query, subscription, or mutation may be run at one time',
+          });
+        },
+      })(QueryOutputDisplay);
     } else {
       OutputOfQuery = graphql(query, {
         props: ({ data }) => {
@@ -63,6 +54,7 @@ const QueriesContainer = () => {
         },
         // render QOD with props from GraphQL query
       })(QueryOutputDisplay);
+      // console.log(query, 'this is query after QOD')
     }
   }
 

@@ -28,10 +28,30 @@ const QueryInput = () => {
   const [{ endpoint }, dispatch] = useStateValue();
   const [newAPIEndpoint, setNewAPIEndpoint] = useState('');
 
+  // ! TO DELETE: TEST METHOD TO SEE IF FRONTEND CONNECTS TO SERVER
+  const serverCheck = () => {
+    event.preventDefault();
+
+    // this goes directly to dev server
+    // works with localhost:3030. need to have server SERVE up app
+    fetch('/api')
+      .then(response => response.json())
+      .then((data) => {
+        console.log('response: ', data.msg);
+      })
+      .catch(e => console.log('error in server test: ', e));
+  };
 
   // this fetch chain/handleSubmit should be added into a different file
   // and imported. might be a heavy lift because of all the variables
   const handleSubmit = () => {
+  // ! TO DELETE: TEST METHOD TO SEE IF FRONTEND CONNECTS TO SERVER
+    // event.preventDefault();
+
+    // serverCheck();
+    // return;
+    // ! END OF SERVER TEST
+
     // if there's a value in api endpoint, replace endpoint.
     // if it's empty, use endpoint in context state
     const urlToSend = newAPIEndpoint || endpoint;

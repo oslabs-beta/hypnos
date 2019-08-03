@@ -12,13 +12,14 @@ const { app, BrowserWindow, Menu } = electron;
 let mainWindow;
 
 // listen for app to be ready
+// NOTE: LOCAL HOST CHANGED TO 8080 SO EXPRESS CAN SERVE UP ELECTORN
 app.on('ready', () => {
   // create new window
   mainWindow = new BrowserWindow({ width: 1170, height: 760 });
   // load html into the window
   console.log('Dev environment on: ', isDev);
   mainWindow.loadURL(url.format({
-    pathname: isDev ? '//localhost:3000' : path.join(__dirname, './build/index.html'),
+    pathname: isDev ? '//localhost:8080' : path.join(__dirname, './build/index.html'),
     protocol: isDev ? 'http:' : 'file:',
     slashes: true,
   }));
