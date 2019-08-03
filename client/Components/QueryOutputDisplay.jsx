@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useStateValue } from '../Context';
 import { jsonFormatter } from '../utils/jsonFormatter';
 import nullChecker from '../utils/nullChecker';
@@ -7,6 +7,7 @@ import nullResultChecker from '../utils/nullResultChecker';
 const QueryOutputDisplay = (props) => {
   // ! TODO: MOVE ERROR CHECKING INTO A DIFFERENT FILE BECAUSE THIS IS A LOT
   const [{ queryResultObject, queryGQLError }] = useStateValue();
+  const [isHovering, toggleHover] = useState(false);
   // pull props off from GQL query running
   const { loading, error } = props;
   // result is assigned either the successful query data or an error string
@@ -84,24 +85,47 @@ const QueryOutputDisplay = (props) => {
   }
 
   // NOTE: If this is true, then successful query results will now be shown at all, which is OK.
-  if (testNull) {
-    return (
-      <article>
-        <p font="helevtica" className="error">
-          Null values returned from query. Please check these properties:
-          <br />
-          <br />
-        </p>
-        <ul font="helevtica">
-          {nullVals}
-        </ul>
-      </article>
-    );
-  }
+  // if (testNull) {
+  //   return (
+  //     <article>
+  //       <p font="helevtica" className="error">
+  //         Null values returned from query. Please check these properties:
+  //         <br />
+  //         <br />
+  //       </p>
+  //       <ul font="helevtica">
+  //         {nullVals}
+  //       </ul>
+  //     </article>
+  //   );
+  // }
 
 
   return (
     <>
+      <>
+        {testNull ? (
+          <article>
+            <p font="helevtica" className="error">
+              Null values returned from query.
+              <br />
+              Please double check your query.
+              <br />
+              <span onMouseEnter={() => toggleHover(true)} onMouseLeave={() => toggleHover(false)}>Details.</span>
+              {isHovering && (
+                <div id="tooltip">
+                  <ul>
+                    {nullVals}
+                  </ul>
+                </div>
+              )
+              }
+              <br />
+              <br />
+            </p>
+          </article>
+        ) : ''}
+      </>
       <article>
         <pre>
           <code>

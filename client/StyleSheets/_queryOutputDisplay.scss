@@ -13,6 +13,11 @@
     font-family: Helevtica, sans-serif;
     overflow-y: auto;
     overflow-x: auto;
+
+    #tooltip {
+        position: absolute;
+        background-color: black;
+    }
     
     ul {
         list-style: none;
