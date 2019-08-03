@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import gql from 'graphql-tag';
 import { Controlled as CodeMirror } from 'react-codemirror2';
+// import NodeFetch from 'node-fetch';
 import { useStateValue } from '../Context';
 import EndpointField from './EndpointField';
 import fetchErrorCheck from '../utils/fetchErrorCheck';
@@ -9,9 +10,8 @@ import * as types from '../Constants/actionTypes';
 // import Code Mirror styling all at once
 import '../StyleSheets/external/CodeMirror.css';
 
-
-// using a proxy to get around CORS. WE PROBABLY NEED A SERVER NOW.
-const proxy = 'https://cors-anywhere.herokuapp.com/';
+// using a proxy to get around CORS. We do not need a server.
+const proxy = Number(process.env.IS_DEV) === 1 ? 'https://cors-anywhere.herokuapp.com/' : '';
 
 // wrote example query so it can be used as a placeholder in textarea
 const exampleQuery = `# Example query:
@@ -28,10 +28,30 @@ const QueryInput = () => {
   const [{ endpoint }, dispatch] = useStateValue();
   const [newAPIEndpoint, setNewAPIEndpoint] = useState('');
 
+  // ! TO DELETE: TEST METHOD TO SEE IF FRONTEND CONNECTS TO SERVER
+  const serverCheck = () => {
+    event.preventDefault();
+
+    // this goes directly to dev server
+    // works with localhost:3030. need to have server SERVE up app
+    fetch('/api')
+      .then(response => response.json())
+      .then((data) => {
+        console.log('response: ', data.msg);
+      })
+      .catch(e => console.log('error in server test: ', e));
+  };
 
   // this fetch chain/handleSubmit should be added into a different file
   // and imported. might be a heavy lift because of all the variables
   const handleSubmit = () => {
+  // ! TO DELETE: TEST METHOD TO SEE IF FRONTEND CONNECTS TO SERVER
+    // event.preventDefault();
+
+    // serverCheck();
+    // return;
+    // ! END OF SERVER TEST
+
     // if there's a value in api endpoint, replace endpoint.
     // if it's empty, use endpoint in context state
     const urlToSend = newAPIEndpoint || endpoint;
@@ -44,7 +64,7 @@ const QueryInput = () => {
     fetch(proxy + urlToSend, {
       // mode: 'no-cors',
       headers: {
-        // 'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Origin': '*',
         'Content-Type': 'application/json',
       },
     })
