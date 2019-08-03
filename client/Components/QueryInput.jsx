@@ -6,6 +6,7 @@ import { useStateValue } from '../Context';
 import EndpointField from './EndpointField';
 import fetchErrorCheck from '../utils/fetchErrorCheck';
 import * as types from '../Constants/actionTypes';
+import db from '../db'
 
 // import Code Mirror styling all at once
 import '../StyleSheets/external/CodeMirror.css';
@@ -45,12 +46,21 @@ const QueryInput = () => {
   // this fetch chain/handleSubmit should be added into a different file
   // and imported. might be a heavy lift because of all the variables
   const handleSubmit = () => {
-  // ! TO DELETE: TEST METHOD TO SEE IF FRONTEND CONNECTS TO SERVER
-    // event.preventDefault();
-
-    // serverCheck();
-    // return;
-    // ! END OF SERVER TEST
+    //send textValue to Dexie db
+    db.history.put({
+      query: textValue
+    })
+    .then(() => console.log('sent to db'))
+    .then(() => {
+      db.history
+            .toArray()
+            .then((queries) => {
+              dispatch({
+                type: types.UPDATE_HISTORY,
+                queriesHistory: queries
+              })
+            })
+    })
 
     // if there's a value in api endpoint, replace endpoint.
     // if it's empty, use endpoint in context state

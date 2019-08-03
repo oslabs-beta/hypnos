@@ -11,7 +11,7 @@
     "react-start": "NODE_ENV=development parcel -p 3000 index.html --out-dir build",
     "react-build": "NODE_ENV=production parcel build index.html --out-dir build --public-url ./",
     "start": "npm run react-start & wait-on http://localhost:3000 && ELECTRON_IS_DEV=1 npm run start-electron",
-    "build": "npm run clean-build && npm run react-build && npm run electron-build && ELECTRON_IS_DEV=0 npm run start-electron",
+    "build": "npm run clean-build && npm run react-build && ELECTRON_IS_DEV=0 && npm run electron-build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
@@ -34,7 +34,9 @@
     "babel-core": "^6.26.3",
     "codemirror": "^5.48.2",
     "css-loader": "^3.1.0",
+    "dexie": "^2.0.4",
     "dotenv": "^8.0.0",
+    "electron-is-dev": "^1.1.0",
     "graphql": "^14.4.2",
     "graphql-anywhere": "^4.2.4",
     "graphql-tag": "^2.10.1",
@@ -52,9 +54,27 @@
     "@babel/preset-react": "^7.0.0",
     "babel-preset-env": "^1.7.0",
     "electron": "^5.0.7",
-    "electron-builder": "^21.1.1",
+    "electron-builder": "^21.2.0",
     "electron-is-dev": "^1.1.0",
+    "electron-packager": "^14.0.4",
     "parcel-bundler": "^1.12.3",
     "wait-on": "^3.3.0"
+  },
+  "build": {
+    "appId": "com.hypnos.app",
+    "productName": "Hypnos",
+    "files": [
+      "./electron.js",
+      "./build/**/*",
+      "./assets/hypnos-icon.png"
+    ],
+    "asar": true,
+    "directories": {
+      "output": "dist"
+    },
+    "mac": {
+      "target": "dmg",
+      "icon": "./assets/hypnos-icon.png"
+    }
   }
 }

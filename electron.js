@@ -6,7 +6,7 @@ const path = require('path');
 
 // to determine whether a dev environ is being un
 const isDev = require('electron-is-dev');
-
+// const isDev= false;
 const { app, BrowserWindow, Menu } = electron;
 
 let mainWindow;

@@ -5,6 +5,7 @@ import { ApolloClient } from 'apollo-client';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import { ApolloProvider } from 'react-apollo';
 import Header from './Components/Header';
+import HistoryDisplay from './Components/HistoryDisplay'
 import QueriesContainer from './Containers/QueriesContainer';
 import { StateProvider, useStateValue } from './Context';
 // using a proxy to get around CORS. We do not need a server.
@@ -36,6 +37,7 @@ const App = () => {
   return (
     <section id="app">
       <ApolloProvider client={client}>
+        <HistoryDisplay />
         <Header />
         <QueriesContainer />
       </ApolloProvider>
