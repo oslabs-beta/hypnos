@@ -19,7 +19,8 @@ app.on('ready', () => {
   // load html into the window
   console.log('Dev environment on: ', isDev);
   mainWindow.loadURL(url.format({
-    pathname: isDev ? '//localhost:8080' : path.join(__dirname, './build/index.html'),
+    // ssiwtched back to 3000 from 8080 because no longer using server
+    pathname: isDev ? '//localhost:3000' : path.join(__dirname, './build/index.html'),
     protocol: isDev ? 'http:' : 'file:',
     slashes: true,
   }));

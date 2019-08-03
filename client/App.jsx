@@ -7,8 +7,8 @@ import { ApolloProvider } from 'react-apollo';
 import Header from './Components/Header';
 import QueriesContainer from './Containers/QueriesContainer';
 import { StateProvider, useStateValue } from './Context';
-// using a proxy to get around CORS. WE PROBABLY NEED A SERVER NOW.
-const proxy = 'https://cors-anywhere.herokuapp.com/';
+// using a proxy to get around CORS. We do not need a server.
+const proxy = Number(process.env.IS_DEV) === 1 ? 'https://cors-anywhere.herokuapp.com/' : '';
 
 
 const App = () => {
