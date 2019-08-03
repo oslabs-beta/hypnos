@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import gql from 'graphql-tag';
 import { Controlled as CodeMirror } from 'react-codemirror2';
+// import NodeFetch from 'node-fetch';
 import { useStateValue } from '../Context';
 import EndpointField from './EndpointField';
 import fetchErrorCheck from '../utils/fetchErrorCheck';
@@ -11,7 +12,9 @@ import '../StyleSheets/external/CodeMirror.css';
 
 
 // using a proxy to get around CORS. WE PROBABLY NEED A SERVER NOW.
-const proxy = 'https://cors-anywhere.herokuapp.com/';
+// const proxy = 'https://cors-anywhere.herokuapp.com/';
+console.log('env is dev: ', process.env.IS_DEV);
+const proxy = process.env.IS_DEV ? 'https://cors-anywhere.herokuapp.com/' : '';
 
 // wrote example query so it can be used as a placeholder in textarea
 const exampleQuery = `# Example query:
@@ -64,7 +67,7 @@ const QueryInput = () => {
     fetch(proxy + urlToSend, {
       // mode: 'no-cors',
       headers: {
-        // 'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Origin': '*',
         'Content-Type': 'application/json',
       },
     })

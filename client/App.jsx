@@ -8,7 +8,9 @@ import Header from './Components/Header';
 import QueriesContainer from './Containers/QueriesContainer';
 import { StateProvider, useStateValue } from './Context';
 // using a proxy to get around CORS. WE PROBABLY NEED A SERVER NOW.
-const proxy = 'https://cors-anywhere.herokuapp.com/';
+const proxy = process.env.IS_DEV ? 'https://cors-anywhere.herokuapp.com/' : '';
+console.log('proxy is: ', proxy)
+// const proxy = 'https://cors-anywhere.herokuapp.com/';
 
 
 const App = () => {
