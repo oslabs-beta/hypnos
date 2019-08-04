@@ -6,7 +6,7 @@ import { useStateValue } from '../Context';
 import EndpointField from './EndpointField';
 import fetchErrorCheck from '../utils/fetchErrorCheck';
 import * as types from '../Constants/actionTypes';
-import db from '../db'
+import db from '../db';
 
 // import Code Mirror styling all at once
 import '../StyleSheets/external/CodeMirror.css';
@@ -29,38 +29,24 @@ const QueryInput = () => {
   const [{ endpoint }, dispatch] = useStateValue();
   const [newAPIEndpoint, setNewAPIEndpoint] = useState('');
 
-  // ! TO DELETE: TEST METHOD TO SEE IF FRONTEND CONNECTS TO SERVER
-  const serverCheck = () => {
-    event.preventDefault();
-
-    // this goes directly to dev server
-    // works with localhost:3030. need to have server SERVE up app
-    fetch('/api')
-      .then(response => response.json())
-      .then((data) => {
-        console.log('response: ', data.msg);
-      })
-      .catch(e => console.log('error in server test: ', e));
-  };
-
   // this fetch chain/handleSubmit should be added into a different file
   // and imported. might be a heavy lift because of all the variables
   const handleSubmit = () => {
-    //send textValue to Dexie db
+    // send textValue to Dexie db
     db.history.put({
-      query: textValue
+      query: textValue,
     })
-    .then(() => console.log('sent to db'))
-    .then(() => {
-      db.history
-            .toArray()
-            .then((queries) => {
-              dispatch({
-                type: types.UPDATE_HISTORY,
-                queriesHistory: queries
-              })
-            })
-    })
+      .then(() => console.log('sent to db'))
+      .then(() => {
+        db.history
+          .toArray()
+          .then((queries) => {
+            dispatch({
+              type: types.UPDATE_HISTORY,
+              queriesHistory: queries,
+            });
+          });
+      });
 
     // if there's a value in api endpoint, replace endpoint.
     // if it's empty, use endpoint in context state

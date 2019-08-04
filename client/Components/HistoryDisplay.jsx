@@ -1,4 +1,4 @@
-import React, { Component, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import db from '../db';
 import { useStateValue } from '../Context';
 import * as types from '../Constants/actionTypes';
