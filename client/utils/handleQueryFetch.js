@@ -6,27 +6,20 @@ import * as types from '../Constants/actionTypes';
 const proxy = Number(process.env.IS_DEV) === 1 ? 'https://cors-anywhere.herokuapp.com/' : '';
 
 const handleQueryFetch = (textValue, newAPIEndpoint, endpoint, dispatch, setNewAPIEndpoint) => {
+  // if there's a value in api endpoint, replace endpoint.
+  // if it's empty, use endpoint in context state
+  console.log('testing fetch, code written after DB addition');
+  const urlToSend = newAPIEndpoint || endpoint;
+
   // send textValue to Dexie db
   db.history.put({
     query: textValue,
+    endpoint: urlToSend,
   })
-    .then(() => console.log('sent to db'));
-  // outdated below: for when another dispatch was sent
-  // .then(() => {
-  //   db.history
-  //     .toArray()
-  //     .then((queries) => {
-  //       dispatch({
-  //         type: types.UPDATE_HISTORY,
-  //         queriesHistory: queries,
-  //       });
-  //     });
-  // })
+    .then(() => console.log('Sent to database.'))
+    .catch(e => console.log('Error adding query to database.'));
 
 
-  // if there's a value in api endpoint, replace endpoint.
-  // if it's empty, use endpoint in context state
-  const urlToSend = newAPIEndpoint || endpoint;
   // prevent refresh
   event.preventDefault();
 
@@ -76,7 +69,7 @@ const handleQueryFetch = (textValue, newAPIEndpoint, endpoint, dispatch, setNewA
         });
       }
     })
-  // for checking if the path is correct
+    // for checking if the path is correct
     .then((response) => {
       console.log('in second then block of fetch');
       if (response.status === 404) {
