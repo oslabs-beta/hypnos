@@ -5,12 +5,11 @@ import { ApolloClient } from 'apollo-client';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import { ApolloProvider } from 'react-apollo';
 import Header from './Components/Header';
-import HistoryDisplay from './Components/HistoryDisplay'
+import HistoryDisplay from './Components/HistoryDisplay';
 import QueriesContainer from './Containers/QueriesContainer';
 import { StateProvider, useStateValue } from './Context';
 // using a proxy to get around CORS. We do not need a server.
 const proxy = Number(process.env.IS_DEV) === 1 ? 'https://cors-anywhere.herokuapp.com/' : '';
-
 
 const App = () => {
   const [{ endpoint }] = useStateValue();
@@ -33,12 +32,11 @@ const App = () => {
 
   });
 
-
   return (
     <section id="app">
       <ApolloProvider client={client}>
-        <HistoryDisplay />
         <Header />
+        <HistoryDisplay />
         <QueriesContainer />
       </ApolloProvider>
     </section>
