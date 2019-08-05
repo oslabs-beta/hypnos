@@ -61,7 +61,6 @@ const reducer = (state, action) => {
     case types.RESET_STATE:
       return {
         ...initialState,
-        // queriesHistory: state.queriesHistory,
       };
     case types.GQL_ERROR:
       return {
@@ -70,12 +69,6 @@ const reducer = (state, action) => {
         query: '',
         queryResultObject: '',
         queryGQLError: action.gqlError,
-      };
-    case types.UPDATE_HISTORY:
-      console.log('update history fired');
-      return {
-        ...state,
-        queriesHistory: action.queriesHistory,
       };
     case types.GET_QUERY:
       console.log('in GET_QUERY');

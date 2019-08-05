@@ -11,7 +11,6 @@ import { StateProvider, useStateValue } from './Context';
 // using a proxy to get around CORS. We do not need a server.
 const proxy = Number(process.env.IS_DEV) === 1 ? 'https://cors-anywhere.herokuapp.com/' : '';
 
-
 const App = () => {
   const [{ endpoint }] = useStateValue();
   const restLink = new RestLink({
@@ -32,7 +31,6 @@ const App = () => {
     cache: new InMemoryCache(),
 
   });
-
 
   return (
     <section id="app">

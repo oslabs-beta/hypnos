@@ -9,13 +9,22 @@ const HistoryDisplay = () => {
   const [{ query, queryGQLError }, dispatch] = useStateValue();
   const [localQH, setLocalQH] = useState([]);
 
-  const handleClickEdit = (event) => {
+
+  useEffect(() => {
+    db.history
+      .toArray()
+      .then((queries) => {
+        console.log('retrieved from DB', queries);
+        setLocalQH(queries);
+      });
+  }, [query, queryGQLError]);
+
+  const onEdit = (id) => {
     event.preventDefault();
-    const id = Number(event.target.id);
     db.history
       .get(id)
       .then((foundQuery) => {
-        console.log('query in handleClickEdit ', foundQuery.query);
+        console.log('query in onEdit ', foundQuery.query);
         dispatch({
           type: types.GET_QUERY,
           historyTextValue: foundQuery.query,
@@ -25,23 +34,12 @@ const HistoryDisplay = () => {
       .then(() => {
         const inputField = document.querySelector('#endpoint-field input');
         inputField.value = '';
-      });
+      })
+      .catch(e => console.log('Error searching DB.'));
   };
 
-  useEffect(() => {
-    db.history
-      .toArray()
-      .then((queries) => {
-        console.log('retrieved from DB', queries);
-        setLocalQH(queries);
-        // dispatch({
-        //   type: types.UPDATE_HISTORY,
-        //   queriesHistory: queries,
-        // });
-      });
-  }, [query, queryGQLError]);
-
   const onDelete = (queryId) => {
+    event.preventDefault();
     console.log('running onDelete');
     db.history
       .delete(queryId)
@@ -55,7 +53,7 @@ const HistoryDisplay = () => {
   return (
     <section id="history-display">
       <ul id="history-list">
-        {localQH.map(pastQueries => <HistoryListItem query={pastQueries.query} id={pastQueries.id} onDelete={onDelete} />)}
+        {localQH.map(pastQueries => <HistoryListItem query={pastQueries.query} id={pastQueries.id} onDelete={onDelete} onEdit={onEdit} />)}
       </ul>
     </section>
   );

@@ -2,7 +2,9 @@
 import React from 'react';
 
 const HistoryListItem = (props) => {
-  const { id, query, onDelete } = props;
+  const {
+    id, query, onDelete, onEdit,
+  } = props;
   console.log('rendering a list item');
   return (
     <>
@@ -19,7 +21,10 @@ const HistoryListItem = (props) => {
         </button>
         <button
           id={`edit-btn-${id}`}
-          onClick={() => console.log('edit clickd')}
+          onClick={() => {
+            console.log('edit clickd');
+            onEdit(id);
+          }}
         >
           Edit
         </button>
