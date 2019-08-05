@@ -28,6 +28,8 @@ const HistoryListItem = (props) => {
         >
           Edit
         </button>
+        <br />
+        <br />
       </li>
     </>
   );
