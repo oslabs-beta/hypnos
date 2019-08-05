@@ -37,3 +37,17 @@ Reset
 // setNewAPIEndpoint('');
 // return;
 // ! END OF NESTED TEST
+
+// ! TO DELETE: TEST METHOD TO SEE IF FRONTEND CONNECTS TO SERVER
+// const serverCheck = () => {
+//   event.preventDefault();
+
+//   // this goes directly to dev server
+//   // works with localhost:3030. need to have server SERVE up app
+//   fetch('/api')
+//     .then(response => response.json())
+//     .then((data) => {
+//       console.log('response: ', data.msg);
+//     })
+//     .catch(e => console.log('error in server test: ', e));
+// };
