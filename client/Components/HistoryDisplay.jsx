@@ -67,6 +67,8 @@ const HistoryDisplay = () => {
       <li db-id={el.id} id={`hist-li-${el.id}`}>{el.query}
         <button id={`del-btn-${el.id}`} onClick={handleClick}>delete</button>
         <button id={`edit-btn-${el.id}`}>edit</button>
+        <br />
+        <br />
       </li>
     )
   }
@@ -74,11 +76,12 @@ const HistoryDisplay = () => {
 
   console.log('historyList => list of queries as LIs ', historyList);
   return (
-    <div>
-      <ul id="history-display">
+    <section id="history-display">
+      <p id='history-header'>History</p>
+      <ul id="history-list">
         {historyList}
       </ul>
-    </div>
+    </section>
   );
 };
 

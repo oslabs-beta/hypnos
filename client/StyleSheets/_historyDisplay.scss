@@ -1,5 +1,39 @@
-.history-display {
+#history-display {
+
     grid-area: historyDisplay;
     overflow: scroll;
-    background-color: green;
+    display: grid; 
+    grid-template-columns: 1fr;
+    grid-template-rows: 30px 1fr;
+    grid-template-areas:
+    "historyHeader"
+    "historyList" ;
+    height: 85vh;
+    // width: 90%;
+    font-family: Helevtica, sans-serif;
+    background-color: #f7f7f7;
+    resize: none;
+    // margin-left: 10px;
+    // padding: 20px 10px;
+
+    ul {
+        list-style-type: none;
+        font-size: 13px;
+    }
+
+    #history-header {
+        display: grid;
+        grid-area: historyHeader;
+        background-color: $loading-color;
+        color: $highlight-color;
+        height: 5vh;
+        box-shadow: 0 2px 4px 0 rgba(0,0,0,0.2);
+        align-items: center;
+    }
+    
+    #history-list {
+        grid-area: historyList;
+        padding: 20px 10px;
+    }
+
 }
