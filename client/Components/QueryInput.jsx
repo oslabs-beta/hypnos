@@ -25,17 +25,29 @@ query ditto {
 
 
 const QueryInput = () => {
+  const [{ endpoint, historyTextValue }, dispatch] = useStateValue();
+  console.log('rendering')
   const [textValue, setTextValue] = useState(exampleQuery);
-  const [{ endpoint }, dispatch] = useStateValue();
+  if (historyTextValue !== '' && textValue !== historyTextValue) setTextValue(historyTextValue)
+  // console.log('historyTextValue in queryInput ', historyTextValue)
+  console.log('textValue ', textValue)
   const [newAPIEndpoint, setNewAPIEndpoint] = useState('');
 
   // this fetch chain/handleSubmit should be added into a different file
   // and imported. might be a heavy lift because of all the variables
   const handleSubmit = () => {
+
+    // if there's a value in api endpoint, replace endpoint.
+    // if it's empty, use endpoint in context state
+    console.log('testing fetch, code written after DB addition');
+    const urlToSend = newAPIEndpoint || endpoint;
+
     // send textValue to Dexie db
     db.history.put({
       query: textValue,
+      endpoint: urlToSend
     })
+    
       .then(() => console.log('sent to db'))
       // .then(() => {
       //   db.history
@@ -47,12 +59,8 @@ const QueryInput = () => {
       //       });
       //     });
       // })
-    ;
+      ;
 
-    // if there's a value in api endpoint, replace endpoint.
-    // if it's empty, use endpoint in context state
-    console.log('testing fetch, code written after DB addition');
-    const urlToSend = newAPIEndpoint || endpoint;
     // prevent refresh
     event.preventDefault();
 

@@ -31,6 +31,7 @@ const initialState = {
   // need to instantiate url or else query without a user input will not run
   // queries stored in db
   queriesHistory: [],
+  historyTextValue: ''
 };
 
 const reducer = (state, action) => {
@@ -77,6 +78,13 @@ const reducer = (state, action) => {
         ...state,
         queriesHistory: action.queriesHistory,
       };
+      case types.GET_QUERY:
+        console.log('in GET_QUERY')
+        return {
+          ...initialState,
+          historyTextValue: action.historyTextValue,
+          endpoint: action.endpoint
+        };
     default:
       return state;
   }
