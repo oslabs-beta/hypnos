@@ -14,7 +14,7 @@ const HistoryDisplay = () => {
       .toArray()
       .then((queries) => {
         console.log('retrieved from DB', queries);
-        setLocalQH(queries);
+        setLocalQH(queries.reverse());
         // dispatch({
         //   type: types.UPDATE_HISTORY,
         //   queriesHistory: queries,
@@ -58,7 +58,7 @@ const HistoryDisplay = () => {
     <section id="history-display">
       <p id="history-header">History</p>
       <ul id="history-list">
-        {localQH.reverse().map((pastQueries, idx) => <HistoryListItem key={`history-li-${idx}`} query={pastQueries.query} id={pastQueries.id} onDelete={onDelete} onEdit={onEdit} />)}
+        {localQH.map((pastQueries, idx) => <HistoryListItem key={`history-li-${idx}`} query={pastQueries.query} id={pastQueries.id} onDelete={onDelete} onEdit={onEdit} />)}
       </ul>
     </section>
   );
