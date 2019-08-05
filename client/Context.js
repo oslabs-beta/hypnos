@@ -30,7 +30,7 @@ const initialState = {
   endpoint: 'https://pokeapi.co/api/v2/pokemon/',
   // need to instantiate url or else query without a user input will not run
   // queries stored in db
-  queriesHistory: [],
+  // queriesHistory: [],
 };
 
 const reducer = (state, action) => {
@@ -61,7 +61,7 @@ const reducer = (state, action) => {
     case types.RESET_STATE:
       return {
         ...initialState,
-        queriesHistory: state.queriesHistory,
+        // queriesHistory: state.queriesHistory,
       };
     case types.GQL_ERROR:
       return {
