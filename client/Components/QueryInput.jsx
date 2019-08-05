@@ -12,6 +12,7 @@ import db from '../db';
 import '../StyleSheets/external/CodeMirror.css';
 import handleQueryFetch from '../utils/handleQueryFetch';
 
+// SHOULD MAKE NOTE: API key should be supplied in endpoint field
 // using a proxy to get around CORS. We do not need a server.
 const proxy = Number(process.env.IS_DEV) === 1 ? 'https://cors-anywhere.herokuapp.com/' : '';
 
@@ -43,22 +44,11 @@ const QueryInput = () => {
     db.history.put({
       query: textValue,
     })
-      .then(() => console.log('sent to db'))
-      // .then(() => {
-      //   db.history
-      //     .toArray()
-      //     .then((queries) => {
-      //       dispatch({
-      //         type: types.UPDATE_HISTORY,
-      //         queriesHistory: queries,
-      //       });
-      //     });
-      // })
-    ;
+      .then(() => console.log('Sent to database.'))
+      .catch(e => console.log('Error adding query to database.'));
 
     // if there's a value in api endpoint, replace endpoint.
     // if it's empty, use endpoint in context state
-    console.log('testing fetch, code written after DB addition');
     const urlToSend = newAPIEndpoint || endpoint;
     // prevent refresh
     event.preventDefault();
@@ -79,7 +69,8 @@ const QueryInput = () => {
 
         // execute regex filtering on the path param
         const pathRegex = textValue.match(/(?<=path:\W*\")\S*(?=\")/gi);
-        // 404 check for the endpoint
+        // SHOULD ADD CHECKS FOR 400, 401, 403, maybe more
+        // 422 => happened in one instance with an API key but no attached query
         if (response.status === 404) {
           dispatch({
             // send off error message for endpoint 404

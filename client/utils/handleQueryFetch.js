@@ -11,6 +11,7 @@ const handleQueryFetch = (textValue, newAPIEndpoint, endpoint, dispatch, setNewA
     query: textValue,
   })
     .then(() => console.log('sent to db'));
+  // outdated below: for when another dispatch was sent
   // .then(() => {
   //   db.history
   //     .toArray()
@@ -25,7 +26,6 @@ const handleQueryFetch = (textValue, newAPIEndpoint, endpoint, dispatch, setNewA
 
   // if there's a value in api endpoint, replace endpoint.
   // if it's empty, use endpoint in context state
-  console.log('testing fetch, code written after DB addition');
   const urlToSend = newAPIEndpoint || endpoint;
   // prevent refresh
   event.preventDefault();
@@ -46,7 +46,8 @@ const handleQueryFetch = (textValue, newAPIEndpoint, endpoint, dispatch, setNewA
 
       // execute regex filtering on the path param
       const pathRegex = textValue.match(/(?<=path:\W*\")\S*(?=\")/gi);
-      // 404 check for the endpoint
+      // SHOULD ADD CHECKS FOR 400, 401, 403, maybe more
+      // 422 => happened in one instance with an API key but no attached query
       if (response.status === 404) {
         dispatch({
           // send off error message for endpoint 404
@@ -75,7 +76,7 @@ const handleQueryFetch = (textValue, newAPIEndpoint, endpoint, dispatch, setNewA
         });
       }
     })
-    // for checking if the path is correct
+  // for checking if the path is correct
     .then((response) => {
       console.log('in second then block of fetch');
       if (response.status === 404) {
