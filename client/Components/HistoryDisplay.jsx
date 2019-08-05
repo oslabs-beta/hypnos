@@ -56,6 +56,7 @@ const HistoryDisplay = () => {
 
   return (
     <section id="history-display">
+      <p id='history-header'>History</p>
       <ul id="history-list">
         {localQH.map(pastQueries => <HistoryListItem query={pastQueries.query} id={pastQueries.id} onDelete={onDelete} onEdit={onEdit} />)}
       </ul>
