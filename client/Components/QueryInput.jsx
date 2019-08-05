@@ -1,11 +1,8 @@
 import React, { useState } from 'react';
-import gql from 'graphql-tag';
 import { Controlled as CodeMirror } from 'react-codemirror2';
 import { useStateValue } from '../Context';
 import EndpointField from './EndpointField';
-import fetchErrorCheck from '../utils/fetchErrorCheck';
 import * as types from '../Constants/actionTypes';
-import db from '../db';
 
 // import Code Mirror styling all at once
 import '../StyleSheets/external/CodeMirror.css';
@@ -13,7 +10,6 @@ import handleQueryFetch from '../utils/handleQueryFetch';
 
 // SHOULD MAKE NOTE: API key should be supplied in endpoint field
 // using a proxy to get around CORS. We do not need a server.
-const proxy = Number(process.env.IS_DEV) === 1 ? 'https://cors-anywhere.herokuapp.com/' : '';
 
 // wrote example query so it can be used as a placeholder in textarea
 const exampleQuery = `# Example query:
@@ -40,13 +36,8 @@ const QueryInput = () => {
   }
   const [newAPIEndpoint, setNewAPIEndpoint] = useState('');
 
-  // this fetch chain/handleSubmit should be added into a different file
-  // and imported. might be a heavy lift because of all the variables
-
-  // ! TEST: HANDLE QUERY FETCH AS NEW FUNC
-  // * IF USING, PARAMS MUST BE PASSED IN: textValue, newAPIEndpoint, endpoint, dispatch, setNewAPIEndpoint
-  // const handleSubmit2 = handleQueryFetch;
-  // ! END OF TEST
+  // this fetch chain/handleSubmit is in a different file,
+  // as handleQueryFetch, and imported.
 
   return (
     <>
