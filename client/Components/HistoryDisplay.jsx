@@ -4,32 +4,6 @@ import { useStateValue } from '../Context';
 import * as types from '../Constants/actionTypes';
 
 
-<<<<<<< HEAD
-const handleClick = () => {
-  event.preventDefault();
-  console.log('handle click running');
-  console.log('event target: ', event.target);
-  console.log('button id: ', event.target.id);
-  //delete div
-
-  // now targets the specific LI
-  let element = document.getElementById(event.target.id).parentElement;
-  console.log('what is element', element.getAttribute('db-id'));
-  if (element !== null) {
-    // gets DB ID
-    const id = Number(element.getAttribute('db-id'))
-    // targets LI, its parent UL, then removes LI
-    element.parentElement.removeChild(element);
-    //delete from DB by id
-
-    // LOCALQH STILL NOT UPDATING AFTER DOM MANIPULATION
-    db.history
-      .delete(id)
-      .then(console.log('deleted ', id));
-  }
-}
-=======
->>>>>>> 8cbdbd0bfe3cd06fb130cdccc1c07ee53d59c407
 
 // const updateQueries = () => {
 //   db.history
@@ -95,22 +69,18 @@ const HistoryDisplay = () => {
 
 
   // console.log('queriesHistory, before render: ', queriesHistory);
-<<<<<<< HEAD
-  // const historyList = queriesHistory.map(el => <li id="el.id">{el.query}</li>);
-  const historyList = localQH.map(el => {
-    return (
-      <li db-id={el.id} id={`hist-li-${el.id}`}>{el.query}
-        <button id={`del-btn-${el.id}`} onClick={handleClick}>delete</button>
-        <button id={`edit-btn-${el.id}`}>edit</button>
-        <br />
-        <br />
-      </li>
-    )
-  }
-  );
-=======
-  const historyList = localQH.map(el => <li id={el.id}>{el.query}<button id={el.id} onClick={() => handleClickDelete(event)}>delete</button><button id={el.id} onClick={() => handleClickEdit(event)}>edit</button></li>);
->>>>>>> 8cbdbd0bfe3cd06fb130cdccc1c07ee53d59c407
+  const historyList = localQH.map(el =>
+    <li
+      id={el.id}>{el.query}
+      <button id={el.id}
+        onClick={() => handleClickDelete(event)}
+      >delete</button>
+      <button id={el.id}
+        onClick={() => handleClickEdit(event)}
+      >edit</button>
+      <br />
+      <br />
+    </li>);
 
   // console.log('historyList => list of queries as LIs ', historyList);
   return (

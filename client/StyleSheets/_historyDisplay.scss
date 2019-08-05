@@ -21,6 +21,10 @@
         font-size: 13px;
     }
 
+    button {
+        // border: none;
+    }
+
     #history-header {
         display: grid;
         grid-area: historyHeader;
