@@ -30,7 +30,14 @@ const QueryInput = () => {
   const [textValue, setTextValue] = useState(exampleQuery);
   // if edit button has been clicked, then historyTextValue exists in state. reassigned to fill out
   // code mirror text area
-  if (historyTextValue !== '' && textValue !== historyTextValue) setTextValue(historyTextValue);
+  if (historyTextValue !== '' && textValue !== historyTextValue) {
+    // if a user has asked for an old query, repopulate
+    setTextValue(historyTextValue);
+    // once history is assigned down here, reset it in context
+    dispatch({
+      type: types.RESET_GET_QUERY,
+    });
+  }
   const [newAPIEndpoint, setNewAPIEndpoint] = useState('');
 
   // this fetch chain/handleSubmit should be added into a different file
@@ -145,8 +152,12 @@ const QueryInput = () => {
             id="code-mirror"
             value={textValue}
             // editor and data are code mirror args. needed to access value
-            onBeforeChange={(editor, data, value) => setTextValue(value)}
-            onChange={(editor, data, value) => setTextValue(value)}
+            onBeforeChange={(editor, data, value) => {
+              setTextValue(value);
+            }}
+            onChange={(editor, data, value) => {
+              setTextValue(value);
+            }}
             options={{
               lineNumbers: true,
               tabSize: 2,
