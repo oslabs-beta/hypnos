@@ -2,13 +2,33 @@ import React, { useState, useEffect } from 'react';
 import db from '../db';
 import { useStateValue } from '../Context';
 import HistoryListItem from './HistoryListItem';
+import * as types from '../Constants/actionTypes';
+
 
 const HistoryDisplay = () => {
-  const [{ query, queryGQLError }] = useStateValue();
+  const [{ query, queryGQLError }, dispatch] = useStateValue();
   const [localQH, setLocalQH] = useState([]);
 
+  const handleClickEdit = (event) => {
+    event.preventDefault();
+    const id = Number(event.target.id);
+    db.history
+      .get(id)
+      .then((foundQuery) => {
+        console.log('query in handleClickEdit ', foundQuery.query);
+        dispatch({
+          type: types.GET_QUERY,
+          historyTextValue: foundQuery.query,
+          endpoint: foundQuery.endpoint,
+        });
+      })
+      .then(() => {
+        const inputField = document.querySelector('#endpoint-field input');
+        inputField.value = '';
+      });
+  };
+
   useEffect(() => {
-    // LOCALQH STILL NOT UPDATING AFTER DOM MANIPULATION
     db.history
       .toArray()
       .then((queries) => {
