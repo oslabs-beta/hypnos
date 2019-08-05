@@ -6,7 +6,7 @@ const HistoryListItem = (props) => {
   console.log('rendering a list item');
   return (
     <>
-      <li db-id={id} id={`hist-li-${id}`}>
+      <li db-id={id} className="history-list-item" id={`hist-li-${id}`}>
         {query}
         <button
           id={`del-btn-${id}`}
