@@ -19,11 +19,12 @@ const QueryOutputDisplay = (props) => {
   // checking to see if there are any null values on the results object
   // if so, means that the query field was improperly named or doesn't exist
 
-  // ! NOTE: Only checks one level. need to do recursive check for nested nulls
+  // ! NOTE: NEEDS TO ACCOUNT FOR ARRAYS
   const testNull = nullChecker(result);
   let nullVals;
   // if there is a null value in successful query, build LIs that display null props in query
   if (testNull) {
+    // ! NOTE: NEEDS TO ACCOUNT FOR ARRAYS
     nullVals = nullResultChecker(result);
     // nullVals = Object.keys(result).reduce((acc, curVal) => {
     //   if (result[curVal] === null) {
@@ -50,16 +51,19 @@ const QueryOutputDisplay = (props) => {
   }
 
   // if there are any values from our result that look like a url, make an array of LIs
+  // ! NOTE: THIS IS NOT NESTED
   let urlPropNames;
   if (urlAsPropCheck) {
+    let idx = 0;
     urlPropNames = Object.keys(result).reduce((acc, curVal) => {
       if (typeof result[curVal] === 'string' && result[curVal].includes('http')) {
         acc.push(
-          <li>
+          <li key={`url-prop-${idx}`}>
             {curVal}
           </li>,
         );
       }
+      idx += 1;
       return acc;
     }, []);
   }

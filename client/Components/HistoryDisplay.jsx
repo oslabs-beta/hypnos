@@ -9,14 +9,18 @@ const HistoryDisplay = () => {
   const [{ query, queryGQLError }, dispatch] = useStateValue();
   const [localQH, setLocalQH] = useState([]);
 
-
   useEffect(() => {
     db.history
       .toArray()
       .then((queries) => {
         console.log('retrieved from DB', queries);
         setLocalQH(queries);
-      });
+        // dispatch({
+        //   type: types.UPDATE_HISTORY,
+        //   queriesHistory: queries,
+        // });
+      })
+      .catch(e => console.log('Error fetching from DB.'));
   }, [query, queryGQLError]);
 
   const onEdit = (id) => {
@@ -52,9 +56,9 @@ const HistoryDisplay = () => {
 
   return (
     <section id="history-display">
-      <p id='history-header'>History</p>
+      <p id="history-header">History</p>
       <ul id="history-list">
-        {localQH.map(pastQueries => <HistoryListItem query={pastQueries.query} id={pastQueries.id} onDelete={onDelete} onEdit={onEdit} />)}
+        {localQH.reverse().map((pastQueries, idx) => <HistoryListItem key={`history-li-${idx}`} query={pastQueries.query} id={pastQueries.id} onDelete={onDelete} onEdit={onEdit} />)}
       </ul>
     </section>
   );

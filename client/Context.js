@@ -42,7 +42,7 @@ const reducer = (state, action) => {
         endpoint: action.submitEndpoint,
         query: '',
         queryResultObject: '',
-
+        historyTextValue: '',
       };
     case types.RUN_QUERY:
       // when query is run, on button press, endpoint is assigned the dynamically changing url
@@ -56,6 +56,7 @@ const reducer = (state, action) => {
         // we should probably only need one of these, b/w url and endpoint
         // this logic might not be needed
         endpoint: action.newEndpoint ? action.newEndpoint : state.endpoint,
+        historyTextValue: '',
       };
     // needs to send whatever was in intial state at the very beginning of the app
     case types.RESET_STATE:
@@ -69,6 +70,7 @@ const reducer = (state, action) => {
         query: '',
         queryResultObject: '',
         queryGQLError: action.gqlError,
+        historyTextValue: '',
       };
     case types.GET_QUERY:
       console.log('in GET_QUERY');
@@ -76,6 +78,12 @@ const reducer = (state, action) => {
         ...initialState,
         historyTextValue: action.historyTextValue,
         endpoint: action.endpoint,
+      };
+    case types.RESET_GET_QUERY:
+      console.log('running reset get query');
+      return {
+        ...state,
+        historyTextValue: '',
       };
     default:
       return state;
