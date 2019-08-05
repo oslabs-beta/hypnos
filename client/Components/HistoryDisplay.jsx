@@ -4,21 +4,37 @@ import { useStateValue } from '../Context';
 import * as types from '../Constants/actionTypes';
 
 
-const handleClick = (event) => {
-  event.preventDefault();
-  // delete div
-  const element = document.getElementById(event.target.id);
-  element.parentNode.removeChild(element);
-  // delete from DB by id
-  const id = Number(event.target.id);
-  db.history
-    .delete(id)
-    .then(console.log('deleted ', id));
-};
-
 const HistoryDisplay = () => {
   const [{ queriesHistory, query, queryGQLError }, dispatch] = useStateValue();
   const [localQH, setLocalQH] = useState([]);
+
+  const handleClick = (event) => {
+    event.preventDefault();
+    // delete div
+    const element = document.getElementById(event.target.id).parentNode;
+    console.log(element);
+    // delete from DB by id
+    const id = Number(element.getAttribute('db-id'));
+    db.history
+      .delete(id)
+      .then(() => {
+        console.log('deleted ', id);
+        db.history
+          .toArray()
+          .then((queries) => {
+            console.log('retrieved from DB', queries);
+            element.parentNode.removeChild(element);
+
+            setLocalQH(queries);
+            // dispatch({
+            //   type: types.UPDATE_HISTORY,
+            //   queriesHistory: queries,
+            // });
+          })
+          .catch(e => console.log('Error fetching from DB.'));
+      })
+      .catch(e => console.log('Error in deleting from database.'));
+  };
 
   useEffect(() => {
     db.history
@@ -30,17 +46,18 @@ const HistoryDisplay = () => {
         //   type: types.UPDATE_HISTORY,
         //   queriesHistory: queries,
         // });
-      });
+      })
+      .catch(e => console.log('Error fetching from DB.'));
   }, [query, queryGQLError]);
 
 
-  console.log('queriesHistory, before render: ', queriesHistory);
+  console.log('queriesHistory, before render: ', localQH);
   // const historyList = queriesHistory.map(el => <li id="el.id">{el.query}</li>);
   const historyList = localQH.map(el => (
-    <li id={el.id}>
+    <li db-id={el.id} id={`qh-${el.id}`}>
       {el.query}
-      <button id={el.id} onClick={() => handleClick(event)}>delete</button>
-      <button id={el.id}>edit</button>
+      <button id={`del-btn-${el.id}`} onClick={() => handleClick(event)}>delete</button>
+      <button id={`edit-btn-${el.id}`}>edit</button>
     </li>
   ));
 
