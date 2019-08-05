@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import gql from 'graphql-tag';
 import { Controlled as CodeMirror } from 'react-codemirror2';
-// import NodeFetch from 'node-fetch';
 import { useStateValue } from '../Context';
 import EndpointField from './EndpointField';
 import fetchErrorCheck from '../utils/fetchErrorCheck';
@@ -27,8 +26,11 @@ query ditto {
 
 
 const QueryInput = () => {
+  const [{ endpoint, historyTextValue }, dispatch] = useStateValue();
   const [textValue, setTextValue] = useState(exampleQuery);
-  const [{ endpoint }, dispatch] = useStateValue();
+  // if edit button has been clicked, then historyTextValue exists in state. reassigned to fill out
+  // code mirror text area
+  if (historyTextValue !== '' && textValue !== historyTextValue) setTextValue(historyTextValue);
   const [newAPIEndpoint, setNewAPIEndpoint] = useState('');
 
   // this fetch chain/handleSubmit should be added into a different file
@@ -40,16 +42,20 @@ const QueryInput = () => {
   // ! END OF TEST
 
   const handleSubmit = () => {
+    // if there's a value in api endpoint, replace endpoint.
+    // if it's empty, use endpoint in context state
+    console.log('testing fetch, code written after DB addition');
+    const urlToSend = newAPIEndpoint || endpoint;
+
     // send textValue to Dexie db
     db.history.put({
       query: textValue,
+      endpoint: urlToSend,
     })
       .then(() => console.log('Sent to database.'))
       .catch(e => console.log('Error adding query to database.'));
 
-    // if there's a value in api endpoint, replace endpoint.
-    // if it's empty, use endpoint in context state
-    const urlToSend = newAPIEndpoint || endpoint;
+
     // prevent refresh
     event.preventDefault();
 

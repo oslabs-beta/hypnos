@@ -1,40 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import db from '../db';
 import { useStateValue } from '../Context';
+import HistoryListItem from './HistoryListItem';
 import * as types from '../Constants/actionTypes';
 
 
 const HistoryDisplay = () => {
-  const [{ queriesHistory, query, queryGQLError }, dispatch] = useStateValue();
+  const [{ query, queryGQLError }, dispatch] = useStateValue();
   const [localQH, setLocalQH] = useState([]);
-
-  const handleClick = (event) => {
-    event.preventDefault();
-    // delete div
-    const element = document.getElementById(event.target.id).parentNode;
-    console.log(element);
-    // delete from DB by id
-    const id = Number(element.getAttribute('db-id'));
-    db.history
-      .delete(id)
-      .then(() => {
-        console.log('deleted ', id);
-        db.history
-          .toArray()
-          .then((queries) => {
-            console.log('retrieved from DB', queries);
-            element.parentNode.removeChild(element);
-
-            setLocalQH(queries);
-            // dispatch({
-            //   type: types.UPDATE_HISTORY,
-            //   queriesHistory: queries,
-            // });
-          })
-          .catch(e => console.log('Error fetching from DB.'));
-      })
-      .catch(e => console.log('Error in deleting from database.'));
-  };
 
   useEffect(() => {
     db.history
@@ -50,24 +23,43 @@ const HistoryDisplay = () => {
       .catch(e => console.log('Error fetching from DB.'));
   }, [query, queryGQLError]);
 
+  const onEdit = (id) => {
+    event.preventDefault();
+    db.history
+      .get(id)
+      .then((foundQuery) => {
+        console.log('query in onEdit ', foundQuery.query);
+        dispatch({
+          type: types.GET_QUERY,
+          historyTextValue: foundQuery.query,
+          endpoint: foundQuery.endpoint,
+        });
+      })
+      .then(() => {
+        const inputField = document.querySelector('#endpoint-field input');
+        inputField.value = '';
+      })
+      .catch(e => console.log('Error searching DB.'));
+  };
 
-  console.log('queriesHistory, before render: ', localQH);
-  // const historyList = queriesHistory.map(el => <li id="el.id">{el.query}</li>);
-  const historyList = localQH.map(el => (
-    <li db-id={el.id} id={`qh-${el.id}`}>
-      {el.query}
-      <button id={`del-btn-${el.id}`} onClick={() => handleClick(event)}>delete</button>
-      <button id={`edit-btn-${el.id}`}>edit</button>
-    </li>
-  ));
+  const onDelete = (queryId) => {
+    event.preventDefault();
+    console.log('running onDelete');
+    db.history
+      .delete(queryId)
+      .then(() => console.log('deleted ', queryId))
+      .then(() => {
+        setLocalQH(localQH.filter(queryItem => queryItem.id !== queryId));
+      })
+      .catch(e => console.log('error deleting from DB :', e));
+  };
 
-  console.log('historyList => list of queries as LIs ', historyList);
   return (
-    <div>
-      <ul id="history-display">
-        {historyList}
+    <section id="history-display">
+      <ul id="history-list">
+        {localQH.map(pastQueries => <HistoryListItem query={pastQueries.query} id={pastQueries.id} onDelete={onDelete} onEdit={onEdit} />)}
       </ul>
-    </div>
+    </section>
   );
 };
 
