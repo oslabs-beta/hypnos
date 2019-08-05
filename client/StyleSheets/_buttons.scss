@@ -56,3 +56,8 @@
 #reset-button:active {
     @extend %button-active;
 }
+
+#history-display button{
+    display: none;    
+}
+
