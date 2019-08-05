@@ -10,6 +10,7 @@ import db from '../db';
 
 // import Code Mirror styling all at once
 import '../StyleSheets/external/CodeMirror.css';
+import handleQueryFetch from '../utils/handleQueryFetch';
 
 // using a proxy to get around CORS. We do not need a server.
 const proxy = Number(process.env.IS_DEV) === 1 ? 'https://cors-anywhere.herokuapp.com/' : '';
@@ -31,6 +32,12 @@ const QueryInput = () => {
 
   // this fetch chain/handleSubmit should be added into a different file
   // and imported. might be a heavy lift because of all the variables
+
+  // ! TEST: HANDLE QUERY FETCH AS NEW FUNC
+  // * IF USING, PARAMS MUST BE PASSED IN: textValue, newAPIEndpoint, endpoint, dispatch, setNewAPIEndpoint
+  // const handleSubmit2 = handleQueryFetch;
+  // ! END OF TEST
+
   const handleSubmit = () => {
     // send textValue to Dexie db
     db.history.put({
