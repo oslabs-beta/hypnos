@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import gql from 'graphql-tag';
 import { Controlled as CodeMirror } from 'react-codemirror2';
-// import NodeFetch from 'node-fetch';
 import { useStateValue } from '../Context';
 import EndpointField from './EndpointField';
 import fetchErrorCheck from '../utils/fetchErrorCheck';
@@ -26,17 +25,15 @@ query ditto {
 
 const QueryInput = () => {
   const [{ endpoint, historyTextValue }, dispatch] = useStateValue();
-  console.log('rendering')
   const [textValue, setTextValue] = useState(exampleQuery);
-  if (historyTextValue !== '' && textValue !== historyTextValue) setTextValue(historyTextValue)
-  // console.log('historyTextValue in queryInput ', historyTextValue)
-  console.log('textValue ', textValue)
+  // if edit button has been clicked, then historyTextValue exists in state. reassigned to fill out
+  // code mirror text area
+  if (historyTextValue !== '' && textValue !== historyTextValue) setTextValue(historyTextValue);
   const [newAPIEndpoint, setNewAPIEndpoint] = useState('');
 
   // this fetch chain/handleSubmit should be added into a different file
   // and imported. might be a heavy lift because of all the variables
   const handleSubmit = () => {
-
     // if there's a value in api endpoint, replace endpoint.
     // if it's empty, use endpoint in context state
     console.log('testing fetch, code written after DB addition');
@@ -45,21 +42,9 @@ const QueryInput = () => {
     // send textValue to Dexie db
     db.history.put({
       query: textValue,
-      endpoint: urlToSend
+      endpoint: urlToSend,
     })
-    
-      .then(() => console.log('sent to db'))
-      // .then(() => {
-      //   db.history
-      //     .toArray()
-      //     .then((queries) => {
-      //       dispatch({
-      //         type: types.UPDATE_HISTORY,
-      //         queriesHistory: queries,
-      //       });
-      //     });
-      // })
-      ;
+      .then(() => console.log('sent to db'));
 
     // prevent refresh
     event.preventDefault();
