@@ -1,9 +1,9 @@
 import { GQL_ERROR } from '../actionTypes';
 import * as errorResponse from './errorResponseStrings';
 
-export const queryMethodErr = {
+export const queryMethodError = {
   type: GQL_ERROR,
-  gqlError: errorResponse.queryMethodErr,
+  gqlError: errorResponse.queryMethodError,
 };
 
 export const multipleQueriesError = {

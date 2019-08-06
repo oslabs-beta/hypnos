@@ -10,6 +10,7 @@ import * as dispatchObj from '../../Constants/errors/errorDispatchObjects';
 
 const fetchErrorCheck = (error, dispatch, reject) => {
   // if Gql query does not start with 'query'
+  console.log('inside fetch error check: ', error);
   if (error.message.slice(0, errorMsg.queryMethodError.length) === errorMsg.queryMethodError) {
     dispatch(dispatchObj.queryMethodError);
     reject(new Error(errorReponse.queryMethodError));
