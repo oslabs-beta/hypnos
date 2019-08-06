@@ -1,5 +1,4 @@
 import gql from 'graphql-tag';
-import db from '../db';
 import fetchErrorCheck from './fetchErrorCheck';
 import * as types from '../Constants/actionTypes';
 
@@ -27,6 +26,9 @@ const handleQueryFetch = (textValue, urlToSend, dispatch, setNewAPIEndpoint) => 
 
   // added w/ new promise format
   return new Promise((resolve, reject) => {
+    // * NOTE, 8/6: THROWING ERRORS BEFORE CATCH SEEMS TO HAVE BETTER ERROR MESSAGING IN CONSOLE LOGS
+    // * REJECTING IN CATCH SEEMS TO HAVE BETTER HANDLING
+
     fetch(proxy + urlToSend, {
       // mode: 'no-cors',
       headers: {
@@ -60,7 +62,7 @@ const handleQueryFetch = (textValue, urlToSend, dispatch, setNewAPIEndpoint) => 
             // gqlError: '@rest must have a \'path\' and \'type\' property. Please click reset to check the example for reference.',
           });
           // throwing error/reject stops promise chain
-          reject(new Error('Path is invalid. Please double check your path.'));
+          throw new Error('Path is invalid. Please double check your path.');
         } else {
           // if regex is NOT null, there was a path. fetch is now made to endpoint + path
           const path = textValue.match(/(?<=path:\W*\")\S*(?=\")/gi)[0].trim();
