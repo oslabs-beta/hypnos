@@ -28,7 +28,7 @@ const HistoryDisplay = () => {
     db.history
       .get(id)
       .then((foundQuery) => {
-        console.log('query in onEdit ', foundQuery.query);
+        console.log('query in onEdit ', foundQuery);
         dispatch({
           type: types.GET_QUERY,
           historyTextValue: foundQuery.query,

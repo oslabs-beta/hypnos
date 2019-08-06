@@ -1,33 +1,40 @@
 /* eslint-disable react/button-has-type */
-import React from 'react';
+import React, { useState } from 'react';
 
 const HistoryListItem = (props) => {
+  const [isHovering, toggleHover] = useState(false);
   const {
     id, query, onDelete, onEdit,
   } = props;
-  console.log('rendering a list item');
+  // console.log('rendering a list item');
   return (
     <>
-      <li db-id={id} className="history-list-item" id={`hist-li-${id}`}>
+      <li db-id={id} className="history-list-item" id={`hist-li-${id}`}
+        onMouseEnter={() => toggleHover(true)}
+        onMouseLeave={() => toggleHover(false)}>
         {query}
-        <button
-          id={`del-btn-${id}`}
-          onClick={() => {
-            console.log('del clicked');
-            onDelete(id);
-          }}
-        >
-          Delete
+        {isHovering && (
+          <span id='button-hover'>
+            <button
+              className='history-delete'
+              id={`del-btn-${id}`}
+              onClick={() => {
+                console.log('del clicked');
+                onDelete(id);
+              }}
+            >Delete
         </button>
-        <button
-          id={`edit-btn-${id}`}
-          onClick={() => {
-            console.log('edit clickd');
-            onEdit(id);
-          }}
-        >
-          Edit
+            <button
+              className='history-edit'
+              id={`edit-btn-${id}`}
+              onClick={() => {
+                console.log('edit clicked');
+                onEdit(id);
+              }}
+            >Edit
         </button>
+          </span>
+        )}
         <br />
         <br />
       </li>
