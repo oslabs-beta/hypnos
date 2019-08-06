@@ -2,13 +2,13 @@ import React, { useState } from 'react';
 import { Controlled as CodeMirror } from 'react-codemirror2';
 import { useStateValue } from '../Context';
 import EndpointField from './EndpointField';
-import db from '../db';
+// import db from '../db';
 import * as types from '../Constants/actionTypes';
 
 // import Code Mirror styling all at once
 import '../StyleSheets/external/CodeMirror.css';
-import addQueryToDB from '../utils/addQueryToDB';
-import handleQueryFetch from '../utils/handleQueryFetch';
+import addQueryToDB from '../utils/queryInput/addQueryToDB';
+import handleQueryFetch from '../utils/queryInput/handleQueryFetch';
 
 // SHOULD MAKE NOTE: API key should be supplied in endpoint field
 // using a proxy to get around CORS. We do not need a server.

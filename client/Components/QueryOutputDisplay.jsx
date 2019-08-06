@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { useStateValue } from '../Context';
-import { jsonFormatter } from '../utils/jsonFormatter';
-import nullChecker from '../utils/nullChecker';
-import nullResultChecker from '../utils/nullResultChecker';
+import { jsonFormatter } from '../utils/queryOutputDisplay/jsonFormatter';
+import nullChecker from '../utils/queryOutputDisplay/nullChecker';
+import nullResultChecker from '../utils/queryOutputDisplay/nullResultChecker';
 
 const QueryOutputDisplay = (props) => {
   // ! TODO: MOVE ERROR CHECKING INTO A DIFFERENT FILE BECAUSE THIS IS A LOT

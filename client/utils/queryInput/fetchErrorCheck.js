@@ -3,7 +3,7 @@
 *
 */
 
-import * as types from '../Constants/actionTypes';
+import * as types from '../../Constants/actionTypes';
 
 const fetchErrorCheck = (error, dispatch, reject) => {
   // if Gql query does not start with 'query'

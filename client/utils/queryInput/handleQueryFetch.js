@@ -1,6 +1,6 @@
 import gql from 'graphql-tag';
 import fetchErrorCheck from './fetchErrorCheck';
-import * as types from '../Constants/actionTypes';
+import * as types from '../../Constants/actionTypes';
 
 const proxy = Number(process.env.IS_DEV) === 1 ? 'https://cors-anywhere.herokuapp.com/' : '';
 
