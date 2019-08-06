@@ -21,8 +21,15 @@
         font-size: 13px;
     }
 
-    button {
-        // border: none;
+    .history-delete {
+        @extend %button;
+        background-color: $loading-color;
+        border-right: solid $primary-color;
+    }
+
+    .history-edit {
+        @extend %button;
+        background-color: $dark-color;
     }
 
     #history-header {
