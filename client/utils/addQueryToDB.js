@@ -1,6 +1,7 @@
 import db from '../db';
 
 const addQueryToDB = (textValue, urlToSend) => new Promise((resolve, reject) => {
+  console.log('running addQueryToDB');
   db.history.put({
     query: textValue,
     endpoint: urlToSend,

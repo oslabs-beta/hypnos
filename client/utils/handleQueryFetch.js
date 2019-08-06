@@ -6,9 +6,10 @@ import * as types from '../Constants/actionTypes';
 const proxy = Number(process.env.IS_DEV) === 1 ? 'https://cors-anywhere.herokuapp.com/' : '';
 
 const handleQueryFetch = (textValue, urlToSend, dispatch, setNewAPIEndpoint) => {
-  // if there's a value in api endpoint, replace endpoint.
-  // if it's empty, use endpoint in context state
-  console.log('testing fetch, code written after DB addition');
+  // prevent refresh
+  event.preventDefault();
+
+  console.log('Running handleQueryFetch');
   // const urlToSend = newAPIEndpoint || endpoint;
 
   // // send textValue to Dexie db
@@ -19,9 +20,6 @@ const handleQueryFetch = (textValue, urlToSend, dispatch, setNewAPIEndpoint) => 
   //   .then(() => console.log('Sent to database.'))
   //   .catch(e => console.log('Error adding query to database.'));
 
-
-  // prevent refresh
-  event.preventDefault();
 
   // ! NOTE: Nested test dispatch added to codeSnippets
 
@@ -57,16 +55,20 @@ const handleQueryFetch = (textValue, urlToSend, dispatch, setNewAPIEndpoint) => 
           dispatch({
             // dispatch path error
             type: types.GQL_ERROR,
-            gqlError: '@rest must have a \'path\' and \'type\' property. Please click reset to check the example for reference.',
+            // changed this dispatch message to match error thrown below
+            gqlError: 'Path is invalid. Please double check your path.',
+            // gqlError: '@rest must have a \'path\' and \'type\' property. Please click reset to check the example for reference.',
           });
-          // throwing error stops promise chain
-          throw new Error('Path is invalid. Please double check your path.');
+          // throwing error/reject stops promise chain
+          reject(new Error('Path is invalid. Please double check your path.'));
         } else {
           // if regex is NOT null, there was a path. fetch is now made to endpoint + path
           const path = textValue.match(/(?<=path:\W*\")\S*(?=\")/gi)[0].trim();
+          // ! NEED: check if there's a param in the path
           // return fetch, which creates a promise
           return fetch(proxy + urlToSend + path, {
             headers: {
+              'Access-Control-Allow-Origin': '*',
               'Content-Type': 'application/json',
             },
           });
