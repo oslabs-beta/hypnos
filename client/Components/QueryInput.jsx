@@ -46,20 +46,30 @@ const QueryInput = () => {
     // tries to run DB query and fetch chain in tandem
     // ! PROMISE.ALL TEST
     // * THIS SEEMS TO WORK FINE, 8/6
-    Promise.all([addQueryToDB(textValue, urlToSend), handleQueryFetch(textValue, urlToSend, dispatch, setNewAPIEndpoint)])
-      .then(() => console.log('DB query and fetches successful.'))
-      .catch(e => console.log('Error in fetch/DB promise.all: ', e));
+    // Promise.all([addQueryToDB(textValue, urlToSend), handleQueryFetch(textValue, urlToSend, dispatch, setNewAPIEndpoint)])
+    //   .then(() => console.log('DB query and fetches successful.'))
+    //   .catch(e => console.log('Error in fetch/DB promise.all: ', e));
     // ! END OF PROMISE.ALL TEST
 
     // ! TEST FOR MOVING ERROR HANDLING TO APOLLO CLIENT
-    // dispatch({
-    //   type: types.RUN_QUERY,
-    //   // decontructed using of gql tag to make query object. need to pass in a stringliteral.
-    //   query: gql([`${textValue}`]),
-    //   // pulls of key for where data will be in result obj
-    //   queryResultObject: textValue.match(/(?<=\{\W)(.*?)(?=\@)/g)[0].trim(),
-    //   newEndpoint: urlToSend,
-    // });
+    console.log('dispatch about to be fired');
+    // console.log('query obj: ', gql([textValue]));
+    try {
+      gql([`${textValue}`]);
+    } catch (err) {
+      console.log('couldnt make tag: ', err);
+    }
+
+    // console.log('regex test: ', textValue.match(/(?<=\{\W)(.*?)(?=\@)/g));
+    const regexResult = textValue.match(/(?<=\{\W)(.*?)(?=\@)/g);
+    dispatch({
+      type: types.RUN_QUERY,
+      // decontructed using of gql tag to make query object. need to pass in a stringliteral.
+      query: gql([`${textValue}`]),
+      // pulls of key for where data will be in result obj
+      queryResultObject: regexResult ? textValue.match(/(?<=\{\W)(.*?)(?=\@)/g)[0].trim() : 'null',
+      newEndpoint: urlToSend,
+    });
     // ! END TEST FOR APOLLO CLIENT/ERRORS
 
     // send textValue to Dexie db
