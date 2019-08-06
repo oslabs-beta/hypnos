@@ -5,6 +5,7 @@
 
 import * as types from '../../Constants/actionTypes';
 import * as errorMsg from '../../Constants/errors/errorStrings';
+import * as dispatchObj from '../../Constants/errors/errorDispatchObjects';
 
 const fetchErrorCheck = (error, dispatch, reject) => {
   // if Gql query does not start with 'query'
