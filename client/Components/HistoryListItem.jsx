@@ -22,7 +22,7 @@ const HistoryListItem = (props) => {
                 console.log('del clicked');
                 onDelete(id);
               }}
-            >Delete
+            ><i class="fas fa-trash"></i>
         </button>
             <button
               className='history-edit'
@@ -31,7 +31,7 @@ const HistoryListItem = (props) => {
                 console.log('edit clicked');
                 onEdit(id);
               }}
-            >Edit
+            ><i class="fas fa-pen"></i>
         </button>
           </span>
         )}

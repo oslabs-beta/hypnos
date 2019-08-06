@@ -52,6 +52,7 @@
     "@babel/core": "^7.5.5",
     "@babel/preset-env": "^7.5.5",
     "@babel/preset-react": "^7.0.0",
+    "@fortawesome/fontawesome-free": "^5.10.1",
     "babel-preset-env": "^1.7.0",
     "electron": "^5.0.7",
     "electron-builder": "^21.2.0",
