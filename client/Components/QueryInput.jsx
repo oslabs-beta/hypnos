@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Controlled as CodeMirror } from 'react-codemirror2';
 import { useStateValue } from '../Context';
 import EndpointField from './EndpointField';
+import db from '../db';
 import * as types from '../Constants/actionTypes';
 
 // import Code Mirror styling all at once
@@ -36,6 +37,22 @@ const QueryInput = () => {
   }
   const [newAPIEndpoint, setNewAPIEndpoint] = useState('');
 
+  const handleSubmit = () => {
+    event.preventDefault();
+    const urlToSend = newAPIEndpoint || endpoint;
+
+    // send textValue to Dexie db
+    db.history.put({
+      query: textValue,
+      endpoint: urlToSend,
+    })
+      .then(() => {
+        console.log('Sent to database.');
+        handleQueryFetch(textValue, urlToSend, dispatch, setNewAPIEndpoint);
+      })
+      .catch(e => console.log('Error adding query to database.'));
+  };
+
   // this fetch chain/handleSubmit is in a different file,
   // as handleQueryFetch, and imported.
 
@@ -43,7 +60,7 @@ const QueryInput = () => {
     <>
       <EndpointField setNewAPIEndpoint={setNewAPIEndpoint} />
       <article id="query-input">
-        <form id="query-input-form" onSubmit={() => handleQueryFetch(textValue, newAPIEndpoint, endpoint, dispatch, setNewAPIEndpoint)}>
+        <form id="query-input-form" onSubmit={() => handleSubmit()}>
           <CodeMirror
             id="code-mirror"
             value={textValue}

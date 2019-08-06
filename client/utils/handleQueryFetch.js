@@ -5,19 +5,19 @@ import * as types from '../Constants/actionTypes';
 
 const proxy = Number(process.env.IS_DEV) === 1 ? 'https://cors-anywhere.herokuapp.com/' : '';
 
-const handleQueryFetch = (textValue, newAPIEndpoint, endpoint, dispatch, setNewAPIEndpoint) => {
+const handleQueryFetch = (textValue, urlToSend, dispatch, setNewAPIEndpoint) => {
   // if there's a value in api endpoint, replace endpoint.
   // if it's empty, use endpoint in context state
   console.log('testing fetch, code written after DB addition');
-  const urlToSend = newAPIEndpoint || endpoint;
+  // const urlToSend = newAPIEndpoint || endpoint;
 
-  // send textValue to Dexie db
-  db.history.put({
-    query: textValue,
-    endpoint: urlToSend,
-  })
-    .then(() => console.log('Sent to database.'))
-    .catch(e => console.log('Error adding query to database.'));
+  // // send textValue to Dexie db
+  // db.history.put({
+  //   query: textValue,
+  //   endpoint: urlToSend,
+  // })
+  //   .then(() => console.log('Sent to database.'))
+  //   .catch(e => console.log('Error adding query to database.'));
 
 
   // prevent refresh

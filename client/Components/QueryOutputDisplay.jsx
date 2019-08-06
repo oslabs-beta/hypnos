@@ -109,25 +109,25 @@ const QueryOutputDisplay = (props) => {
     <>
       <>
         {testNull ? (
-          <article>
-            <p font="helevtica" className="error">
+          <section>
+            <aside font="helevtica" className="error">
               Null values returned from query.
               <br />
               Please double check your query.
               <br />
               <span onMouseEnter={() => toggleHover(true)} onMouseLeave={() => toggleHover(false)}>Details.</span>
               {isHovering && (
-                <div id="tooltip">
+                <article id="tooltip">
                   <ul>
                     {nullVals}
                   </ul>
-                </div>
+                </article>
               )
               }
               <br />
               <br />
-            </p>
-          </article>
+            </aside>
+          </section>
         ) : ''}
       </>
       <article>

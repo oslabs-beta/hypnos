@@ -17,9 +17,9 @@ const nullResultCheck = (object, errorPath = '') => {
       if (nullPath !== '') {
         // nullVals is always an array. so if path is an array of strings, flatten vals out
         // before pushing
-        nullPath.forEach((curNullPath) => {
+        nullPath.forEach((curNullPath, idx) => {
           nullVals.push(
-            <li>
+            <li key={`null-path-li-${idx}`}>
               {curNullPath}
             </li>,
           );
