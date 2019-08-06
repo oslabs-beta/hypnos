@@ -7,6 +7,7 @@ import * as types from '../Constants/actionTypes';
 
 // import Code Mirror styling all at once
 import '../StyleSheets/external/CodeMirror.css';
+import addQueryToDB from '../utils/addQueryToDB';
 import handleQueryFetch from '../utils/handleQueryFetch';
 
 // SHOULD MAKE NOTE: API key should be supplied in endpoint field
@@ -41,16 +42,24 @@ const QueryInput = () => {
     event.preventDefault();
     const urlToSend = newAPIEndpoint || endpoint;
 
+    // tries to run DB query and fetch chain in tandem
+    // ! PROMISE.ALL TEST
+    Promise.all([addQueryToDB(textValue, urlToSend), handleQueryFetch(textValue, urlToSend, dispatch, setNewAPIEndpoint)])
+      .then(() => console.log('DB query and fetches successful.'))
+      .catch(e => console.log('Error in fetch/DB promise.all: ', e));
+    // ! END OF PROMISE.ALL TEST
+
     // send textValue to Dexie db
-    db.history.put({
-      query: textValue,
-      endpoint: urlToSend,
-    })
-      .then(() => {
-        console.log('Sent to database.');
-        handleQueryFetch(textValue, urlToSend, dispatch, setNewAPIEndpoint);
-      })
-      .catch(e => console.log('Error adding query to database.'));
+    // runs DB query and THEN fetch chain
+    // db.history.put({
+    //   query: textValue,
+    //   endpoint: urlToSend,
+    // })
+    //   .then(() => {
+    //     console.log('Sent to database.');
+    //     handleQueryFetch(textValue, urlToSend, dispatch, setNewAPIEndpoint);
+    //   })
+    //   .catch(e => console.log('Error adding query to database.'));
   };
 
   // this fetch chain/handleSubmit is in a different file,
