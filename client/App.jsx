@@ -6,33 +6,21 @@ import { ApolloClient } from 'apollo-client';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import { ApolloProvider } from 'react-apollo';
 import { onError } from 'apollo-link-error';
-import { createHttpLink } from 'apollo-link-http';
 import { ApolloLink } from 'apollo-link';
+// import { createHttpLink } from 'apollo-link-http';
 
 import Header from './Components/Header';
 import HistoryDisplay from './Components/HistoryDisplay';
 import QueriesContainer from './Containers/QueriesContainer';
 import { StateProvider, useStateValue } from './Context';
 // using a proxy to get around CORS. We do not need a server.
+
 const proxy = Number(process.env.IS_DEV) === 1 ? 'https://cors-anywhere.herokuapp.com/' : '';
 
 const App = () => {
   const [{ endpoint }] = useStateValue();
   // instantiated errorLink
   // const httpLink = createHttpLink({ uri: proxy + endpoint });
-  const errorLink = onError(({
-    operation, response, graphQLErrors, networkError, forward,
-  }) => {
-    console.log('hey');
-    if (graphQLErrors) {
-      console.log('graphql error hit ', graphQLErrors);
-    }
-    if (networkError) {
-      console.log('found network error: ', networkError);
-    }
-    console.log('response: ', response);
-    // return forward(operation);
-  });
 
   const restLink = new RestLink({
     // might be able to use custom fetch here for error checking?
@@ -44,8 +32,31 @@ const App = () => {
       'Content-Type': 'application/json',
       // 'Access-Control-Allow-Origin': '*',
     },
+    onError: ({ networkError, graphQLErrors }) => {
+      console.log('graphQLErrors', graphQLErrors);
+      console.log('networkError', networkError);
+    },
+    // customFetch: (uri, options) => fetch(uri),
     // credentials: 'include',
   });
+
+  // error link, which isn't actually being triggered at all
+  const errorLink = onError(({
+    graphQLErrors, networkError,
+  }) => {
+    // operation and response are other props in the onError obj
+    // console.log('operation in errorLink: ', operation);
+    // console.log('response in errorLink: ', response);
+    if (graphQLErrors) {
+      graphQLErrors.map(({ message, locations, path }) => console.log(
+        `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`,
+      ));
+    }
+    if (networkError) console.log(`[Network error]: ${networkError}`);
+  });
+
+
+  // const httpLink = createHttpLink(proxy + endpoint);
 
   const client = new ApolloClient({
     // added errorLink here
@@ -54,8 +65,17 @@ const App = () => {
     // handling errors on default
     defaultOptions: {
       watchQuery: {
-        errorPolicy: 'none',
+        fetchPolicy: 'cache-and-network',
+        errorPolicy: 'all',
       },
+      query: {
+        fetchPolicy: 'cache-and-network',
+        errorPolicy: 'all',
+      },
+    },
+    onError: ({ networkError, graphQLErrors }) => {
+      console.log('graphQLErrors', graphQLErrors);
+      console.log('networkError', networkError);
     },
   });
 

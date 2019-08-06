@@ -32,8 +32,11 @@ const QueriesContainer = () => {
       })(QueryOutputDisplay);
     } else {
       OutputOfQuery = graphql(query, {
+        // options: {
+        //   errorPolicy: true,
+        // },
         props: ({ data }) => {
-          // console.log(data, 'this is data inside output of query');
+          console.log(data, 'this is data inside output of query');
           // console.log(query, 'this is query inside output of query')
           if (data.loading) {
             return {

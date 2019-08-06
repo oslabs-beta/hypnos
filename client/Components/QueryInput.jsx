@@ -8,6 +8,7 @@ import * as types from '../Constants/actionTypes';
 
 // import Code Mirror styling all at once
 import '../StyleSheets/external/CodeMirror.css';
+import fetchErrorCheck from '../utils/queryInput/fetchErrorCheck';
 import addQueryToDB from '../utils/queryInput/addQueryToDB';
 import handleQueryFetch from '../utils/queryInput/handleQueryFetch';
 
@@ -57,7 +58,12 @@ const QueryInput = () => {
     try {
       gql([`${textValue}`]);
     } catch (err) {
-      console.log('couldnt make tag: ', err);
+      console.log('could not make tag: ', err);
+      // NEED CATCH FOR NO PATH STRING AT ALL
+      // 'Syntax Error: Unexpected )'
+      // NEED 404 CHECK -- PULL FROM HANDLE QUERY FETCH?
+      fetchErrorCheck(err, dispatch);
+      return;
     }
 
     // console.log('regex test: ', textValue.match(/(?<=\{\W)(.*?)(?=\@)/g));
