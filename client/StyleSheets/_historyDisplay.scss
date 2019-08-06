@@ -19,17 +19,29 @@
     ul {
         list-style-type: none;
         font-size: 13px;
+
+        li {
+            border-bottom: 1px solid $dark-color;
+            padding-top: 5px;
+        }
+
     }
 
+
     .history-delete {
-        @extend %button;
-        background-color: $loading-color;
-        border-right: solid $primary-color;
+
+        i {
+            color: $dark-color;
+        }
+        
     }
 
     .history-edit {
-        @extend %button;
-        background-color: $dark-color;
+
+        i {
+            color: $loading-color;
+        }
+
     }
 
     #history-header {
@@ -38,8 +50,10 @@
         background-color: $loading-color;
         color: $highlight-color;
         height: 5vh;
-        box-shadow: 0 2px 4px 0 rgba(0,0,0,0.2);
+        padding-left: 10px;
+        // box-shadow: 0 2px 4px 0 rgba(0,0,0,0.2);
         align-items: center;
+        font-weight: bold;
     }
     
     #history-list {
