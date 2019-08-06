@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Controlled as CodeMirror } from 'react-codemirror2';
+import gql from 'graphql-tag';
 import { useStateValue } from '../Context';
 import EndpointField from './EndpointField';
 // import db from '../db';
@@ -49,6 +50,17 @@ const QueryInput = () => {
       .then(() => console.log('DB query and fetches successful.'))
       .catch(e => console.log('Error in fetch/DB promise.all: ', e));
     // ! END OF PROMISE.ALL TEST
+
+    // ! TEST FOR MOVING ERROR HANDLING TO APOLLO CLIENT
+    // dispatch({
+    //   type: types.RUN_QUERY,
+    //   // decontructed using of gql tag to make query object. need to pass in a stringliteral.
+    //   query: gql([`${textValue}`]),
+    //   // pulls of key for where data will be in result obj
+    //   queryResultObject: textValue.match(/(?<=\{\W)(.*?)(?=\@)/g)[0].trim(),
+    //   newEndpoint: urlToSend,
+    // });
+    // ! END TEST FOR APOLLO CLIENT/ERRORS
 
     // send textValue to Dexie db
     // runs DB query and THEN fetch chain

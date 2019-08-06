@@ -40,6 +40,7 @@ const QueriesContainer = () => {
             };
           }
           if (data.error) {
+            console.log('error inside QC: ', data.error);
             return {
               error: data.error,
             };
