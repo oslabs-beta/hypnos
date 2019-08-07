@@ -68,15 +68,27 @@ const QueryInput = () => {
 
     // console.log('regex test: ', textValue.match(/(?<=\{\W)(.*?)(?=\@)/g));
     const regexResult = textValue.match(/(?<=\{\W)(.*?)(?=\@)/g);
-    Promise.all()
-    dispatch({
-      type: types.RUN_QUERY,
-      // decontructed using of gql tag to make query object. need to pass in a stringliteral.
-      query: gql([`${textValue}`]),
-      // pulls of key for where data will be in result obj
-      queryResultObject: regexResult ? textValue.match(/(?<=\{\W)(.*?)(?=\@)/g)[0].trim() : 'null',
-      newEndpoint: urlToSend,
-    });
+    Promise.all([addQueryToDB(textValue, urlToSend),
+      dispatch({
+        type: types.RUN_QUERY,
+        // decontructed using of gql tag to make query object. need to pass in a stringliteral.
+        query: gql([`${textValue}`]),
+        // pulls of key for where data will be in result obj
+        queryResultObject: regexResult ? textValue.match(/(?<=\{\W)(.*?)(?=\@)/g)[0].trim() : 'null',
+        newEndpoint: urlToSend,
+      }),
+    ])
+      .then(() => console.log('db adds and dispatch successful'))
+      .catch(e => console.log('error in new promise all: ', e));
+    // commented out
+    // dispatch({
+    //   type: types.RUN_QUERY,
+    //   // decontructed using of gql tag to make query object. need to pass in a stringliteral.
+    //   query: gql([`${textValue}`]),
+    //   // pulls of key for where data will be in result obj
+    //   queryResultObject: regexResult ? textValue.match(/(?<=\{\W)(.*?)(?=\@)/g)[0].trim() : 'null',
+    //   newEndpoint: urlToSend,
+    // });
     // ! END TEST FOR APOLLO CLIENT/ERRORS
 
     // send textValue to Dexie db
@@ -95,7 +107,7 @@ const QueryInput = () => {
   // this fetch chain/handleSubmit is in a different file,
   // as handleQueryFetch, and imported.
 
-  
+
   return (
     <>
       <EndpointField setNewAPIEndpoint={setNewAPIEndpoint} />

@@ -40,3 +40,9 @@ export const noPathOrTypeError = {
   type: GQL_ERROR,
   gqlError: errorResponse.noPathOrTypeError,
 };
+
+export const endpointPath404Error = {
+  tpe: GQL_ERROR,
+  gqlError: errorResponse.endpointPath404Error,
+};
+

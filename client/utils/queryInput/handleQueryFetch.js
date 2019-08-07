@@ -4,6 +4,8 @@ import * as types from '../../Constants/actionTypes';
 
 const proxy = Number(process.env.IS_DEV) === 1 ? 'https://cors-anywhere.herokuapp.com/' : '';
 
+// MIGHT rework to invoke inside of apollo custom fetch.
+
 const handleQueryFetch = (textValue, urlToSend, dispatch, setNewAPIEndpoint) => {
   // prevent refresh
   event.preventDefault();

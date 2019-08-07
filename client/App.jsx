@@ -1,6 +1,7 @@
 import React from 'react';
 import './StyleSheets/App.scss';
 
+
 import { RestLink } from 'apollo-link-rest';
 import { ApolloClient } from 'apollo-client';
 import { InMemoryCache } from 'apollo-cache-inmemory';
@@ -13,7 +14,11 @@ import Header from './Components/Header';
 import HistoryDisplay from './Components/HistoryDisplay';
 import QueriesContainer from './Containers/QueriesContainer';
 import { StateProvider, useStateValue } from './Context';
+
+import * as errorResponse from './Constants/errors/errorResponseStrings';
+// import * as errorDispatchObj from './Constants/errors/errorDispatchObjects';
 // using a proxy to get around CORS. We do not need a server.
+
 
 const proxy = Number(process.env.IS_DEV) === 1 ? 'https://cors-anywhere.herokuapp.com/' : '';
 
@@ -43,7 +48,11 @@ const App = () => {
           .then((res) => {
             // const clone = res.clone();
             console.log('in first then lock, custom fetch');
-            if (res.status === 404) reject(new Error('404'));
+            if (res.status === 404) {
+              // dispatch inside of here seems to break it
+              // dispatch(errorDispatchObj.endpointPath404Error);
+              reject(new Error(errorResponse.endpointPath404Error));
+            }
             // console.log('clone.json: ', clone.json());
             else return resolve(res);
           })

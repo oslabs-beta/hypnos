@@ -6,3 +6,4 @@ export const queryFieldBlankError = 'Query fields cannot be blank. Please click 
 export const typeSyntaxError = 'Inside @rest, "type" must be followed by a colon (e.g. type:).';
 export const noRestCallError = 'Query must have an @rest call.';
 export const noPathOrTypeError = '@rest must have a \'path\' and \'type\' property. Please click reset to check the example for reference.';
+export const endpointPath404Error = 'Endpoint is invalid. Please double check your endpoint.';
