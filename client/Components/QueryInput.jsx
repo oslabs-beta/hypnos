@@ -68,6 +68,7 @@ const QueryInput = () => {
 
     // console.log('regex test: ', textValue.match(/(?<=\{\W)(.*?)(?=\@)/g));
     const regexResult = textValue.match(/(?<=\{\W)(.*?)(?=\@)/g);
+    Promise.all()
     dispatch({
       type: types.RUN_QUERY,
       // decontructed using of gql tag to make query object. need to pass in a stringliteral.
@@ -94,6 +95,7 @@ const QueryInput = () => {
   // this fetch chain/handleSubmit is in a different file,
   // as handleQueryFetch, and imported.
 
+  
   return (
     <>
       <EndpointField setNewAPIEndpoint={setNewAPIEndpoint} />

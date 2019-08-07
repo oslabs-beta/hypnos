@@ -32,17 +32,37 @@ const App = () => {
       'Content-Type': 'application/json',
       // 'Access-Control-Allow-Origin': '*',
     },
-    onError: ({ networkError, graphQLErrors }) => {
-      console.log('graphQLErrors', graphQLErrors);
-      console.log('networkError', networkError);
+    // onError: ({ networkError, graphQLErrors }) => {
+    //   console.log('graphQLErrors', graphQLErrors);
+    //   console.log('networkError', networkError);
+    // },
+    customFetch: (uri, options) => {
+      console.log('in custom fetch');
+      return new Promise((resolve, reject) => {
+        fetch(uri)
+          .then((res) => {
+            // const clone = res.clone();
+            console.log('in first then lock, custom fetch');
+            if (res.status === 404) reject(new Error('404'));
+            // console.log('clone.json: ', clone.json());
+            else return resolve(res);
+          })
+          // .then((data) => {
+          //   console.log('data in 2nd then block: ', data);
+          //   return resolve(data);
+          // })
+          .catch((e) => {
+            console.log('error in custom fetch');
+            reject(e);
+          });
+      });
     },
-    // customFetch: (uri, options) => fetch(uri),
     // credentials: 'include',
   });
 
   // error link, which isn't actually being triggered at all
   const errorLink = onError(({
-    graphQLErrors, networkError,
+    graphQLErrors, networkError, operation, response, forward,
   }) => {
     // operation and response are other props in the onError obj
     // console.log('operation in errorLink: ', operation);
@@ -52,7 +72,9 @@ const App = () => {
         `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`,
       ));
     }
-    if (networkError) console.log(`[Network error]: ${networkError}`);
+    if (networkError) console.log(networkError);
+
+    // forward(operation);
   });
 
 
@@ -60,23 +82,23 @@ const App = () => {
 
   const client = new ApolloClient({
     // added errorLink here
-    link: ApolloLink.from([restLink, errorLink]),
+    link: ApolloLink.from([errorLink, restLink]),
     cache: new InMemoryCache(),
     // handling errors on default
-    defaultOptions: {
-      watchQuery: {
-        fetchPolicy: 'cache-and-network',
-        errorPolicy: 'all',
-      },
-      query: {
-        fetchPolicy: 'cache-and-network',
-        errorPolicy: 'all',
-      },
-    },
-    onError: ({ networkError, graphQLErrors }) => {
-      console.log('graphQLErrors', graphQLErrors);
-      console.log('networkError', networkError);
-    },
+    // defaultOptions: {
+    //   watchQuery: {
+    //     fetchPolicy: 'cache-and-network',
+    //     errorPolicy: 'all',
+    //   },
+    //   query: {
+    //     fetchPolicy: 'cache-and-network',
+    //     errorPolicy: 'all',
+    //   },
+    // },
+    // onError: ({ networkError, graphQLErrors }) => {
+    //   console.log('graphQLErrors', graphQLErrors);
+    //   console.log('networkError', networkError);
+    // },
   });
 
   return (

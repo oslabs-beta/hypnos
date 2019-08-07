@@ -1,5 +1,6 @@
 import React from 'react';
 import { graphql } from 'react-apollo';
+import { CURRENT_APP_INSTALLER_FILE_NAME } from 'builder-util-runtime';
 import { useStateValue } from '../Context';
 // NOTE: moved endpoint field to inside query
 import QueryOutputDisplay from '../Components/QueryOutputDisplay';
@@ -19,6 +20,7 @@ const QueriesContainer = () => {
     // on the data object. e.g. query ditto { !!!POKEMON }
     // if query.definitions is an array with the number of queries. It should not be greater than 1
     if (query.definitions.length > 1) {
+      console.log('in 2 query block, QC. GQL error: ', queryGQLError);
       // GraphQL can only run one query at a time, so even though this if statement block is to check for error, we need to send only one query to GQL so that the app doesn't break
       query.definitions = [query.definitions[0]];
       OutputOfQuery = graphql(query, {
@@ -31,6 +33,7 @@ const QueriesContainer = () => {
         },
       })(QueryOutputDisplay);
     } else {
+      console.log('in 1 query block, QC. GQL error: ', queryGQLError);
       OutputOfQuery = graphql(query, {
         // options: {
         //   errorPolicy: true,
@@ -44,7 +47,7 @@ const QueriesContainer = () => {
             };
           }
           if (data.error) {
-            console.log('error inside QC: ', data.error);
+            // console.log('error inside QC: ', data.error);
             return {
               error: data.error,
             };
@@ -67,6 +70,8 @@ const QueriesContainer = () => {
   // NOTE: moved endpoint field to inside query
   // NOTE: ERRORS ARE MOSTLY BEING RENDERED HERE, NOT INSIDE QUERY OUTPUT DISPLAY.
   // ERRORS RENDERED INSIDE OF QOD ARE UNCAUGHT GQL ERRORS
+
+  console.log('GQL error, in QC: ', queryGQLError);
 
   return (
     <section id="queries-container">
