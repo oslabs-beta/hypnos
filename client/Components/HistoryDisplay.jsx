@@ -13,14 +13,14 @@ const HistoryDisplay = () => {
     db.history
       .toArray()
       .then((queries) => {
-        console.log('retrieved from DB', queries);
+        // console.log('retrieved from DB', queries);
         setLocalQH(queries.reverse());
         // dispatch({
         //   type: types.UPDATE_HISTORY,
         //   queriesHistory: queries,
         // });
       })
-      .catch(e => console.log('Error fetching from DB.'));
+      .catch(e => console.log('Error fetching from DB: ', e));
   }, [query, queryGQLError]);
 
   const onEdit = (id) => {
@@ -28,7 +28,7 @@ const HistoryDisplay = () => {
     db.history
       .get(id)
       .then((foundQuery) => {
-        console.log('query in onEdit ', foundQuery);
+        // console.log('Query in onEdit ', foundQuery);
         dispatch({
           type: types.GET_QUERY,
           historyTextValue: foundQuery.query,
@@ -44,14 +44,14 @@ const HistoryDisplay = () => {
 
   const onDelete = (queryId) => {
     event.preventDefault();
-    console.log('running onDelete');
+    // console.log('running onDelete');
     db.history
       .delete(queryId)
-      .then(() => console.log('deleted ', queryId))
+      .then(() => console.log('Deleted ', queryId))
       .then(() => {
         setLocalQH(localQH.filter(queryItem => queryItem.id !== queryId));
       })
-      .catch(e => console.log('error deleting from DB :', e));
+      .catch(e => console.log('Error deleting from DB :', e));
   };
 
   return (

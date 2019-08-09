@@ -53,12 +53,12 @@ const QueryInput = () => {
     // ! END OF PROMISE.ALL TEST
 
     // ! TEST FOR MOVING ERROR HANDLING TO APOLLO CLIENT
-    console.log('dispatch about to be fired');
+    // console.log('dispatch about to be fired');
     // console.log('query obj: ', gql([textValue]));
     try {
       gql([`${textValue}`]);
     } catch (err) {
-      console.log('could not make tag: ', err);
+      // console.log('could not make tag: ', err);
       // NEED CATCH FOR NO PATH STRING AT ALL
       // 'Syntax Error: Unexpected )'
       // NEED 404 CHECK -- PULL FROM HANDLE QUERY FETCH?
@@ -78,8 +78,8 @@ const QueryInput = () => {
         newEndpoint: urlToSend,
       }),
     ])
-      .then(() => console.log('db adds and dispatch successful'))
-      .catch(e => console.log('error in new promise all: ', e));
+      .then(() => console.log('DB entry added and dispatch successful.'))
+      .catch(e => console.log('Error in DB add/dispatch chain: ', e));
     // commented out
     // dispatch({
     //   type: types.RUN_QUERY,

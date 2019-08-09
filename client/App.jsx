@@ -41,13 +41,13 @@ const App = () => {
     //   console.log('graphQLErrors', graphQLErrors);
     //   console.log('networkError', networkError);
     // },
-    customFetch: (uri, options) => {
-      console.log('in custom fetch');
-      return new Promise((resolve, reject) => {
+    customFetch: (uri, options) =>
+      // console.log('in custom fetch');
+      new Promise((resolve, reject) => {
         fetch(uri)
           .then((res) => {
             // const clone = res.clone();
-            console.log('in first then lock, custom fetch');
+            // console.log('in first then block, custom fetch');
             if (res.status === 404) {
               // dispatch inside of here seems to break it
               // dispatch(errorDispatchObj.endpointPath404Error);
@@ -61,11 +61,11 @@ const App = () => {
           //   return resolve(data);
           // })
           .catch((e) => {
-            console.log('error in custom fetch');
-            reject(e);
+            // console.log('error in custom fetch');
+            reject('error in custom fetch: ', e);
           });
-      });
-    },
+      })
+    ,
     // credentials: 'include',
   });
 
@@ -81,7 +81,7 @@ const App = () => {
         `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`,
       ));
     }
-    if (networkError) console.log(networkError);
+    if (networkError) console.log('Network Error: ', networkError);
 
     // forward(operation);
   });
