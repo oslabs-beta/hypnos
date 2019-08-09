@@ -48,6 +48,7 @@
     "react-apollo": "^2.5.8",
     "react-codemirror2": "^6.0.0",
     "react-dom": "^16.8.6",
+    "react-tabs": "^3.0.0",
     "sass": "^1.22.7",
     "sass-loader": "^7.1.0",
     "style-loader": "^0.23.1"

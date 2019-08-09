@@ -1,6 +1,11 @@
 import React from 'react';
 import './StyleSheets/App.scss';
 
+import {
+  Tab, Tabs, TabList, TabPanel,
+} from 'react-tabs';
+import 'react-tabs/style/react-tabs.css';
+
 
 import { RestLink } from 'apollo-link-rest';
 import { ApolloClient } from 'apollo-client';
@@ -12,6 +17,7 @@ import { ApolloLink } from 'apollo-link';
 
 import Header from './Components/Header';
 import HistoryDisplay from './Components/HistoryDisplay';
+// import QueriesContainerManager from './Containers/QueriesContainerManager';
 import QueriesContainer from './Containers/QueriesContainer';
 import { StateProvider, useStateValue } from './Context';
 
@@ -116,6 +122,7 @@ const App = () => {
         <Header />
         <HistoryDisplay />
         <QueriesContainer />
+        
       </ApolloProvider>
     </section>
   );
