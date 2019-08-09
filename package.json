@@ -6,12 +6,13 @@
   "homepage": "./",
   "scripts": {
     "start-electron": "electron .",
+    "start-electron-prod": "ELECTRON_IS_DEV=0 npm run start-electron",
     "electron-build": "electron-builder",
     "clean-build": "rm -rf build/ .cache dist/",
     "react-start": "NODE_ENV=development parcel -p 3000 index.html --out-dir build",
     "react-build": "NODE_ENV=production parcel build index.html --out-dir build --public-url ./",
     "start": "npm run react-start & wait-on http://localhost:3000 && ELECTRON_IS_DEV=1 npm run start-electron",
-    "build": "npm run clean-build && npm run react-build && ELECTRON_IS_DEV=0 && npm run electron-build",
+    "build": "npm run clean-build && npm run react-build && ELECTRON_IS_DEV=0 npm run electron-build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
@@ -30,6 +31,9 @@
   "dependencies": {
     "apollo-cache-inmemory": "^1.6.2",
     "apollo-client": "^2.6.3",
+    "apollo-link": "^1.2.12",
+    "apollo-link-error": "^1.1.11",
+    "apollo-link-http": "^1.5.15",
     "apollo-link-rest": "^0.7.3",
     "babel-core": "^6.26.3",
     "codemirror": "^5.48.2",
@@ -52,6 +56,7 @@
     "@babel/core": "^7.5.5",
     "@babel/preset-env": "^7.5.5",
     "@babel/preset-react": "^7.0.0",
+    "@fortawesome/fontawesome-free": "^5.10.1",
     "babel-preset-env": "^1.7.0",
     "electron": "^5.0.7",
     "electron-builder": "^21.2.0",

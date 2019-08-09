@@ -1,12 +1,16 @@
 import React, { useState } from 'react';
 import { Controlled as CodeMirror } from 'react-codemirror2';
+import gql from 'graphql-tag';
 import { useStateValue } from '../Context';
 import EndpointField from './EndpointField';
+// import db from '../db';
 import * as types from '../Constants/actionTypes';
 
 // import Code Mirror styling all at once
 import '../StyleSheets/external/CodeMirror.css';
-import handleQueryFetch from '../utils/handleQueryFetch';
+import fetchErrorCheck from '../utils/queryInput/fetchErrorCheck';
+import addQueryToDB from '../utils/queryInput/addQueryToDB';
+import handleQueryFetch from '../utils/queryInput/handleQueryFetch';
 
 // SHOULD MAKE NOTE: API key should be supplied in endpoint field
 // using a proxy to get around CORS. We do not need a server.
@@ -36,14 +40,79 @@ const QueryInput = () => {
   }
   const [newAPIEndpoint, setNewAPIEndpoint] = useState('');
 
+  const handleSubmit = () => {
+    event.preventDefault();
+    const urlToSend = newAPIEndpoint || endpoint;
+
+    // tries to run DB query and fetch chain in tandem
+    // ! PROMISE.ALL TEST
+    // * THIS SEEMS TO WORK FINE, 8/6
+    // Promise.all([addQueryToDB(textValue, urlToSend), handleQueryFetch(textValue, urlToSend, dispatch, setNewAPIEndpoint)])
+    //   .then(() => console.log('DB query and fetches successful.'))
+    //   .catch(e => console.log('Error in fetch/DB promise.all: ', e));
+    // ! END OF PROMISE.ALL TEST
+
+    // ! TEST FOR MOVING ERROR HANDLING TO APOLLO CLIENT
+    // console.log('dispatch about to be fired');
+    // console.log('query obj: ', gql([textValue]));
+    try {
+      gql([`${textValue}`]);
+    } catch (err) {
+      console.log('could not make tag: ', err);
+      // NEED CATCH FOR NO PATH STRING AT ALL
+      // 'Syntax Error: Unexpected )'
+      // NEED 404 CHECK -- PULL FROM HANDLE QUERY FETCH?
+      fetchErrorCheck(err, dispatch);
+      return;
+    }
+
+    // console.log('regex test: ', textValue.match(/(?<=\{\W)(.*?)(?=\@)/g));
+    const regexResult = textValue.match(/(?<=\{\W)(.*?)(?=\@)/g);
+    Promise.all([addQueryToDB(textValue, urlToSend),
+      dispatch({
+        type: types.RUN_QUERY,
+        // decontructed using of gql tag to make query object. need to pass in a stringliteral.
+        query: gql([`${textValue}`]),
+        // pulls of key for where data will be in result obj
+        queryResultObject: regexResult ? textValue.match(/(?<=\{\W)(.*?)(?=\@)/g)[0].trim() : 'null',
+        newEndpoint: urlToSend,
+      }),
+    ])
+      // .then(() => console.log('db adds and dispatch successful'))
+      .catch(e => console.log('error in new promise all: ', e));
+    // commented out
+    // dispatch({
+    //   type: types.RUN_QUERY,
+    //   // decontructed using of gql tag to make query object. need to pass in a stringliteral.
+    //   query: gql([`${textValue}`]),
+    //   // pulls of key for where data will be in result obj
+    //   queryResultObject: regexResult ? textValue.match(/(?<=\{\W)(.*?)(?=\@)/g)[0].trim() : 'null',
+    //   newEndpoint: urlToSend,
+    // });
+    // ! END TEST FOR APOLLO CLIENT/ERRORS
+
+    // send textValue to Dexie db
+    // runs DB query and THEN fetch chain
+    // db.history.put({
+    //   query: textValue,
+    //   endpoint: urlToSend,
+    // })
+    //   .then(() => {
+    //     console.log('Sent to database.');
+    //     handleQueryFetch(textValue, urlToSend, dispatch, setNewAPIEndpoint);
+    //   })
+    //   .catch(e => console.log('Error adding query to database.'));
+  };
+
   // this fetch chain/handleSubmit is in a different file,
   // as handleQueryFetch, and imported.
+
 
   return (
     <>
       <EndpointField setNewAPIEndpoint={setNewAPIEndpoint} />
       <article id="query-input">
-        <form id="query-input-form" onSubmit={() => handleQueryFetch(textValue, newAPIEndpoint, endpoint, dispatch, setNewAPIEndpoint)}>
+        <form id="query-input-form" onSubmit={() => handleSubmit()}>
           <CodeMirror
             id="code-mirror"
             value={textValue}

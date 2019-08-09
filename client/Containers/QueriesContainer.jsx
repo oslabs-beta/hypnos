@@ -12,12 +12,15 @@ const QueriesContainer = () => {
   // error thrown because it evals before anything is in query
   let OutputOfQuery;
   if (query !== '') {
+    // console.log('inside of QC, after if block');
     // if something is in query, assign QoQ to output of query
     // had to pass on props with the props object. it "parses" bigass object
     // before it's passed on. one thing needed for dynamism: the name of the prop
     // on the data object. e.g. query ditto { !!!POKEMON }
+    
     // if query.definitions is an array with the number of queries. It should not be greater than 1
     if (query.definitions.length > 1) {
+      // console.log('in 2 query block, QC. GQL error: ', queryGQLError);
       // GraphQL can only run one query at a time, so even though this if statement block is to check for error, we need to send only one query to GQL so that the app doesn't break
       query.definitions = [query.definitions[0]];
       OutputOfQuery = graphql(query, {
@@ -30,7 +33,11 @@ const QueriesContainer = () => {
         },
       })(QueryOutputDisplay);
     } else {
+      // console.log('in 1 query block, QC. GQL error: ', queryGQLError);
       OutputOfQuery = graphql(query, {
+        // options: {
+        //   errorPolicy: true,
+        // },
         props: ({ data }) => {
           // console.log(data, 'this is data inside output of query');
           // console.log(query, 'this is query inside output of query')
@@ -40,6 +47,7 @@ const QueriesContainer = () => {
             };
           }
           if (data.error) {
+            // console.log('error inside QC: ', data.error);
             return {
               error: data.error,
             };
@@ -62,6 +70,8 @@ const QueriesContainer = () => {
   // NOTE: moved endpoint field to inside query
   // NOTE: ERRORS ARE MOSTLY BEING RENDERED HERE, NOT INSIDE QUERY OUTPUT DISPLAY.
   // ERRORS RENDERED INSIDE OF QOD ARE UNCAUGHT GQL ERRORS
+
+  // console.log('GQL error, in QC: ', queryGQLError);
 
   return (
     <section id="queries-container">

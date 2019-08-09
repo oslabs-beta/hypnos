@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { useStateValue } from '../Context';
-import { jsonFormatter } from '../utils/jsonFormatter';
-import nullChecker from '../utils/nullChecker';
-import nullResultChecker from '../utils/nullResultChecker';
+import { jsonFormatter } from '../utils/queryOutputDisplay/jsonFormatter';
+import nullChecker from '../utils/queryOutputDisplay/nullChecker';
+import nullResultChecker from '../utils/queryOutputDisplay/nullResultChecker';
 
 const QueryOutputDisplay = (props) => {
   // ! TODO: MOVE ERROR CHECKING INTO A DIFFERENT FILE BECAUSE THIS IS A LOT
@@ -12,6 +12,7 @@ const QueryOutputDisplay = (props) => {
   const { loading, error } = props;
   // result is assigned either the successful query data or an error string
   const result = props[queryResultObject] ? props[queryResultObject] : queryGQLError;
+
 
   // checking if __typeName on the result object exists. If it doesn't, we send an error message
   if (loading === false && !Object.keys(result).includes('__typename')) return <p className="error">Query does not have a properly formatted type within @rest.</p>;
@@ -109,25 +110,25 @@ const QueryOutputDisplay = (props) => {
     <>
       <>
         {testNull ? (
-          <article>
-            <p font="helevtica" className="error">
+          <section>
+            <aside font="helevtica" className="error">
               Null values returned from query.
               <br />
               Please double check your query.
               <br />
               <span onMouseEnter={() => toggleHover(true)} onMouseLeave={() => toggleHover(false)}>Details.</span>
               {isHovering && (
-                <div id="tooltip">
+                <article id="tooltip">
                   <ul>
                     {nullVals}
                   </ul>
-                </div>
+                </article>
               )
               }
               <br />
               <br />
-            </p>
-          </article>
+            </aside>
+          </section>
         ) : ''}
       </>
       <article>
