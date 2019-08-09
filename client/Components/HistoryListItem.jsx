@@ -17,7 +17,7 @@ const HistoryListItem = (props) => {
         onMouseLeave={() => toggleHover(false)}
       >
         {query}
-        {true && (
+        {isHovering && (
           <span id="button-hover">
             <button
               className="history-delete"
