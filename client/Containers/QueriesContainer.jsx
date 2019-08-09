@@ -1,6 +1,5 @@
 import React from 'react';
 import { graphql } from 'react-apollo';
-import { CURRENT_APP_INSTALLER_FILE_NAME } from 'builder-util-runtime';
 import { useStateValue } from '../Context';
 // NOTE: moved endpoint field to inside query
 import QueryOutputDisplay from '../Components/QueryOutputDisplay';
@@ -18,6 +17,7 @@ const QueriesContainer = () => {
     // had to pass on props with the props object. it "parses" bigass object
     // before it's passed on. one thing needed for dynamism: the name of the prop
     // on the data object. e.g. query ditto { !!!POKEMON }
+    
     // if query.definitions is an array with the number of queries. It should not be greater than 1
     if (query.definitions.length > 1) {
       console.log('in 2 query block, QC. GQL error: ', queryGQLError);
