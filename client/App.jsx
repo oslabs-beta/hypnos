@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './StyleSheets/App.scss';
 
 import {
@@ -30,6 +30,10 @@ const proxy = Number(process.env.IS_DEV) === 1 ? 'https://cors-anywhere.herokuap
 
 const App = () => {
   const [{ endpoint }] = useStateValue();
+  const [queriesTabs, setQueriesTabs] = useState({
+    tabsList: [<Tab tab-id={0}>{`Title ${0}`}</Tab>, <Tab tab-id={1}>{`Title ${1}`}</Tab>],
+    queriesContainers: [<TabPanel><QueriesContainer /></TabPanel>, <TabPanel><h2>Any content 2</h2></TabPanel>],
+  });
   // instantiated errorLink
   // const httpLink = createHttpLink({ uri: proxy + endpoint });
 
@@ -116,13 +120,92 @@ const App = () => {
     // },
   });
 
+
+  const deleteTab = (tabId) => {
+    console.log('tabsList, before filter: ', queriesTabs.tabsList);
+    console.log('tabsList, before filter: ', queriesTabs.queriesContainers);
+    // const newTabsList = curTabsList.slice(0).filter((el) => {
+    //   console.log('all elements, tabsList, in filter: ', el);
+    //   return 1;
+    // });
+
+    // console.log('queriesTabs, before filter: ', curQueriesContainers);
+    // const newQueriesContainers = curQueriesContainers.slice(0).filter((el) => {
+    //   // console.log('inside QC filter');
+    //   // console.log(tabId !== +el.props['tab-panel-id']);
+    //   console.log('all elements, queriesTabs, in filter:', el);
+    //   return 1;
+    // });
+    // setQueriesTabs({
+    //   tabsList: queriesTabs.tabsList.filter(el => tabId !== el.props['tab-id']),
+    //   queriesContainers: queriesTabs.queriesContainers.filter(el => tabId !== el.props['tab-panel-id']),
+    // });
+  };
+
+  const addNewTab = () => {
+    console.log('adding tab. tabslist, before add: ', queriesTabs.tabsList);
+    console.log('adding tab. queriesContainers, before add: ', queriesTabs.queriesContainers);
+    const newTabsList = queriesTabs.tabsList.slice(0);
+    const newQueriesContainers = queriesTabs.queriesContainers.slice(0);
+    const newTabId = Number(newQueriesContainers.length);
+
+    newTabsList.push(<Tab tab-id={newTabId}>
+      {`Title ${newTabsList.length}`}
+      <button type="button" onClick={() => deleteTab(newTabId)}>X</button>
+    </Tab>);
+
+    newQueriesContainers.push(
+      <TabPanel tab-panel-id={newTabId}>
+        <QueriesContainer key={`qc-${newQueriesContainers.length}`} />
+      </TabPanel>,
+    );
+
+    setQueriesTabs({
+      tabsList: newTabsList,
+      queriesContainers: newQueriesContainers,
+    });
+  };
+
+
+  // const deleteTab = (tabId) => {
+  //   // console.log('tab id, inside delete: ', tabId);
+  //   const newTabsList = queriesTabs.tabsList.slice(0).filter((el) => {
+  //     // console.log('inside tabs list filter. tabId: ', +tabId);
+  //     // console.log('inside tabs list filter. props tabId: ', +el.props['tab-id']);
+  //     // console.log(tabId !== el.props['tab-id']);
+  //     console.log('passing through filter. should be X times: ', queriesTabs.tabsList.length);
+  //     return tabId !== +el.props['tab-id'];
+  //   });
+  //   console.log('new tabs list, inside delete, after filter: ', newTabsList);
+  //   const newQueriesContainers = queriesTabs.queriesContainers.slice(0).filter(el =>
+  //     // console.log('inside QC filter');
+  //     // console.log(tabId !== +el.props['tab-panel-id']);
+  //     tabId !== +el.props['tab-panel-id']);
+
+  //   setQueriesTabs({
+  //     tabsList: newTabsList,
+  //     queriesContainers: newQueriesContainers,
+  //   });
+  // };
+
+
+  // const tabsList = [<Tab>{`Title ${1}`}</Tab>, <Tab>{`Title ${2}`}</Tab>];
+  // const queriesContainers = [<TabPanel><QueriesContainer /></TabPanel>, <TabPanel><h2>Any content 2</h2></TabPanel>];
+
+
   return (
     <section id="app">
       <ApolloProvider client={client}>
         <Header />
         <HistoryDisplay />
-        <QueriesContainer />
-        
+        {/* <QueriesContainer /> */}
+        <Tabs>
+          <TabList>
+            {queriesTabs.tabsList}
+            <button type="button" onClick={addNewTab}>New Tab</button>
+          </TabList>
+          {queriesTabs.queriesContainers}
+        </Tabs>
       </ApolloProvider>
     </section>
   );
