@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import db from '../db';
 import { useStateValue } from '../Context';
-import HistoryListItem from './HistoryListItem';
+import HistoryListItem from './ListItems/HistoryListItem';
 import * as types from '../Constants/actionTypes';
 
 

@@ -17,7 +17,7 @@ import { ApolloLink } from 'apollo-link';
 
 import Header from './Components/Header';
 import HistoryDisplay from './Components/HistoryDisplay';
-// import QueriesContainerManager from './Containers/QueriesContainerManager';
+import DeleteButton from './Components/ListItems/TabsDeleteButton';
 import QueriesContainer from './Containers/QueriesContainer';
 import { StateProvider, useStateValue } from './Context';
 
@@ -30,10 +30,6 @@ const proxy = Number(process.env.IS_DEV) === 1 ? 'https://cors-anywhere.herokuap
 
 const App = () => {
   const [{ endpoint }] = useStateValue();
-  const [queriesTabs, setQueriesTabs] = useState({
-    tabsList: [<Tab tab-id={0}>{`Title ${0}`}</Tab>, <Tab tab-id={1}>{`Title ${1}`}</Tab>],
-    queriesContainers: [<TabPanel><QueriesContainer /></TabPanel>, <TabPanel><h2>Any content 2</h2></TabPanel>],
-  });
   // instantiated errorLink
   // const httpLink = createHttpLink({ uri: proxy + endpoint });
 
@@ -119,7 +115,10 @@ const App = () => {
     //   console.log('networkError', networkError);
     // },
   });
-
+  const [queriesTabs, setQueriesTabs] = useState({
+    tabsList: [<Tab tab-id={0}>{`Title ${0}`}</Tab>, <Tab tab-id={1}>{`Title ${1}`}</Tab>],
+    queriesContainers: [<TabPanel><QueriesContainer /></TabPanel>, <TabPanel><h2>Any content 1</h2></TabPanel>],
+  });
 
   const deleteTab = (tabId) => {
     console.log('tabsList, before filter: ', queriesTabs.tabsList);
@@ -136,23 +135,29 @@ const App = () => {
     //   console.log('all elements, queriesTabs, in filter:', el);
     //   return 1;
     // });
-    // setQueriesTabs({
-    //   tabsList: queriesTabs.tabsList.filter(el => tabId !== el.props['tab-id']),
-    //   queriesContainers: queriesTabs.queriesContainers.filter(el => tabId !== el.props['tab-panel-id']),
-    // });
+    setQueriesTabs({
+      tabsList: queriesTabs.tabsList.filter(el => el.props['tab-id'] !== tabId),
+      queriesContainers: queriesTabs.queriesContainers.filter(el => el.props['tab-panel-id'] !== tabId),
+    });
   };
 
+
+  const [currentTab, setCurrentTab] = useState({ tabIndex: 0 });
+
   const addNewTab = () => {
-    console.log('adding tab. tabslist, before add: ', queriesTabs.tabsList);
-    console.log('adding tab. queriesContainers, before add: ', queriesTabs.queriesContainers);
-    const newTabsList = queriesTabs.tabsList.slice(0);
-    const newQueriesContainers = queriesTabs.queriesContainers.slice(0);
+    // console.log('adding tab. tabslist, before add: ', queriesTabs.tabsList);
+    // console.log('adding tab. queriesContainers, before add: ', queriesTabs.queriesContainers);
+
+    // NOTE: THIS DOESN'T SEEM LIKE BEST PRACTICE. SHOULD BE MAPPED INSIDE RENDER
+
+    const newTabsList = queriesTabs.tabsList;
+    const newQueriesContainers = queriesTabs.queriesContainers;
     const newTabId = Number(newQueriesContainers.length);
 
     newTabsList.push(<Tab tab-id={newTabId}>
       {`Title ${newTabsList.length}`}
-      <button type="button" onClick={() => deleteTab(newTabId)}>X</button>
-    </Tab>);
+      <DeleteButton tabId={newTabId} deleteTab={deleteTab} />
+                     </Tab>);
 
     newQueriesContainers.push(
       <TabPanel tab-panel-id={newTabId}>
@@ -166,43 +171,18 @@ const App = () => {
     });
   };
 
-
-  // const deleteTab = (tabId) => {
-  //   // console.log('tab id, inside delete: ', tabId);
-  //   const newTabsList = queriesTabs.tabsList.slice(0).filter((el) => {
-  //     // console.log('inside tabs list filter. tabId: ', +tabId);
-  //     // console.log('inside tabs list filter. props tabId: ', +el.props['tab-id']);
-  //     // console.log(tabId !== el.props['tab-id']);
-  //     console.log('passing through filter. should be X times: ', queriesTabs.tabsList.length);
-  //     return tabId !== +el.props['tab-id'];
-  //   });
-  //   console.log('new tabs list, inside delete, after filter: ', newTabsList);
-  //   const newQueriesContainers = queriesTabs.queriesContainers.slice(0).filter(el =>
-  //     // console.log('inside QC filter');
-  //     // console.log(tabId !== +el.props['tab-panel-id']);
-  //     tabId !== +el.props['tab-panel-id']);
-
-  //   setQueriesTabs({
-  //     tabsList: newTabsList,
-  //     queriesContainers: newQueriesContainers,
-  //   });
-  // };
-
-
-  // const tabsList = [<Tab>{`Title ${1}`}</Tab>, <Tab>{`Title ${2}`}</Tab>];
-  // const queriesContainers = [<TabPanel><QueriesContainer /></TabPanel>, <TabPanel><h2>Any content 2</h2></TabPanel>];
-
-
+  console.log('what is the state: ', queriesTabs);
   return (
     <section id="app">
       <ApolloProvider client={client}>
         <Header />
         <HistoryDisplay />
         {/* <QueriesContainer /> */}
-        <Tabs>
+        <Tabs selectedIndex={currentTab.tabIndex} onSelect={tabIndex => setCurrentTab({ tabIndex })}>
           <TabList>
             {queriesTabs.tabsList}
-            <button type="button" onClick={addNewTab}>New Tab</button>
+            {/* {<button type="button" onClick={deleteTab}>x</button>} */}
+            {<button type="button" onClick={addNewTab}>New Tab</button>}
           </TabList>
           {queriesTabs.queriesContainers}
         </Tabs>
