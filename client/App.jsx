@@ -42,12 +42,12 @@ const App = () => {
     //   console.log('networkError', networkError);
     // },
     customFetch: (uri, options) => {
-      console.log('in custom fetch');
+      // console.log('in custom fetch');
       return new Promise((resolve, reject) => {
         fetch(uri)
           .then((res) => {
             // const clone = res.clone();
-            console.log('in first then lock, custom fetch');
+            // console.log('in first then lock, custom fetch');
             if (res.status === 404) {
               // dispatch inside of here seems to break it
               // dispatch(errorDispatchObj.endpointPath404Error);

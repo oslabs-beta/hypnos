@@ -10,7 +10,7 @@ const handleQueryFetch = (textValue, urlToSend, dispatch, setNewAPIEndpoint) => 
   // prevent refresh
   event.preventDefault();
 
-  console.log('Running handleQueryFetch');
+  // console.log('Running handleQueryFetch');
   // const urlToSend = newAPIEndpoint || endpoint;
 
   // // send textValue to Dexie db
@@ -40,7 +40,7 @@ const handleQueryFetch = (textValue, urlToSend, dispatch, setNewAPIEndpoint) => 
     })
       .then((response) => {
         // catch all for when textValue is null
-        console.log('in first then block for fetch');
+        // console.log('in first then block for fetch');
 
         // execute regex filtering on the path param
         const pathRegex = textValue.match(/(?<=path:\W*\")\S*(?=\")/gi);
@@ -80,7 +80,7 @@ const handleQueryFetch = (textValue, urlToSend, dispatch, setNewAPIEndpoint) => 
       })
       // for checking if the path is correct
       .then((response) => {
-        console.log('in second then block of fetch');
+        // console.log('in second then block of fetch');
         if (response.status === 404) {
           dispatch({
             type: types.GQL_ERROR,
@@ -90,7 +90,7 @@ const handleQueryFetch = (textValue, urlToSend, dispatch, setNewAPIEndpoint) => 
         } else return response.json();
       })
       .then((data) => {
-        console.log('in third then of fetch, before run query dispatch');
+        // console.log('in third then of fetch, before run query dispatch');
         // if get request is successful, parse it here. fire dispatch to run query
         dispatch({
           type: types.RUN_QUERY,

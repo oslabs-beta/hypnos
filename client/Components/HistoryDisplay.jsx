@@ -13,7 +13,7 @@ const HistoryDisplay = () => {
     db.history
       .toArray()
       .then((queries) => {
-        console.log('retrieved from DB', queries);
+        // console.log('retrieved from DB', queries);
         setLocalQH(queries.reverse());
         // dispatch({
         //   type: types.UPDATE_HISTORY,
@@ -28,7 +28,7 @@ const HistoryDisplay = () => {
     db.history
       .get(id)
       .then((foundQuery) => {
-        console.log('query in onEdit ', foundQuery);
+        // console.log('query in onEdit ', foundQuery);
         dispatch({
           type: types.GET_QUERY,
           historyTextValue: foundQuery.query,
@@ -44,10 +44,10 @@ const HistoryDisplay = () => {
 
   const onDelete = (queryId) => {
     event.preventDefault();
-    console.log('running onDelete');
+    // console.log('running onDelete');
     db.history
       .delete(queryId)
-      .then(() => console.log('deleted ', queryId))
+      // .then(() => console.log('deleted ', queryId))
       .then(() => {
         setLocalQH(localQH.filter(queryItem => queryItem.id !== queryId));
       })
