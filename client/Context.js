@@ -36,6 +36,12 @@ const initialState = {
   apiKey: '',
 };
 
+const iniialState2 = {
+  tabIndices: {
+    0: initialState,
+  },
+};
+
 const reducer = (state, action) => {
   switch (action.type) {
     case types.SUBMIT_ENDPOINT:
@@ -103,6 +109,15 @@ const reducer = (state, action) => {
         headersKey: action.headerKey,
         isModalOpen: false,
       };
+    case types.NEW_TAB_STATE:
+      const newTabState = {
+        ...state,
+        tabIndices: {
+          ...state.tabIndices,
+        },
+      };
+      newTabState[action.newTabIndex] = initialState;
+      return newTabState;
     default:
       return state;
   }
