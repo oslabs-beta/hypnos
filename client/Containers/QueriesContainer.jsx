@@ -5,6 +5,9 @@ import { useStateValue } from '../Context';
 import QueryOutputDisplay from '../Components/QueryOutputDisplay';
 import QueryInput from '../Components/QueryInput';
 import * as types from '../Constants/actionTypes';
+import APIModal from '../Components/APIKeyModal';
+
+// Modal.setAppElement('#root')
 
 const QueriesContainer = () => {
   const [{ query, queryResultObject, queryGQLError }, dispatch] = useStateValue();
@@ -17,7 +20,7 @@ const QueriesContainer = () => {
     // had to pass on props with the props object. it "parses" bigass object
     // before it's passed on. one thing needed for dynamism: the name of the prop
     // on the data object. e.g. query ditto { !!!POKEMON }
-    
+
     // if query.definitions is an array with the number of queries. It should not be greater than 1
     if (query.definitions.length > 1) {
       // console.log('in 2 query block, QC. GQL error: ', queryGQLError);
@@ -76,6 +79,7 @@ const QueriesContainer = () => {
   return (
     <section id="queries-container">
       <QueryInput />
+      <APIModal />
       <article id="query-output">
         {query !== '' && <OutputOfQuery query={query} />}
         {queryGQLError !== '' && <p className="error">{queryGQLError}</p>}
