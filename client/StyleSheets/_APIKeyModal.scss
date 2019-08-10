@@ -1,0 +1,21 @@
+#API-key-modal {
+    display: grid;
+    grid-area: modal;
+    width: 100%;
+    justify-content: stretch;
+
+    button {
+        background-color: $loading-color;
+        font-family: Helvetica, sans-serif;
+        font-size: 13px;
+        font-weight: bold;
+        color: white;
+    }
+}
+#api-key-input {
+    font-family: Helvetica, sans-serif;
+}
+    
+#headers-key-input {
+    font-family: Helvetica, sans-serif;
+}

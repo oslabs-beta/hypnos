@@ -69,14 +69,14 @@ const QueryInput = () => {
     // console.log('regex test: ', textValue.match(/(?<=\{\W)(.*?)(?=\@)/g));
     const regexResult = textValue.match(/(?<=\{\W)(.*?)(?=\@)/g);
     Promise.all([addQueryToDB(textValue, urlToSend),
-      dispatch({
-        type: types.RUN_QUERY,
-        // decontructed using of gql tag to make query object. need to pass in a stringliteral.
-        query: gql([`${textValue}`]),
-        // pulls of key for where data will be in result obj
-        queryResultObject: regexResult ? textValue.match(/(?<=\{\W)(.*?)(?=\@)/g)[0].trim() : 'null',
-        newEndpoint: urlToSend,
-      }),
+    dispatch({
+      type: types.RUN_QUERY,
+      // decontructed using of gql tag to make query object. need to pass in a stringliteral.
+      query: gql([`${textValue}`]),
+      // pulls of key for where data will be in result obj
+      queryResultObject: regexResult ? textValue.match(/(?<=\{\W)(.*?)(?=\@)/g)[0].trim() : 'null',
+      newEndpoint: urlToSend,
+    }),
     ])
       .then(() => console.log('DB entry added and dispatch successful.'))
       .catch(e => console.log('Error in DB add/dispatch chain: ', e));
@@ -106,7 +106,6 @@ const QueryInput = () => {
 
   // this fetch chain/handleSubmit is in a different file,
   // as handleQueryFetch, and imported.
-
 
   return (
     <>
