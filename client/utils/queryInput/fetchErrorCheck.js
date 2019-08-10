@@ -10,7 +10,7 @@ import * as dispatchObj from '../../Constants/errors/errorDispatchObjects';
 
 const fetchErrorCheck = (error, dispatch) => {
   // if Gql query does not start with 'query'
-  console.log('inside fetch error check: ', error);
+  // console.log('inside fetch error check: ', error);
   if (error.message.slice(0, errorMsg.queryMethodError.length) === errorMsg.queryMethodError) {
     dispatch(dispatchObj.queryMethodError);
     // throw new Error(errorReponse.queryMethodError);
@@ -45,7 +45,7 @@ const fetchErrorCheck = (error, dispatch) => {
     dispatch(dispatchObj.noPathOrTypeError);
     // throw new Error(errorReponse.noPathOrTypeError);
   } else {
-    console.log('Error in fetch: ', error);
+    // console.log('Error in fetch: ', error);
     throw new Error('Error n fetch: ', error);
   }
 };

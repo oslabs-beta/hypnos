@@ -19,7 +19,7 @@ const HistoryListItem = (props) => {
               className='history-delete'
               id={`del-btn-${id}`}
               onClick={() => {
-                console.log('del clicked');
+                // console.log('del clicked');
                 onDelete(id);
               }}
             ><i class="fas fa-trash fa-lg"></i>
@@ -28,7 +28,7 @@ const HistoryListItem = (props) => {
               className='history-edit'
               id={`edit-btn-${id}`}
               onClick={() => {
-                console.log('edit clicked');
+                // console.log('edit clicked');
                 onEdit(id);
               }}
             ><i class="fas fa-pen fa-lg"></i>

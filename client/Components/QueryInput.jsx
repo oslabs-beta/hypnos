@@ -53,7 +53,7 @@ const QueryInput = () => {
     // ! END OF PROMISE.ALL TEST
 
     // ! TEST FOR MOVING ERROR HANDLING TO APOLLO CLIENT
-    console.log('dispatch about to be fired');
+    // console.log('dispatch about to be fired');
     // console.log('query obj: ', gql([textValue]));
     try {
       gql([`${textValue}`]);
@@ -78,7 +78,7 @@ const QueryInput = () => {
         newEndpoint: urlToSend,
       }),
     ])
-      .then(() => console.log('db adds and dispatch successful'))
+      // .then(() => console.log('db adds and dispatch successful'))
       .catch(e => console.log('error in new promise all: ', e));
     // commented out
     // dispatch({

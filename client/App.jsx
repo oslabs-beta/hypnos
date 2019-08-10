@@ -56,7 +56,7 @@ const App = () => {
         fetch(uri, fetchOptions)
           .then((res) => {
             // const clone = res.clone();
-            console.log('in first then lock, custom fetch');
+            // console.log('in first then lock, custom fetch');
             if (res.status === 404) {
               // dispatch inside of here seems to break it
               // dispatch(errorDispatchObj.endpointPath404Error);

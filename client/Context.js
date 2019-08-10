@@ -49,7 +49,7 @@ const reducer = (state, action) => {
       };
     case types.RUN_QUERY:
       // when query is run, on button press, endpoint is assigned the dynamically changing url
-      console.log('run query fired, reducer');
+      // console.log('run query fired, reducer');
       return {
         ...state,
         // if a query is run, that means no 404 happened
@@ -67,7 +67,7 @@ const reducer = (state, action) => {
         ...initialState,
       };
     case types.GQL_ERROR:
-      console.log('gql error fired: ', action);
+      // console.log('gql error fired: ', action);
       return {
         ...state,
         // on a 404, reset query. no query is actually run
@@ -77,14 +77,14 @@ const reducer = (state, action) => {
         historyTextValue: '',
       };
     case types.GET_QUERY:
-      console.log('in GET_QUERY');
+      // console.log('in GET_QUERY');
       return {
         ...initialState,
         historyTextValue: action.historyTextValue,
         endpoint: action.endpoint,
       };
     case types.RESET_GET_QUERY:
-      console.log('running reset get query');
+      // console.log('running reset get query');
       return {
         ...state,
         historyTextValue: '',
