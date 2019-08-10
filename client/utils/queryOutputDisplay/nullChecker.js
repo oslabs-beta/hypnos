@@ -9,7 +9,7 @@ const nullChecker = (object) => {
     if (object[key] === null) return true;
     // in the case of an array of objects - iterate through array and recursively call nullChecker on all objects
     if (Array.isArray(object[key])) {
-      for (let el of object[key]) {
+      for (const el of object[key]) {
         if (el === null) return true;
         if (!Array.isArray(el) && typeof el === 'object') {
           // if value at current key is an object, recurse and assign boolean result to a variable
@@ -47,73 +47,73 @@ const objectTest = {
   test: {
     once: {
       array: [
-        null
-      ]
-    }
-  }
+        null,
+      ],
+    },
+  },
 };
 
 const officeCheck = {
-  "id": 526,
-  "name": "The Office",
-  "seasons": [
+  id: 526,
+  name: 'The Office',
+  seasons: [
     {
-      "number": 1,
-      "image": null,
-      "summary": null,
-      "__typename": "Season"
+      number: 1,
+      image: null,
+      summary: null,
+      __typename: 'Season',
     },
     {
-      "number": 2,
-      "image": null,
-      "summary": null,
-      "__typename": "Season"
+      number: 2,
+      image: null,
+      summary: null,
+      __typename: 'Season',
     },
     {
-      "number": 3,
-      "image": null,
-      "summary": null,
-      "__typename": "Season"
+      number: 3,
+      image: null,
+      summary: null,
+      __typename: 'Season',
     },
     {
-      "number": 4,
-      "image": null,
-      "summary": null,
-      "__typename": "Season"
+      number: 4,
+      image: null,
+      summary: null,
+      __typename: 'Season',
     },
     {
-      "number": 5,
-      "image": null,
-      "summary": null,
-      "__typename": "Season"
+      number: 5,
+      image: null,
+      summary: null,
+      __typename: 'Season',
     },
     {
-      "number": 6,
-      "image": null,
-      "summary": null,
-      "__typename": "Season"
+      number: 6,
+      image: null,
+      summary: null,
+      __typename: 'Season',
     },
     {
-      "number": 7,
-      "image": null,
-      "summary": null,
-      "__typename": "Season"
+      number: 7,
+      image: null,
+      summary: null,
+      __typename: 'Season',
     },
     {
-      "number": 8,
-      "image": null,
-      "summary": null,
-      "__typename": "Season"
+      number: 8,
+      image: null,
+      summary: null,
+      __typename: 'Season',
     },
     {
-      "number": 9,
-      "image": null,
-      "summary": null,
-      "__typename": "Season"
-    }
+      number: 9,
+      image: null,
+      summary: null,
+      __typename: 'Season',
+    },
   ],
-  "__typename": "Show"
-}
+  __typename: 'Show',
+};
 
 
 // should be boolean
