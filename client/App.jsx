@@ -51,7 +51,7 @@ const App = () => {
     //   console.log('networkError', networkError);
     // },
     customFetch: (uri, fetchOptions) => {
-      console.log('in custom fetch');
+      // console.log('in custom fetch');
       return new Promise((resolve, reject) => {
         fetch(uri, fetchOptions)
           .then((res) => {
