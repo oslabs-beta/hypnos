@@ -40,6 +40,7 @@ const QueriesContainer = () => {
         //   errorPolicy: true,
         // },
         props: ({ data }) => {
+          // console.log(data, 'this is data inside output of query');
           // console.log(query, 'this is query inside output of query')
           if (data.loading) {
             return {
@@ -74,7 +75,7 @@ const QueriesContainer = () => {
   return (
     <section id="queries-container">
       <QueryInput />
-      <APIModal />
+      
       <article id="query-output">
         {query !== '' && <OutputOfQuery query={query} />}
         {queryGQLError !== '' && <p className="error">{queryGQLError}</p>}

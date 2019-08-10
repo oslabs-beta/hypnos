@@ -1,10 +1,8 @@
-#API-key-modal {
-    grid-area: modal;
-}
-
 #queries-container {
     grid-area: queryContainer;
-    width: 80%;
+    width: 100%;
+    padding:20px;
+    box-sizing: border-box;
     margin-bottom: 50px;
     justify-self: center;
     display: grid;
@@ -13,7 +11,7 @@
     grid-template-columns: 1fr 30px 1fr;
     grid-template-rows: auto 15px auto auto auto;
     grid-template-areas:
-        "endpointField endpointField modal"
+        "endpointField endpointField endpointField"
         ". . ."
         "queryInput . queryOutput"
         "queryInput . queryOutput"
