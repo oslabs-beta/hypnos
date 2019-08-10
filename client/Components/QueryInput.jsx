@@ -58,7 +58,7 @@ const QueryInput = () => {
     try {
       gql([`${textValue}`]);
     } catch (err) {
-      console.log('could not make tag: ', err);
+      // console.log('could not make tag: ', err);
       // NEED CATCH FOR NO PATH STRING AT ALL
       // 'Syntax Error: Unexpected )'
       // NEED 404 CHECK -- PULL FROM HANDLE QUERY FETCH?
@@ -78,8 +78,8 @@ const QueryInput = () => {
       newEndpoint: urlToSend,
     }),
     ])
-      // .then(() => console.log('db adds and dispatch successful'))
-      .catch(e => console.log('error in new promise all: ', e));
+      .then(() => console.log('DB entry added and dispatch successful.'))
+      .catch(e => console.log('Error in DB add/dispatch chain: ', e));
     // commented out
     // dispatch({
     //   type: types.RUN_QUERY,
@@ -111,26 +111,23 @@ const QueryInput = () => {
     <>
       <EndpointField setNewAPIEndpoint={setNewAPIEndpoint} />
       <article id="query-input">
-        <form id="query-input-form" onSubmit={() => handleSubmit()}>
-          <section id='CodeMirror'>
-            <CodeMirror
-              id="code-mirror"
-              style={isModalOpen ? { visibility: 'hidden' } : { visibility: 'visible' }}
-              value={textValue}
-              // editor and data are code mirror args. needed to access value
-              onBeforeChange={(editor, data, value) => {
-                setTextValue(value);
-              }}
-              onChange={(editor, data, value) => {
-                setTextValue(value);
-              }}
-              options={{
-                lineNumbers: true,
-                tabSize: 2,
-                lineWrapping: true,
-              }}
-            />
-          </section>
+        <form id="query-input-form" style={isModalOpen ? { visibility: 'hidden' } : { visibility: 'visible' }} onSubmit={() => handleSubmit()}>
+          <CodeMirror
+            id="code-mirror"
+            value={textValue}
+            // editor and data are code mirror args. needed to access value
+            onBeforeChange={(editor, data, value) => {
+              setTextValue(value);
+            }}
+            onChange={(editor, data, value) => {
+              setTextValue(value);
+            }}
+            options={{
+              lineNumbers: true,
+              tabSize: 2,
+              lineWrapping: true,
+            }}
+          />
           <section id="buttons">
             {/* NOTE: THIS IS PRESENTLY OK INSIDE THE FORM */}
             {/* reset state button */}

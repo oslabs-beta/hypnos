@@ -9,30 +9,36 @@ const HistoryListItem = (props) => {
   // console.log('rendering a list item');
   return (
     <>
-      <li db-id={id} className="history-list-item" id={`hist-li-${id}`}
+      <li
+        db-id={id}
+        className="history-list-item"
+        id={`hist-li-${id}`}
         onMouseEnter={() => toggleHover(true)}
-        onMouseLeave={() => toggleHover(false)}>
+        onMouseLeave={() => toggleHover(false)}
+      >
         {query}
         {isHovering && (
-          <span id='button-hover'>
+          <span id="button-hover">
             <button
-              className='history-delete'
+              className="history-delete"
               id={`del-btn-${id}`}
               onClick={() => {
                 // console.log('del clicked');
                 onDelete(id);
               }}
-            ><i className="fas fa-trash fa-lg"></i>
-        </button>
+            >
+              <i className="fas fa-trash fa-lg" />
+            </button>
             <button
-              className='history-edit'
+              className="history-edit"
               id={`edit-btn-${id}`}
               onClick={() => {
                 // console.log('edit clicked');
                 onEdit(id);
               }}
-            ><i className="fas fa-pen fa-lg"></i>
-        </button>
+            >
+              <i className="fas fa-pen fa-lg" />
+            </button>
           </span>
         )}
         <br />

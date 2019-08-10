@@ -28,7 +28,7 @@ body {
     grid-template-columns: 15% 1fr;
     grid-template-areas: 
         "header header"
-        "historyDisplay ."
+        "historyDisplay queryContainer"
         "historyDisplay queryContainer";
     font: $font-stack;
     background-color: $background-color;
