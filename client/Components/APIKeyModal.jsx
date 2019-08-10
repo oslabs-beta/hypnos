@@ -3,6 +3,18 @@ import Modal from 'react-modal';
 import { useStateValue } from '../Context';
 import * as types from '../Constants/actionTypes'
 
+const customStyles = {
+    content : {
+    //   top                   : '50%',
+    //   left                  : '50%',
+    //   right                 : 'auto',
+    //   bottom                : 'auto',
+    //   marginRight           : '-50%',
+    //   transform             : 'translate(-50%, -50%)',
+      backgroundColor: 'green'
+    }
+  };
+
 Modal.setAppElement('#root')
 
 const APIModal = () => {
@@ -34,7 +46,7 @@ const APIModal = () => {
                 isOpen={isModalOpen}
                 //   onAfterOpen={this.afterOpenModal}
                 onRequestClose={() => closeModal()}
-                //   style={customStyles}
+                  style={customStyles}
                 contentLabel="API Key"
             >
 
