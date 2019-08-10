@@ -1,7 +1,3 @@
-#API-key-modal {
-    grid-area: modal;
-}
-
 #queries-container {
     grid-area: queryContainer;
     width: 80%;
@@ -10,13 +6,13 @@
     display: grid;
     // gives fixed size for first column. intermediary column will shrink
     // as needed. output will be as large as needed
-    grid-template-columns: 1fr 30px 1fr;
+    grid-template-columns: 1fr 30px 1fr 50px;
     grid-template-rows: auto 15px auto auto auto;
     grid-template-areas:
-        "endpointField endpointField modal"
-        ". . ."
-        "queryInput . queryOutput"
-        "queryInput . queryOutput"
-        "queryInput . queryOutput" ;
+        "endpointField endpointField endpointField modal"
+        ". . . ."
+        "queryInput . queryOutput ."
+        "queryInput . queryOutput ."
+        "queryInput . queryOutput ." ;
     background-color: $background-color;
 }
