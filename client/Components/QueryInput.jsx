@@ -26,7 +26,7 @@ query ditto {
 
 
 const QueryInput = () => {
-  const [{ endpoint, historyTextValue }, dispatch] = useStateValue();
+  const [{ endpoint, historyTextValue, isModalOpen }, dispatch] = useStateValue();
   const [textValue, setTextValue] = useState(exampleQuery);
   // if edit button has been clicked, then historyTextValue exists in state. reassigned to fill out
   // code mirror text area
@@ -112,7 +112,7 @@ const QueryInput = () => {
     <>
       <EndpointField setNewAPIEndpoint={setNewAPIEndpoint} />
       <article id="query-input">
-        <form id="query-input-form" onSubmit={() => handleSubmit()}>
+        <form id="query-input-form" style={isModalOpen ? { visibility: 'hidden' } : { visibility: 'visible' }} onSubmit={() => handleSubmit()}>
           <CodeMirror
             id="code-mirror"
             value={textValue}
