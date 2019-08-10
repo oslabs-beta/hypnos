@@ -15,7 +15,18 @@ const QueryOutputDisplay = (props) => {
 
 
   // checking if __typeName on the result object exists. If it doesn't, we send an error message
-  if (loading === false && !Object.keys(result).includes('__typename')) return <p className="error">Query does not have a properly formatted type within @rest.</p>;
+  if (loading === false) {
+    // console.log(result);
+    //if result comes back as an array - checks 0th index, will not work for nested result arrays
+    if(Array.isArray(result)) {
+      if (!result[0]['__typename']) {
+        return <p className="error">Query does not have a properly formatted type within @rest.</p>;
+      }
+    //if result comes back as a flat object
+    } else if (!Object.keys(result).includes('__typename')) {
+      return <p className="error">Query does not have a properly formatted type within @rest.</p>;
+    }
+  }
 
   // checking to see if there are any null values on the results object
   // if so, means that the query field was improperly named or doesn't exist
