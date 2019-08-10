@@ -28,8 +28,8 @@ body {
     grid-template-columns: 15% 1fr;
     grid-template-areas: 
         "header header"
-        "historyDisplay queryContainer"
-        "historyDisplay queryContainer";
+        "historyDisplay reactTabs"
+        "historyDisplay reactTabs";
     font: $font-stack;
     background-color: $background-color;
 }

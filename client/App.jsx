@@ -160,7 +160,7 @@ const App = () => {
         <HistoryDisplay />
         {/* <QueriesContainer /> */}
         <Tabs selectedIndex={currentTab.tabIndex} onSelect={tabIndex => setCurrentTab({ tabIndex })}>
-          <TabList>
+          <TabList id="tabs-list">
             {queriesTabs.tabsListLabels.map((el, idx) => (idx !== 0
               ? (
                 <Tab key={`tab-${el}`} tab-id={el}>
@@ -174,10 +174,10 @@ const App = () => {
                 </Tab>
               )))}
             {/* {<button type="button" onClick={deleteTab}>x</button>} */}
-            {<button type="button" onClick={addNewTab}>New Tab</button>}
+            <button type="button" id="add-tab-button" style={{fontSize: '25px'}} onClick={addNewTab}>+</button>
           </TabList>
           {/* {queriesTabs.queriesContainers} */}
-          {queriesTabs.tabsListLabels.map((el, idx) => <TabPanel key={`tab-panel-${el}`} tab-panel-id={el}><QueriesContainer key={`qc-${el}`} /></TabPanel>)}
+          {queriesTabs.tabsListLabels.map((el, idx) => <TabPanel id="tab-panel" key={`tab-panel-${el}`} tab-panel-id={el}><QueriesContainer key={`qc-${el}`} /></TabPanel>)}
         </Tabs>
       </ApolloProvider>
     </section>

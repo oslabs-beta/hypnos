@@ -75,7 +75,7 @@ const QueriesContainer = () => {
   return (
     <section id="queries-container">
       <QueryInput />
-      <APIModal />
+      
       <article id="query-output">
         {query !== '' && <OutputOfQuery query={query} />}
         {queryGQLError !== '' && <p className="error">{queryGQLError}</p>}
