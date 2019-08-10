@@ -45,4 +45,3 @@ export const endpointPath404Error = {
   tpe: GQL_ERROR,
   gqlError: errorResponse.endpointPath404Error,
 };
-

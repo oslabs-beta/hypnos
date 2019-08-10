@@ -142,6 +142,22 @@ const QueryOutputDisplay = (props) => {
           </section>
         ) : ''}
       </>
+      <>
+        {urlAsPropCheck
+          ? (
+            <article>
+              <p className="error">
+                  Note: The following data on the prop(s) below resemble a URL. If it is, you will have to reformat your query to access data at that API:
+                <br />
+                <br />
+              </p>
+              <ul>
+                {urlPropNames}
+              </ul>
+            </article>
+          )
+          : ''}
+      </>
       <article>
         <pre>
           <code>
@@ -150,22 +166,7 @@ const QueryOutputDisplay = (props) => {
         </pre>
         <br />
         <br />
-        <>
-          {urlAsPropCheck
-            ? (
-              <article>
-                <p className="error">
-                  Note: The following data on the prop(s) below resemble a URL. If it is, you will have to reformat your query to access data at that API:
-                  <br />
-                  <br />
-                </p>
-                <ul>
-                  {urlPropNames}
-                </ul>
-              </article>
-            )
-            : ''}
-        </>
+
       </article>
     </>
   );

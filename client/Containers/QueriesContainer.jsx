@@ -23,7 +23,6 @@ const QueriesContainer = () => {
 
     // if query.definitions is an array with the number of queries. It should not be greater than 1
     if (query.definitions.length > 1) {
-      // console.log('in 2 query block, QC. GQL error: ', queryGQLError);
       // GraphQL can only run one query at a time, so even though this if statement block is to check for error, we need to send only one query to GQL so that the app doesn't break
       query.definitions = [query.definitions[0]];
       OutputOfQuery = graphql(query, {
@@ -36,7 +35,6 @@ const QueriesContainer = () => {
         },
       })(QueryOutputDisplay);
     } else {
-      // console.log('in 1 query block, QC. GQL error: ', queryGQLError);
       OutputOfQuery = graphql(query, {
         // options: {
         //   errorPolicy: true,
@@ -73,8 +71,6 @@ const QueriesContainer = () => {
   // NOTE: moved endpoint field to inside query
   // NOTE: ERRORS ARE MOSTLY BEING RENDERED HERE, NOT INSIDE QUERY OUTPUT DISPLAY.
   // ERRORS RENDERED INSIDE OF QOD ARE UNCAUGHT GQL ERRORS
-
-  // console.log('GQL error, in QC: ', queryGQLError);
 
   return (
     <section id="queries-container">
