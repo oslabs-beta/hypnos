@@ -3,17 +3,6 @@ import Modal from 'react-modal';
 import { useStateValue } from '../Context';
 import * as types from '../Constants/actionTypes'
 
-const customStyles = {
-    content : {
-    //   top                   : '50%',
-    //   left                  : '50%',
-    //   right                 : 'auto',
-    //   bottom                : 'auto',
-    //   marginRight           : '-50%',
-    //   transform             : 'translate(-50%, -50%)',
-      backgroundColor: 'green'
-    }
-  };
 
 Modal.setAppElement('#root')
 
@@ -46,7 +35,7 @@ const APIModal = () => {
                 isOpen={isModalOpen}
                 //   onAfterOpen={this.afterOpenModal}
                 onRequestClose={() => closeModal()}
-                  style={customStyles}
+                //   style={customStyles}
                 contentLabel="API Key"
             >
 
@@ -54,17 +43,17 @@ const APIModal = () => {
                 <form>
                     <label>
                         Headers Key:
-                    <input type="text" id="headers-key" onChange={(e)=>{
-                        const header = e.target.value;
-                        setHeaderValue(header);
-                    }}/>
+                    <input type="text" id="headers-key" onChange={(e) => {
+                            const header = e.target.value;
+                            setHeaderValue(header);
+                        }} />
                     </label>
                     <label>
                         API Key:
-                    <input type="text" id="API-key" onChange={(e)=>{
-                        const api = e.target.value;
-                        setApiTextValue(api);
-                    }}/>
+                    <input type="text" id="API-key" onChange={(e) => {
+                            const api = e.target.value;
+                            setApiTextValue(api);
+                        }} />
                     </label>
                     <button onClick={() => closeModal()}>Submit</button>
                 </form>
