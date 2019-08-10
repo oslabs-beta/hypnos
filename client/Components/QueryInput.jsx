@@ -26,7 +26,7 @@ query ditto {
 
 
 const QueryInput = () => {
-  const [{ endpoint, historyTextValue }, dispatch] = useStateValue();
+  const [{ endpoint, historyTextValue, isModalOpen }, dispatch] = useStateValue();
   const [textValue, setTextValue] = useState(exampleQuery);
   // if edit button has been clicked, then historyTextValue exists in state. reassigned to fill out
   // code mirror text area
@@ -58,7 +58,7 @@ const QueryInput = () => {
     try {
       gql([`${textValue}`]);
     } catch (err) {
-      console.log('could not make tag: ', err);
+      // console.log('could not make tag: ', err);
       // NEED CATCH FOR NO PATH STRING AT ALL
       // 'Syntax Error: Unexpected )'
       // NEED 404 CHECK -- PULL FROM HANDLE QUERY FETCH?
@@ -78,8 +78,8 @@ const QueryInput = () => {
         newEndpoint: urlToSend,
       }),
     ])
-      // .then(() => console.log('db adds and dispatch successful'))
-      .catch(e => console.log('error in new promise all: ', e));
+      .then(() => console.log('DB entry added and dispatch successful.'))
+      .catch(e => console.log('Error in DB add/dispatch chain: ', e));
     // commented out
     // dispatch({
     //   type: types.RUN_QUERY,
@@ -112,7 +112,7 @@ const QueryInput = () => {
     <>
       <EndpointField setNewAPIEndpoint={setNewAPIEndpoint} />
       <article id="query-input">
-        <form id="query-input-form" onSubmit={() => handleSubmit()}>
+        <form id="query-input-form" style={isModalOpen ? { visibility: 'hidden' } : { visibility: 'visible' }} onSubmit={() => handleSubmit()}>
           <CodeMirror
             id="code-mirror"
             value={textValue}

@@ -33,7 +33,7 @@ const initialState = {
   historyTextValue: '',
   isModalOpen: false,
   headersKey: '',
-  apiKey: ''
+  apiKey: '',
 };
 
 const reducer = (state, action) => {
@@ -90,13 +90,13 @@ const reducer = (state, action) => {
         historyTextValue: '',
       };
     case types.OPEN_MODAL:
-      console.log('open modal fired')
+      console.log('open modal fired');
       return {
         ...state,
         isModalOpen: true,
       };
-      case types.CLOSE_MODAL:
-        console.log('close modal fired')
+    case types.CLOSE_MODAL:
+      console.log('close modal fired');
       return {
         ...state,
         apiKey: action.apiKey,

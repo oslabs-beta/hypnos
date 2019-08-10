@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import db from '../db';
 import { useStateValue } from '../Context';
-import HistoryListItem from './HistoryListItem';
+import HistoryListItem from './MiniComponents/HistoryListItem';
 import * as types from '../Constants/actionTypes';
 
 
@@ -20,7 +20,7 @@ const HistoryDisplay = () => {
         //   queriesHistory: queries,
         // });
       })
-      .catch(e => console.log('Error fetching from DB.'));
+      .catch(e => console.log('Error fetching from DB: ', e));
   }, [query, queryGQLError]);
 
   const onEdit = (id) => {
@@ -28,7 +28,7 @@ const HistoryDisplay = () => {
     db.history
       .get(id)
       .then((foundQuery) => {
-        // console.log('query in onEdit ', foundQuery);
+        // console.log('Query in onEdit ', foundQuery);
         dispatch({
           type: types.GET_QUERY,
           historyTextValue: foundQuery.query,
@@ -51,7 +51,7 @@ const HistoryDisplay = () => {
       .then(() => {
         setLocalQH(localQH.filter(queryItem => queryItem.id !== queryId));
       })
-      .catch(e => console.log('error deleting from DB :', e));
+      .catch(e => console.log('Error deleting from DB :', e));
   };
 
   return (
