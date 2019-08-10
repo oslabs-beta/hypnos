@@ -27,7 +27,7 @@ const APIModal = () => {
   };
 
   return (
-    <div id="API-key-modal">
+    <section id="API-key-modal">
       <button onClick={() => openModal()}>API Key</button>
       <Modal
         isOpen={isModalOpen}
@@ -64,7 +64,7 @@ const APIModal = () => {
           <button onClick={() => closeModal()}>Submit</button>
         </form>
       </Modal>
-    </div>
+    </section>
   );
 };
 
