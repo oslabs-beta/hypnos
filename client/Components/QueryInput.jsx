@@ -26,7 +26,7 @@ query ditto {
 
 
 const QueryInput = () => {
-  const [{ endpoint, historyTextValue }, dispatch] = useStateValue();
+  const [{ endpoint, historyTextValue, isModalOpen }, dispatch] = useStateValue();
   const [textValue, setTextValue] = useState(exampleQuery);
   // if edit button has been clicked, then historyTextValue exists in state. reassigned to fill out
   // code mirror text area
@@ -69,14 +69,14 @@ const QueryInput = () => {
     // console.log('regex test: ', textValue.match(/(?<=\{\W)(.*?)(?=\@)/g));
     const regexResult = textValue.match(/(?<=\{\W)(.*?)(?=\@)/g);
     Promise.all([addQueryToDB(textValue, urlToSend),
-      dispatch({
-        type: types.RUN_QUERY,
-        // decontructed using of gql tag to make query object. need to pass in a stringliteral.
-        query: gql([`${textValue}`]),
-        // pulls of key for where data will be in result obj
-        queryResultObject: regexResult ? textValue.match(/(?<=\{\W)(.*?)(?=\@)/g)[0].trim() : 'null',
-        newEndpoint: urlToSend,
-      }),
+    dispatch({
+      type: types.RUN_QUERY,
+      // decontructed using of gql tag to make query object. need to pass in a stringliteral.
+      query: gql([`${textValue}`]),
+      // pulls of key for where data will be in result obj
+      queryResultObject: regexResult ? textValue.match(/(?<=\{\W)(.*?)(?=\@)/g)[0].trim() : 'null',
+      newEndpoint: urlToSend,
+    }),
     ])
       // .then(() => console.log('db adds and dispatch successful'))
       .catch(e => console.log('error in new promise all: ', e));
@@ -107,28 +107,30 @@ const QueryInput = () => {
   // this fetch chain/handleSubmit is in a different file,
   // as handleQueryFetch, and imported.
 
-
   return (
     <>
       <EndpointField setNewAPIEndpoint={setNewAPIEndpoint} />
       <article id="query-input">
         <form id="query-input-form" onSubmit={() => handleSubmit()}>
-          <CodeMirror
-            id="code-mirror"
-            value={textValue}
-            // editor and data are code mirror args. needed to access value
-            onBeforeChange={(editor, data, value) => {
-              setTextValue(value);
-            }}
-            onChange={(editor, data, value) => {
-              setTextValue(value);
-            }}
-            options={{
-              lineNumbers: true,
-              tabSize: 2,
-              lineWrapping: true,
-            }}
-          />
+          <section id='CodeMirror'>
+            <CodeMirror
+              id="code-mirror"
+              style={isModalOpen ? { visibility: 'hidden' } : { visibility: 'visible' }}
+              value={textValue}
+              // editor and data are code mirror args. needed to access value
+              onBeforeChange={(editor, data, value) => {
+                setTextValue(value);
+              }}
+              onChange={(editor, data, value) => {
+                setTextValue(value);
+              }}
+              options={{
+                lineNumbers: true,
+                tabSize: 2,
+                lineWrapping: true,
+              }}
+            />
+          </section>
           <section id="buttons">
             {/* NOTE: THIS IS PRESENTLY OK INSIDE THE FORM */}
             {/* reset state button */}
