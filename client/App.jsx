@@ -17,7 +17,7 @@ import { ApolloLink } from 'apollo-link';
 
 import Header from './Components/Header';
 import HistoryDisplay from './Components/HistoryDisplay';
-import DeleteButton from './Components/ListItems/TabsDeleteButton';
+import DeleteButton from './Components/MiniComponents/TabsDeleteButton';
 import QueriesContainer from './Containers/QueriesContainer';
 import { StateProvider, useStateValue } from './Context';
 
@@ -115,63 +115,36 @@ const App = () => {
     //   console.log('networkError', networkError);
     // },
   });
+
+  // rendering tabs inside render method, based on tabsListLabels, just nums in an array
   const [queriesTabs, setQueriesTabs] = useState({
-    tabsList: [<Tab tab-id={0}>{`Title ${0}`}</Tab>, <Tab tab-id={1}>{`Title ${1}`}</Tab>],
-    queriesContainers: [<TabPanel><QueriesContainer /></TabPanel>, <TabPanel><h2>Any content 1</h2></TabPanel>],
+    tabsListLabels: [0],
   });
-
-  const deleteTab = (tabId) => {
-    console.log('tabsList, before filter: ', queriesTabs.tabsList);
-    console.log('tabsList, before filter: ', queriesTabs.queriesContainers);
-    // const newTabsList = curTabsList.slice(0).filter((el) => {
-    //   console.log('all elements, tabsList, in filter: ', el);
-    //   return 1;
-    // });
-
-    // console.log('queriesTabs, before filter: ', curQueriesContainers);
-    // const newQueriesContainers = curQueriesContainers.slice(0).filter((el) => {
-    //   // console.log('inside QC filter');
-    //   // console.log(tabId !== +el.props['tab-panel-id']);
-    //   console.log('all elements, queriesTabs, in filter:', el);
-    //   return 1;
-    // });
-    setQueriesTabs({
-      tabsList: queriesTabs.tabsList.filter(el => el.props['tab-id'] !== tabId),
-      queriesContainers: queriesTabs.queriesContainers.filter(el => el.props['tab-panel-id'] !== tabId),
-    });
-  };
-
-
   const [currentTab, setCurrentTab] = useState({ tabIndex: 0 });
 
+  const deleteTab = (tabId) => {
+    // delete tabs by checking tabId, which is passed as a prop upon creation of tab
+    // let tabIdx;
+    setQueriesTabs({
+      tabsListLabels: queriesTabs.tabsListLabels.filter((el, idx) => el !== tabId),
+      // if (el === tabId) tabIdx = idx;
+    });
+
+    // change tab if current tab was deleted tab not working
+    // if (currentTab.tabIndex === tabIdx) setCurrentTab({ tabIndex: tabIdx - 2 });
+  };
+
   const addNewTab = () => {
-    // console.log('adding tab. tabslist, before add: ', queriesTabs.tabsList);
-    // console.log('adding tab. queriesContainers, before add: ', queriesTabs.queriesContainers);
+    // push new item (just a num) to tabsListLabels
+    const newTabsListLabels = queriesTabs.tabsListLabels;
 
-    // NOTE: THIS DOESN'T SEEM LIKE BEST PRACTICE. SHOULD BE MAPPED INSIDE RENDER
-
-    const newTabsList = queriesTabs.tabsList;
-    const newQueriesContainers = queriesTabs.queriesContainers;
-    const newTabId = Number(newQueriesContainers.length);
-
-    newTabsList.push(<Tab tab-id={newTabId}>
-      {`Title ${newTabsList.length}`}
-      <DeleteButton tabId={newTabId} deleteTab={deleteTab} />
-                     </Tab>);
-
-    newQueriesContainers.push(
-      <TabPanel tab-panel-id={newTabId}>
-        <QueriesContainer key={`qc-${newQueriesContainers.length}`} />
-      </TabPanel>,
-    );
+    newTabsListLabels.push(newTabsListLabels.length);
 
     setQueriesTabs({
-      tabsList: newTabsList,
-      queriesContainers: newQueriesContainers,
+      tabsListLabels: newTabsListLabels,
     });
   };
 
-  console.log('what is the state: ', queriesTabs);
   return (
     <section id="app">
       <ApolloProvider client={client}>
@@ -180,11 +153,23 @@ const App = () => {
         {/* <QueriesContainer /> */}
         <Tabs selectedIndex={currentTab.tabIndex} onSelect={tabIndex => setCurrentTab({ tabIndex })}>
           <TabList>
-            {queriesTabs.tabsList}
+            {queriesTabs.tabsListLabels.map((el, idx) => (idx !== 0
+              ? (
+                <Tab key={`tab-${el}`} tab-id={el}>
+                  {`Title ${el}`}
+                  <DeleteButton key={`del-btn-${el}`} tabId={el} deleteTab={deleteTab} />
+                </Tab>
+              )
+              : (
+                <Tab key={`tab-${el}`} tab-id={el}>
+                  {`Title ${el}`}
+                </Tab>
+              )))}
             {/* {<button type="button" onClick={deleteTab}>x</button>} */}
             {<button type="button" onClick={addNewTab}>New Tab</button>}
           </TabList>
-          {queriesTabs.queriesContainers}
+          {/* {queriesTabs.queriesContainers} */}
+          {queriesTabs.tabsListLabels.map((el, idx) => <TabPanel key={`tab-panel-${el}`} tab-panel-id={el}><QueriesContainer key={`qc-${el}`} /></TabPanel>)}
         </Tabs>
       </ApolloProvider>
     </section>
