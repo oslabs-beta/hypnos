@@ -45,8 +45,8 @@ const fetchErrorCheck = (error, dispatch) => {
     dispatch(dispatchObj.noPathOrTypeError);
     // throw new Error(errorReponse.noPathOrTypeError);
   } else {
-    console.log('Error in fetch: ', error);
-    throw new Error('Error in fetch: ', error);
+    // console.log('Error in fetch: ', error);
+    throw new Error('Error n fetch: ', error);
   }
 };
 

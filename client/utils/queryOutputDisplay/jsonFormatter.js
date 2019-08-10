@@ -19,7 +19,7 @@ export const jsonFormatter = (obj) => {
       resultStr += '\n';
       resultStr += tab.repeat(nestLevel);
     } else if (char === ':') {
-      resultStr += char + ' ';
+      resultStr += `${char} `;
     } else if (char === '}' || char === ']') {
       resultStr += '\n';
       nestLevel -= 1;

@@ -11,7 +11,7 @@ const addQueryToDB = (textValue, urlToSend) => new Promise((resolve, reject) => 
       resolve('Sent to database.');
     })
     .catch((e) => {
-      console.log('Error adding query to database. ', e);
+      // console.log('Error adding query to database. ', e);
       reject(new Error('Error addding query to database.'));
     });
 });

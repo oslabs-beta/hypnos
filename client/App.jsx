@@ -29,31 +29,40 @@ import * as errorResponse from './Constants/errors/errorResponseStrings';
 const proxy = Number(process.env.IS_DEV) === 1 ? 'https://cors-anywhere.herokuapp.com/' : '';
 
 const App = () => {
-  const [{ endpoint }] = useStateValue();
+  const [{ endpoint, apiKey, headersKey }] = useStateValue();
   // instantiated errorLink
   // const httpLink = createHttpLink({ uri: proxy + endpoint });
+
+  const headersOptions = {
+    'Content-Type': 'application/json',
+    // 'Access-Control-Allow-Origin': '*',
+  };
+
+  if (apiKey !== '' && headersKey !== '') {
+    console.log('apiKey: ', apiKey);
+    console.log('headersKey: ', headersKey);
+    headersOptions[headersKey] = apiKey;
+    console.log('headersOptions ', headersOptions);
+  }
 
   const restLink = new RestLink({
     // might be able to use custom fetch here for error checking?
     uri: proxy + endpoint,
     fetchOptions: {
       mode: 'no-cors',
-    },
-    headers: {
-      'Content-Type': 'application/json',
-      // 'Access-Control-Allow-Origin': '*',
+      headers: headersOptions,
     },
     // onError: ({ networkError, graphQLErrors }) => {
     //   console.log('graphQLErrors', graphQLErrors);
     //   console.log('networkError', networkError);
     // },
-    customFetch: (uri, options) =>
+    customFetch: (uri, fetchOptions) =>
       // console.log('in custom fetch');
       new Promise((resolve, reject) => {
-        fetch(uri)
+        fetch(uri, fetchOptions)
           .then((res) => {
             // const clone = res.clone();
-            // console.log('in first then block, custom fetch');
+            // console.log('in first then lock, custom fetch');
             if (res.status === 404) {
               // dispatch inside of here seems to break it
               // dispatch(errorDispatchObj.endpointPath404Error);
@@ -70,8 +79,7 @@ const App = () => {
             // console.log('error in custom fetch');
             reject('error in custom fetch: ', e);
           });
-      })
-    ,
+      }),
     // credentials: 'include',
   });
 

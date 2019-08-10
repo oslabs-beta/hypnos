@@ -47,7 +47,7 @@ const HistoryDisplay = () => {
     // console.log('running onDelete');
     db.history
       .delete(queryId)
-      .then(() => console.log('Deleted ', queryId))
+      // .then(() => console.log('deleted ', queryId))
       .then(() => {
         setLocalQH(localQH.filter(queryItem => queryItem.id !== queryId));
       })

@@ -5,6 +5,9 @@ import { useStateValue } from '../Context';
 import QueryOutputDisplay from '../Components/QueryOutputDisplay';
 import QueryInput from '../Components/QueryInput';
 import * as types from '../Constants/actionTypes';
+import APIModal from '../Components/APIKeyModal';
+
+// Modal.setAppElement('#root')
 
 const QueriesContainer = () => {
   const [{ query, queryResultObject, queryGQLError }, dispatch] = useStateValue();
@@ -12,6 +15,7 @@ const QueriesContainer = () => {
   // error thrown because it evals before anything is in query
   let OutputOfQuery;
   if (query !== '') {
+    // console.log('inside of QC, after if block');
     // if something is in query, assign QoQ to output of query
     // had to pass on props with the props object. it "parses" bigass object
     // before it's passed on. one thing needed for dynamism: the name of the prop
@@ -70,6 +74,7 @@ const QueriesContainer = () => {
   return (
     <section id="queries-container">
       <QueryInput />
+      <APIModal />
       <article id="query-output">
         {query !== '' && <OutputOfQuery query={query} />}
         {queryGQLError !== '' && <p className="error">{queryGQLError}</p>}
