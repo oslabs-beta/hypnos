@@ -41,7 +41,6 @@ const APIModal = () => {
         <form>
           <label>
                         Headers Key:
-<<<<<<< HEAD
             <input
               type="text"
               id="headers-key"
@@ -68,26 +67,5 @@ const APIModal = () => {
     </section>
   );
 };
-=======
-                    <input type="text" id="headers-key" onChange={(e) => {
-                            const header = e.target.value;
-                            setHeaderValue(header);
-                        }} />
-                    </label>
-                    <label>
-                        API Key:
-                    <input type="text" id="API-key" onChange={(e) => {
-                            const api = e.target.value;
-                            setApiTextValue(api);
-                        }} />
-                    </label>
-                    <button onClick={() => closeModal()}>Submit</button>
-                </form>
-            </Modal>
-        </div>
-    );
-
-}
->>>>>>> dev
 
 export default APIModal;
