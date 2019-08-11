@@ -4,23 +4,14 @@
     grid-template-rows: 1fr;
     grid-template-areas: 
     "queryContainer";
-    background-color: green;
 }
 
 .react-tabs {
     grid-area: reactTabs
 }
 
-.react-tabs__tab {
-    background-color: green;
-}
-
 .react-tabs__tab--selected {
     background-color: $loading-color;
-
-    button: {
-        background-color: green;
-    }
 }
 
 #tabs-list {
