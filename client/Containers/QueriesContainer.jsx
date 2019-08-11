@@ -40,10 +40,7 @@ const QueriesContainer = () => {
         //   errorPolicy: true,
         // },
         props: ({ data }) => {
-<<<<<<< HEAD
-=======
           // console.log(data, 'this is data inside output of query');
->>>>>>> dev
           // console.log(query, 'this is query inside output of query')
           if (data.loading) {
             return {
