@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useStateValue } from '../Context';
 import { jsonFormatter } from '../utils/queryOutputDisplay/jsonFormatter';
 import nullChecker from '../utils/queryOutputDisplay/nullChecker';
@@ -11,18 +11,44 @@ const QueryOutputDisplay = (props) => {
   // pull props off from GQL query running
   const { loading, error } = props;
   // result is assigned either the successful query data or an error string
-  const result = props[queryResultObject] ? props[queryResultObject] : queryGQLError;
+
+  // testing result with local state, to help with multiple tabs
+  // const [cachedResult, setCachedResult] = useState('');
+  const [result, setResult] = useState('');
+  if (!loading && props[queryResultObject] && typeof result !== 'object') setResult(props[queryResultObject]);
+  // useEffect(() => {
+  //   setQueryResult(props[queryResultObject] ? props[queryResultObject] : queryGQLError);
+  // }, [queryResultObject, queryGQLError]);
+  // setQueryResult(props[queryResultObject] ? props[queryResultObject] : queryGQLError);
+
+  // old way result was written below
+  // let result;
+  // const currentResult = props[queryResultObject] ? props[queryResultObject] : queryGQLError;
+
+  // const result = props[queryResultObject] ? props[queryResultObject] : queryGQLError;
+
+  console.log('what is result: ', typeof result);
+  // if (typeof cachedResult === 'string') {
+  //   console.log('in if block of cache check');
+  //   console.log('type of currentResult: ', currentResult);
+  //   setCachedResult(currentResult);
+  //   result = currentResult;
+  // } else {
+  //   console.log('in else block of cache check');
+  //   result = cachedResult;
+  // }
+  // const result = typeof cachedResult !== 'string' ? cachedResult : currentResult;
 
 
   // checking if __typeName on the result object exists. If it doesn't, we send an error message
   if (loading === false) {
     // console.log(result);
-    //if result comes back as an array - checks 0th index, will not work for nested result arrays
-    if(Array.isArray(result)) {
-      if (!result[0]['__typename']) {
+    // if result comes back as an array - checks 0th index, will not work for nested result arrays
+    if (Array.isArray(result)) {
+      if (!result[0].__typename) {
         return <p className="error">Query does not have a properly formatted type within @rest.</p>;
       }
-    //if result comes back as a flat object
+    // if result comes back as a flat object
     } else if (!Object.keys(result).includes('__typename')) {
       return <p className="error">Query does not have a properly formatted type within @rest.</p>;
     }
@@ -83,6 +109,8 @@ const QueryOutputDisplay = (props) => {
 
   // loading and error cases do not have query-output IDs
   // loading and error come from GraphQL query result
+
+  // ! TEST: for local state of result. if it's an empty string, query hasn't been run
   if (loading) {
     return (<div className="lds-circle"><div /></div>);
 

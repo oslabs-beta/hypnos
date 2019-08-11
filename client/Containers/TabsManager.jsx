@@ -38,7 +38,7 @@ const TabsManager = () => {
     });
   };
   return (
-    <Tabs selectedIndex={currentTab.tabIndex} onSelect={tabIndex => setCurrentTab({ tabIndex })}>
+    <Tabs forceRenderTabPanel selectedIndex={currentTab.tabIndex} onSelect={tabIndex => setCurrentTab({ tabIndex })}>
       <TabList id="tabs-list">
         {queriesTabs.tabsListLabels.map((el, idx) => (idx !== 0
           ? (

@@ -1,6 +1,6 @@
 import React from 'react';
 import { useStateValue } from '../Context';
-import APIModal from './APIKeyModal'
+import APIModal from './APIKeyModal';
 
 const EndpointField = (props) => {
   const [{ endpoint }] = useStateValue();
