@@ -1,5 +1,6 @@
 import React from 'react';
 import { useStateValue } from '../Context';
+import APIModal from './APIKeyModal'
 
 const EndpointField = (props) => {
   const [{ endpoint }] = useStateValue();
@@ -19,6 +20,7 @@ const EndpointField = (props) => {
           setNewAPIEndpoint(newUrl);
         }}
       />
+      <APIModal />
     </article>
   );
 };

@@ -9,10 +9,15 @@
 @import "_buttons.scss";
 @import "_spinner.scss";
 @import "_historyDisplay.scss";
+@import "_APIKeyModal.scss";
 
 * {
     margin: 0;
     padding: 0;
+}
+
+body {
+    font: $font-stack;
 }
 
 #app {
@@ -23,8 +28,8 @@
     grid-template-columns: 15% 1fr;
     grid-template-areas: 
         "header header"
-        "historyDisplay ."
-        "historyDisplay queryContainer";
+        "historyDisplay reactTabs"
+        "historyDisplay reactTabs";
     font: $font-stack;
     background-color: $background-color;
 }

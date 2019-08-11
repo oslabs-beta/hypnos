@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './StyleSheets/App.scss';
 
-import {
-  Tab, Tabs, TabList, TabPanel,
-} from 'react-tabs';
+// import {
+//   Tab, Tabs, TabList, TabPanel,
+// } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
 
 
@@ -17,11 +17,13 @@ import { ApolloLink } from 'apollo-link';
 
 import Header from './Components/Header';
 import HistoryDisplay from './Components/HistoryDisplay';
-import DeleteButton from './Components/MiniComponents/TabsDeleteButton';
-import QueriesContainer from './Containers/QueriesContainer';
+import TabsManager from './Containers/TabsManager';
+// import DeleteButton from './Components/MiniComponents/TabsDeleteButton';
+// import QueriesContainer from './Containers/QueriesContainer';
 import { StateProvider, useStateValue } from './Context';
 
 import * as errorResponse from './Constants/errors/errorResponseStrings';
+
 // import * as errorDispatchObj from './Constants/errors/errorDispatchObjects';
 // using a proxy to get around CORS. We do not need a server.
 
@@ -124,61 +126,13 @@ const App = () => {
     // },
   });
 
-  // rendering tabs inside render method, based on tabsListLabels, just nums in an array
-  const [queriesTabs, setQueriesTabs] = useState({
-    tabsListLabels: [0],
-  });
-  const [currentTab, setCurrentTab] = useState({ tabIndex: 0 });
-
-  const deleteTab = (tabId) => {
-    // delete tabs by checking tabId, which is passed as a prop upon creation of tab
-    // let tabIdx;
-    setQueriesTabs({
-      tabsListLabels: queriesTabs.tabsListLabels.filter((el, idx) => el !== tabId),
-      // if (el === tabId) tabIdx = idx;
-    });
-
-    // change tab if current tab was deleted tab not working
-    // if (currentTab.tabIndex === tabIdx) setCurrentTab({ tabIndex: tabIdx - 2 });
-  };
-
-  const addNewTab = () => {
-    // push new item (just a num) to tabsListLabels
-    const newTabsListLabels = queriesTabs.tabsListLabels;
-
-    newTabsListLabels.push(newTabsListLabels.length);
-
-    setQueriesTabs({
-      tabsListLabels: newTabsListLabels,
-    });
-  };
-
   return (
     <section id="app">
       <ApolloProvider client={client}>
         <Header />
         <HistoryDisplay />
         {/* <QueriesContainer /> */}
-        <Tabs selectedIndex={currentTab.tabIndex} onSelect={tabIndex => setCurrentTab({ tabIndex })}>
-          <TabList>
-            {queriesTabs.tabsListLabels.map((el, idx) => (idx !== 0
-              ? (
-                <Tab key={`tab-${el}`} tab-id={el}>
-                  {`Title ${el}`}
-                  <DeleteButton key={`del-btn-${el}`} tabId={el} deleteTab={deleteTab} />
-                </Tab>
-              )
-              : (
-                <Tab key={`tab-${el}`} tab-id={el}>
-                  {`Title ${el}`}
-                </Tab>
-              )))}
-            {/* {<button type="button" onClick={deleteTab}>x</button>} */}
-            {<button type="button" onClick={addNewTab}>New Tab</button>}
-          </TabList>
-          {/* {queriesTabs.queriesContainers} */}
-          {queriesTabs.tabsListLabels.map((el, idx) => <TabPanel key={`tab-panel-${el}`} tab-panel-id={el}><QueriesContainer key={`qc-${el}`} /></TabPanel>)}
-        </Tabs>
+        <TabsManager />
       </ApolloProvider>
     </section>
   );
