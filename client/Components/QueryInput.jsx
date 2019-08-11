@@ -114,7 +114,6 @@ const QueryInput = () => {
         <form id="query-input-form" style={isModalOpen ? { visibility: 'hidden' } : { visibility: 'visible' }} onSubmit={() => handleSubmit()}>
           <CodeMirror
             // editorDidMount={editor => editor.focus()}
-            className="CodeMirror-focused"
             onViewportChange={(editor, from, to) => console.log('code mirror on viewport change. trying to solve opening on tab click')}
             id="code-mirror"
             value={textValue}

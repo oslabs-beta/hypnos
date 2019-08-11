@@ -11,11 +11,14 @@ const QueryOutputDisplay = (props) => {
   // pull props off from GQL query running
   const { loading, error } = props;
   // result is assigned either the successful query data or an error string
+  const result = props[queryResultObject] ? props[queryResultObject] : queryGQLError;
 
+
+  // ! STATE TESTING
   // testing result with local state, to help with multiple tabs
   // const [cachedResult, setCachedResult] = useState('');
-  const [result, setResult] = useState('');
-  if (!loading && props[queryResultObject] && typeof result !== 'object') setResult(props[queryResultObject]);
+  // const [result, setResult] = useState('');
+  // if (!loading && props[queryResultObject] && typeof result !== 'object') setResult(props[queryResultObject]);
   // useEffect(() => {
   //   setQueryResult(props[queryResultObject] ? props[queryResultObject] : queryGQLError);
   // }, [queryResultObject, queryGQLError]);
@@ -25,7 +28,8 @@ const QueryOutputDisplay = (props) => {
   // let result;
   // const currentResult = props[queryResultObject] ? props[queryResultObject] : queryGQLError;
 
-  // const result = props[queryResultObject] ? props[queryResultObject] : queryGQLError;
+  // ! END OF STATE TESTING
+
 
   console.log('what is result: ', typeof result);
   // if (typeof cachedResult === 'string') {
