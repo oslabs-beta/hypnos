@@ -1,6 +1,6 @@
 {
-  "name": "hypnos",
-  "version": "1.0.0",
+  "name": "Hypnos",
+  "version": "0.0.1",
   "description": "An app to test GraphQL calls on RESTful APIs, via Apollo.",
   "main": "electron.js",
   "homepage": "./",
