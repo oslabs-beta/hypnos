@@ -83,7 +83,7 @@ const reducer = (state, action) => {
         historyTextValue: '',
       };
     case types.GET_QUERY:
-      // console.log('in GET_QUERY');
+      console.log('in GET_QUERY. endpoint coming in: ', action.endpoint);
       return {
         ...initialState,
         historyTextValue: action.historyTextValue,

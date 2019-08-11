@@ -9,7 +9,9 @@ import APIModal from '../Components/APIKeyModal';
 
 // Modal.setAppElement('#root')
 
-const QueriesContainer = () => {
+const QueriesContainer = (props) => {
+  const { stateTabReference } = props;
+
   const [{ query, queryResultObject, queryGQLError }, dispatch] = useStateValue();
 
   // error thrown because it evals before anything is in query
@@ -44,17 +46,20 @@ const QueriesContainer = () => {
           // console.log(query, 'this is query inside output of query')
           if (data.loading) {
             return {
+              stateTabReference,
               loading: data.loading,
             };
           }
           if (data.error) {
             // console.log('error inside QC: ', data.error);
             return {
+              stateTabReference,
               error: data.error,
             };
           }
           // if query successful, instantiate result obj.
           const resultObj = {
+            stateTabReference,
             loading: false,
           };
           // separately assign queryResultVar to output obj
@@ -74,8 +79,8 @@ const QueriesContainer = () => {
 
   return (
     <section id="queries-container">
-      <QueryInput />
-      
+      <QueryInput stateTabReference={stateTabReference} />
+
       <article id="query-output">
         {query !== '' && <OutputOfQuery query={query} />}
         {queryGQLError !== '' && <p className="error">{queryGQLError}</p>}

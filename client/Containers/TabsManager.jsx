@@ -38,7 +38,7 @@ const TabsManager = () => {
     });
   };
   return (
-    <Tabs forceRenderTabPanel selectedIndex={currentTab.tabIndex} onSelect={tabIndex => setCurrentTab({ tabIndex })}>
+    <Tabs forceRenderTabPanel selectedIndex={currentTab.tabIndex} onSelect={(tabIndex, lastIndex) => setCurrentTab({ tabIndex })}>
       <TabList id="tabs-list">
         {queriesTabs.tabsListLabels.map((el, idx) => (idx !== 0
           ? (
@@ -56,7 +56,7 @@ const TabsManager = () => {
         <button type="button" id="add-tab-button" style={{ fontSize: '25px' }} onClick={addNewTab}>+</button>
       </TabList>
       {/* {queriesTabs.queriesContainers} */}
-      {queriesTabs.tabsListLabels.map((el, idx) => <TabPanel id="tab-panel" key={`tab-panel-${el}`} tab-panel-id={el}><QueriesContainer key={`qc-${el}`} /></TabPanel>)}
+      {queriesTabs.tabsListLabels.map((el, idx) => <TabPanel id="tab-panel" key={`tab-panel-${el}`} tab-panel-id={el}><QueriesContainer stateTabReference={el} key={`qc-${el}`} /></TabPanel>)}
     </Tabs>
   );
 };

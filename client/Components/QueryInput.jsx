@@ -25,7 +25,9 @@ query ditto {
 }`;
 
 
-const QueryInput = () => {
+const QueryInput = (props) => {
+  const { stateTabReference } = props;
+
   const [{ endpoint, historyTextValue, isModalOpen }, dispatch] = useStateValue();
   const [textValue, setTextValue] = useState(exampleQuery);
   // if edit button has been clicked, then historyTextValue exists in state. reassigned to fill out
@@ -109,11 +111,21 @@ const QueryInput = () => {
 
   return (
     <>
-      <EndpointField setNewAPIEndpoint={setNewAPIEndpoint} />
+      <EndpointField setNewAPIEndpoint={setNewAPIEndpoint} stateTabReference={stateTabReference} />
       <article id="query-input">
         <form id="query-input-form" style={isModalOpen ? { visibility: 'hidden' } : { visibility: 'visible' }} onSubmit={() => handleSubmit()}>
           <CodeMirror
-            // editorDidMount={editor => editor.focus()}
+            editorDidMount={(editor) => {
+              console.log('mounted CM');
+              // editor.refresh();
+              // const orgViewportMargin = editor.getOption('viewportMargin');
+              // console.log('og viewport: ', orgViewportMargin);
+              // editor.setOption('viewportMargin', Infinity);
+              // console.log('new viewport: ', editor.getOption('viewportMargin'));
+              // // editor.refresh();
+              // editor.setOption('viewportMargin', orgViewportMargin);
+              // editor.refresh();
+            }}
             onViewportChange={(editor, from, to) => console.log('code mirror on viewport change. trying to solve opening on tab click')}
             id="code-mirror"
             value={textValue}

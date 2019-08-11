@@ -36,8 +36,13 @@ const HistoryDisplay = () => {
         });
       })
       .then(() => {
-        const inputField = document.querySelector('#endpoint-field input');
-        inputField.value = '';
+        const inputFields = document.querySelectorAll('#endpoint-field input');
+        console.log('input fields: ', inputFields);
+        // clears fields for all input field attribues. but endpoint value at component level still takes in what was in endpoint field beforehand
+        inputFields.forEach((el) => {
+          el.value = '';
+        });
+        // inputFields.value = '';
       })
       .catch(e => console.log('Error searching DB.'));
   };

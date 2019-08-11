@@ -9,7 +9,9 @@ const QueryOutputDisplay = (props) => {
   const [{ queryResultObject, queryGQLError }] = useStateValue();
   const [isHovering, toggleHover] = useState(false);
   // pull props off from GQL query running
-  const { loading, error } = props;
+  const {
+    loading, error, stateTabReference,
+  } = props;
   // result is assigned either the successful query data or an error string
   const result = props[queryResultObject] ? props[queryResultObject] : queryGQLError;
 
