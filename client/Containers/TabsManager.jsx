@@ -20,7 +20,7 @@ const TabsManager = () => {
     // delete tabs by checking tabId, which is passed as a prop upon creation of tab
     // let tabIdx;
     setQueriesTabs({
-      tabsListLabels: queriesTabs.tabsListLabels.filter((el, idx) => el !== tabId);
+      tabsListLabels: queriesTabs.tabsListLabels.filter((el, idx) => el !== tabId),
     });
   };
 
