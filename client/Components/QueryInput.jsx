@@ -12,6 +12,8 @@ import fetchErrorCheck from '../utils/queryInput/fetchErrorCheck';
 import addQueryToDB from '../utils/queryInput/addQueryToDB';
 import handleQueryFetch from '../utils/queryInput/handleQueryFetch';
 
+import defaultEndpoint from '../Constants/defaultEndpoint';
+
 // from addons folder of codemirror
 require('codemirror/addon/display/autorefresh');
 
@@ -59,7 +61,7 @@ const QueryInput = (props) => {
     // old way
     // const urlToSend = newAPIEndpoint || endpoint;
     // new way
-    const urlToSend = newAPIEndpoint || endpointHistory[stateTabReference] || endpoint;
+    const urlToSend = newAPIEndpoint || endpointHistory[stateTabReference] || defaultEndpoint;
 
 
     // tries to run DB query and fetch chain in tandem
