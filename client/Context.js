@@ -36,7 +36,10 @@ const initialTabHistory = {
 };
 
 const initialState = {
-  query: '',
+  query: {
+    query: '',
+    ranQueryTab: -1,
+  },
   queryResultObject: '',
   queryGQLError: '',
   // we should probably only need one of these, b/w url and endpoint
@@ -59,7 +62,10 @@ const reducer = (state, action) => {
         ...state,
         // if user changes endpoint, want to make sure query is valid
         endpoint: action.submitEndpoint,
-        query: '',
+        query: {
+          query: '',
+          ranQueryTab: -1,
+        },
         queryResultObject: '',
         historyTextValue: '',
       };
@@ -71,7 +77,10 @@ const reducer = (state, action) => {
         // if a query is run, that means no 404 happened
         queryGQLError: '',
         queryResultObject: action.queryResultObject,
-        query: Object.assign({}, action.query),
+        query: {
+          query: Object.assign({}, action.query),
+          ranQueryTab: action.ranQueryTab,
+        },
         // we should probably only need one of these, b/w url and endpoint
         // this logic might not be needed
         endpoint: action.newEndpoint ? action.newEndpoint : state.endpoint,
@@ -93,7 +102,10 @@ const reducer = (state, action) => {
       return {
         ...state,
         // on a 404, reset query. no query is actually run
-        query: '',
+        query: {
+          query: '',
+          ranQueryTab: -1,
+        },
         queryResultObject: '',
         queryGQLError: action.gqlError,
         historyTextValue: '',

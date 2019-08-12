@@ -5,14 +5,15 @@ import { useStateValue } from '../Context';
 import QueryOutputDisplay from '../Components/QueryOutputDisplay';
 import QueryInput from '../Components/QueryInput';
 import * as types from '../Constants/actionTypes';
-import APIModal from '../Components/APIKeyModal';
 
+// MOVED modal to inside endpoint field
+// import APIModal from '../Components/APIKeyModal';
 // Modal.setAppElement('#root')
 
 const QueriesContainer = (props) => {
   const { stateTabReference } = props;
 
-  const [{ query, queryResultObject, queryGQLError }, dispatch] = useStateValue();
+  const [{ query: { query, ranQueryTab }, queryResultObject, queryGQLError }, dispatch] = useStateValue();
 
   // error thrown because it evals before anything is in query
   let OutputOfQuery;
@@ -77,12 +78,15 @@ const QueriesContainer = (props) => {
   // NOTE: ERRORS ARE MOSTLY BEING RENDERED HERE, NOT INSIDE QUERY OUTPUT DISPLAY.
   // ERRORS RENDERED INSIDE OF QOD ARE UNCAUGHT GQL ERRORS
 
+  // too out this conditional from first item under article
+  // stateTabReference === ranQueryTab &&
+
   return (
     <section id="queries-container">
       <QueryInput stateTabReference={stateTabReference} />
 
       <article id="query-output">
-        {query !== '' && <OutputOfQuery query={query} />}
+        {query !== '' && stateTabReference === ranQueryTab && <OutputOfQuery query={query} />}
         {queryGQLError !== '' && <p className="error">{queryGQLError}</p>}
       </article>
     </section>

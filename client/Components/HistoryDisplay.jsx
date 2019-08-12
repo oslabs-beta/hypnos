@@ -6,7 +6,8 @@ import * as types from '../Constants/actionTypes';
 
 
 const HistoryDisplay = () => {
-  const [{ query, queryGQLError }, dispatch] = useStateValue();
+  // edited query to have nested prop also called query. added query tab reference
+  const [{ query: { query }, queryGQLError }, dispatch] = useStateValue();
   const [localQH, setLocalQH] = useState([]);
 
   useEffect(() => {

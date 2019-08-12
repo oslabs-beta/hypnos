@@ -30,10 +30,10 @@ const TabsManager = () => {
       // if (el === tabId) tabIdx = idx;
     });
 
-    dispatch({
-      type: types.DELETE_TAB_STATE,
-      deletedTab: tabId,
-    });
+    // dispatch({
+    //   type: types.DELETE_TAB_STATE,
+    //   deletedTab: tabId,
+    // });
 
     // change tab if current tab was deleted tab not working
     // if (currentTab.tabIndex === tabIdx) setCurrentTab({ tabIndex: tabIdx - 2 });
@@ -50,10 +50,10 @@ const TabsManager = () => {
     setQueriesTabs({
       tabsListLabels: newTabsListLabels,
     });
-    dispatch({
-      type: types.SET_NEW_TAB_STATE,
-      newTabIndex: newLabel,
-    });
+    // dispatch({
+    //   type: types.SET_NEW_TAB_STATE,
+    //   newTabIndex: newLabel,
+    // });
   };
 
   console.log('new state labels: ', queriesTabs.tabsListLabels);

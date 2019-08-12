@@ -81,6 +81,7 @@ const QueryInput = (props) => {
         // pulls of key for where data will be in result obj
         queryResultObject: regexResult ? textValue.match(/(?<=\{\W)(.*?)(?=\@)/g)[0].trim() : 'null',
         newEndpoint: urlToSend,
+        ranQueryTab: stateTabReference,
       }),
     ])
       .then(() => console.log('DB entry added and dispatch successful.'))

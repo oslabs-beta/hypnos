@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useStateValue } from '../Context';
 import { jsonFormatter } from '../utils/queryOutputDisplay/jsonFormatter';
 import nullChecker from '../utils/queryOutputDisplay/nullChecker';
@@ -12,39 +12,12 @@ const QueryOutputDisplay = (props) => {
   const {
     loading, error, stateTabReference,
   } = props;
+
+  // if the current tab matches the tab from which the query was run, show contents. if not, make invisible
+  // const styleObj = { visibility: ranQueryTab === stateTabReference ? 'visible' : 'hidden' };
+
   // result is assigned either the successful query data or an error string
   const result = props[queryResultObject] ? props[queryResultObject] : queryGQLError;
-
-
-  // ! STATE TESTING
-  // testing result with local state, to help with multiple tabs
-  // const [cachedResult, setCachedResult] = useState('');
-  // const [result, setResult] = useState('');
-  // if (!loading && props[queryResultObject] && typeof result !== 'object') setResult(props[queryResultObject]);
-  // useEffect(() => {
-  //   setQueryResult(props[queryResultObject] ? props[queryResultObject] : queryGQLError);
-  // }, [queryResultObject, queryGQLError]);
-  // setQueryResult(props[queryResultObject] ? props[queryResultObject] : queryGQLError);
-
-  // old way result was written below
-  // let result;
-  // const currentResult = props[queryResultObject] ? props[queryResultObject] : queryGQLError;
-
-  // ! END OF STATE TESTING
-
-
-  console.log('what is result: ', typeof result);
-  // if (typeof cachedResult === 'string') {
-  //   console.log('in if block of cache check');
-  //   console.log('type of currentResult: ', currentResult);
-  //   setCachedResult(currentResult);
-  //   result = currentResult;
-  // } else {
-  //   console.log('in else block of cache check');
-  //   result = cachedResult;
-  // }
-  // const result = typeof cachedResult !== 'string' ? cachedResult : currentResult;
-
 
   // checking if __typeName on the result object exists. If it doesn't, we send an error message
   if (loading === false) {
