@@ -12,6 +12,9 @@ import fetchErrorCheck from '../utils/queryInput/fetchErrorCheck';
 import addQueryToDB from '../utils/queryInput/addQueryToDB';
 import handleQueryFetch from '../utils/queryInput/handleQueryFetch';
 
+// from addons folder of codemirror
+require('codemirror/addon/display/autorefresh');
+
 // SHOULD MAKE NOTE: API key should be supplied in endpoint field
 // using a proxy to get around CORS. We do not need a server.
 
@@ -131,15 +134,19 @@ const QueryInput = (props) => {
             value={textValue}
             // editor and data are code mirror args. needed to access value
             onBeforeChange={(editor, data, value) => {
+              // console.log('on before change hit');
               setTextValue(value);
             }}
             onChange={(editor, data, value) => {
+              // console.log('on change hit');
               setTextValue(value);
             }}
             options={{
               lineNumbers: true,
               tabSize: 2,
               lineWrapping: true,
+              autoRefresh: true,
+              mode: 'javascript',
               // autofocus: true,
             }}
           />
