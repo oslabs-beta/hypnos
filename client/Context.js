@@ -142,7 +142,6 @@ const reducer = (state, action) => {
         ...state,
         tabIndices: {
           ...state.tabIndices,
-
         },
       };
     default:

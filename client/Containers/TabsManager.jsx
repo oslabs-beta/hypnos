@@ -74,7 +74,7 @@ const TabsManager = () => {
       <TabList id="tabs-list">
         {queriesTabs.tabsListLabels.map((el, idx) => (idx !== 0
           ? (
-            <Tab tabIndex="-12" key={`tab-${el}`} tab-id={el}>
+            <Tab key={`tab-${el}`} tab-id={el}>
               {`Title ${el}`}
               <DeleteButton key={`del-btn-${el}`} tabId={el} deleteTab={deleteTab} />
             </Tab>
