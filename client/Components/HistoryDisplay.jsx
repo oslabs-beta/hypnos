@@ -16,7 +16,7 @@ const HistoryDisplay = (props) => {
     db.history
       .toArray()
       .then((queries) => {
-        // console.log('retrieved from DB', queries);
+        console.log('retrieved from DB', queries);
         setLocalQH(queries.reverse());
         // dispatch({
         //   type: types.UPDATE_HISTORY,
@@ -79,7 +79,7 @@ const HistoryDisplay = (props) => {
         <li>
           <button type="button" onClick={clearHistory}>Clear Database</button>
         </li>
-        {localQH.map((pastQueries, idx) => <HistoryListItem key={`history-li-${idx}`} query={pastQueries.query} id={pastQueries.id} onDelete={onDelete} onEdit={onEdit} />)}
+        {localQH.map((pastQueries, idx) => <HistoryListItem key={`history-li-${idx}`} query={pastQueries} id={pastQueries.id} onDelete={onDelete} onEdit={onEdit} />)}
       </ul>
     </section>
   );
