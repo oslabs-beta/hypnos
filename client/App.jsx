@@ -1,10 +1,12 @@
 import React from 'react';
-import './StyleSheets/App.scss';
+//not sure we need the below
+// import './StyleSheets/App.scss';
 
 // import {
 //   Tab, Tabs, TabList, TabPanel,
 // } from 'react-tabs';
-import 'react-tabs/style/react-tabs.css';
+//not sure we need the below
+// import 'react-tabs/style/react-tabs.css';
 
 
 import { RestLink } from 'apollo-link-rest';

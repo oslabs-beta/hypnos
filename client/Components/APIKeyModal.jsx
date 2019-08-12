@@ -3,7 +3,7 @@ import Modal from 'react-modal';
 import { useStateValue } from '../Context';
 import * as types from '../Constants/actionTypes';
 
-Modal.setAppElement('#root');
+// Modal.setAppElement('#root');
 
 const customStyles = {
   content: {
