@@ -5,7 +5,7 @@ import APIModal from './APIKeyModal';
 const EndpointField = (props) => {
   // streamlined to not use local state from queryInput component
   const { setNewAPIEndpoint, stateTabReference } = props;
-  const [{ endpoint, endpointHistory }] = useStateValue();
+  const [{ endpoint, endpointHistory, endpointFromDB }] = useStateValue();
 
   return (
     <article id="endpoint-field" input-field-tab-id={stateTabReference}>

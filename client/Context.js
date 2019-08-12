@@ -17,15 +17,16 @@ export const StateProvider = ({ children }) => (
 );
 
 export const useStateValue = () => useContext(StateContext);
-export const newUseStateValue = (requestedContext, tab) => {
-  const [state, dispatch] = useContext(StateContext);
-  // if just dispatch is needed
-  if (requestedContext === reqContext.dispatch) return [dispatch];
-  // if entire state is needed
-  if (requestedContext === reqContext.state) return [state, dispatch];
-  // if specific tab's info is needed, as well as possibility of whole state (e.g. isModalOpen)
-  if (requestedContext === reqContext.tab) return [state.tabIndices[tab], dispatch, state];
-};
+
+// export const newUseStateValue = (requestedContext, tab) => {
+//   const [state, dispatch] = useContext(StateContext);
+//   // if just dispatch is needed
+//   if (requestedContext === reqContext.dispatch) return [dispatch];
+//   // if entire state is needed
+//   if (requestedContext === reqContext.state) return [state, dispatch];
+//   // if specific tab's info is needed, as well as possibility of whole state (e.g. isModalOpen)
+//   if (requestedContext === reqContext.tab) return [state.tabIndices[tab], dispatch, state];
+// };
 
 const initialTabHistory = {
   savedQueryText: '',
@@ -48,6 +49,8 @@ const initialState = {
   // need to instantiate url or else query without a user input will not run
   // queries stored in db
   historyTextValue: '',
+  historyIdx: 0,
+  endpointFromDB: '',
   isModalOpen: false,
   headersKey: '',
   apiKey: '',
@@ -81,6 +84,7 @@ const reducer = (state, action) => {
         ...state,
         // if a query is run, that means no 404 happened
         queryGQLError: '',
+        endpointFromDB: '',
         queryResultObject: action.queryResultObject,
         query: {
           query: Object.assign({}, action.query),
@@ -123,12 +127,20 @@ const reducer = (state, action) => {
         queryGQLError: action.gqlError,
         historyTextValue: '',
       };
-    case types.GET_QUERY:
+    case types.EDIT_QUERY_FROM_DB:
       console.log('in GET_QUERY. endpoint coming in: ', action.endpoint);
       return {
         ...initialState,
         historyTextValue: action.historyTextValue,
-        endpoint: action.endpoint,
+        historyIdx: action.currentTabID,
+        // ! original:
+        endpoint: state.endpoint,
+        // ! New:
+        endpointFromDB: action.endpoint,
+        endpointHistory: {
+          ...state.endpointHistory,
+          [action.currentTabID]: action.endpoint,
+        },
       };
     case types.RESET_GET_QUERY:
       // console.log('running reset get query');

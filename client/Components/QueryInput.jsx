@@ -30,20 +30,27 @@ query ditto {
 
 const QueryInput = (props) => {
   const { stateTabReference } = props;
+  console.log('looping');
 
   const [{
-    endpoint, historyTextValue, isModalOpen, endpointHistory,
+    endpoint, historyTextValue, isModalOpen, endpointHistory, historyIdx,
   }, dispatch] = useStateValue();
   const [textValue, setTextValue] = useState(exampleQuery);
   // if edit button has been clicked, then historyTextValue exists in state. reassigned to fill out
   // code mirror text area
-  if (historyTextValue !== '' && textValue !== historyTextValue) {
+
+  if (historyTextValue !== '' && textValue !== historyTextValue && historyIdx === stateTabReference) {
     // if a user has asked for an old query, repopulate
+
     setTextValue(historyTextValue);
-    // once history is assigned down here, reset it in context
+
     dispatch({
       type: types.RESET_GET_QUERY,
     });
+    // once history is assigned down here, reset it in context
+    // dispatch({
+    //   type: types.RESET_GET_QUERY,
+    // });
   }
   const [newAPIEndpoint, setNewAPIEndpoint] = useState('');
 
@@ -52,7 +59,7 @@ const QueryInput = (props) => {
     // old way
     // const urlToSend = newAPIEndpoint || endpoint;
     // new way
-    const urlToSend = newAPIEndpoint || endpointHistory[stateTabReference];
+    const urlToSend = newAPIEndpoint || endpointHistory[stateTabReference] || endpoint;
 
 
     // tries to run DB query and fetch chain in tandem

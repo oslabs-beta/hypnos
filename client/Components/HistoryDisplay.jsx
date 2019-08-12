@@ -5,7 +5,9 @@ import HistoryListItem from './MiniComponents/HistoryListItem';
 import * as types from '../Constants/actionTypes';
 
 
-const HistoryDisplay = () => {
+const HistoryDisplay = (props) => {
+  const { currentTabID } = props;
+  console.log('current tab: ', currentTabID);
   // edited query to have nested prop also called query. added query tab reference
   const [{ query: { query }, queryGQLError }, dispatch] = useStateValue();
   const [localQH, setLocalQH] = useState([]);
@@ -40,9 +42,10 @@ const HistoryDisplay = () => {
       .then((foundQuery) => {
         // console.log('Query in onEdit ', foundQuery);
         dispatch({
-          type: types.GET_QUERY,
+          type: types.EDIT_QUERY_FROM_DB,
           historyTextValue: foundQuery.query,
           endpoint: foundQuery.endpoint,
+          currentTabID,
         });
       })
       .then(() => {

@@ -135,7 +135,7 @@ const App = () => {
     <section id="app">
       <ApolloProvider client={client}>
         <Header />
-        <HistoryDisplay />
+        {/* <HistoryDisplay /> */}
         {/* <QueriesContainer /> */}
         <TabsManager />
       </ApolloProvider>

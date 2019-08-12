@@ -4,6 +4,7 @@ import {
 } from 'react-tabs';
 import QueriesContainer from './QueriesContainer';
 import DeleteButton from '../Components/MiniComponents/TabsDeleteButton';
+import HistoryDisplay from '../Components/HistoryDisplay';
 
 import * as types from '../Constants/actionTypes';
 
@@ -58,38 +59,43 @@ const TabsManager = () => {
 
   console.log('new state labels: ', queriesTabs.tabsListLabels);
   return (
-    <Tabs
-      forceRenderTabPanel
-      selectedIndex={currentTab.tabIndex}
-      onSelect={(tabIndex, lastIndex, event) => {
-        console.log('event objec: ', event.target.getAttribute('tab-id'));
-        // this is confusing, but these indecies DO line up with indecies in current state
-        console.log('last tab: ', lastIndex);
-        console.log('new tab: ', tabIndex);
-        const tabIdToSave = queriesTabs.tabsListLabels[lastIndex];
-        console.log(tabIdToSave);
-        setCurrentTab({ tabIndex });
-      }}
-    >
-      <TabList id="tabs-list">
-        {queriesTabs.tabsListLabels.map((el, idx) => (idx !== 0
-          ? (
-            <Tab key={`tab-${el}`} tab-id={el}>
-              {`Title ${el}`}
-              <DeleteButton key={`del-btn-${el}`} tabId={el} deleteTab={deleteTab} />
-            </Tab>
-          )
-          : (
-            <Tab key={`tab-${el}`} tab-id={el}>
-              {`Title ${el}`}
-            </Tab>
-          )))}
-        {/* {<button type="button" onClick={deleteTab}>x</button>} */}
-        <button type="button" id="add-tab-button" style={{ fontSize: '25px' }} onClick={addNewTab}>+</button>
-      </TabList>
-      {/* {queriesTabs.queriesContainers} */}
-      {queriesTabs.tabsListLabels.map((el, idx) => <TabPanel id="tab-panel" key={`tab-panel-${el}`} tab-panel-id={el}><QueriesContainer stateTabReference={el} key={`qc-${el}`} /></TabPanel>)}
-    </Tabs>
+    <>
+      <HistoryDisplay currentTabID={Number(queriesTabs.tabsListLabels[currentTab.tabIndex])} />
+      <>
+        <Tabs
+          forceRenderTabPanel
+          selectedIndex={currentTab.tabIndex}
+          onSelect={(tabIndex, lastIndex, event) => {
+            console.log('event objec: ', event.target.getAttribute('tab-id'));
+            // this is confusing, but these indecies DO line up with indecies in current state
+            console.log('last tab: ', lastIndex);
+            console.log('new tab: ', tabIndex);
+            const tabIdToSave = queriesTabs.tabsListLabels[lastIndex];
+            console.log(tabIdToSave);
+            setCurrentTab({ tabIndex });
+          }}
+        >
+          <TabList id="tabs-list">
+            {queriesTabs.tabsListLabels.map((el, idx) => (idx !== 0
+              ? (
+                <Tab key={`tab-${el}`} tab-id={el}>
+                  {`Title ${el}`}
+                  <DeleteButton key={`del-btn-${el}`} tabId={el} deleteTab={deleteTab} />
+                </Tab>
+              )
+              : (
+                <Tab key={`tab-${el}`} tab-id={el}>
+                  {`Title ${el}`}
+                </Tab>
+              )))}
+            {/* {<button type="button" onClick={deleteTab}>x</button>} */}
+            <button type="button" id="add-tab-button" style={{ fontSize: '25px' }} onClick={addNewTab}>+</button>
+          </TabList>
+          {/* {queriesTabs.queriesContainers} */}
+          {queriesTabs.tabsListLabels.map((el, idx) => <TabPanel id="tab-panel" key={`tab-panel-${el}`} tab-panel-id={el}><QueriesContainer stateTabReference={el} key={`qc-${el}`} /></TabPanel>)}
+        </Tabs>
+      </>
+    </>
   );
 };
 
