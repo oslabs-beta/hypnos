@@ -31,7 +31,9 @@ query ditto {
 const QueryInput = (props) => {
   const { stateTabReference } = props;
 
-  const [{ endpoint, historyTextValue, isModalOpen }, dispatch] = useStateValue();
+  const [{
+    endpoint, historyTextValue, isModalOpen, endpointHistory,
+  }, dispatch] = useStateValue();
   const [textValue, setTextValue] = useState(exampleQuery);
   // if edit button has been clicked, then historyTextValue exists in state. reassigned to fill out
   // code mirror text area
@@ -47,7 +49,11 @@ const QueryInput = (props) => {
 
   const handleSubmit = () => {
     event.preventDefault();
-    const urlToSend = newAPIEndpoint || endpoint;
+    // old way
+    // const urlToSend = newAPIEndpoint || endpoint;
+    // new way
+    const urlToSend = newAPIEndpoint || endpointHistory[stateTabReference];
+
 
     // tries to run DB query and fetch chain in tandem
     // ! PROMISE.ALL TEST

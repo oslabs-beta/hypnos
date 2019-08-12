@@ -50,6 +50,9 @@ const initialState = {
   isModalOpen: false,
   headersKey: '',
   apiKey: '',
+  endpointHistory: {
+    0: 'https://pokeapi.co/api/v2/pokemon/',
+  },
   tabIndices: {
     0: initialTabHistory,
   },
@@ -57,6 +60,7 @@ const initialState = {
 
 const reducer = (state, action) => {
   switch (action.type) {
+    // ! NOT BEING USED ANYMORE
     case types.SUBMIT_ENDPOINT:
       return {
         ...state,
@@ -81,8 +85,16 @@ const reducer = (state, action) => {
           query: Object.assign({}, action.query),
           ranQueryTab: action.ranQueryTab,
         },
+        endpointHistory: {
+          ...state.endpointHistory,
+          [action.ranQueryTab]: action.newEndpoint ? action.newEndpoint : state.endpoint,
+        },
         // we should probably only need one of these, b/w url and endpoint
         // this logic might not be needed
+
+        // new endpoint logic
+        // endpoint: state.endpointHistory[action.ranQueryTab] !== action.newEndpoint ? state.endpointHistory[action.ranQueryTab] : action.newEndpoint,
+
         endpoint: action.newEndpoint ? action.newEndpoint : state.endpoint,
         historyTextValue: '',
       };
