@@ -13,7 +13,7 @@
     "react-build": "NODE_ENV=production parcel build index.html --out-dir build --public-url ./",
     "start": "npm run react-start & wait-on http://localhost:3000 && ELECTRON_IS_DEV=1 npm run start-electron",
     "build": "npm run clean-build && npm run react-build && ELECTRON_IS_DEV=0 npm run electron-build",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest --verbose"
   },
   "keywords": [
     "Apollo",
@@ -51,6 +51,7 @@
     "react-dom": "^16.8.6",
     "react-modal": "^3.9.1",
     "react-tabs": "^3.0.0",
+    "react-test-renderer": "^16.9.0",
     "sass": "^1.22.7",
     "sass-loader": "^7.1.0",
     "style-loader": "^0.23.1"
@@ -61,12 +62,17 @@
     "@babel/preset-react": "^7.0.0",
     "@fortawesome/fontawesome-free": "^5.10.1",
     "babel-preset-env": "^1.7.0",
+    "enzyme": "^3.10.0",
+    "enzyme-adapter-react-16": "^1.14.0",
+    "enzyme-to-json": "^3.4.0",
     "electron": "^5.0.7",
     "electron-builder": "^21.2.0",
     "electron-is-dev": "^1.1.0",
     "electron-packager": "^14.0.4",
     "parcel-bundler": "^1.12.3",
-    "wait-on": "^3.3.0"
+    "puppeteer": "^1.19.0",
+    "wait-on": "^3.3.0",
+    "jest": "^24.8.0"
   },
   "build": {
     "appId": "com.hypnos.app",
