@@ -9,20 +9,25 @@ const QueryOutputDisplay = (props) => {
   const [{ queryResultObject, queryGQLError }] = useStateValue();
   const [isHovering, toggleHover] = useState(false);
   // pull props off from GQL query running
-  const { loading, error } = props;
+  const {
+    loading, error, stateTabReference,
+  } = props;
+
+  // if the current tab matches the tab from which the query was run, show contents. if not, make invisible
+  // const styleObj = { visibility: ranQueryTab === stateTabReference ? 'visible' : 'hidden' };
+
   // result is assigned either the successful query data or an error string
   const result = props[queryResultObject] ? props[queryResultObject] : queryGQLError;
-
 
   // checking if __typeName on the result object exists. If it doesn't, we send an error message
   if (loading === false) {
     // console.log(result);
-    //if result comes back as an array - checks 0th index, will not work for nested result arrays
-    if(Array.isArray(result)) {
-      if (!result[0]['__typename']) {
+    // if result comes back as an array - checks 0th index, will not work for nested result arrays
+    if (Array.isArray(result)) {
+      if (!result[0].__typename) {
         return <p className="error">Query does not have a properly formatted type within @rest.</p>;
       }
-    //if result comes back as a flat object
+    // if result comes back as a flat object
     } else if (!Object.keys(result).includes('__typename')) {
       return <p className="error">Query does not have a properly formatted type within @rest.</p>;
     }
@@ -83,6 +88,8 @@ const QueryOutputDisplay = (props) => {
 
   // loading and error cases do not have query-output IDs
   // loading and error come from GraphQL query result
+
+  // ! TEST: for local state of result. if it's an empty string, query hasn't been run
   if (loading) {
     return (<div className="lds-circle"><div /></div>);
 

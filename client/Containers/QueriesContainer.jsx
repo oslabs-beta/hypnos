@@ -5,12 +5,15 @@ import { useStateValue } from '../Context';
 import QueryOutputDisplay from '../Components/QueryOutputDisplay';
 import QueryInput from '../Components/QueryInput';
 import * as types from '../Constants/actionTypes';
-import APIModal from '../Components/APIKeyModal';
 
+// MOVED modal to inside endpoint field
+// import APIModal from '../Components/APIKeyModal';
 // Modal.setAppElement('#root')
 
-const QueriesContainer = () => {
-  const [{ query, queryResultObject, queryGQLError }, dispatch] = useStateValue();
+const QueriesContainer = (props) => {
+  const { stateTabReference } = props;
+
+  const [{ query: { query, ranQueryTab }, queryResultObject, queryGQLError }, dispatch] = useStateValue();
 
   // error thrown because it evals before anything is in query
   let OutputOfQuery;
@@ -24,37 +27,57 @@ const QueriesContainer = () => {
     // if query.definitions is an array with the number of queries. It should not be greater than 1
     if (query.definitions.length > 1) {
       // GraphQL can only run one query at a time, so even though this if statement block is to check for error, we need to send only one query to GQL so that the app doesn't break
+
       query.definitions = [query.definitions[0]];
+
+      // seems to work now with new tabs, with dispatch moved out of props
+      dispatch({
+        type: types.GQL_ERROR,
+        gqlError: 'Currently attempting to run multiple queries, but only one query, subscription, or mutation may be run at one time',
+      });
+
       OutputOfQuery = graphql(query, {
+        onError: (e) => {
+          // not working
+          console.log('too many queries');
+        },
         props: ({ data }) => {
-          // to sanitize our context and render the error
-          dispatch({
-            type: types.GQL_ERROR,
-            gqlError: 'Currently attempting to run multiple queries, but only one query, subscription, or mutation may be run at one time',
-          });
+          // dispatch moved to before query being run
+
+          if (data.loading) {
+            return {
+              stateTabReference,
+              loading: data.loading,
+            };
+          }
+          return {
+            stateTabReference,
+            error: 'Currently attempting to run multiple queries, but only one query, subscription, or mutation may be run at one time',
+          };
         },
       })(QueryOutputDisplay);
     } else {
       OutputOfQuery = graphql(query, {
         // options: {
-        //   errorPolicy: true,
+        //   errorPolicy: 'true',
         // },
         props: ({ data }) => {
-          // console.log(data, 'this is data inside output of query');
-          // console.log(query, 'this is query inside output of query')
           if (data.loading) {
             return {
+              stateTabReference,
               loading: data.loading,
             };
           }
           if (data.error) {
             // console.log('error inside QC: ', data.error);
             return {
+              stateTabReference,
               error: data.error,
             };
           }
           // if query successful, instantiate result obj.
           const resultObj = {
+            stateTabReference,
             loading: false,
           };
           // separately assign queryResultVar to output obj
@@ -72,12 +95,14 @@ const QueriesContainer = () => {
   // NOTE: ERRORS ARE MOSTLY BEING RENDERED HERE, NOT INSIDE QUERY OUTPUT DISPLAY.
   // ERRORS RENDERED INSIDE OF QOD ARE UNCAUGHT GQL ERRORS
 
+  // too out this conditional from first item under article
+
   return (
     <section id="queries-container">
-      <QueryInput />
-      
+      <QueryInput stateTabReference={stateTabReference} />
+
       <article id="query-output">
-        {query !== '' && <OutputOfQuery query={query} />}
+        {query !== '' && stateTabReference === ranQueryTab && <OutputOfQuery query={query} />}
         {queryGQLError !== '' && <p className="error">{queryGQLError}</p>}
       </article>
     </section>
