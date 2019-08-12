@@ -37,6 +37,7 @@ const initialTabHistory = {
 
 const initialState = {
   query: {
+    // MADE QUERY AN OBJ WITH QUERY PROP. ADDED RAN QUERYTAB ON IT TO KNOW WHERE QUERY CAME FROM
     query: '',
     ranQueryTab: -1,
   },
@@ -85,16 +86,11 @@ const reducer = (state, action) => {
           query: Object.assign({}, action.query),
           ranQueryTab: action.ranQueryTab,
         },
+        // sets endpoint history, for other tabs being able to run their old queries
         endpointHistory: {
           ...state.endpointHistory,
           [action.ranQueryTab]: action.newEndpoint ? action.newEndpoint : state.endpoint,
         },
-        // we should probably only need one of these, b/w url and endpoint
-        // this logic might not be needed
-
-        // new endpoint logic
-        // endpoint: state.endpointHistory[action.ranQueryTab] !== action.newEndpoint ? state.endpointHistory[action.ranQueryTab] : action.newEndpoint,
-
         endpoint: action.newEndpoint ? action.newEndpoint : state.endpoint,
         historyTextValue: '',
       };
@@ -102,6 +98,11 @@ const reducer = (state, action) => {
     case types.RESET_STATE:
       return {
         ...initialState,
+        // this might not be needed below
+        endpointHistory: {
+          ...state.endpointHistory,
+        },
+        // TAB INDICIES MIGHT NOT BE NEEDED
         tabIndices: {
           ...state.tabIndices,
           // retains history except for current tab

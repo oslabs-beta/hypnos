@@ -113,7 +113,7 @@ const App = () => {
     link: ApolloLink.from([errorLink, restLink]),
     cache: new InMemoryCache(),
     // fetchPolicy: 'cache-first',
-    
+
     // handling errors on default
     // defaultOptions: {
     //   watchQuery: {
