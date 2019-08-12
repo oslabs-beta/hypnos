@@ -44,7 +44,7 @@ const APIModal = () => {
 
   return (
     <section id="API-key-modal">
-      <button onClick={() => openModal()} id="API-button">Authenticate</button>
+      <button onClick={() => openModal()} id="API-button">Submit API Key</button>
       <Modal
         isOpen={isModalOpen}
         //   onAfterOpen={this.afterOpenModal}

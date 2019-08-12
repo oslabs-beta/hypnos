@@ -17,6 +17,10 @@
         }
     }
 
+    button:hover {
+        background-color: $loading-color-hover;
+    }
+
 }
 #api-key-input {
     font-family: Helvetica, sans-serif;
@@ -52,5 +56,9 @@
         // color: $highlight-color;
         font-weight: bold;
         font-family: Helvetica, sans-serif;
+    }
+
+    button:hover {
+        background-color: #e5e5e5;
     }
 }
