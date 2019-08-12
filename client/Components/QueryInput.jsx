@@ -12,6 +12,11 @@ import fetchErrorCheck from '../utils/queryInput/fetchErrorCheck';
 import addQueryToDB from '../utils/queryInput/addQueryToDB';
 import handleQueryFetch from '../utils/queryInput/handleQueryFetch';
 
+import defaultEndpoint from '../Constants/defaultEndpoint';
+
+// from addons folder of codemirror
+require('codemirror/addon/display/autorefresh');
+
 // SHOULD MAKE NOTE: API key should be supplied in endpoint field
 // using a proxy to get around CORS. We do not need a server.
 
@@ -25,24 +30,39 @@ query ditto {
 }`;
 
 
-const QueryInput = () => {
-  const [{ endpoint, historyTextValue, isModalOpen }, dispatch] = useStateValue();
+const QueryInput = (props) => {
+  const { stateTabReference } = props;
+
+  // deleted endpoint from useStateValue below
+  const [{
+    historyTextValue, isModalOpen, endpointHistory, historyIdx,
+  }, dispatch] = useStateValue();
   const [textValue, setTextValue] = useState(exampleQuery);
   // if edit button has been clicked, then historyTextValue exists in state. reassigned to fill out
   // code mirror text area
-  if (historyTextValue !== '' && textValue !== historyTextValue) {
+
+  if (historyTextValue !== '' && textValue !== historyTextValue && historyIdx === stateTabReference) {
     // if a user has asked for an old query, repopulate
+
     setTextValue(historyTextValue);
-    // once history is assigned down here, reset it in context
+
     dispatch({
       type: types.RESET_GET_QUERY,
     });
+    // once history is assigned down here, reset it in context
+    // dispatch({
+    //   type: types.RESET_GET_QUERY,
+    // });
   }
   const [newAPIEndpoint, setNewAPIEndpoint] = useState('');
 
   const handleSubmit = () => {
     event.preventDefault();
-    const urlToSend = newAPIEndpoint || endpoint;
+    // old way
+    // const urlToSend = newAPIEndpoint || endpoint;
+    // new way
+    const urlToSend = newAPIEndpoint || endpointHistory[stateTabReference] || defaultEndpoint;
+
 
     // tries to run DB query and fetch chain in tandem
     // ! PROMISE.ALL TEST
@@ -69,14 +89,15 @@ const QueryInput = () => {
     // console.log('regex test: ', textValue.match(/(?<=\{\W)(.*?)(?=\@)/g));
     const regexResult = textValue.match(/(?<=\{\W)(.*?)(?=\@)/g);
     Promise.all([addQueryToDB(textValue, urlToSend),
-    dispatch({
-      type: types.RUN_QUERY,
-      // decontructed using of gql tag to make query object. need to pass in a stringliteral.
-      query: gql([`${textValue}`]),
-      // pulls of key for where data will be in result obj
-      queryResultObject: regexResult ? textValue.match(/(?<=\{\W)(.*?)(?=\@)/g)[0].trim() : 'null',
-      newEndpoint: urlToSend,
-    }),
+      dispatch({
+        type: types.RUN_QUERY,
+        // decontructed using of gql tag to make query object. need to pass in a stringliteral.
+        query: gql([`${textValue}`]),
+        // pulls of key for where data will be in result obj
+        queryResultObject: regexResult ? textValue.match(/(?<=\{\W)(.*?)(?=\@)/g)[0].trim() : 'null',
+        newEndpoint: urlToSend,
+        ranQueryTab: stateTabReference,
+      }),
     ])
       .then(() => console.log('DB entry added and dispatch successful.'))
       .catch(e => console.log('Error in DB add/dispatch chain: ', e));
@@ -109,7 +130,7 @@ const QueryInput = () => {
 
   return (
     <>
-      <EndpointField setNewAPIEndpoint={setNewAPIEndpoint} />
+      <EndpointField setNewAPIEndpoint={setNewAPIEndpoint} stateTabReference={stateTabReference} />
       <article id="query-input">
         <form id="query-input-form" style={isModalOpen ? { visibility: 'hidden' } : { visibility: 'visible' }} onSubmit={() => handleSubmit()}>
           <CodeMirror
@@ -117,15 +138,19 @@ const QueryInput = () => {
             value={textValue}
             // editor and data are code mirror args. needed to access value
             onBeforeChange={(editor, data, value) => {
+              // console.log('on before change hit');
               setTextValue(value);
             }}
             onChange={(editor, data, value) => {
+              // console.log('on change hit');
               setTextValue(value);
             }}
             options={{
               lineNumbers: true,
               tabSize: 2,
               lineWrapping: true,
+              autoRefresh: true,
+              mode: 'javascript',
             }}
           />
           <section id="buttons">

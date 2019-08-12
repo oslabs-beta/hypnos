@@ -15,8 +15,8 @@ const customStyles = {
     transform: 'translate(-50%, -50%)',
     backgroundColor: '#31708b',
     width: '100px;',
-    borderRadius: '5px'
-  }
+    borderRadius: '5px',
+  },
 };
 
 const APIModal = () => {

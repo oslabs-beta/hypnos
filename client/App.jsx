@@ -33,7 +33,10 @@ import * as errorResponse from './Constants/errors/errorResponseStrings';
 const proxy = Number(process.env.IS_DEV) === 1 ? 'https://cors-anywhere.herokuapp.com/' : '';
 
 const App = () => {
-  const [{ endpoint, apiKey, headersKey }] = useStateValue();
+  const [{
+    endpoint, apiKey, headersKey,
+  }] = useStateValue();
+
   // instantiated errorLink
   // const httpLink = createHttpLink({ uri: proxy + endpoint });
 
@@ -111,6 +114,8 @@ const App = () => {
     // added errorLink here
     link: ApolloLink.from([errorLink, restLink]),
     cache: new InMemoryCache(),
+    // fetchPolicy: 'cache-first',
+
     // handling errors on default
     // defaultOptions: {
     //   watchQuery: {
@@ -128,12 +133,13 @@ const App = () => {
     // },
   });
 
+
+  // history display moved to render inside of TabsManager
+  // QC instances render inside tabs manager
   return (
     <section id="app">
       <ApolloProvider client={client}>
         <Header />
-        <HistoryDisplay />
-        {/* <QueriesContainer /> */}
         <TabsManager />
       </ApolloProvider>
     </section>

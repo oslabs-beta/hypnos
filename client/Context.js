@@ -2,11 +2,6 @@
   Context to be used throughout the application
   Allows hooks to be utilized
 
-  ! IMPORTANT NOTES FOR ADVANCED QUERIES
-  ! THESE TARGET SOME QUERY VARS
-  ! QUERYOBJ.kind.definitions[0].name.kind.value = query name (e.g.)
-  ! QUERYOBJ.kind.definitions[0].selectionSet.selections[0].name.value = valBeforeRest (e.g.)
-  ! QUERYOBJ.definitions[""0""].selectionSet.selections[""0""].selectionSet.selections[""0""].directives[""0""].arguments[""0""].value.value === FIRST PARAM?
   ************************** */
 
 import React, { createContext, useContext, useReducer } from 'react';
@@ -22,8 +17,34 @@ export const StateProvider = ({ children }) => (
 
 export const useStateValue = () => useContext(StateContext);
 
+
+// experiment: to have robust tab history. not needed right now
+
+// export const newUseStateValue = (requestedContext, tab) => {
+//   const [state, dispatch] = useContext(StateContext);
+//   // if just dispatch is needed
+//   if (requestedContext === reqContext.dispatch) return [dispatch];
+//   // if entire state is needed
+//   if (requestedContext === reqContext.state) return [state, dispatch];
+//   // if specific tab's info is needed, as well as possibility of whole state (e.g. isModalOpen)
+//   if (requestedContext === reqContext.tab) return [state.tabIndices[tab], dispatch, state];
+// };
+
+// initial tab history and tabIndices not being used right now
+// const initialTabHistory = {
+//   savedQueryText: '',
+//   savedEndpoint: '',
+//   savedHeadersKey: '',
+//   savedAPIKey: '',
+//   savedHistoryTextValue: '',
+// };
+
 const initialState = {
-  query: '',
+  query: {
+    // MADE QUERY AN OBJ WITH QUERY PROP. ADDED RAN QUERYTAB ON IT TO KNOW WHERE QUERY CAME FROM
+    query: '',
+    ranQueryTab: -1,
+  },
   queryResultObject: '',
   queryGQLError: '',
   // we should probably only need one of these, b/w url and endpoint
@@ -31,25 +52,32 @@ const initialState = {
   // need to instantiate url or else query without a user input will not run
   // queries stored in db
   historyTextValue: '',
+  historyIdx: 0,
+  endpointFromDB: '',
   isModalOpen: false,
   headersKey: '',
   apiKey: '',
-};
-
-const iniialState2 = {
-  tabIndices: {
-    0: initialState,
+  endpointHistory: {
+    0: 'https://pokeapi.co/api/v2/pokemon/',
   },
+  // not being used right now
+  // tabIndices: {
+  //   0: initialTabHistory,
+  // },
 };
 
 const reducer = (state, action) => {
   switch (action.type) {
+    // ! NOT BEING USED ANYMORE
     case types.SUBMIT_ENDPOINT:
       return {
         ...state,
         // if user changes endpoint, want to make sure query is valid
         endpoint: action.submitEndpoint,
-        query: '',
+        query: {
+          query: '',
+          ranQueryTab: -1,
+        },
         queryResultObject: '',
         historyTextValue: '',
       };
@@ -60,10 +88,17 @@ const reducer = (state, action) => {
         ...state,
         // if a query is run, that means no 404 happened
         queryGQLError: '',
+        endpointFromDB: '',
         queryResultObject: action.queryResultObject,
-        query: Object.assign({}, action.query),
-        // we should probably only need one of these, b/w url and endpoint
-        // this logic might not be needed
+        query: {
+          query: Object.assign({}, action.query),
+          ranQueryTab: action.ranQueryTab,
+        },
+        // sets endpoint history, for other tabs being able to run their old queries
+        endpointHistory: {
+          ...state.endpointHistory,
+          [action.ranQueryTab]: action.newEndpoint ? action.newEndpoint : state.endpoint,
+        },
         endpoint: action.newEndpoint ? action.newEndpoint : state.endpoint,
         historyTextValue: '',
       };
@@ -71,29 +106,53 @@ const reducer = (state, action) => {
     case types.RESET_STATE:
       return {
         ...initialState,
+        // this might not be needed below
+        endpointHistory: {
+          ...state.endpointHistory,
+        },
+        // TAB INDICIES NOT NEEDED RIGHT NOW
+        // tabIndices: {
+        //   ...state.tabIndices,
+        //   // retains history except for current tab
+        //   // ! NOTE: THIS IS ** 0 ** RIGHT NOW
+        //   0: initialTabHistory,
+        // },
       };
     case types.GQL_ERROR:
       // console.log('gql error fired: ', action);
       return {
         ...state,
         // on a 404, reset query. no query is actually run
-        query: '',
+        query: {
+          query: '',
+          ranQueryTab: -1,
+        },
         queryResultObject: '',
         queryGQLError: action.gqlError,
         historyTextValue: '',
       };
-    case types.GET_QUERY:
-      // console.log('in GET_QUERY');
+    case types.EDIT_QUERY_FROM_DB:
+      console.log('in GET_QUERY. endpoint coming in: ', action.endpoint);
       return {
         ...initialState,
         historyTextValue: action.historyTextValue,
-        endpoint: action.endpoint,
+        historyIdx: action.currentTabID,
+        // ! original:
+        endpoint: state.endpoint,
+        // ! New:
+        endpointFromDB: action.endpoint,
+        endpointHistory: {
+          ...state.endpointHistory,
+          [action.currentTabID]: action.endpoint,
+        },
       };
     case types.RESET_GET_QUERY:
       // console.log('running reset get query');
       return {
         ...state,
         historyTextValue: '',
+        // reset to a number that will never exist
+        historyIdx: -1,
       };
     case types.OPEN_MODAL:
       console.log('open modal fired');
@@ -109,15 +168,29 @@ const reducer = (state, action) => {
         headersKey: action.headerKey,
         isModalOpen: false,
       };
-    case types.NEW_TAB_STATE:
-      const newTabState = {
+    // this case can probably be deleted
+    case types.SET_NEW_TAB_STATE:
+      return {
+        ...state,
+        // tab indices not needed righ tnow.
+        // tabIndices: {
+        //   ...state.tabIndices,
+        //   [action.newTabIndex]: initialTabHistory,
+        // },
+      };
+    // this case can probably be deleted
+    case types.DELETE_TAB_STATE:
+      const newState = Object.assign({}, state);
+      delete newState.tabIndices[action.deletedTab];
+      return newState;
+    // this case can probably be deleted
+    case types.SAVE_TAB_STATE:
+      return {
         ...state,
         tabIndices: {
           ...state.tabIndices,
         },
       };
-      newTabState[action.newTabIndex] = initialState;
-      return newTabState;
     default:
       return state;
   }
