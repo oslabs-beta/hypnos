@@ -7,7 +7,6 @@ const HistoryListItem = (props) => {
     id, query, onDelete, onEdit,
   } = props;
 
-  console.log('query query: ', query.query);
   const pathRegex = query.query.match(/(?<=path:\W*\")\S*(?=\")/gi);
   const path = pathRegex ? pathRegex[0] : 'invalid';
   // console.log('rendering a list item');

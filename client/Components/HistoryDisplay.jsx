@@ -7,7 +7,7 @@ import * as types from '../Constants/actionTypes';
 
 const HistoryDisplay = (props) => {
   const { currentTabID } = props;
-  console.log('current tab: ', currentTabID);
+
   // edited query to have nested prop also called query. added query tab reference
   const [{ query: { query }, queryGQLError }, dispatch] = useStateValue();
   const [localQH, setLocalQH] = useState([]);
@@ -50,7 +50,6 @@ const HistoryDisplay = (props) => {
       })
       .then(() => {
         const inputFields = document.querySelectorAll('#endpoint-field input');
-        console.log('input fields: ', inputFields);
         // clears fields for all input field attribues. but endpoint value at component level still takes in what was in endpoint field beforehand
         inputFields.forEach((el) => {
           el.value = '';
