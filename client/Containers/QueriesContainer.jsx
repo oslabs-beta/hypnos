@@ -26,8 +26,6 @@ const QueriesContainer = (props) => {
 
     // if query.definitions is an array with the number of queries. It should not be greater than 1
     if (query.definitions.length > 1) {
-      console.log('in 2 defs block');
-
       // GraphQL can only run one query at a time, so even though this if statement block is to check for error, we need to send only one query to GQL so that the app doesn't break
 
       query.definitions = [query.definitions[0]];
@@ -38,27 +36,13 @@ const QueriesContainer = (props) => {
         gqlError: 'Currently attempting to run multiple queries, but only one query, subscription, or mutation may be run at one time',
       });
 
-      // idea test
-      // OutputOfQuery = {
-      //   props: () => ({
-      //     stateTabReference,
-      //     error: 'Currently attempting to run multiple queries, but only one query, subscription, or mutation may be run at one time',
-      //   }),
-      // }(QueryOutputDisplay);
-
       OutputOfQuery = graphql(query, {
         onError: (e) => {
           // not working
           console.log('too many queries');
         },
         props: ({ data }) => {
-          // to sanitize our context and render the error
-          console.log('before dispatch, 2 blocks');
-          // dispatch({
-          //   type: types.GQL_ERROR,
-          //   gqlError: 'Currently attempting to run multiple queries, but only one query, subscription, or mutation may be run at one time',
-          // });
-          console.log('before loading, 2 blocks');
+          // dispatch moved to before query being run
 
           if (data.loading) {
             return {
@@ -78,9 +62,6 @@ const QueriesContainer = (props) => {
         //   errorPolicy: 'true',
         // },
         props: ({ data }) => {
-          // console.log(data, 'this is data inside output of query');
-          // console.log(query, 'this is query inside output of query')
-
           if (data.loading) {
             return {
               stateTabReference,
@@ -115,7 +96,6 @@ const QueriesContainer = (props) => {
   // ERRORS RENDERED INSIDE OF QOD ARE UNCAUGHT GQL ERRORS
 
   // too out this conditional from first item under article
-  // stateTabReference === ranQueryTab &&
 
   return (
     <section id="queries-container">

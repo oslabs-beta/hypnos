@@ -32,10 +32,10 @@ query ditto {
 
 const QueryInput = (props) => {
   const { stateTabReference } = props;
-  console.log('looping');
 
+  // deleted endpoint from useStateValue below
   const [{
-    endpoint, historyTextValue, isModalOpen, endpointHistory, historyIdx,
+    historyTextValue, isModalOpen, endpointHistory, historyIdx,
   }, dispatch] = useStateValue();
   const [textValue, setTextValue] = useState(exampleQuery);
   // if edit button has been clicked, then historyTextValue exists in state. reassigned to fill out

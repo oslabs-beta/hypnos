@@ -6,17 +6,10 @@ import QueriesContainer from './QueriesContainer';
 import DeleteButton from '../Components/MiniComponents/TabsDeleteButton';
 import HistoryDisplay from '../Components/HistoryDisplay';
 
-import * as types from '../Constants/actionTypes';
-
-import { useStateValue } from '../Context';
-
-
 import 'react-tabs/style/react-tabs.css';
 
 const TabsManager = () => {
   // rendering tabs inside render method, based on tabsListLabels, just nums in an array
-
-  const [state, dispatch] = useStateValue();
 
   const [queriesTabs, setQueriesTabs] = useState({
     tabsListLabels: [0],
@@ -27,17 +20,8 @@ const TabsManager = () => {
     // delete tabs by checking tabId, which is passed as a prop upon creation of tab
     // let tabIdx;
     setQueriesTabs({
-      tabsListLabels: queriesTabs.tabsListLabels.filter((el, idx) => el !== tabId),
-      // if (el === tabId) tabIdx = idx;
+      tabsListLabels: queriesTabs.tabsListLabels.filter((el, idx) => el !== tabId);
     });
-
-    // dispatch({
-    //   type: types.DELETE_TAB_STATE,
-    //   deletedTab: tabId,
-    // });
-
-    // change tab if current tab was deleted tab not working
-    // if (currentTab.tabIndex === tabIdx) setCurrentTab({ tabIndex: tabIdx - 2 });
   };
 
   const addNewTab = () => {
@@ -51,13 +35,9 @@ const TabsManager = () => {
     setQueriesTabs({
       tabsListLabels: newTabsListLabels,
     });
-    // dispatch({
-    //   type: types.SET_NEW_TAB_STATE,
-    //   newTabIndex: newLabel,
-    // });
   };
 
-  console.log('new state labels: ', queriesTabs.tabsListLabels);
+  //  NEW: history displayed rendered inside of tabs manager now. same location in DOM
   return (
     <>
       <HistoryDisplay currentTabID={Number(queriesTabs.tabsListLabels[currentTab.tabIndex])} />
@@ -66,12 +46,13 @@ const TabsManager = () => {
           forceRenderTabPanel
           selectedIndex={currentTab.tabIndex}
           onSelect={(tabIndex, lastIndex, event) => {
-            console.log('event objec: ', event.target.getAttribute('tab-id'));
-            // this is confusing, but these indecies DO line up with indecies in current state
-            console.log('last tab: ', lastIndex);
-            console.log('new tab: ', tabIndex);
+            // console.log('last tab: ', lastIndex);
+            // console.log('new tab: ', tabIndex);
+
+            // tabIdToSave is the unique value given by dev. tabIndex is managed by tabs itself
+            // not being used currently but might be needed in future
             const tabIdToSave = queriesTabs.tabsListLabels[lastIndex];
-            console.log(tabIdToSave);
+            // console.log(tabIdToSave);
             setCurrentTab({ tabIndex });
           }}
         >

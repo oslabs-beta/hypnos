@@ -131,12 +131,13 @@ const App = () => {
     // },
   });
 
+
+  // history display moved to render inside of TabsManager
+  // QC instances render inside tabs manager
   return (
     <section id="app">
       <ApolloProvider client={client}>
         <Header />
-        {/* <HistoryDisplay /> */}
-        {/* <QueriesContainer /> */}
         <TabsManager />
       </ApolloProvider>
     </section>

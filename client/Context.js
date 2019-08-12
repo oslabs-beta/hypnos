@@ -6,7 +6,6 @@
 
 import React, { createContext, useContext, useReducer } from 'react';
 import * as types from './Constants/actionTypes';
-import * as reqContext from './Constants/requestedContext';
 
 export const StateContext = createContext();
 
@@ -18,6 +17,9 @@ export const StateProvider = ({ children }) => (
 
 export const useStateValue = () => useContext(StateContext);
 
+
+// experiment: to have robust tab history. not needed right now
+
 // export const newUseStateValue = (requestedContext, tab) => {
 //   const [state, dispatch] = useContext(StateContext);
 //   // if just dispatch is needed
@@ -28,13 +30,14 @@ export const useStateValue = () => useContext(StateContext);
 //   if (requestedContext === reqContext.tab) return [state.tabIndices[tab], dispatch, state];
 // };
 
-const initialTabHistory = {
-  savedQueryText: '',
-  savedEndpoint: '',
-  savedHeadersKey: '',
-  savedAPIKey: '',
-  savedHistoryTextValue: '',
-};
+// initial tab history and tabIndices not being used right now
+// const initialTabHistory = {
+//   savedQueryText: '',
+//   savedEndpoint: '',
+//   savedHeadersKey: '',
+//   savedAPIKey: '',
+//   savedHistoryTextValue: '',
+// };
 
 const initialState = {
   query: {
@@ -57,9 +60,10 @@ const initialState = {
   endpointHistory: {
     0: 'https://pokeapi.co/api/v2/pokemon/',
   },
-  tabIndices: {
-    0: initialTabHistory,
-  },
+  // not being used right now
+  // tabIndices: {
+  //   0: initialTabHistory,
+  // },
 };
 
 const reducer = (state, action) => {
@@ -106,13 +110,13 @@ const reducer = (state, action) => {
         endpointHistory: {
           ...state.endpointHistory,
         },
-        // TAB INDICIES MIGHT NOT BE NEEDED
-        tabIndices: {
-          ...state.tabIndices,
-          // retains history except for current tab
-          // ! NOTE: THIS IS ** 0 ** RIGHT NOW
-          0: initialTabHistory,
-        },
+        // TAB INDICIES NOT NEEDED RIGHT NOW
+        // tabIndices: {
+        //   ...state.tabIndices,
+        //   // retains history except for current tab
+        //   // ! NOTE: THIS IS ** 0 ** RIGHT NOW
+        //   0: initialTabHistory,
+        // },
       };
     case types.GQL_ERROR:
       // console.log('gql error fired: ', action);
@@ -164,18 +168,22 @@ const reducer = (state, action) => {
         headersKey: action.headerKey,
         isModalOpen: false,
       };
+    // this case can probably be deleted
     case types.SET_NEW_TAB_STATE:
       return {
         ...state,
-        tabIndices: {
-          ...state.tabIndices,
-          [action.newTabIndex]: initialTabHistory,
-        },
+        // tab indices not needed righ tnow.
+        // tabIndices: {
+        //   ...state.tabIndices,
+        //   [action.newTabIndex]: initialTabHistory,
+        // },
       };
+    // this case can probably be deleted
     case types.DELETE_TAB_STATE:
       const newState = Object.assign({}, state);
       delete newState.tabIndices[action.deletedTab];
       return newState;
+    // this case can probably be deleted
     case types.SAVE_TAB_STATE:
       return {
         ...state,
