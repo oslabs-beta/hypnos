@@ -2,11 +2,6 @@
   Context to be used throughout the application
   Allows hooks to be utilized
 
-  ! IMPORTANT NOTES FOR ADVANCED QUERIES
-  ! THESE TARGET SOME QUERY VARS
-  ! QUERYOBJ.kind.definitions[0].name.kind.value = query name (e.g.)
-  ! QUERYOBJ.kind.definitions[0].selectionSet.selections[0].name.value = valBeforeRest (e.g.)
-  ! QUERYOBJ.definitions[""0""].selectionSet.selections[""0""].selectionSet.selections[""0""].directives[""0""].arguments[""0""].value.value === FIRST PARAM?
   ************************** */
 
 import React, { createContext, useContext, useReducer } from 'react';
@@ -110,14 +105,13 @@ const reducer = (state, action) => {
         isModalOpen: false,
       };
     case types.NEW_TAB_STATE:
-      const newTabState = {
+      return {
         ...state,
         tabIndices: {
           ...state.tabIndices,
+          [action.newTabIndex]: initialState,
         },
       };
-      newTabState[action.newTabIndex] = initialState;
-      return newTabState;
     default:
       return state;
   }

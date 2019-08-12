@@ -29,14 +29,18 @@ const TabsManager = () => {
 
   const addNewTab = () => {
     // push new item (just a num) to tabsListLabels
-    const newTabsListLabels = queriesTabs.tabsListLabels;
+    const newTabsListLabels = queriesTabs.tabsListLabels.slice(0);
 
-    newTabsListLabels.push(newTabsListLabels.length);
+    // adds +1 to whateve the final item is in the list
+    const lastLabelAdded = newTabsListLabels[newTabsListLabels.length - 1];
+    newTabsListLabels.push(lastLabelAdded + 1);
 
     setQueriesTabs({
       tabsListLabels: newTabsListLabels,
     });
   };
+
+  console.log('new state labels: ', queriesTabs.tabsListLabels);
   return (
     <Tabs forceRenderTabPanel selectedIndex={currentTab.tabIndex} onSelect={(tabIndex, lastIndex) => setCurrentTab({ tabIndex })}>
       <TabList id="tabs-list">
