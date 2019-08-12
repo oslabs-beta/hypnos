@@ -5,10 +5,17 @@ import {
 import QueriesContainer from './QueriesContainer';
 import DeleteButton from '../Components/MiniComponents/TabsDeleteButton';
 
+import * as types from '../Constants/actionTypes';
+
+import { useStateValue } from '../Context';
+
+
 import 'react-tabs/style/react-tabs.css';
 
 const TabsManager = () => {
   // rendering tabs inside render method, based on tabsListLabels, just nums in an array
+
+  const [state, dispatch] = useStateValue();
 
   const [queriesTabs, setQueriesTabs] = useState({
     tabsListLabels: [0],
@@ -23,6 +30,11 @@ const TabsManager = () => {
       // if (el === tabId) tabIdx = idx;
     });
 
+    dispatch({
+      type: types.DELETE_TAB_STATE,
+      deletedTab: tabId,
+    });
+
     // change tab if current tab was deleted tab not working
     // if (currentTab.tabIndex === tabIdx) setCurrentTab({ tabIndex: tabIdx - 2 });
   };
@@ -32,11 +44,15 @@ const TabsManager = () => {
     const newTabsListLabels = queriesTabs.tabsListLabels.slice(0);
 
     // adds +1 to whateve the final item is in the list
-    const lastLabelAdded = newTabsListLabels[newTabsListLabels.length - 1];
-    newTabsListLabels.push(lastLabelAdded + 1);
+    const newLabel = newTabsListLabels[newTabsListLabels.length - 1] + 1;
+    newTabsListLabels.push(newLabel);
 
     setQueriesTabs({
       tabsListLabels: newTabsListLabels,
+    });
+    dispatch({
+      type: types.SET_NEW_TAB_STATE,
+      newTabIndex: newLabel,
     });
   };
 

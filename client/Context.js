@@ -17,6 +17,13 @@ export const StateProvider = ({ children }) => (
 
 export const useStateValue = () => useContext(StateContext);
 
+const tabHistory = {
+  savedQueryText: '',
+  savedEndpoint: '',
+  savedHeadersKey: '',
+  savedAPIKey: '',
+};
+
 const initialState = {
   query: '',
   queryResultObject: '',
@@ -29,13 +36,17 @@ const initialState = {
   isModalOpen: false,
   headersKey: '',
   apiKey: '',
+  tabIndices: {
+    0: tabHistory,
+  },
 };
 
-const iniialState2 = {
+const initialState2 = {
   tabIndices: {
     0: initialState,
   },
 };
+
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -104,7 +115,7 @@ const reducer = (state, action) => {
         headersKey: action.headerKey,
         isModalOpen: false,
       };
-    case types.NEW_TAB_STATE:
+    case types.SET_NEW_TAB_STATE:
       return {
         ...state,
         tabIndices: {
@@ -112,6 +123,10 @@ const reducer = (state, action) => {
           [action.newTabIndex]: initialState,
         },
       };
+    case types.DELETE_TAB_STATE:
+      const newState = Object.assign({}, state);
+      delete newState.tabIndices[action.deletedTab];
+      return newState;
     default:
       return state;
   }

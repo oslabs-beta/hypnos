@@ -31,7 +31,10 @@ import * as errorResponse from './Constants/errors/errorResponseStrings';
 const proxy = Number(process.env.IS_DEV) === 1 ? 'https://cors-anywhere.herokuapp.com/' : '';
 
 const App = () => {
-  const [{ endpoint, apiKey, headersKey }] = useStateValue();
+  const [{
+    endpoint, apiKey, headersKey,
+  }] = useStateValue();
+ 
   // instantiated errorLink
   // const httpLink = createHttpLink({ uri: proxy + endpoint });
 
