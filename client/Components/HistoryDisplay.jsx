@@ -24,6 +24,15 @@ const HistoryDisplay = () => {
       .catch(e => console.log('Error fetching from DB: ', e));
   }, [query, queryGQLError]);
 
+  const clearHistory = () => {
+    db.history.clear()
+      .then(() => {
+        console.log('Database cleared.');
+        setLocalQH([]);
+      })
+      .catch((e) => { throw new Error('Error in clearing database: ', e); });
+  };
+
   const onEdit = (id) => {
     event.preventDefault();
     db.history
@@ -64,6 +73,9 @@ const HistoryDisplay = () => {
     <section id="history-display">
       <p id="history-header">History</p>
       <ul id="history-list">
+        <li>
+          <button type="button" onClick={clearHistory}>Clear Database</button>
+        </li>
         {localQH.map((pastQueries, idx) => <HistoryListItem key={`history-li-${idx}`} query={pastQueries.query} id={pastQueries.id} onDelete={onDelete} onEdit={onEdit} />)}
       </ul>
     </section>
