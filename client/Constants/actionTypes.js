@@ -8,3 +8,4 @@ export const OPEN_MODAL = 'OPEN_MODAL';
 export const CLOSE_MODAL = 'CLOSE_MODAL';
 export const SET_NEW_TAB_STATE = 'SET_NEW_TAB_STATE';
 export const DELETE_TAB_STATE = 'DELETE_TAB_STATE';
+export const SAVE_TAB_STATE = 'SAVE_TAB_STATE';

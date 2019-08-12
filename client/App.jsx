@@ -34,7 +34,7 @@ const App = () => {
   const [{
     endpoint, apiKey, headersKey,
   }] = useStateValue();
- 
+
   // instantiated errorLink
   // const httpLink = createHttpLink({ uri: proxy + endpoint });
 

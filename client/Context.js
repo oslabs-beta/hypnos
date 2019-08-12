@@ -6,6 +6,7 @@
 
 import React, { createContext, useContext, useReducer } from 'react';
 import * as types from './Constants/actionTypes';
+import * as reqContext from './Constants/requestedContext';
 
 export const StateContext = createContext();
 
@@ -16,12 +17,22 @@ export const StateProvider = ({ children }) => (
 );
 
 export const useStateValue = () => useContext(StateContext);
+export const newUseStateValue = (requestedContext, tab) => {
+  const [state, dispatch] = useContext(StateContext);
+  // if just dispatch is needed
+  if (requestedContext === reqContext.dispatch) return [dispatch];
+  // if entire state is needed
+  if (requestedContext === reqContext.state) return [state, dispatch];
+  // if specific tab's info is needed, as well as possibility of whole state (e.g. isModalOpen)
+  if (requestedContext === reqContext.tab) return [state.tabIndices[tab], dispatch, state];
+};
 
-const tabHistory = {
+const initialTabHistory = {
   savedQueryText: '',
   savedEndpoint: '',
   savedHeadersKey: '',
   savedAPIKey: '',
+  savedHistoryTextValue: '',
 };
 
 const initialState = {
@@ -37,16 +48,9 @@ const initialState = {
   headersKey: '',
   apiKey: '',
   tabIndices: {
-    0: tabHistory,
+    0: initialTabHistory,
   },
 };
-
-const initialState2 = {
-  tabIndices: {
-    0: initialState,
-  },
-};
-
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -77,6 +81,12 @@ const reducer = (state, action) => {
     case types.RESET_STATE:
       return {
         ...initialState,
+        tabIndices: {
+          ...state.tabIndices,
+          // retains history except for current tab
+          // ! NOTE: THIS IS ** 0 ** RIGHT NOW
+          0: initialTabHistory,
+        },
       };
     case types.GQL_ERROR:
       // console.log('gql error fired: ', action);
@@ -120,13 +130,21 @@ const reducer = (state, action) => {
         ...state,
         tabIndices: {
           ...state.tabIndices,
-          [action.newTabIndex]: initialState,
+          [action.newTabIndex]: initialTabHistory,
         },
       };
     case types.DELETE_TAB_STATE:
       const newState = Object.assign({}, state);
       delete newState.tabIndices[action.deletedTab];
       return newState;
+    case types.SAVE_TAB_STATE:
+      return {
+        ...state,
+        tabIndices: {
+          ...state.tabIndices,
+
+        },
+      };
     default:
       return state;
   }

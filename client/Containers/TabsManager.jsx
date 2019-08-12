@@ -58,11 +58,23 @@ const TabsManager = () => {
 
   console.log('new state labels: ', queriesTabs.tabsListLabels);
   return (
-    <Tabs forceRenderTabPanel selectedIndex={currentTab.tabIndex} onSelect={(tabIndex, lastIndex) => setCurrentTab({ tabIndex })}>
+    <Tabs
+      forceRenderTabPanel
+      selectedIndex={currentTab.tabIndex}
+      onSelect={(tabIndex, lastIndex, event) => {
+        console.log('event objec: ', event.target.getAttribute('tab-id'));
+        // this is confusing, but these indecies DO line up with indecies in current state
+        console.log('last tab: ', lastIndex);
+        console.log('new tab: ', tabIndex);
+        const tabIdToSave = queriesTabs.tabsListLabels[lastIndex];
+        console.log(tabIdToSave);
+        setCurrentTab({ tabIndex });
+      }}
+    >
       <TabList id="tabs-list">
         {queriesTabs.tabsListLabels.map((el, idx) => (idx !== 0
           ? (
-            <Tab key={`tab-${el}`} tab-id={el}>
+            <Tab tabIndex="-12" key={`tab-${el}`} tab-id={el}>
               {`Title ${el}`}
               <DeleteButton key={`del-btn-${el}`} tabId={el} deleteTab={deleteTab} />
             </Tab>
