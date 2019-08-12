@@ -118,18 +118,6 @@ const QueryInput = (props) => {
       <article id="query-input">
         <form id="query-input-form" style={isModalOpen ? { visibility: 'hidden' } : { visibility: 'visible' }} onSubmit={() => handleSubmit()}>
           <CodeMirror
-            editorDidMount={(editor) => {
-              console.log('mounted CM');
-              // editor.refresh();
-              // const orgViewportMargin = editor.getOption('viewportMargin');
-              // console.log('og viewport: ', orgViewportMargin);
-              // editor.setOption('viewportMargin', Infinity);
-              // console.log('new viewport: ', editor.getOption('viewportMargin'));
-              // // editor.refresh();
-              // editor.setOption('viewportMargin', orgViewportMargin);
-              // editor.refresh();
-            }}
-            onViewportChange={(editor, from, to) => console.log('code mirror on viewport change. trying to solve opening on tab click')}
             id="code-mirror"
             value={textValue}
             // editor and data are code mirror args. needed to access value
@@ -147,7 +135,6 @@ const QueryInput = (props) => {
               lineWrapping: true,
               autoRefresh: true,
               mode: 'javascript',
-              // autofocus: true,
             }}
           />
           <section id="buttons">
