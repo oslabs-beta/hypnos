@@ -147,6 +147,8 @@ const reducer = (state, action) => {
       return {
         ...state,
         historyTextValue: '',
+        // reset to a number that will never exist
+        historyIdx: -1,
       };
     case types.OPEN_MODAL:
       console.log('open modal fired');
