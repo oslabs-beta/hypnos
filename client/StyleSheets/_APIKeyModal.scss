@@ -10,7 +10,13 @@
         font-size: 13px;
         font-weight: bold;
         color: white;
+        box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+
+        &:focus {
+            outline: 0;
+        }
     }
+
 }
 #api-key-input {
     font-family: Helvetica, sans-serif;
@@ -18,4 +24,33 @@
     
 #headers-key-input {
     font-family: Helvetica, sans-serif;
+}
+
+#api-key-form {
+
+    background-color: $dark-color;
+
+    label {
+        font-family: Helvetica, sans-serif;
+        color: white;
+        padding-bottom: 5px;
+    }
+
+    input {
+        height: 30px;
+        margin: 0px 5px;
+        margin-right: 20px;
+    }
+
+    button {
+        color: $dark-color;
+        background-color: white;
+        height: 35px;
+        width: 50px;
+        margin-top: 10px;
+        font-size: 13px;
+        // color: $highlight-color;
+        font-weight: bold;
+        font-family: Helvetica, sans-serif;
+    }
 }

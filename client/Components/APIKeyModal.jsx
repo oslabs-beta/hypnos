@@ -3,7 +3,7 @@ import Modal from 'react-modal';
 import { useStateValue } from '../Context';
 import * as types from '../Constants/actionTypes';
 
-Modal.setAppElement('#root');
+// Modal.setAppElement('#root');
 
 const customStyles = {
   content: {
@@ -13,11 +13,14 @@ const customStyles = {
     bottom: 'auto',
     marginRight: '-50%',
     transform: 'translate(-50%, -50%)',
+    backgroundColor: '#31708b',
+    width: '100px;',
+    borderRadius: '5px',
   },
 };
 
 const APIModal = () => {
-//   const [{ isModalOpen, apiKey, headersKey }, dispatch] = useStateValue();
+  //   const [{ isModalOpen, apiKey, headersKey }, dispatch] = useStateValue();
 
   const [{ isModalOpen, apiKey, headersKey }, dispatch] = useStateValue();
 
@@ -44,19 +47,19 @@ const APIModal = () => {
       <button onClick={() => openModal()} id="API-button">Authenticate</button>
       <Modal
         isOpen={isModalOpen}
-                //   onAfterOpen={this.afterOpenModal}
+        //   onAfterOpen={this.afterOpenModal}
         onRequestClose={() => closeModal()}
-                //   style={customStyles}
+        style={customStyles}
         contentLabel="API Key"
       >
 
         {/* <h2 ref={subtitle => this.subtitle = subtitle}>Hello</h2> */}
-        <form>
+        <form id="api-key-form">
           <label>
-                        Headers Key:
+            Headers Key:
             <input
               type="text"
-              id="headers-key"
+              id="headers-key-field"
               onChange={(e) => {
                 const header = e.target.value;
                 setHeaderValue(header);
@@ -64,17 +67,17 @@ const APIModal = () => {
             />
           </label>
           <label>
-                        API Key:
+            API Key:
             <input
               type="text"
-              id="API-key"
+              id="api-key-field"
               onChange={(e) => {
                 const api = e.target.value;
                 setApiTextValue(api);
               }}
             />
           </label>
-          <button onClick={() => closeModal()}>Submit</button>
+          <button id="modal-submit-button" onClick={() => closeModal()}>Add</button>
         </form>
       </Modal>
     </section>

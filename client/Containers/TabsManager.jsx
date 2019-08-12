@@ -6,7 +6,7 @@ import QueriesContainer from './QueriesContainer';
 import DeleteButton from '../Components/MiniComponents/TabsDeleteButton';
 import HistoryDisplay from '../Components/HistoryDisplay';
 
-import 'react-tabs/style/react-tabs.css';
+// import 'react-tabs/style/react-tabs.css';
 
 const TabsManager = () => {
   // rendering tabs inside render method, based on tabsListLabels, just nums in an array
@@ -70,7 +70,7 @@ const TabsManager = () => {
                 </Tab>
               )))}
             {/* {<button type="button" onClick={deleteTab}>x</button>} */}
-            <button type="button" id="add-tab-button" style={{ fontSize: '25px' }} onClick={addNewTab}>+</button>
+            <button type="button" id="add-tab-button" style={{ fontSize: '25px', borderStyle: 'none', paddingLeft: '5px' }} onClick={addNewTab}>+</button>
           </TabList>
           {/* {queriesTabs.queriesContainers} */}
           {queriesTabs.tabsListLabels.map((el, idx) => <TabPanel id="tab-panel" key={`tab-panel-${el}`} tab-panel-id={el}><QueriesContainer stateTabReference={el} key={`qc-${el}`} /></TabPanel>)}

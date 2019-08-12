@@ -6,8 +6,8 @@ import EndpointField from './EndpointField';
 // import db from '../db';
 import * as types from '../Constants/actionTypes';
 
-// import Code Mirror styling all at once
-import '../StyleSheets/external/CodeMirror.css';
+// // import Code Mirror styling all at once
+// import '../StyleSheets/external/CodeMirror.css';
 import fetchErrorCheck from '../utils/queryInput/fetchErrorCheck';
 import addQueryToDB from '../utils/queryInput/addQueryToDB';
 import handleQueryFetch from '../utils/queryInput/handleQueryFetch';
