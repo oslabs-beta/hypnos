@@ -104,6 +104,8 @@ const reducer = (state, action) => {
           ranQueryTab: action.ranQueryTab,
         },
         // sets endpoint history, for other tabs being able to run their old queries
+        headersKey: action.newHeadersKey,
+        apiKey: action.newAPIKey,
         endpointHistory: {
           ...state.endpointHistory,
           [action.ranQueryTab]: action.newEndpoint ? action.newEndpoint : state.endpoint,
@@ -147,7 +149,7 @@ const reducer = (state, action) => {
         historyTextValue: action.historyTextValue,
         historyIdx: action.currentTabID,
         // ! original:
-        endpoint: state.endpoint,
+        endpoint: action.endpoint,
         // ! New:
         endpointFromDB: action.endpoint,
         endpointHistory: {

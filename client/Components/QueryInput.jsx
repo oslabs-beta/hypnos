@@ -40,6 +40,12 @@ const QueryInput = (props) => {
     historyTextValue, isModalOpen, endpointHistory, historyIdx,
   }, dispatch] = useStateValue();
   const [textValue, setTextValue] = useState(exampleQuery);
+
+  const [modalOptions, setModalOptions] = useState({
+    isModalOpen: false,
+    newHeadersKey: '',
+    newAPIKey: '',
+  });
   // if edit button has been clicked, then historyTextValue exists in state. reassigned to fill out
   // code mirror text area
 
@@ -88,6 +94,8 @@ const QueryInput = (props) => {
         queryResultObject: regexResult ? textValue.match(/(?<=\{\W)(.*?)(?=\@)/g)[0].trim() : 'null',
         newEndpoint: urlToSend,
         ranQueryTab: stateTabReference,
+        newHeadersKey: modalOptions.newHeadersKey,
+        newAPIKey: modalOptions.newAPIKey,
       }),
     ])
       .then(() => console.log('DB entry added and dispatch successful.'))
@@ -96,9 +104,9 @@ const QueryInput = (props) => {
 
   return (
     <>
-      <EndpointField setNewAPIEndpoint={setNewAPIEndpoint} stateTabReference={stateTabReference} />
+      <EndpointField modalOptions={modalOptions} setModalOptions={setModalOptions} setNewAPIEndpoint={setNewAPIEndpoint} stateTabReference={stateTabReference} />
       <article id="query-input">
-        <form id="query-input-form" style={isModalOpen ? { visibility: 'hidden' } : { visibility: 'visible' }} onSubmit={() => handleSubmit()}>
+        <form id="query-input-form" style={modalOptions.isModalOpen ? { visibility: 'hidden' } : { visibility: 'visible' }} onSubmit={() => handleSubmit()}>
           <CodeMirror
             id="code-mirror"
             value={textValue}
