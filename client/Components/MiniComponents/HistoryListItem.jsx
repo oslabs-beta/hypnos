@@ -19,8 +19,16 @@ const HistoryListItem = (props) => {
         onMouseEnter={() => toggleHover(true)}
         onMouseLeave={() => toggleHover(false)}
       >
-        {`Endpoint: ${endpoint}\nPath: ${path}`}
-
+        <p>
+          <span>Endpoint:</span>
+          {' '}
+          {endpoint}
+        </p>
+        <p>
+          <span>Path:</span>
+          {' '}
+          {path}
+        </p>
         {isHovering && (
           <span id="button-hover">
             <button
