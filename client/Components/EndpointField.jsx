@@ -18,7 +18,6 @@ const EndpointField = (props) => {
         onChange={(e) => {
           // have to assign value from text area instead of local state, since state setter
           // and dispatch are async
-          console.log('chang in endpoint input');
 
           const newUrl = e.target.value;
           setNewAPIEndpoint(newUrl);

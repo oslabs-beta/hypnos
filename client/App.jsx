@@ -1,11 +1,11 @@
 import React from 'react';
-//not sure we need the below
+// not sure we need the below
 // import './StyleSheets/App.scss';
 
 // import {
 //   Tab, Tabs, TabList, TabPanel,
 // } from 'react-tabs';
-//not sure we need the below
+// not sure we need the below
 // import 'react-tabs/style/react-tabs.css';
 
 

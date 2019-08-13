@@ -34,7 +34,7 @@ const APIModal = () => {
   };
 
   const closeModal = () => {
-    console.log('close modal happened');
+    // console.log('close modal happened');
     dispatch({
       type: types.CLOSE_MODAL,
       apiKey: apiTextValue,
