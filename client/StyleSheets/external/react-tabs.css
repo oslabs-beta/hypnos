@@ -1,6 +1,16 @@
 .react-tabs {
     -webkit-tap-highlight-color: transparent;
   }
+
+.react-tabs button:focus {
+  outline: 0;
+}
+
+.react-tabs button {
+  border-style: none;
+  font-size: '25px'; 
+  padding-left: '5px';
+}
   
   .react-tabs__tab-list {
     border-bottom: 1px solid #aaa;

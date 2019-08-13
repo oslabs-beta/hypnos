@@ -4,9 +4,10 @@
     overflow: scroll;
     display: grid; 
     grid-template-columns: 1fr;
-    grid-template-rows: 30px 1fr;
+    grid-template-rows: 30px 20px 1fr;
     grid-template-areas:
     "historyHeader"
+    "clearHistory"
     "historyList" ;
     height: 85vh;
     // width: 90%;
@@ -50,7 +51,7 @@
         grid-area: historyHeader;
         background-color: $loading-color;
         color: $highlight-color;
-        height: 5vh;
+        // height: 5vh;
         padding-left: 10px;
         // box-shadow: 0 2px 4px 0 rgba(0,0,0,0.2);
         align-items: center;
@@ -60,6 +61,22 @@
     #history-list {
         grid-area: historyList;
         padding: 20px 10px;
+    }
+
+    #clear-history {
+        display: grid;
+        grid-area: clearHistory;
+        border-style: none;
+        background-color: $loading-color;
+        color: $highlight-color;
+        align-items: center;
+        justify-self: stretch
+
+        
+    }
+
+    button:focus {
+        outline: 0;
     }
 
 }

@@ -19,6 +19,8 @@
     display: grid;
 }
 
+#add-tab-button:focus {
+    outline: 0;
 .react-tabs__tab {
     font-family: Helvetica, sans-serif;
 }

@@ -64,7 +64,7 @@ const TabsManager = () => {
               ? (
                 <Tab key={`tab-${el}`} tab-id={el} style={{ fontFamily: 'Helvetica, sans-serif', fontSize: '12px', height: '17px' }}>
                   {endpointHistory[el] ? endpointHistory[el] : defaultEndpoint}
-                  <DeleteButton key={`del-btn-${el}`} tabId={el} deleteTab={deleteTab} />
+                  <DeleteButton className="delete-button" key={`del-btn-${el}`} tabId={el} deleteTab={deleteTab} />
                 </Tab>
               )
               : (
@@ -73,7 +73,7 @@ const TabsManager = () => {
                 </Tab>
               )))}
             {/* {<button type="button" onClick={deleteTab}>x</button>} */}
-            <button type="button" id="add-tab-button" style={{ fontSize: '25px', borderStyle: 'none', paddingLeft: '5px' }} onClick={addNewTab}>+</button>
+            <button type="button" id="add-tab-button" style={{ fontSize: '25px', paddingLeft: '5px' }} onClick={addNewTab}>+</button>
           </TabList>
           {/* {queriesTabs.queriesContainers} */}
           {queriesTabs.tabsListLabels.map((el, idx) => <TabPanel id="tab-panel" key={`tab-panel-${el}`} tab-panel-id={el}><QueriesContainer stateTabReference={el} key={`qc-${el}`} /></TabPanel>)}
