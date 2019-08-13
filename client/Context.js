@@ -151,7 +151,7 @@ const reducer = (state, action) => {
         // ! original:
         endpoint: action.endpoint,
         // ! New:
-        endpointFromDB: action.endpoint,
+        // endpointFromDB: action.endpoint,
         endpointHistory: {
           ...state.endpointHistory,
           [action.currentTabID]: action.endpoint,
