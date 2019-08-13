@@ -5,11 +5,14 @@ import {
 import QueriesContainer from './QueriesContainer';
 import DeleteButton from '../Components/MiniComponents/TabsDeleteButton';
 import HistoryDisplay from '../Components/HistoryDisplay';
+import { useStateValue } from '../Context';
+import defaultEndpoint from '../Constants/defaultEndpoint';
 
 // import 'react-tabs/style/react-tabs.css';
 
 const TabsManager = () => {
   // rendering tabs inside render method, based on tabsListLabels, just nums in an array
+  const [{ endpointHistory }, dispatch] = useStateValue();
 
   const [queriesTabs, setQueriesTabs] = useState({
     tabsListLabels: [0],
@@ -59,14 +62,14 @@ const TabsManager = () => {
           <TabList id="tabs-list">
             {queriesTabs.tabsListLabels.map((el, idx) => (idx !== 0
               ? (
-                <Tab key={`tab-${el}`} tab-id={el}>
-                  {`Title ${el}`}
+                <Tab key={`tab-${el}`} tab-id={el} style={{'font-family': 'Helvetica, sans-serif', 'font-size': '12px', 'height': '17px'}}>
+                  {endpointHistory[el] ? endpointHistory[el] : defaultEndpoint}
                   <DeleteButton key={`del-btn-${el}`} tabId={el} deleteTab={deleteTab} />
                 </Tab>
               )
               : (
-                <Tab key={`tab-${el}`} tab-id={el}>
-                  {`Title ${el}`}
+                <Tab key={`tab-${el}`} tab-id={el} style={{'font-family': 'Helvetica, sans-serif', 'font-size': '12px', 'height': '17px'}}>
+                  {endpointHistory[el]}
                 </Tab>
               )))}
             {/* {<button type="button" onClick={deleteTab}>x</button>} */}

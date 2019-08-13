@@ -7,7 +7,8 @@
 }
 
 .react-tabs {
-    grid-area: reactTabs
+    grid-area: reactTabs;
+    
 }
 
 .react-tabs__tab--selected {
@@ -16,5 +17,9 @@
 
 #tabs-list {
     display: grid;
+}
+
+.react-tabs__tab {
+    font-family: Helvetica, sans-serif;
 }
 
