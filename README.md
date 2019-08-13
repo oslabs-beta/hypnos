@@ -1,3 +1,7 @@
+<p align="center">
+<img src="./assets/hypnos-icon.png" style="width: 100px; height: 100px" >
+</p>
+
 # HYPNOS
 
 Hypnos is a tool to better handle errors for GraphQL calls to RESTful API’s using Apollo Client’s Apollo-link-rest package. User can put in an endpoint for a RESTful API and mock up an Apollo-link-rest call and will receive either meaningful errors or their expected data. 
