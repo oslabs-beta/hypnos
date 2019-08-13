@@ -18,34 +18,13 @@ export const StateProvider = ({ children }) => (
 export const useStateValue = () => useContext(StateContext);
 
 
-// experiment: to have robust tab history. not needed right now
-
-// export const newUseStateValue = (requestedContext, tab) => {
-//   const [state, dispatch] = useContext(StateContext);
-//   // if just dispatch is needed
-//   if (requestedContext === reqContext.dispatch) return [dispatch];
-//   // if entire state is needed
-//   if (requestedContext === reqContext.state) return [state, dispatch];
-//   // if specific tab's info is needed, as well as possibility of whole state (e.g. isModalOpen)
-//   if (requestedContext === reqContext.tab) return [state.tabIndices[tab], dispatch, state];
+// const initialEndpointHistory = {
+//   endpoint: 'https://pokeapi.co/api/v2/pokemon/',
+//   headers: {
+//     headersKey: '',
+//     apiKey: '',
+//   },
 // };
-
-// initial tab history and tabIndices not being used right now
-// const initialTabHistory = {
-//   savedQueryText: '',
-//   savedEndpoint: '',
-//   savedHeadersKey: '',
-//   savedAPIKey: '',
-//   savedHistoryTextValue: '',
-// };
-
-const initialEndpointHistory = {
-  endpoint: 'https://pokeapi.co/api/v2/pokemon/',
-  headers: {
-    headersKey: '',
-    apiKey: '',
-  },
-};
 
 const initialState = {
   query: {
@@ -62,17 +41,9 @@ const initialState = {
   historyTextValue: '',
   historyIdx: 0,
   endpointFromDB: '',
-  isModalOpen: false,
-  headersKey: '',
-  apiKey: '',
   endpointHistory: {
     0: 'https://pokeapi.co/api/v2/pokemon/',
-    // 999: initialEndpointHistory,
   },
-  // not being used right now
-  // tabIndices: {
-  //   0: initialTabHistory,
-  // },
 };
 
 const reducer = (state, action) => {
@@ -122,13 +93,6 @@ const reducer = (state, action) => {
           ...state.endpointHistory,
           [action.currentTab]: 'https://pokeapi.co/api/v2/pokemon/',
         },
-        // TAB INDICIES NOT NEEDED RIGHT NOW
-        // tabIndices: {
-        //   ...state.tabIndices,
-        //   // retains history except for current tab
-        //   // ! NOTE: THIS IS ** 0 ** RIGHT NOW
-        //   0: initialTabHistory,
-        // },
       };
     case types.GQL_ERROR:
       // console.log('gql error fired: ', action);
@@ -148,10 +112,7 @@ const reducer = (state, action) => {
         ...initialState,
         historyTextValue: action.historyTextValue,
         historyIdx: action.currentTabID,
-        // ! original:
         endpoint: action.endpoint,
-        // ! New:
-        // endpointFromDB: action.endpoint,
         endpointHistory: {
           ...state.endpointHistory,
           [action.currentTabID]: action.endpoint,
@@ -164,43 +125,6 @@ const reducer = (state, action) => {
         historyTextValue: '',
         // reset to a number that will never exist
         historyIdx: -1,
-      };
-    case types.OPEN_MODAL:
-      console.log('open modal fired');
-      return {
-        ...state,
-        isModalOpen: true,
-      };
-    case types.CLOSE_MODAL:
-      console.log('close modal fired');
-      return {
-        ...state,
-        apiKey: action.apiKey,
-        headersKey: action.headerKey,
-        isModalOpen: false,
-      };
-    // this case can probably be deleted
-    case types.SET_NEW_TAB_STATE:
-      return {
-        ...state,
-        // tab indices not needed righ tnow.
-        // tabIndices: {
-        //   ...state.tabIndices,
-        //   [action.newTabIndex]: initialTabHistory,
-        // },
-      };
-    // this case can probably be deleted
-    case types.DELETE_TAB_STATE:
-      const newState = Object.assign({}, state);
-      delete newState.tabIndices[action.deletedTab];
-      return newState;
-    // this case can probably be deleted
-    case types.SAVE_TAB_STATE:
-      return {
-        ...state,
-        tabIndices: {
-          ...state.tabIndices,
-        },
       };
     default:
       return state;

@@ -20,10 +20,7 @@ const customStyles = {
 };
 
 const APIModal = (props) => {
-  //   const [{ isModalOpen, apiKey, headersKey }, dispatch] = useStateValue();
   const { modalOptions, setModalOptions } = props;
-
-  const [{ isModalOpen, apiKey, headersKey }, dispatch] = useStateValue();
 
   const [apiTextValue, setApiTextValue] = useState('');
   const [headerValue, setHeaderValue] = useState('');
@@ -33,9 +30,6 @@ const APIModal = (props) => {
       ...modalOptions,
       isModalOpen: true,
     });
-    // dispatch({
-    //   type: types.OPEN_MODAL,
-    // });
   };
 
   const closeModal = () => {
@@ -46,11 +40,6 @@ const APIModal = (props) => {
       newAPIKey: apiTextValue.trim(),
       isModalOpen: false,
     });
-    // dispatch({
-    //   type: types.CLOSE_MODAL,
-    //   apiKey: apiTextValue.trim(),
-    //   headerKey: headerValue.trim(),
-    // });
   };
 
   return (
