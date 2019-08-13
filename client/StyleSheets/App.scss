@@ -24,7 +24,7 @@ body {
     min-width: 100vw;
     min-height: 100vh;
     display: grid;
-    grid-template-rows: 50px 45px 1fr;
+    grid-template-rows: 7% 15% 1fr;
     grid-template-columns: 15% 1fr;
     grid-template-areas: 
         "header header"
@@ -32,6 +32,8 @@ body {
         "historyDisplay reactTabs";
     font: $font-stack;
     background-color: $background-color;
+    // NOT SURE WHAT ELSE THE BELOW MIGHT CAUSE, BUT THIS FIXES WHITESPACE ON BOTTOM
+    overflow: hidden;
 }
 
 %input-fields {

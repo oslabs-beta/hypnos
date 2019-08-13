@@ -4,10 +4,10 @@ import React, { useState } from 'react';
 const HistoryListItem = (props) => {
   const [isHovering, toggleHover] = useState(false);
   const {
-    id, query, onDelete, onEdit,
+    id, queryText, endpoint, onDelete, onEdit,
   } = props;
 
-  const pathRegex = query.query.match(/(?<=path:\W*\")\S*(?=\")/gi);
+  const pathRegex = queryText.match(/(?<=path:\W*\")\S*(?=\")/gi);
   const path = pathRegex ? pathRegex[0] : 'invalid';
   // console.log('rendering a list item');
   return (
@@ -19,9 +19,16 @@ const HistoryListItem = (props) => {
         onMouseEnter={() => toggleHover(true)}
         onMouseLeave={() => toggleHover(false)}
       >
-        {`Endpoint: ${query.endpoint}
-        Path: ${path}`}
-
+        <p>
+          <span>Endpoint:</span>
+          {' '}
+          {endpoint}
+        </p>
+        <p>
+          <span>Path:</span>
+          {' '}
+          {path}
+        </p>
         {isHovering && (
           <span id="button-hover">
             <button

@@ -19,8 +19,9 @@ const customStyles = {
   },
 };
 
-const APIModal = () => {
+const APIModal = (props) => {
   //   const [{ isModalOpen, apiKey, headersKey }, dispatch] = useStateValue();
+  const { modalOptions, setModalOptions } = props;
 
   const [{ isModalOpen, apiKey, headersKey }, dispatch] = useStateValue();
 
@@ -28,32 +29,47 @@ const APIModal = () => {
   const [headerValue, setHeaderValue] = useState('');
 
   const openModal = () => {
-    dispatch({
-      type: types.OPEN_MODAL,
+    setModalOptions({
+      ...modalOptions,
+      isModalOpen: true,
     });
+    // dispatch({
+    //   type: types.OPEN_MODAL,
+    // });
   };
 
   const closeModal = () => {
     // console.log('close modal happened');
-    dispatch({
-      type: types.CLOSE_MODAL,
-      apiKey: apiTextValue,
-      headerKey: headerValue,
+    setModalOptions({
+      ...modalOptions,
+      newHeadersKey: headerValue.trim(),
+      newAPIKey: apiTextValue.trim(),
+      isModalOpen: false,
     });
+    // dispatch({
+    //   type: types.CLOSE_MODAL,
+    //   apiKey: apiTextValue.trim(),
+    //   headerKey: headerValue.trim(),
+    // });
   };
 
   return (
     <section id="API-key-modal">
-      <button onClick={() => openModal()} id="API-button">Submit<br/>API Key</button>
+      <button onClick={() => openModal()} id="API-button">
+Submit
+        <br />
+API Key
+      </button>
       <Modal
-        isOpen={isModalOpen}
+        isOpen={modalOptions.isModalOpen}
         //   onAfterOpen={this.afterOpenModal}
         onRequestClose={() => closeModal()}
         style={customStyles}
         contentLabel="API Key"
       >
 
-        {/* <h2 ref={subtitle => this.subtitle = subtitle}>Hello</h2> */}
+        <p id="modal-instructions">If your endpoint requires an API key, please enter it here.</p>
+        <br />
         <form id="api-key-form">
           <label>
             Headers Key:
