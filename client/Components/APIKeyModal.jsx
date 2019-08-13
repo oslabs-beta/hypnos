@@ -34,7 +34,7 @@ const APIModal = () => {
   };
 
   const closeModal = () => {
-    console.log('close modal happened');
+    // console.log('close modal happened');
     dispatch({
       type: types.CLOSE_MODAL,
       apiKey: apiTextValue,
@@ -44,7 +44,7 @@ const APIModal = () => {
 
   return (
     <section id="API-key-modal">
-      <button onClick={() => openModal()} id="API-button">Authenticate</button>
+      <button onClick={() => openModal()} id="API-button">Submit API Key</button>
       <Modal
         isOpen={isModalOpen}
         //   onAfterOpen={this.afterOpenModal}
