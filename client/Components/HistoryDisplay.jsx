@@ -53,14 +53,8 @@ const HistoryDisplay = (props) => {
         const inputField = document.querySelector(`#endpoint-field[input-field-tab-id ="${currentTabID}"] input`);
         console.log('found input: ', inputField);
         inputField.value = foundQuery.endpoint;
-        // const inputFields = document.querySelectorAll('#endpoint-field input');
-        // // clears fields for all input field attribues. but endpoint value at component level still takes in what was in endpoint field beforehand
-        // inputFields.forEach((el) => {
-        //   el.value = '';
-        // });
-        // inputFields.value = '';
       })
-      .catch(e => console.log('Error searching DB.', e));
+      .catch(e => console.log('Error searching DB.'));
   };
 
   const onDelete = (queryId) => {
