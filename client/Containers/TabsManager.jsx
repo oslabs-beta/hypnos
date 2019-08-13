@@ -73,7 +73,7 @@ const TabsManager = () => {
                 </Tab>
               )))}
             {/* {<button type="button" onClick={deleteTab}>x</button>} */}
-            <button type="button" id="add-tab-button" style={{ fontSize: '25px', borderStyle: 'none', paddingLeft: '5px', paddingBottom: '-6px',backgroundColor: '#f7f9fb', outline: 'none' }} onClick={addNewTab}>+</button>
+            <button type="button" id="add-tab-button" style={{ fontSize: '25px', borderStyle: 'none', paddingLeft: '5px', paddingBottom: '-6px',backgroundColor: '#f7f9fb', outline: 'none', alignSelf: 'center' }} onClick={addNewTab}>+</button>
           </TabList>
           {/* {queriesTabs.queriesContainers} */}
           {queriesTabs.tabsListLabels.map((el, idx) => <TabPanel id="tab-panel" key={`tab-panel-${el}`} tab-panel-id={el}><QueriesContainer stateTabReference={el} key={`qc-${el}`} /></TabPanel>)}

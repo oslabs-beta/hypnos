@@ -32,6 +32,7 @@ body {
         "historyDisplay reactTabs";
     font: $font-stack;
     background-color: $background-color;
+    // NOT SURE WHAT ELSE THE BELOW MIGHT CAUSE, BUT THIS FIXES WHITESPACE ON BOTTOM
     overflow: hidden;
 }
 

@@ -130,12 +130,14 @@ const QueryInput = (props) => {
               onClick={() => {
                 dispatch({
                   type: types.RESET_STATE,
+                  currentTab: stateTabReference,
                 });
                 // after reseting state, reset endpoint field to empty string. in state,
                 // it will be POKEAPI
 
                 // vanilla DOM manipulation was the best way to change the input field value
-                const inputField = document.querySelector('#endpoint-field input');
+                // only resets current tab's endpoint field
+                const inputField = document.querySelector(`#endpoint-field[input-field-tab-id ="${stateTabReference}"] input`);
                 inputField.value = '';
                 // reset textValue field to exampleQuery
                 setTextValue(exampleQuery);

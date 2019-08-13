@@ -109,6 +109,7 @@ const reducer = (state, action) => {
         // this might not be needed below
         endpointHistory: {
           ...state.endpointHistory,
+          [action.currentTab]: 'https://pokeapi.co/api/v2/pokemon/',
         },
         // TAB INDICIES NOT NEEDED RIGHT NOW
         // tabIndices: {
