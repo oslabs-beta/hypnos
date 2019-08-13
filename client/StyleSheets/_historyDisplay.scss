@@ -79,8 +79,8 @@
         // background-color: $loading-color;
         // color: $highlight-color;
         align-items: left;
-        padding-left: 10px;
-        height: 32px;
+        // padding-left: 10px;
+        height: 33px;
         border-bottom: 1px solid $loading-color;
 
         // border-bottom-color: black;
@@ -89,10 +89,18 @@
     }
 
     #clear-history-button {
-        border-style: none;
-        height: 32px;
+        // border-style: none;
+        height: 33px;
+        width: 100px;
         background-color: $background-color;
         font-size: 13px;
+        border-right: 1px solid $loading-color;
+        border-top: none;
+        border-bottom: none;
+    }
+
+    #clear-history-button:hover {
+        background-color: #D3D3D3;
     }
 
     button:focus {
