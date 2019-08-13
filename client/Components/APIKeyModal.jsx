@@ -53,7 +53,8 @@ const APIModal = () => {
         contentLabel="API Key"
       >
 
-        {/* <h2 ref={subtitle => this.subtitle = subtitle}>Hello</h2> */}
+        <p id='modal-instructions'>If your endpoint requires an API key, please enter it here.</p>
+        <br />
         <form id="api-key-form">
           <label>
             Headers Key:
