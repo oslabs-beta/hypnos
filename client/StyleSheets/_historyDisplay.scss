@@ -9,7 +9,7 @@
     "historyHeader"
     "clearHistory"
     "historyList" ;
-    height: 85vh;
+    height: 88vh;
     // width: 90%;
     font-family: system-ui;
     background-color: #f7f7f7;
@@ -22,6 +22,7 @@
     ul {
         list-style-type: none;
         font-size: 13px;
+        margin-bottom: 43px;
 
 
         li {
@@ -59,6 +60,7 @@
         // box-shadow: 0 2px 4px 0 rgba(0,0,0,0.2);
         align-items: center;
         font-weight: bold;
+        width: 100%;
     }
     
     #history-list {
