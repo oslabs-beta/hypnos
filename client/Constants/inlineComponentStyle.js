@@ -7,6 +7,11 @@ export const tabsDeleteButtonStyle = {
   visibility: 'visible',
 };
 
+export const tabsDeleteButtonMainStyle = {
+  ...tabsDeleteButtonStyle,
+  visibility: 'hidden',
+};
+
 export const apiKeyModalStyle = {
   content: {
     top: '50%',

@@ -1,15 +1,15 @@
 import React from 'react';
-import { tabsDeleteButtonStyle as styleObj } from '../../Constants/inlineComponentStyle';
+import { tabsDeleteButtonStyle, tabsDeleteButtonMainStyle } from '../../Constants/inlineComponentStyle';
 
 const DeleteButton = (props) => {
   const { tabId, deleteTab, isHidden } = props;
-  styleObj.visibility = isHidden ? 'hidden' : 'visible';
+
   return (
     <button
       type="button"
       tab-id={tabId}
       onClick={() => deleteTab(tabId)}
-      style={styleObj}
+      style={isHidden ? tabsDeleteButtonMainStyle : tabsDeleteButtonStyle}
     >
       X
     </button>

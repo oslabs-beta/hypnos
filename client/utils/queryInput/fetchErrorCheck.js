@@ -3,12 +3,11 @@
 *
 */
 
-import * as types from '../../Constants/actionTypes';
 import * as errorMsg from '../../Constants/errors/errorStrings';
-import * as errorReponse from '../../Constants/errors/errorResponseStrings';
 import * as dispatchObj from '../../Constants/errors/errorDispatchObjects';
 
 const fetchErrorCheck = (error, dispatch) => {
+  console.log('error coming in: ', error);
   // if Gql query does not start with 'query'
   // console.log('inside fetch error check: ', error);
   if (error.message.slice(0, errorMsg.queryMethodError.length) === errorMsg.queryMethodError) {
@@ -44,9 +43,11 @@ const fetchErrorCheck = (error, dispatch) => {
   } else if (error.message.slice(0, errorMsg.noPathOrTypeError.length) === errorMsg.noPathOrTypeError) {
     dispatch(dispatchObj.noPathOrTypeError);
     // throw new Error(errorReponse.noPathOrTypeError);
+  } else if (error.message === errorMsg.singleQuotesError) {
+    dispatch(dispatchObj.singleQuotesError);
   } else {
     // console.log('Error in fetch: ', error);
-    throw new Error('Error n fetch: ', error);
+    throw new Error('Error in fetch: ', error);
   }
 };
 

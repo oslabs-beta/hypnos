@@ -7,3 +7,4 @@ export const typeSyntaxError = 'Inside @rest, "type" must be followed by a colon
 export const noRestCallError = 'Query must have an @rest call.';
 export const noPathOrTypeError = '@rest must have a \'path\' and \'type\' property. Please click reset to check the example for reference.';
 export const endpointPath404Error = 'Endpoint is invalid. Please double check your endpoint.';
+export const singleQuotesError = 'Please use double quotes (" ") instead of single quotes (\' \').';
