@@ -70,6 +70,7 @@ const TabsManager = () => {
               : (
                 <Tab key={`tab-${el}`} tab-id={el} style={{fontFamily: 'Helvetica, sans-serif', fontSize: '12px', height: '17px', backgroundColor: '#f7f9fb'}}>
                   {endpointHistory[el]}
+                  <DeleteButton id="main-tab-delete" className="delete-button" key={`del-btn-${el}`} tabId={el} deleteTab={()=>{}} isHidden={true}/>
                 </Tab>
               )))}
             {/* {<button type="button" onClick={deleteTab}>x</button>} */}
