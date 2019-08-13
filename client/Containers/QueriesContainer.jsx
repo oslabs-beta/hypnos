@@ -39,7 +39,7 @@ const QueriesContainer = (props) => {
       OutputOfQuery = graphql(query, {
         onError: (e) => {
           // not working
-          console.log('too many queries');
+          console.log('Too many queries being run.');
         },
         props: ({ data }) => {
           // dispatch moved to before query being run

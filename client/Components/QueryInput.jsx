@@ -7,10 +7,12 @@ import EndpointField from './EndpointField';
 import * as types from '../Constants/actionTypes';
 
 // // import Code Mirror styling all at once
+// NOTE: THIS IS NOW BEING IMPORTED IN INDEX.HTML FILE
 // import '../StyleSheets/external/CodeMirror.css';
+
 import fetchErrorCheck from '../utils/queryInput/fetchErrorCheck';
 import addQueryToDB from '../utils/queryInput/addQueryToDB';
-import handleQueryFetch from '../utils/queryInput/handleQueryFetch';
+// import handleQueryFetch from '../utils/queryInput/handleQueryFetch';
 
 import defaultEndpoint from '../Constants/defaultEndpoint';
 
@@ -63,24 +65,13 @@ const QueryInput = (props) => {
     // new way
     const urlToSend = newAPIEndpoint || endpointHistory[stateTabReference] || defaultEndpoint;
 
-
-    // tries to run DB query and fetch chain in tandem
-    // ! PROMISE.ALL TEST
-    // * THIS SEEMS TO WORK FINE, 8/6
-    // Promise.all([addQueryToDB(textValue, urlToSend), handleQueryFetch(textValue, urlToSend, dispatch, setNewAPIEndpoint)])
-    //   .then(() => console.log('DB query and fetches successful.'))
-    //   .catch(e => console.log('Error in fetch/DB promise.all: ', e));
-    // ! END OF PROMISE.ALL TEST
-
-    // ! TEST FOR MOVING ERROR HANDLING TO APOLLO CLIENT
-    // console.log('dispatch about to be fired');
-    // console.log('query obj: ', gql([textValue]));
     try {
       gql([`${textValue}`]);
     } catch (err) {
       // console.log('could not make tag: ', err);
       // NEED CATCH FOR NO PATH STRING AT ALL
       // 'Syntax Error: Unexpected )'
+
       // NEED 404 CHECK -- PULL FROM HANDLE QUERY FETCH?
       fetchErrorCheck(err, dispatch);
       return;
@@ -101,32 +92,7 @@ const QueryInput = (props) => {
     ])
       .then(() => console.log('DB entry added and dispatch successful.'))
       .catch(e => console.log('Error in DB add/dispatch chain: ', e));
-    // commented out
-    // dispatch({
-    //   type: types.RUN_QUERY,
-    //   // decontructed using of gql tag to make query object. need to pass in a stringliteral.
-    //   query: gql([`${textValue}`]),
-    //   // pulls of key for where data will be in result obj
-    //   queryResultObject: regexResult ? textValue.match(/(?<=\{\W)(.*?)(?=\@)/g)[0].trim() : 'null',
-    //   newEndpoint: urlToSend,
-    // });
-    // ! END TEST FOR APOLLO CLIENT/ERRORS
-
-    // send textValue to Dexie db
-    // runs DB query and THEN fetch chain
-    // db.history.put({
-    //   query: textValue,
-    //   endpoint: urlToSend,
-    // })
-    //   .then(() => {
-    //     console.log('Sent to database.');
-    //     handleQueryFetch(textValue, urlToSend, dispatch, setNewAPIEndpoint);
-    //   })
-    //   .catch(e => console.log('Error adding query to database.'));
   };
-
-  // this fetch chain/handleSubmit is in a different file,
-  // as handleQueryFetch, and imported.
 
   return (
     <>
