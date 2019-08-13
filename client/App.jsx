@@ -57,8 +57,8 @@ const App = () => {
     uri: proxy + endpoint,
     fetchOptions: {
       mode: 'no-cors',
-      headers: headersOptions,
     },
+    headers: headersOptions,
     // onError: ({ networkError, graphQLErrors }) => {
     //   console.log('graphQLErrors', graphQLErrors);
     //   console.log('networkError', networkError);

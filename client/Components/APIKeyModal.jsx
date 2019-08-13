@@ -44,7 +44,7 @@ const APIModal = () => {
 
   return (
     <section id="API-key-modal">
-      <button onClick={() => openModal()} id="API-button">Submit API Key</button>
+      <button onClick={() => openModal()} id="API-button">Submit<br/>API Key</button>
       <Modal
         isOpen={isModalOpen}
         //   onAfterOpen={this.afterOpenModal}
@@ -53,7 +53,8 @@ const APIModal = () => {
         contentLabel="API Key"
       >
 
-        {/* <h2 ref={subtitle => this.subtitle = subtitle}>Hello</h2> */}
+        <p id='modal-instructions'>If your endpoint requires an API key, please enter it here.</p>
+        <br />
         <form id="api-key-form">
           <label>
             Headers Key:
