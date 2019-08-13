@@ -63,13 +63,13 @@ const App = () => {
     //   console.log('graphQLErrors', graphQLErrors);
     //   console.log('networkError', networkError);
     // },
-    customFetch: (uri, fetchOptions) =>
-      // console.log('in custom fetch');
-      new Promise((resolve, reject) => {
+    customFetch: (uri, fetchOptions) => {
+      console.log('in custom fetch. fetchOptions: ', fetchOptions);
+      return new Promise((resolve, reject) => {
         fetch(uri, fetchOptions)
           .then((res) => {
             // const clone = res.clone();
-            // console.log('in first then lock, custom fetch');
+            console.log('in first then lock, custom fetch: ', res);
             if (res.status === 404) {
               // dispatch inside of here seems to break it
               // dispatch(errorDispatchObj.endpointPath404Error);
@@ -86,7 +86,8 @@ const App = () => {
             // console.log('error in custom fetch');
             reject('error in custom fetch: ', e);
           });
-      }),
+      });
+    },
     // credentials: 'include',
   });
 

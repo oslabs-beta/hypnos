@@ -39,6 +39,14 @@ export const useStateValue = () => useContext(StateContext);
 //   savedHistoryTextValue: '',
 // };
 
+const initialEndpointHistory = {
+  endpoint: 'https://pokeapi.co/api/v2/pokemon/',
+  headers: {
+    headersKey: '',
+    apiKey: '',
+  },
+};
+
 const initialState = {
   query: {
     // MADE QUERY AN OBJ WITH QUERY PROP. ADDED RAN QUERYTAB ON IT TO KNOW WHERE QUERY CAME FROM
@@ -59,6 +67,7 @@ const initialState = {
   apiKey: '',
   endpointHistory: {
     0: 'https://pokeapi.co/api/v2/pokemon/',
+    // 999: initialEndpointHistory,
   },
   // not being used right now
   // tabIndices: {
@@ -95,6 +104,8 @@ const reducer = (state, action) => {
           ranQueryTab: action.ranQueryTab,
         },
         // sets endpoint history, for other tabs being able to run their old queries
+        headersKey: action.newHeadersKey,
+        apiKey: action.newAPIKey,
         endpointHistory: {
           ...state.endpointHistory,
           [action.ranQueryTab]: action.newEndpoint ? action.newEndpoint : state.endpoint,
@@ -138,9 +149,9 @@ const reducer = (state, action) => {
         historyTextValue: action.historyTextValue,
         historyIdx: action.currentTabID,
         // ! original:
-        endpoint: state.endpoint,
+        endpoint: action.endpoint,
         // ! New:
-        endpointFromDB: action.endpoint,
+        // endpointFromDB: action.endpoint,
         endpointHistory: {
           ...state.endpointHistory,
           [action.currentTabID]: action.endpoint,

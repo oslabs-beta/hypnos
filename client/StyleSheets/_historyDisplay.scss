@@ -2,6 +2,11 @@
 
     grid-area: historyDisplay;
     overflow: scroll;
+    // will adds
+    overflow-x: hidden;
+    // W: box-sizing doesn't seem needed
+    // box-sizing: border-box;
+    // end of will adds
     display: grid; 
     grid-template-columns: minmax(0, 1fr);
     grid-template-rows: 37px 20px 1fr;
@@ -28,6 +33,13 @@
         li {
             border-bottom: 1px solid $dark-color;
             padding-top: 5px;
+
+            // Added in to word wrap endpoints
+            word-break: break-word;
+
+            span {
+                font-weight: 700;
+            }
         }
 
     }

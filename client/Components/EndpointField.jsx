@@ -6,7 +6,9 @@ import defaultEndpoint from '../Constants/defaultEndpoint';
 
 const EndpointField = (props) => {
   // streamlined to not use local state from queryInput component
-  const { setNewAPIEndpoint, stateTabReference } = props;
+  const {
+    setNewAPIEndpoint, stateTabReference, modalOptions, setModalOptions,
+  } = props;
   // 8/12: deleted endpoint from useStateValue below
   const [{ endpointHistory }] = useStateValue();
 
@@ -23,7 +25,7 @@ const EndpointField = (props) => {
           setNewAPIEndpoint(newUrl);
         }}
       />
-      <APIModal />
+      <APIModal modalOptions={modalOptions} setModalOptions={setModalOptions} />
     </article>
   );
 };
