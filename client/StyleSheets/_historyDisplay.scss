@@ -3,31 +3,30 @@
     grid-area: historyDisplay;
     overflow: scroll;
     display: grid; 
-    grid-template-columns: 1fr;
-    grid-template-rows: 30px 20px 1fr;
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: 37px 20px 1fr;
     grid-template-areas:
     "historyHeader"
     "clearHistory"
     "historyList" ;
     height: 85vh;
     // width: 90%;
-    font-family: Helevtica, sans-serif;
+    font-family: system-ui;
     background-color: #f7f7f7;
     resize: none;
     // margin-left: 10px;
     // padding: 20px 10px;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
 
 
     ul {
         list-style-type: none;
         font-size: 13px;
-        word-wrap: break-word;
 
 
         li {
             border-bottom: 1px solid $dark-color;
             padding-top: 5px;
-            overflow-wrap: break-word;
         }
 
     }
@@ -63,21 +62,35 @@
     }
     
     #history-list {
+        // border-top-color: black;
         grid-area: historyList;
         padding: 20px 10px;
+        // max-height: 90%;
+        // margin-bottom: 50px;
 
     }
 
     #clear-history {
-        display: grid;
-        grid-area: clearHistory;
-        border-style: none;
-        background-color: $loading-color;
-        color: $highlight-color;
-        align-items: center;
-        justify-self: stretch
+        // display: grid;
+        // grid-area: clearHistory;
+        // border-style: none;
+        // background-color: $loading-color;
+        // color: $highlight-color;
+        align-items: left;
+        padding-left: 10px;
+        height: 31px;
+        border-bottom: 1px solid $loading-color;
+
+        // border-bottom-color: black;
 
         
+    }
+
+    #clear-history-button {
+        border-style: none;
+        height: 31px;
+        background-color: $background-color;
+        font-size: 13px;
     }
 
     button:focus {

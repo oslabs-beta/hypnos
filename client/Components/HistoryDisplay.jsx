@@ -74,9 +74,11 @@ const HistoryDisplay = (props) => {
   return (
     <section id="history-display">
       <section id="history-header">History</section>
-      <button id="clear-history" type="button" onClick={clearHistory}>Clear Database</button>
+      <section id="clear-history">
+        <button id="clear-history-button" type="button" onClick={clearHistory}>Clear All</button>
+      </section>
       <ul id="history-list">
-        {localQH.map((pastQueries, idx) => <HistoryListItem key={`history-li-${idx}`} query={pastQueries.query} id={pastQueries.id} onDelete={onDelete} onEdit={onEdit} />)}
+        {localQH.map((pastQueries, idx) => <HistoryListItem key={`history-li-${idx}`} query={pastQueries} id={pastQueries.id} onDelete={onDelete} onEdit={onEdit} />)}
       </ul>
     </section>
   );
