@@ -47,16 +47,20 @@ const HistoryDisplay = (props) => {
           endpoint: foundQuery.endpoint,
           currentTabID,
         });
+        return foundQuery;
       })
-      .then(() => {
-        const inputFields = document.querySelectorAll('#endpoint-field input');
-        // clears fields for all input field attribues. but endpoint value at component level still takes in what was in endpoint field beforehand
-        inputFields.forEach((el) => {
-          el.value = '';
-        });
+      .then((foundQuery) => {
+        const inputField = document.querySelector(`#endpoint-field[input-field-tab-id ="${currentTabID}"] input`);
+        console.log('found input: ', inputField);
+        inputField.value = foundQuery.endpoint;
+        // const inputFields = document.querySelectorAll('#endpoint-field input');
+        // // clears fields for all input field attribues. but endpoint value at component level still takes in what was in endpoint field beforehand
+        // inputFields.forEach((el) => {
+        //   el.value = '';
+        // });
         // inputFields.value = '';
       })
-      .catch(e => console.log('Error searching DB.'));
+      .catch(e => console.log('Error searching DB.', e));
   };
 
   const onDelete = (queryId) => {
@@ -74,7 +78,7 @@ const HistoryDisplay = (props) => {
   return (
     <section id="history-display">
       <section id="history-header">History</section>
-      <button id="clear-history" type="button" onClick={clearHistory}>Clear Database</button>
+      <button id="clear-history" type="button" onClick={clearHistory}>Clear History</button>
       <ul id="history-list">
         {localQH.map((pastQueries, idx) => <HistoryListItem key={`history-li-${idx}`} query={pastQueries} id={pastQueries.id} onDelete={onDelete} onEdit={onEdit} />)}
       </ul>
