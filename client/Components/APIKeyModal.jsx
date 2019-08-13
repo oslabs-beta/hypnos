@@ -27,10 +27,10 @@ const APIModal = (props) => {
 
   return (
     <section id="API-key-modal">
-      <button onClick={() => openModal()} id="API-button">
-Submit
+      <button type="button" onClick={() => openModal()} id="API-button">
+        Submit
         <br />
-API Key
+        API Key
       </button>
       <Modal
         isOpen={modalOptions.isModalOpen}
@@ -65,7 +65,7 @@ API Key
               }}
             />
           </label>
-          <button id="modal-submit-button" onClick={() => closeModal()}>Add</button>
+          <button type="button" id="modal-submit-button" onClick={() => closeModal()}>Add</button>
         </form>
       </Modal>
     </section>

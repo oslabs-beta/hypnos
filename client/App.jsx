@@ -63,9 +63,9 @@ const App = () => {
     //   console.log('graphQLErrors', graphQLErrors);
     //   console.log('networkError', networkError);
     // },
-    customFetch: (uri, fetchOptions) => 
+    customFetch: (uri, fetchOptions) =>
       // console.log('in custom fetch. fetchOptions: ', fetchOptions);
-       new Promise((resolve, reject) => {
+      new Promise((resolve, reject) => {
         fetch(uri, fetchOptions)
           .then((res) => {
             // const clone = res.clone();

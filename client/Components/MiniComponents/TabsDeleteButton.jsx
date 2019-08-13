@@ -11,7 +11,7 @@ const DeleteButton = (props) => {
       onClick={() => deleteTab(tabId)}
       style={styleObj}
     >
-X
+      X
     </button>
   );
 };
