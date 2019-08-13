@@ -16,13 +16,17 @@
     // margin-left: 10px;
     // padding: 20px 10px;
 
+
     ul {
         list-style-type: none;
         font-size: 13px;
+        word-wrap: break-word;
+
 
         li {
             border-bottom: 1px solid $dark-color;
             padding-top: 5px;
+            overflow-wrap: break-word;
         }
 
     }
@@ -60,6 +64,7 @@
     #history-list {
         grid-area: historyList;
         padding: 20px 10px;
+
     }
 
 }

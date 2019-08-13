@@ -6,6 +6,9 @@ const HistoryListItem = (props) => {
   const {
     id, query, onDelete, onEdit,
   } = props;
+
+  const pathRegex = query.query.match(/(?<=path:\W*\")\S*(?=\")/gi);
+  const path = pathRegex ? pathRegex[0] : 'invalid';
   // console.log('rendering a list item');
   return (
     <>
@@ -16,7 +19,9 @@ const HistoryListItem = (props) => {
         onMouseEnter={() => toggleHover(true)}
         onMouseLeave={() => toggleHover(false)}
       >
-        {query}
+        {`Endpoint: ${query.endpoint}
+        Path: ${path}`}
+
         {isHovering && (
           <span id="button-hover">
             <button

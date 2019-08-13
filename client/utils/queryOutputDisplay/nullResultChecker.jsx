@@ -10,10 +10,10 @@ const nullResultCheck = (object, errorPath = '') => {
   // loop over object key by key
   for (const key of objKeys) {
     // if the value at the current key in the object is null, add to result array
-    if (object[key] === null) nullVals.push(<li>{errorPath + key}</li>);
+    if (object[key] === null) nullVals.push(<li key={errorPath + key}>{errorPath + key}</li>);
     else if (Array.isArray(object[key])) {
       for (let i = 0; i < object[key].length; i += 1) {
-        if (object[key][i] === null) nullVals.push(<li>{`${errorPath + key}at index ${i}`}</li>);
+        if (object[key][i] === null) nullVals.push(<li key={`${errorPath + key}at index ${i}`}>{`${errorPath + key}at index ${i}`}</li>);
         else if (!Array.isArray(object[key][i]) && typeof object[key][i] === 'object') {
           nullPath = nullResultCheck(object[key][i], `${errorPath + key} at index ${i} => `);
           // ensure nullPath is not an empty string, in that there's a new nullpath to add
