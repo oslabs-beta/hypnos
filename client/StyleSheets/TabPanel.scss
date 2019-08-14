@@ -1,0 +1,29 @@
+.react-tab__tabs-panel {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+    grid-template-areas: 
+    "queryContainer";
+}
+
+.react-tabs {
+    grid-area: reactTabs;
+    
+}
+
+.react-tabs__tab--selected {
+    background-color: $loading-color;
+}
+
+#tabs-list {
+    display: grid;
+}
+
+#add-tab-button:focus {
+    outline: 0;
+.react-tabs__tab {
+    font-family: Helvetica, sans-serif;
+    bottom: 1px;
+}
+
+}

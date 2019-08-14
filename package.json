@@ -1,23 +1,31 @@
 {
   "name": "hypnos",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "An app to test GraphQL calls on RESTful APIs, via Apollo.",
   "main": "electron.js",
   "homepage": "./",
   "scripts": {
     "start-electron": "electron .",
-    "electron-build": "electron-builder",
+    "start-electron-prod": "ELECTRON_IS_DEV=0 npm run start-electron",
+    "electron-build": "electron-builder -mwl",
     "clean-build": "rm -rf build/ .cache dist/",
-    "react-start": "parcel -p 3000 index.html --out-dir build",
-    "react-build": "parcel build index.html --out-dir build --public-url ./",
+    "react-start": "NODE_ENV=development parcel -p 3000 index.html --out-dir build",
+    "react-build": "NODE_ENV=production parcel build index.html --out-dir build --public-url ./",
     "start": "npm run react-start & wait-on http://localhost:3000 && ELECTRON_IS_DEV=1 npm run start-electron",
-    "build": "npm run clean-build && npm run react-build && npm run electron-build && ELECTRON_IS_DEV=0 npm run start-electron",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "npm run clean-build && npm run react-build && ELECTRON_IS_DEV=0 npm run electron-build",
+    "test": "jest --verbose"
   },
   "keywords": [
     "Apollo",
     "Apollo-Link-Rest",
     "Electron",
+    "Jest",
+    "Enzyme",
+    "Puppeteer",
+    "Testing",
+    "Dexie",
+    "IndexDB",
+    "React",
     "Parcel",
     "GraphQL",
     "REST API",
@@ -25,23 +33,44 @@
     "Query",
     "Mutation"
   ],
-  "author": "Dillon Garrett, Sophie Nye & Will Robinson",
+  "author": {
+    "name": "Sophie Nye",
+    "email": "sophie.nye@gmail.com"
+  },
+  "contributors": [
+    "Dillon Garrett <dillon.garrett.dev@gmail.com",
+    "Will Robinson <wrobinson91@gmail.com"
+  ],
   "license": "MIT",
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^1.2.21",
+    "@fortawesome/free-solid-svg-icons": "^5.10.1",
+    "@fortawesome/react-fontawesome": "^0.1.4",
     "apollo-cache-inmemory": "^1.6.2",
     "apollo-client": "^2.6.3",
+    "apollo-link": "^1.2.12",
+    "apollo-link-error": "^1.1.11",
+    "apollo-link-http": "^1.5.15",
     "apollo-link-rest": "^0.7.3",
     "babel-core": "^6.26.3",
+    "babel-jest": "^24.8.0",
     "codemirror": "^5.48.2",
+    "context": "0.0.1",
     "css-loader": "^3.1.0",
-    "grap": "^1.0.0",
+    "dexie": "^2.0.4",
+    "dotenv": "^8.0.0",
+    "electron-is-dev": "^1.1.0",
+    "fake-indexeddb": "^2.1.1",
     "graphql": "^14.4.2",
     "graphql-anywhere": "^4.2.4",
     "graphql-tag": "^2.10.1",
-    "react": "^16.8.6",
+    "react": "^16.9.0",
     "react-apollo": "^2.5.8",
     "react-codemirror2": "^6.0.0",
     "react-dom": "^16.8.6",
+    "react-modal": "^3.9.1",
+    "react-tabs": "^3.0.0",
+    "react-test-renderer": "^16.9.0",
     "sass": "^1.22.7",
     "sass-loader": "^7.1.0",
     "style-loader": "^0.23.1"
@@ -50,11 +79,46 @@
     "@babel/core": "^7.5.5",
     "@babel/preset-env": "^7.5.5",
     "@babel/preset-react": "^7.0.0",
+    "babel-jest": "^24.8.0",
+    "@fortawesome/fontawesome-free": "^5.10.1",
     "babel-preset-env": "^1.7.0",
+    "enzyme": "^3.10.0",
+    "enzyme-adapter-react-16": "^1.14.0",
+    "enzyme-to-json": "^3.4.0",
     "electron": "^5.0.7",
-    "electron-builder": "^21.1.1",
+    "electron-builder": "^21.2.0",
     "electron-is-dev": "^1.1.0",
+    "electron-packager": "^14.0.4",
     "parcel-bundler": "^1.12.3",
-    "wait-on": "^3.3.0"
+    "puppeteer": "^1.19.0",
+    "regenerator-runtime": "^0.13.3",
+    "wait-on": "^3.3.0",
+    "jest": "^24.8.0"
+  },
+  "build": {
+    "appId": "com.hypnos.app",
+    "productName": "Hypnos",
+    "files": [
+      "./electron.js",
+      "./build/**/*",
+      "./assets/hypnos-icon.png"
+    ],
+    "asar": true,
+    "directories": {
+      "output": "dist"
+    },
+    "mac": {
+      "target": "dmg",
+      "icon": "./assets/hypnos-icon.png"
+    },
+    "win": {
+      "target": "nsis",
+      "icon": "./assets/hypnos-icon.png"
+    },
+    "linux": {
+      "target": "deb",
+      "icon": "./assets/hypnos-icon.png",
+      "category": "Development"
+    }
   }
 }

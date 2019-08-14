@@ -7,6 +7,7 @@
     font-size: 13px;
     color: $highlight-color;
     font-weight: bold;
+    font-family: Helvetica, sans-serif;
     // background-color: $loading-color;
 }
 
@@ -56,3 +57,37 @@
 #reset-button:active {
     @extend %button-active;
 }
+
+#open-modal {
+    @extend %button;
+    background-color: $loading-color;
+    height: 50px;
+}
+
+#open-modal:hover {
+    background-color: $loading-color-hover;
+}
+
+#open-modal:active {
+    @extend %button-active;
+}
+
+#close-modal {
+    @extend %button;
+    background-color: $dark-color;
+    height: 17px;
+    width: 80px;
+    margin-left: 10px;
+}
+
+#close-modal:hover {
+    @extend %button-hover;
+}
+
+#close-modal:active {
+    @extend %button-active;
+}
+
+
+
+

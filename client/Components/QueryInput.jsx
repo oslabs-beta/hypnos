@@ -1,17 +1,26 @@
 import React, { useState } from 'react';
-import gql from 'graphql-tag';
 import { Controlled as CodeMirror } from 'react-codemirror2';
+import gql from 'graphql-tag';
 import { useStateValue } from '../Context';
 import EndpointField from './EndpointField';
-import fetchErrorCheck from '../utils/fetchErrorCheck';
+// import db from '../db';
 import * as types from '../Constants/actionTypes';
 
-// import Code Mirror styling all at once
-import '../StyleSheets/external/CodeMirror.css';
+// // import Code Mirror styling all at once
+// NOTE: THIS IS NOW BEING IMPORTED IN INDEX.HTML FILE
+// import '../StyleSheets/external/CodeMirror.css';
 
+import fetchErrorCheck from '../utils/queryInput/fetchErrorCheck';
+import addQueryToDB from '../utils/queryInput/addQueryToDB';
+// import handleQueryFetch from '../utils/queryInput/handleQueryFetch';
 
-// using a proxy to get around CORS. WE PROBABLY NEED A SERVER NOW.
-const proxy = 'https://cors-anywhere.herokuapp.com/';
+import defaultEndpoint from '../Constants/defaultEndpoint';
+
+// from addons folder of codemirror
+require('codemirror/addon/display/autorefresh');
+
+// SHOULD MAKE NOTE: API key should be supplied in endpoint field
+// using a proxy to get around CORS. We do not need a server.
 
 // wrote example query so it can be used as a placeholder in textarea
 const exampleQuery = `# Example query:
@@ -23,109 +32,99 @@ query ditto {
 }`;
 
 
-const QueryInput = () => {
+const QueryInput = (props) => {
+  const { stateTabReference } = props;
+
+  // deleted endpoint from useStateValue below
+  const [{
+    historyTextValue, isModalOpen, endpointHistory, historyIdx,
+  }, dispatch] = useStateValue();
   const [textValue, setTextValue] = useState(exampleQuery);
-  const [{ endpoint }, dispatch] = useStateValue();
+
+  const [modalOptions, setModalOptions] = useState({
+    isModalOpen: false,
+    newHeadersKey: '',
+    newAPIKey: '',
+  });
+  // if edit button has been clicked, then historyTextValue exists in state. reassigned to fill out
+  // code mirror text area
+
+  if (historyTextValue !== '' && textValue !== historyTextValue && historyIdx === stateTabReference) {
+    // if a user has asked for an old query, repopulate
+
+    setTextValue(historyTextValue);
+
+    dispatch({
+      type: types.RESET_GET_QUERY,
+    });
+    // once history is assigned down here, reset it in context
+    // dispatch({
+    //   type: types.RESET_GET_QUERY,
+    // });
+  }
   const [newAPIEndpoint, setNewAPIEndpoint] = useState('');
 
-
-  // this fetch chain/handleSubmit should be added into a different file
-  // and imported. might be a heavy lift because of all the variables
   const handleSubmit = () => {
-    // if there's a value in api endpoint, replace endpoint.
-    // if it's empty, use endpoint in context state
-    const urlToSend = newAPIEndpoint || endpoint;
-    // prevent refresh
     event.preventDefault();
+    // old way
+    // const urlToSend = newAPIEndpoint || endpoint;
+    // new way
+    const urlToSend = newAPIEndpoint || endpointHistory[stateTabReference] || defaultEndpoint;
 
-    // ! NOTE: Nested test dispatch added to codeSnippets
+    try {
+      gql([`${textValue}`]);
+    } catch (err) {
+      // console.log('could not make tag: ', err);
+      // NEED CATCH FOR NO PATH STRING AT ALL
+      // 'Syntax Error: Unexpected )'
 
-    // make initial fetch to api, to ensure endpoint is valid. proxy to get around CORS
-    fetch(proxy + urlToSend, {
-      // mode: 'no-cors',
-      headers: {
-        // 'Access-Control-Allow-Origin': '*',
-        'Content-Type': 'application/json',
-      },
-    })
-      .then((response) => {
-        // catch all for when textValue is null
+      // NEED 404 CHECK -- PULL FROM HANDLE QUERY FETCH?
+      fetchErrorCheck(err, dispatch);
+      return;
+    }
 
-        // execute regex filtering on the path param
-        const pathRegex = textValue.match(/(?<=path:\W*\")\S*(?=\")/gi);
-        // 404 check for the endpoint
-        if (response.status === 404) {
-          dispatch({
-            // send off error message for endpoint 404
-            type: types.GQL_ERROR,
-            gqlError: 'Endpoint is invalid. Please double check your endpoint.',
-          });
-          // throwing error stops promise chain
-          throw new Error('Endpoint is invalid. Please double check your endpoint.');
-        } else if (pathRegex === null) {
-          // if regex is null, then there's no path
-          dispatch({
-            // dispatch path error
-            type: types.GQL_ERROR,
-            gqlError: '@rest must have a \'path\' and \'type\' property. Please click reset to check the example for reference.',
-          });
-          // throwing error stops promise chain
-          throw new Error('Path is invalid. Please double check your path.');
-        } else {
-          // if regex is NOT null, there was a path. fetch is now made to endpoint + path
-          const path = textValue.match(/(?<=path:\W*\")\S*(?=\")/gi)[0].trim();
-          // return fetch, which creates a promise
-          return fetch(proxy + urlToSend + path, {
-            headers: {
-              'Content-Type': 'application/json',
-            },
-          });
-        }
-      })
-      // for checking if the path is correct
-      .then((response) => {
-        if (response.status === 404) {
-          dispatch({
-            type: types.GQL_ERROR,
-            gqlError: 'Path is invalid. Please double check your path.',
-          });
-          throw new Error('Path is invalid. Please double check your path.');
-        } else return response.json();
-      })
-      .then((data) => {
-        // if get request is successful, parse it here. fire dispatch to run query
-        dispatch({
-          type: types.RUN_QUERY,
-          // decontructed using of gql tag to make query object. need to pass in a stringliteral.
-          query: gql([`${textValue}`]),
-          // pulls of key for where data will be in result obj
-          queryResultObject: textValue.match(/(?<=\{\W)(.*?)(?=\@)/g)[0].trim(),
-          newEndpoint: urlToSend,
-        });
-        // reset local api endpoint
-        setNewAPIEndpoint('');
-      })
-      .catch((error) => {
-        // moved error checking to other file for code clarity
-        fetchErrorCheck(error, dispatch);
-      });
+    // console.log('regex test: ', textValue.match(/(?<=\{\W)(.*?)(?=\@)/g));
+    const regexResult = textValue.match(/(?<=\{\W)(.*?)(?=\@)/g);
+    Promise.all([addQueryToDB(textValue, urlToSend),
+      dispatch({
+        type: types.RUN_QUERY,
+        // decontructed using of gql tag to make query object. need to pass in a stringliteral.
+        query: gql([`${textValue}`]),
+        // pulls of key for where data will be in result obj
+        queryResultObject: regexResult ? textValue.match(/(?<=\{\W)(.*?)(?=\@)/g)[0].trim() : 'null',
+        newEndpoint: urlToSend,
+        ranQueryTab: stateTabReference,
+        newHeadersKey: modalOptions.newHeadersKey,
+        newAPIKey: modalOptions.newAPIKey,
+      }),
+    ])
+      // .then(() => console.log('DB entry added and dispatch successful.'))
+      .catch(e => console.log('Error in DB add/dispatch chain: ', e));
   };
 
   return (
     <>
-      <EndpointField setNewAPIEndpoint={setNewAPIEndpoint} />
+      <EndpointField modalOptions={modalOptions} setModalOptions={setModalOptions} setNewAPIEndpoint={setNewAPIEndpoint} stateTabReference={stateTabReference} />
       <article id="query-input">
-        <form id="query-input-form" onSubmit={() => handleSubmit()}>
+        <form id="query-input-form" style={modalOptions.isModalOpen ? { visibility: 'hidden' } : { visibility: 'visible' }} onSubmit={() => handleSubmit()}>
           <CodeMirror
             id="code-mirror"
             value={textValue}
             // editor and data are code mirror args. needed to access value
-            onBeforeChange={(editor, data, value) => setTextValue(value)}
-            onChange={(editor, data, value) => setTextValue(value)}
+            onBeforeChange={(editor, data, value) => {
+              // console.log('on before change hit');
+              setTextValue(value);
+            }}
+            onChange={(editor, data, value) => {
+              // console.log('on change hit');
+              setTextValue(value);
+            }}
             options={{
               lineNumbers: true,
               tabSize: 2,
               lineWrapping: true,
+              autoRefresh: true,
+              mode: 'javascript',
             }}
           />
           <section id="buttons">
@@ -139,12 +138,14 @@ const QueryInput = () => {
               onClick={() => {
                 dispatch({
                   type: types.RESET_STATE,
+                  currentTab: stateTabReference,
                 });
                 // after reseting state, reset endpoint field to empty string. in state,
                 // it will be POKEAPI
 
                 // vanilla DOM manipulation was the best way to change the input field value
-                const inputField = document.querySelector('#endpoint-field input');
+                // only resets current tab's endpoint field
+                const inputField = document.querySelector(`#endpoint-field[input-field-tab-id ="${stateTabReference}"] input`);
                 inputField.value = '';
                 // reset textValue field to exampleQuery
                 setTextValue(exampleQuery);

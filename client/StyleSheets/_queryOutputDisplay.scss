@@ -13,6 +13,16 @@
     font-family: Helevtica, sans-serif;
     overflow-y: auto;
     overflow-x: auto;
+
+    #tooltip {
+        position: absolute;
+        background-color:$dark-color;
+        color: white;
+    }
+
+    aside span {
+        font-weight: 700;
+    }
     
     ul {
         list-style: none;

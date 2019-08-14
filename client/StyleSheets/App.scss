@@ -8,38 +8,46 @@
 @import "_header.scss";
 @import "_buttons.scss";
 @import "_spinner.scss";
+@import "_historyDisplay.scss";
+@import "_APIKeyModal.scss";
 
 * {
     margin: 0;
     padding: 0;
 }
 
+body {
+    font: $font-stack;
+}
+
 #app {
     min-width: 100vw;
     min-height: 100vh;
     display: grid;
-    grid-template-rows: 50px 45px 1fr;
-    grid-template-columns: 1fr;
+    grid-template-rows: 45px 35px 1fr;
+    grid-template-columns: 15% 1fr;
     grid-template-areas: 
-        "header"
-        "."
-        "queryContainer";
+        "header header"
+        "historyDisplay reactTabs"
+        "historyDisplay reactTabs";
     font: $font-stack;
     background-color: $background-color;
+    // NOT SURE WHAT ELSE THE BELOW MIGHT CAUSE, BUT THIS FIXES WHITESPACE ON BOTTOM
+    overflow: hidden;
 }
 
 %input-fields {
     border-left: 1px solid $highlight-color;
 }
 
-@-webkit-keyframes colorchange
-{
-0%   {background: #0D5C63;}
-// 25%  {background: #247B7B;}
-50%  {background: #78CDD7;}
-// 75%  {background: #247B7B;}
-100% {background: #0D5C63;}
-}
+// @-webkit-keyframes colorchange
+// {
+// 0%   {background: #0D5C63;}
+// // 25%  {background: #247B7B;}
+// 50%  {background: #78CDD7;}
+// // 75%  {background: #247B7B;}
+// 100% {background: #0D5C63;}
+// }
 
 // @-webkit-keyframes colorchange
 // {
