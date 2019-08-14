@@ -16,7 +16,7 @@ const HistoryDisplay = (props) => {
     db.history
       .toArray()
       .then((queries) => {
-        console.log('retrieved from DB', queries);
+        // console.log('retrieved from DB', queries);
         setLocalQH(queries.reverse());
         // dispatch({
         //   type: types.UPDATE_HISTORY,
@@ -29,7 +29,7 @@ const HistoryDisplay = (props) => {
   const clearHistory = () => {
     db.history.clear()
       .then(() => {
-        console.log('Database cleared.');
+        // console.log('Database cleared.');
         setLocalQH([]);
       })
       .catch((e) => { throw new Error('Error in clearing database: ', e); });
@@ -51,7 +51,7 @@ const HistoryDisplay = (props) => {
       })
       .then((foundQuery) => {
         const inputField = document.querySelector(`#endpoint-field[input-field-tab-id ="${currentTabID}"] input`);
-        console.log('found input: ', inputField);
+        // console.log('found input: ', inputField);
         inputField.value = foundQuery.endpoint;
       })
       .catch(e => console.log('Error searching DB.'));
