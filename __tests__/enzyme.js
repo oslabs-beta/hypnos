@@ -50,7 +50,7 @@ describe('React unit tests', () => {
         // });
 
         it('database returns an array of queries', () => {
-            console.log('in db test')
+            // console.log('in db test')
             let array = [1,2,3]
             db.history.toArray().then((queries) => array = queries)
             expect(array).toHaveLength(3);

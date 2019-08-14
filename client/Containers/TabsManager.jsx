@@ -62,7 +62,7 @@ const TabsManager = () => {
           <TabList id="tabs-list">
             {queriesTabs.tabsListLabels.map((el, idx) => (idx !== 0
               ? (
-                <Tab key={`tab-${el}`} tab-id={el} style={{ fontFamily: 'Helvetica, sans-serif', fontSize: '12px', height: '13x', backgroundColor: '#f7f9fb' }}>
+                <Tab key={`tab-${el}`} tab-id={el} style={{ fontFamily: 'Helvetica, sans-serif', fontSize: '12px', backgroundColor: '#f7f9fb' }}>
                   {endpointHistory[el] ? endpointHistory[el] : defaultEndpoint}
                   <DeleteButton className="delete-button" key={`del-btn-${el}`} tabId={el} deleteTab={deleteTab} />
                 </Tab>
