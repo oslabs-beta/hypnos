@@ -33,13 +33,14 @@
     "Query",
     "Mutation"
   ],
-  "author": { 
-    "name" : "Sophie Nye",
-    "email" : "sophie.nye@gmail.com"
+  "author": {
+    "name": "Sophie Nye",
+    "email": "sophie.nye@gmail.com"
   },
-  "contributors": [ 
+  "contributors": [
     "Dillon Garrett <dillon.garrett.dev@gmail.com",
-    "Will Robinson <wrobinson91@gmail.com"],
+    "Will Robinson <wrobinson91@gmail.com"
+  ],
   "license": "MIT",
   "dependencies": {
     "apollo-cache-inmemory": "^1.6.2",

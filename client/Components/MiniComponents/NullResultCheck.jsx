@@ -11,7 +11,7 @@ const NullResultCheck = (props) => {
         <br />
         Please double check your query.
         <br />
-        <span onMouseEnter={() => toggleHover(true)} onMouseLeave={() => toggleHover(false)}>Details.</span>
+        <span onMouseEnter={() => toggleHover(true)} onMouseLeave={() => toggleHover(false)}>Hover for details.</span>
         {isHovering && (
           <article id="tooltip">
             <ul>
