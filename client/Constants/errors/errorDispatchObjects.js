@@ -50,3 +50,8 @@ export const singleQuotesError = {
   type: GQL_ERROR,
   gqlError: errorResponse.singleQuotesError,
 };
+
+export const badFieldError = {
+  type: GQL_ERROR,
+  gqlError: errorResponse.badFieldError,
+};

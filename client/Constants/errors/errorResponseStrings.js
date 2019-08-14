@@ -8,3 +8,4 @@ export const noRestCallError = 'Query must have an @rest call.';
 export const noPathOrTypeError = '@rest must have a \'path\' and \'type\' property. Please click reset to check the example for reference.';
 export const endpointPath404Error = 'Endpoint is invalid. Please double check your endpoint.';
 export const singleQuotesError = 'Please use double quotes (" ") instead of single quotes (\' \').';
+export const badFieldError = 'One or more of your query fields might be written incorrectly. Please double check them.';
