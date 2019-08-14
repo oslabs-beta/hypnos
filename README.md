@@ -5,7 +5,6 @@
 </p>
 
 ## HYPNOS
-***
 
 Welcome to __Hypnos(beta)__, a streamlined desktop application to sandbox GraphQL calls to RESTful APIs using the Apollo-link-rest package from Apollo Client, as well as giving detailed, helpful error messages. 
 
@@ -16,7 +15,6 @@ Welcome to __Hypnos(beta)__, a streamlined desktop application to sandbox GraphQ
 *\* We recently added tabs to handle multiple entries!* 
 
 ## Getting Started
-***
 
 __Requirements__
 
@@ -30,7 +28,6 @@ Download for Mac, Windows, or Linux [will have links]
 Install the app to your applications folder.
 
 ## How to Use
-***
 
 __Enter your API endpoint__
 
@@ -60,7 +57,6 @@ If there are any errors in query formatting, they will be displayed on the right
 
 
 ## Features
-***
 
 __Hypnos History__
 
@@ -85,7 +81,6 @@ A majority of APIs require a key in order to gain access to their endpoints, but
 
 
 ## Resources
-***
 
 Built with Electron and React
 
