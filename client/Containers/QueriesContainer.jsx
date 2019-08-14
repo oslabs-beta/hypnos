@@ -4,7 +4,7 @@ import { useStateValue } from '../Context';
 // NOTE: moved endpoint field to inside query
 import QueryOutputDisplay from '../Components/QueryOutputDisplay';
 import QueryInput from '../Components/QueryInput';
-import * as types from '../Constants/actionTypes';
+import { multipleQueriesError as multipleQueriesDispatchObj } from '../Constants/errors/errorDispatchObjects';
 
 // MOVED modal to inside endpoint field
 // import APIModal from '../Components/APIKeyModal';
@@ -31,15 +31,12 @@ const QueriesContainer = (props) => {
       query.definitions = [query.definitions[0]];
 
       // seems to work now with new tabs, with dispatch moved out of props
-      dispatch({
-        type: types.GQL_ERROR,
-        gqlError: 'Currently attempting to run multiple queries, but only one query, subscription, or mutation may be run at one time',
-      });
+      dispatch(multipleQueriesDispatchObj);
 
       OutputOfQuery = graphql(query, {
         onError: (e) => {
           // not working
-          console.log('Too many queries being run.');
+          console.log('Too many queries being run.', e);
         },
         props: ({ data }) => {
           // dispatch moved to before query being run

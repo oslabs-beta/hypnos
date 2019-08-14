@@ -14,7 +14,7 @@ const QueryOutputDisplay = (props) => {
   const [isHovering, toggleHover] = useState(false);
   // pull props off from GQL query running
   const {
-    loading, error, stateTabReference,
+    loading, error,
   } = props;
 
   // if the current tab matches the tab from which the query was run, show contents. if not, make invisible

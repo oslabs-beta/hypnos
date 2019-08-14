@@ -3,12 +3,12 @@
 *
 */
 
-import * as types from '../../Constants/actionTypes';
 import * as errorMsg from '../../Constants/errors/errorStrings';
-import * as errorReponse from '../../Constants/errors/errorResponseStrings';
 import * as dispatchObj from '../../Constants/errors/errorDispatchObjects';
 
 const fetchErrorCheck = (error, dispatch) => {
+  // console.log('error coming in: ', error);
+  // console.log('error stack coming in: ', error.stack);
   // if Gql query does not start with 'query'
   // console.log('inside fetch error check: ', error);
   if (error.message.slice(0, errorMsg.queryMethodError.length) === errorMsg.queryMethodError) {
@@ -39,14 +39,23 @@ const fetchErrorCheck = (error, dispatch) => {
   } else if (error.message === errorMsg.noRestCallError) {
     dispatch(dispatchObj.noRestCallError);
     // throw new Error(errorReponse.noRestCallError);
-    // ! TODO: this needs work. There are several errors that come through with the same error name and we'll have to figure out how best to parse them
-    // ! fires if string after "type" is empty
-  } else if (error.message.slice(0, errorMsg.noPathOrTypeError.length) === errorMsg.noPathOrTypeError) {
-    dispatch(dispatchObj.noPathOrTypeError);
-    // throw new Error(errorReponse.noPathOrTypeError);
+  } else if (error.message.slice(0, errorMsg.badArgumentOrFieldError.length) === errorMsg.badArgumentOrFieldError) {
+    // two known cases for this error: either it's an invalid type/path argument
+    // !  NOTE: THE STACK CHECKING METHOD DOES NOT WORK ON BUILD, AS THE STACK TRACE IS DIFFERENT
+    if (error.stack.slice(0, 300).includes('parseArgument')) dispatch(dispatchObj.noPathOrTypeError);
+    // or a field has quotes around it
+    else if (error.stack.slice(0, 300).includes('parseField')) dispatch(dispatchObj.badFieldError);
+    else dispatch(dispatchObj.genericError);
+    // throw new Error(errorReponse.badArgumentOrFieldError);
+  } else if (error.message === errorMsg.singleQuotesError) {
+    dispatch(dispatchObj.singleQuotesError);
+  } else if (error.message === errorMsg.unterminatedStringError) {
+    dispatch(dispatchObj.unterminatedStringError);
   } else {
     // console.log('Error in fetch: ', error);
-    throw new Error('Error n fetch: ', error);
+    // ADDED GENERIC ERROR CATCH SO SOMETHING WOULD ALWAYS SHOW WITH A SYNTAX ERROR
+    dispatch(dispatchObj.genericError);
+    throw new Error('Error in fetch: ', error);
   }
 };
 
