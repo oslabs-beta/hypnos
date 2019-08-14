@@ -87,8 +87,7 @@ const App = () => {
             // console.log('error in custom fetch');
             reject('error in custom fetch: ', e);
           });
-      })
-    ,
+      }),
     // credentials: 'include',
   });
 

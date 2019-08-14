@@ -98,7 +98,7 @@ const QueryInput = (props) => {
         newAPIKey: modalOptions.newAPIKey,
       }),
     ])
-      .then(() => console.log('DB entry added and dispatch successful.'))
+      // .then(() => console.log('DB entry added and dispatch successful.'))
       .catch(e => console.log('Error in DB add/dispatch chain: ', e));
   };
 

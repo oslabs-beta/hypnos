@@ -1,6 +1,6 @@
 .react-tabs {
     -webkit-tap-highlight-color: transparent;
-    font-family: system-ui;
+    /* font-family: system-ui; */
   }
 
 .react-tabs button:focus {

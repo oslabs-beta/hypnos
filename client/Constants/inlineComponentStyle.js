@@ -29,7 +29,6 @@ export const apiKeyModalStyle = {
 export const tabStyle = {
   fontFamily: 'Helvetica, sans-serif',
   fontSize: '12px',
-  height: '13x',
   backgroundColor: '#f7f9fb',
 };
 
