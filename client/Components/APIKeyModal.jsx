@@ -25,6 +25,20 @@ const APIModal = (props) => {
     });
   };
 
+  const styleComponent = {
+    content: {
+      top: '50%',
+      left: '50%',
+      right: 'auto',
+      bottom: 'auto',
+      marginRight: '-50%',
+      transform: 'translate(-50%, -50%)',
+      backgroundColor: '#31708b',
+      width: '200px',
+      borderRadius: '5px',
+    },
+  };
+
   return (
     <section id="API-key-modal">
       <button type="button" onClick={() => openModal()} id="API-button">
@@ -36,7 +50,7 @@ const APIModal = (props) => {
         isOpen={modalOptions.isModalOpen}
         //   onAfterOpen={this.afterOpenModal}
         onRequestClose={() => closeModal()}
-        style={styleObj}
+        style={styleComponent}
         contentLabel="API Key"
       >
 
