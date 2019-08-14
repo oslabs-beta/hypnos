@@ -45,6 +45,7 @@ const fetchErrorCheck = (error, dispatch) => {
     if (error.stack.slice(0, 300).includes('parseArgument')) dispatch(dispatchObj.noPathOrTypeError);
     // or a field has quotes around it
     else if (error.stack.slice(0, 300).includes('parseField')) dispatch(dispatchObj.badFieldError);
+    else dispatch(dispatchObj.genericError);
     // throw new Error(errorReponse.badArgumentOrFieldError);
   } else if (error.message === errorMsg.singleQuotesError) {
     dispatch(dispatchObj.singleQuotesError);
