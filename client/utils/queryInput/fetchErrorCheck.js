@@ -49,6 +49,8 @@ const fetchErrorCheck = (error, dispatch) => {
     // throw new Error(errorReponse.badArgumentOrFieldError);
   } else if (error.message === errorMsg.singleQuotesError) {
     dispatch(dispatchObj.singleQuotesError);
+  } else if (error.message === errorMsg.unterminatedStringError) {
+    dispatch(dispatchObj.unterminatedStringError);
   } else {
     // console.log('Error in fetch: ', error);
     throw new Error('Error in fetch: ', error);

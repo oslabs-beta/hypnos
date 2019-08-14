@@ -18,7 +18,8 @@ import { ApolloLink } from 'apollo-link';
 // import { createHttpLink } from 'apollo-link-http';
 
 import Header from './Components/Header';
-import HistoryDisplay from './Components/HistoryDisplay';
+// history display now rendered inside Tabs Manager
+// import HistoryDisplay from './Components/HistoryDisplay';
 import TabsManager from './Containers/TabsManager';
 // import DeleteButton from './Components/MiniComponents/TabsDeleteButton';
 // import QueriesContainer from './Containers/QueriesContainer';

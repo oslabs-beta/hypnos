@@ -14,7 +14,7 @@ import { tabStyle, tabStyleMain, addButtonStyle } from '../Constants/inlineCompo
 
 const TabsManager = () => {
   // rendering tabs inside render method, based on tabsListLabels, just nums in an array
-  const [{ endpointHistory }, dispatch] = useStateValue();
+  const [{ endpointHistory }] = useStateValue();
 
   const [queriesTabs, setQueriesTabs] = useState({
     tabsListLabels: [0],

@@ -17,11 +17,8 @@ const HistoryDisplay = (props) => {
       .toArray()
       .then((queries) => {
         // console.log('retrieved from DB', queries);
+        // displaying queries history in descending chronological order
         setLocalQH(queries.reverse());
-        // dispatch({
-        //   type: types.UPDATE_HISTORY,
-        //   queriesHistory: queries,
-        // });
       })
       .catch(e => console.log('Error fetching from DB: ', e));
   }, [query, queryGQLError]);

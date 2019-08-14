@@ -9,3 +9,4 @@ export const typeSyntaxError = 'Syntax Error: Expected :';
 export const noRestCallError = 'Cannot read property \'0\' of null';
 export const badArgumentOrFieldError = 'Syntax Error: Expected Name';
 export const singleQuotesError = 'Syntax Error: Unexpected single quote character (\'), did you mean to use a double quote (")?';
+export const unterminatedStringError = 'Syntax Error: Unterminated string.';
