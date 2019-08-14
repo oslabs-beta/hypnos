@@ -10,3 +10,4 @@ export const endpointPath404Error = 'Endpoint is invalid. Please double check yo
 export const singleQuotesError = 'Please use double quotes (" ") instead of single quotes (\' \').';
 export const badFieldError = 'One or more of your query fields might be written incorrectly. Please double check them.';
 export const unterminatedStringError = 'An open string has not been closed with double quotes(" "). Please double check your query.';
+export const genericError = 'There was an uncaught error in your GraphQL syntax. Please double check your query.'

@@ -20,6 +20,7 @@ export const endpointPath404Error = new ErrorDispatch(errorResponse.endpointPath
 export const singleQuotesError = new ErrorDispatch(errorResponse.singleQuotesError);
 export const badFieldError = new ErrorDispatch(errorResponse.badFieldError);
 export const unterminatedStringError = new ErrorDispatch(errorResponse.unterminatedStringError);
+export const genericError = new ErrorDispatch(errorResponse.genericError);
 
 // BELOW: Old way to make error dispatches, before constructor
 
