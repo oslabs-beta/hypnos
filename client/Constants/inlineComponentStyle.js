@@ -21,7 +21,7 @@ export const apiKeyModalStyle = {
     marginRight: '-50%',
     transform: 'translate(-50%, -50%)',
     backgroundColor: '#31708b',
-    width: '100px',
+    // width: '100px',
     borderRadius: '5px',
   },
 };

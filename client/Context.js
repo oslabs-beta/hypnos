@@ -40,6 +40,8 @@ const initialState = {
   // queries stored in db
   historyTextValue: '',
   historyIdx: 0,
+  headersKey: '',
+  apiKey: '',
   endpointFromDB: '',
   endpointHistory: {
     0: 'https://pokeapi.co/api/v2/pokemon/',
