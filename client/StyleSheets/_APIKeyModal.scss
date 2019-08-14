@@ -6,7 +6,7 @@
 
     button {
         background-color: $loading-color;
-        font-family: Helvetica, sans-serif;
+        font-family: system-ui;
         font-size: 13px;
         font-weight: bold;
         color: white;
@@ -25,16 +25,16 @@
 }
 
 #modal-instructions {
-    font-family: Helvetica, sans-serif;
+    font-family: system-ui;
     color: white;
 }
 
 #api-key-input {
-    font-family: Helvetica, sans-serif;
+    font-family: system-ui;
 }
     
 #headers-key-input {
-    font-family: Helvetica, sans-serif;
+    font-family: system-ui;
 }
 
 #api-key-form {
@@ -42,7 +42,7 @@
     background-color: $dark-color;
 
     label {
-        font-family: Helvetica, sans-serif;
+        font-family: system-ui;
         color: white;
         padding-bottom: 5px;
     }
@@ -62,7 +62,7 @@
         font-size: 13px;
         // color: $highlight-color;
         font-weight: bold;
-        font-family: Helvetica, sans-serif;
+        font-family: system-ui;
     }
 
     button:hover {
