@@ -53,6 +53,7 @@ const TabsManager = () => {
           onSelect={(tabIndex, lastIndex, event) => {
             // console.log('last tab: ', lastIndex);
             // console.log('new tab: ', tabIndex);
+            // console.log('unique ids: ', queriesTabs);
 
             // tabIdToSave is the unique value given by dev. tabIndex is managed by tabs itself
             // not being used currently but might be needed in future

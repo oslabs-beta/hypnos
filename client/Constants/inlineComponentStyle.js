@@ -35,7 +35,9 @@ export const tabStyle = {
 
 export const tabStyleMain = {
   ...tabStyle,
-  marginBottom: '1px',
+  // height: '13px',
+  // marginBottom used to be needed. now it's not
+  // marginBottom: '1px',
 };
 
 export const addButtonStyle = {
