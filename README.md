@@ -23,7 +23,11 @@ All you need to do is download your respective OS package, install, and go!
 
 __How to Install__
 
-Download for Mac, Windows, or Linux [will have links]
+Download for Mac or Windows (Linux coming soon!)
+
+__Mac__: [hypnos-0.0.1.dmg](https://github.com/oslabs-beta/hypnos/releases/download/v0.0.1/Hypnos-0.0.1.dmg)
+
+__Windows Zipped Config__: [hypnos-0.0.1.zip](https://github.com/oslabs-beta/hypnos/releases/download/v0.0.1/Hypnos-windows.zip)
 
 Install the app to your applications folder.
 
