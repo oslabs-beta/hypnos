@@ -1,29 +1,9 @@
 import React, { useState } from 'react';
 import Modal from 'react-modal';
-import { useStateValue } from '../Context';
-import * as types from '../Constants/actionTypes';
-
-// Modal.setAppElement('#root');
-
-const customStyles = {
-  content: {
-    top: '50%',
-    left: '50%',
-    right: 'auto',
-    bottom: 'auto',
-    marginRight: '-50%',
-    transform: 'translate(-50%, -50%)',
-    backgroundColor: '#31708b',
-    width: '100px;',
-    borderRadius: '5px',
-  },
-};
+import { apiKeyModalStyle as styleObj } from '../Constants/inlineComponentStyle';
 
 const APIModal = (props) => {
-  //   const [{ isModalOpen, apiKey, headersKey }, dispatch] = useStateValue();
   const { modalOptions, setModalOptions } = props;
-
-  const [{ isModalOpen, apiKey, headersKey }, dispatch] = useStateValue();
 
   const [apiTextValue, setApiTextValue] = useState('');
   const [headerValue, setHeaderValue] = useState('');
@@ -33,9 +13,6 @@ const APIModal = (props) => {
       ...modalOptions,
       isModalOpen: true,
     });
-    // dispatch({
-    //   type: types.OPEN_MODAL,
-    // });
   };
 
   const closeModal = () => {
@@ -46,25 +23,21 @@ const APIModal = (props) => {
       newAPIKey: apiTextValue.trim(),
       isModalOpen: false,
     });
-    // dispatch({
-    //   type: types.CLOSE_MODAL,
-    //   apiKey: apiTextValue.trim(),
-    //   headerKey: headerValue.trim(),
-    // });
   };
+
 
   return (
     <section id="API-key-modal">
       <button onClick={() => openModal()} id="API-button">
-Submit
+        Submit
         <br />
-API Key
+        API Key
       </button>
       <Modal
         isOpen={modalOptions.isModalOpen}
         //   onAfterOpen={this.afterOpenModal}
         onRequestClose={() => closeModal()}
-        style={customStyles}
+        style={styleObj}
         contentLabel="API Key"
       >
 
@@ -99,5 +72,9 @@ API Key
     </section>
   );
 };
+
+// this is supposed to be down here, but it looks weird. commented out for now
+// Modal.setAppElement('#root');
+
 
 export default APIModal;
