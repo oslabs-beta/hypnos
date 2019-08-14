@@ -16,7 +16,12 @@
 
     #tooltip {
         position: absolute;
-        background-color: black;
+        background-color:$dark-color;
+        color: white;
+    }
+
+    aside span {
+        font-weight: 700;
     }
     
     ul {

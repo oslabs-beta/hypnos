@@ -7,19 +7,19 @@ const NullResultCheck = (props) => {
   return (
     <section>
       <aside font="helevtica" className="error">
-      Null values returned from query.
+        Null values returned from query.
         <br />
-      Please double check your query.
+        Please double check your query.
         <br />
-        <span onMouseEnter={() => toggleHover(true)} onMouseLeave={() => toggleHover(false)}>Details.</span>
+        <span onMouseEnter={() => toggleHover(true)} onMouseLeave={() => toggleHover(false)}>Hover for details.</span>
         {isHovering && (
-        <article id="tooltip">
-          <ul>
-            {nullResultChecker(result)}
-          </ul>
-        </article>
+          <article id="tooltip">
+            <ul>
+              {nullResultChecker(result)}
+            </ul>
+          </article>
         )
-      }
+        }
         <br />
         <br />
       </aside>

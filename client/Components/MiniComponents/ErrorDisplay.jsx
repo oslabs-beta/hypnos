@@ -6,11 +6,11 @@ const ErrorDisplay = (props) => {
     <>
       <p className="error">{errorMessage}</p>
       {extraSpace && (
-      <>
-        <br />
-        {' '}
-        <br />
-      </>
+        <>
+          <br />
+          {' '}
+          <br />
+        </>
       )}
     </>
   );

@@ -1,6 +1,9 @@
 /* eslint-disable react/button-has-type */
 import React, { useState } from 'react';
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTrash, faPen } from '@fortawesome/free-solid-svg-icons';
+
 const HistoryListItem = (props) => {
   const [isHovering, toggleHover] = useState(false);
   const {
@@ -39,7 +42,8 @@ const HistoryListItem = (props) => {
                 onDelete(id);
               }}
             >
-              <i className="fas fa-trash fa-lg" />
+              <FontAwesomeIcon icon={faTrash} size="lg" />
+              {/* <i className="fas fa-trash fa-lg" /> */}
             </button>
             <button
               className="history-edit"
@@ -49,7 +53,8 @@ const HistoryListItem = (props) => {
                 onEdit(id);
               }}
             >
-              <i className="fas fa-pen fa-lg" />
+              <FontAwesomeIcon icon={faPen} size="lg" />
+              {/* <i className="fas fa-pen fa-lg" /> */}
             </button>
           </span>
         )}
