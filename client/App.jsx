@@ -46,10 +46,10 @@ const App = () => {
   };
 
   if (apiKey !== '' && headersKey !== '') {
-    console.log('apiKey: ', apiKey);
-    console.log('headersKey: ', headersKey);
+    // console.log('apiKey: ', apiKey);
+    // console.log('headersKey: ', headersKey);
     headersOptions[headersKey] = apiKey;
-    console.log('headersOptions ', headersOptions);
+    // console.log('headersOptions ', headersOptions);
   }
 
   const restLink = new RestLink({
@@ -64,12 +64,12 @@ const App = () => {
     //   console.log('networkError', networkError);
     // },
     customFetch: (uri, fetchOptions) => {
-      console.log('in custom fetch. fetchOptions: ', fetchOptions);
+      // console.log('in custom fetch. fetchOptions: ', fetchOptions);
       return new Promise((resolve, reject) => {
         fetch(uri, fetchOptions)
           .then((res) => {
             // const clone = res.clone();
-            console.log('in first then lock, custom fetch: ', res);
+            // console.log('in first then lock, custom fetch: ', res);
             if (res.status === 404) {
               // dispatch inside of here seems to break it
               // dispatch(errorDispatchObj.endpointPath404Error);

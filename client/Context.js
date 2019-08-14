@@ -166,13 +166,13 @@ const reducer = (state, action) => {
         historyIdx: -1,
       };
     case types.OPEN_MODAL:
-      console.log('open modal fired');
+      // console.log('open modal fired');
       return {
         ...state,
         isModalOpen: true,
       };
     case types.CLOSE_MODAL:
-      console.log('close modal fired');
+      // console.log('close modal fired');
       return {
         ...state,
         apiKey: action.apiKey,
