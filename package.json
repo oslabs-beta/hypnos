@@ -7,7 +7,7 @@
   "scripts": {
     "start-electron": "electron .",
     "start-electron-prod": "ELECTRON_IS_DEV=0 npm run start-electron",
-    "electron-build": "electron-builder",
+    "electron-build": "electron-builder -mwl",
     "clean-build": "rm -rf build/ .cache dist/",
     "react-start": "NODE_ENV=development parcel -p 3000 index.html --out-dir build",
     "react-build": "NODE_ENV=production parcel build index.html --out-dir build --public-url ./",
@@ -19,6 +19,13 @@
     "Apollo",
     "Apollo-Link-Rest",
     "Electron",
+    "Jest",
+    "Enzyme",
+    "Puppeteer",
+    "Testing",
+    "Dexie",
+    "IndexDB",
+    "React",
     "Parcel",
     "GraphQL",
     "REST API",
@@ -26,7 +33,13 @@
     "Query",
     "Mutation"
   ],
-  "author": "Dillon Garrett, Sophie Nye & Will Robinson",
+  "author": { 
+    "name" : "Sophie Nye",
+    "email" : "sophie.nye@gmail.com"
+  },
+  "contributors": [ 
+    "Dillon Garrett <dillon.garrett.dev@gmail.com",
+    "Will Robinson <wrobinson91@gmail.com"],
   "license": "MIT",
   "dependencies": {
     "apollo-cache-inmemory": "^1.6.2",
@@ -93,6 +106,15 @@
     "mac": {
       "target": "dmg",
       "icon": "./assets/hypnos-icon.png"
+    },
+    "win": {
+      "target": "nsis",
+      "icon": "./assets/hypnos-icon.png"
+    },
+    "linux": {
+      "target": "deb",
+      "icon": "./assets/hypnos-icon.png",
+      "category": "Development"
     }
   }
 }
