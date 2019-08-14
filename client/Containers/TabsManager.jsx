@@ -8,11 +8,13 @@ import HistoryDisplay from '../Components/HistoryDisplay';
 import { useStateValue } from '../Context';
 import defaultEndpoint from '../Constants/defaultEndpoint';
 
+import { tabStyle, tabStyleMain, addButtonStyle } from '../Constants/inlineComponentStyle';
+
 // import 'react-tabs/style/react-tabs.css';
 
 const TabsManager = () => {
   // rendering tabs inside render method, based on tabsListLabels, just nums in an array
-  const [{ endpointHistory }, dispatch] = useStateValue();
+  const [{ endpointHistory }] = useStateValue();
 
   const [queriesTabs, setQueriesTabs] = useState({
     tabsListLabels: [0],
@@ -51,6 +53,7 @@ const TabsManager = () => {
           onSelect={(tabIndex, lastIndex, event) => {
             // console.log('last tab: ', lastIndex);
             // console.log('new tab: ', tabIndex);
+            // console.log('unique ids: ', queriesTabs);
 
             // tabIdToSave is the unique value given by dev. tabIndex is managed by tabs itself
             // not being used currently but might be needed in future
@@ -62,19 +65,26 @@ const TabsManager = () => {
           <TabList id="tabs-list">
             {queriesTabs.tabsListLabels.map((el, idx) => (idx !== 0
               ? (
-                <Tab key={`tab-${el}`} tab-id={el} style={{ fontFamily: 'Helvetica, sans-serif', fontSize: '12px', backgroundColor: '#f7f9fb' }}>
+                <Tab key={`tab-${el}`} tab-id={el} style={tabStyle}>
                   {endpointHistory[el] ? endpointHistory[el] : defaultEndpoint}
                   <DeleteButton className="delete-button" key={`del-btn-${el}`} tabId={el} deleteTab={deleteTab} />
                 </Tab>
               )
               : (
-                <Tab key={`tab-${el}`} tab-id={el} style={{fontFamily: 'Helvetica, sans-serif', fontSize: '12px', height: '13px', backgroundColor: '#f7f9fb', marginBottom: '1px'}}>
+                <Tab key={`tab-${el}`} tab-id={el} style={tabStyleMain}>
                   {endpointHistory[el]}
-                  <DeleteButton id="main-tab-delete" className="delete-button" key={`del-btn-${el}`} tabId={el} deleteTab={()=>{}} isHidden={true}/>
+                  <DeleteButton id="main-tab-delete" className="delete-button" key={`del-btn-${el}`} tabId={el} deleteTab={() => { }} isHidden />
                 </Tab>
               )))}
             {/* {<button type="button" onClick={deleteTab}>x</button>} */}
-            <button type="button" id="add-tab-button" style={{ fontSize: '25px', borderStyle: 'none', paddingLeft: '5px', paddingBottom: '-6px',backgroundColor: '#f7f9fb', outline: 'none', alignSelf: 'center' }} onClick={addNewTab}>+</button>
+            <button
+              type="button"
+              id="add-tab-button"
+              style={addButtonStyle}
+              onClick={addNewTab}
+            >
+              +
+            </button>
           </TabList>
           {/* {queriesTabs.queriesContainers} */}
           {queriesTabs.tabsListLabels.map((el, idx) => <TabPanel id="tab-panel" key={`tab-panel-${el}`} tab-panel-id={el}><QueriesContainer stateTabReference={el} key={`qc-${el}`} /></TabPanel>)}

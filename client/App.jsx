@@ -18,7 +18,8 @@ import { ApolloLink } from 'apollo-link';
 // import { createHttpLink } from 'apollo-link-http';
 
 import Header from './Components/Header';
-import HistoryDisplay from './Components/HistoryDisplay';
+// history display now rendered inside Tabs Manager
+// import HistoryDisplay from './Components/HistoryDisplay';
 import TabsManager from './Containers/TabsManager';
 // import DeleteButton from './Components/MiniComponents/TabsDeleteButton';
 // import QueriesContainer from './Containers/QueriesContainer';
@@ -63,9 +64,9 @@ const App = () => {
     //   console.log('graphQLErrors', graphQLErrors);
     //   console.log('networkError', networkError);
     // },
-    customFetch: (uri, fetchOptions) => {
+    customFetch: (uri, fetchOptions) =>
       // console.log('in custom fetch. fetchOptions: ', fetchOptions);
-      return new Promise((resolve, reject) => {
+      new Promise((resolve, reject) => {
         fetch(uri, fetchOptions)
           .then((res) => {
             // const clone = res.clone();
@@ -86,8 +87,7 @@ const App = () => {
             // console.log('error in custom fetch');
             reject('error in custom fetch: ', e);
           });
-      });
-    },
+      }),
     // credentials: 'include',
   });
 

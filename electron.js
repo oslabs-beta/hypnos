@@ -15,7 +15,7 @@ let mainWindow;
 // NOTE: LOCAL HOST CHANGED TO 8080 SO EXPRESS CAN SERVE UP ELECTORN
 app.on('ready', () => {
   // create new window
-  mainWindow = new BrowserWindow({ width: 1170, height: 760 });
+  mainWindow = new BrowserWindow({ width: 1170, height: 800 });
   // load html into the window
   console.log('Dev environment on: ', isDev);
   mainWindow.loadURL(url.format({
