@@ -34,7 +34,9 @@ const TabsManager = () => {
     const newTabsListLabels = queriesTabs.tabsListLabels.slice(0);
 
     // adds +1 to whateve the final item is in the list
-    const newLabel = newTabsListLabels[newTabsListLabels.length - 1] + 1;
+    console.log('getting obj keys, sorted desc', Object.keys(endpointHistory).sort((a, b) => b - a));
+    const newLabel = Number(Object.keys(endpointHistory).sort((a, b) => b - a)[0]) + 1;
+    // const newLabel = newTabsListLabels[newTabsListLabels.length - 1] + 1;
     newTabsListLabels.push(newLabel);
 
     setQueriesTabs({
@@ -87,7 +89,7 @@ const TabsManager = () => {
             </button>
           </TabList>
           {/* {queriesTabs.queriesContainers} */}
-          {queriesTabs.tabsListLabels.map((el, idx) => <TabPanel id="tab-panel" key={`tab-panel-${el}`} tab-panel-id={el}><QueriesContainer stateTabReference={el} key={`qc-${el}`} /></TabPanel>)}
+          {queriesTabs.tabsListLabels.map((el, idx) => { console.log('el when making tabs: ', el); return <TabPanel id="tab-panel" key={`tab-panel-${el}`} tab-panel-id={el}><QueriesContainer stateTabReference={el} key={`qc-${el}`} /></TabPanel>; })}
         </Tabs>
       </>
     </>
