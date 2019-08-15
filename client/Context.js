@@ -65,7 +65,7 @@ const reducer = (state, action) => {
       };
     case types.RUN_QUERY:
       // when query is run, on button press, endpoint is assigned the dynamically changing url
-      console.log('run query fired, reducer', action);
+      // console.log('run query fired, reducer', action);
       return {
         ...state,
         // if a query is run, that means no 404 happened

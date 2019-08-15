@@ -76,7 +76,7 @@ const QueryInput = (props) => {
     // console.log('new api endpoint: ', defaultEndpoint);
     const urlToSend = newAPIEndpoint || endpointHistory[stateTabReference] || defaultEndpoint;
 
-    console.log('url being sent: ', urlToSend);
+    // console.log('url being sent: ', urlToSend);
     try {
       gql([`${textValue}`]);
     } catch (err) {
