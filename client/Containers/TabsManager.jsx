@@ -34,8 +34,13 @@ const TabsManager = () => {
     const newTabsListLabels = queriesTabs.tabsListLabels.slice(0);
 
     // adds +1 to whateve the final item is in the list
-    const newLabel = newTabsListLabels[newTabsListLabels.length - 1] + 1;
+    // console.log('getting obj keys, sorted desc', Object.keys(endpointHistory).sort((a, b) => b - a));
+    const lastItemInHistory = Number(Object.keys(endpointHistory).sort((a, b) => b - a)[0]) + 1;
+    const lastItemLocal = newTabsListLabels[newTabsListLabels.length - 1] + 1;
+    const newLabel = lastItemLocal >= lastItemInHistory ? lastItemLocal : lastItemInHistory;
+    // const newLabel = newTabsListLabels[newTabsListLabels.length - 1] + 1;
     newTabsListLabels.push(newLabel);
+    // console.log('new tabs: ', newTabsListLabels);
 
     setQueriesTabs({
       tabsListLabels: newTabsListLabels,
@@ -57,7 +62,7 @@ const TabsManager = () => {
 
             // tabIdToSave is the unique value given by dev. tabIndex is managed by tabs itself
             // not being used currently but might be needed in future
-            const tabIdToSave = queriesTabs.tabsListLabels[lastIndex];
+            // const tabIdToSave = queriesTabs.tabsListLabels[lastIndex];
             // console.log(tabIdToSave);
             setCurrentTab({ tabIndex });
           }}

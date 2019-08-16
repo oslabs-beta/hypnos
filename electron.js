@@ -26,6 +26,7 @@ app.on('ready', () => {
   }));
 
   // build menu from template
+  if (isDev) mainMenuTemplate.push(devToolsMenu);
   const mainMenu = Menu.buildFromTemplate(mainMenuTemplate);
   // insert Menu
   Menu.setApplicationMenu(mainMenu);
@@ -37,14 +38,11 @@ const mainMenuTemplate = [
     label: 'File',
     submenu: [
       {
-        label: 'quit',
+        label: 'Quit',
         click() {
           app.quit();
         },
         accelerator: 'CommandOrControl+Q',
-      },
-      {
-        label: 'Copy',
       },
     ],
   },
@@ -60,24 +58,26 @@ const mainMenuTemplate = [
       { label: 'Select All', accelerator: 'CmdOrCtrl+A', selector: 'selectAll:' },
     ],
   },
-  {
-    label: 'View',
-    submenu: [
-      {
-        // should be available only in dev environment
-        open: false,
-        label: 'DevTools',
-        click() {
-          if (!this.open) {
-            mainWindow.webContents.openDevTools();
-            this.open = true;
-          } else {
-            mainWindow.webContents.closeDevTools();
-            this.open = false;
-          }
-        },
-        accelerator: 'f12',
-      },
-    ],
-  },
 ];
+
+
+const devToolsMenu = {
+  label: 'View',
+  submenu: [
+    {
+      // should be available only in dev environment
+      open: false,
+      label: 'DevTools',
+      click() {
+        if (!this.open) {
+          mainWindow.webContents.openDevTools();
+          this.open = true;
+        } else {
+          mainWindow.webContents.closeDevTools();
+          this.open = false;
+        }
+      },
+      accelerator: 'f12',
+    },
+  ],
+};
