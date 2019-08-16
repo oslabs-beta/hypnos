@@ -56,8 +56,8 @@ const TabsManager = () => {
           forceRenderTabPanel
           selectedIndex={currentTab.tabIndex}
           onSelect={(tabIndex, lastIndex, event) => {
-            console.log('last tab: ', lastIndex);
-            console.log('new tab: ', tabIndex);
+            // console.log('last tab: ', lastIndex);
+            // console.log('new tab: ', tabIndex);
             // console.log('unique ids: ', queriesTabs);
 
             // tabIdToSave is the unique value given by dev. tabIndex is managed by tabs itself
