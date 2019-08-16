@@ -49,10 +49,13 @@ const QueryInput = (props) => {
   // if edit button has been clicked, then historyTextValue exists in state. reassigned to fill out
   // code mirror text area
 
+  const [newAPIEndpoint, setNewAPIEndpoint] = useState('');
+
   if (historyTextValue !== '' && textValue !== historyTextValue && historyIdx === stateTabReference) {
     // if a user has asked for an old query, repopulate
 
     setTextValue(historyTextValue);
+    setNewAPIEndpoint(endpointHistory[stateTabReference]);
 
     dispatch({
       type: types.RESET_GET_QUERY,
@@ -62,15 +65,18 @@ const QueryInput = (props) => {
     //   type: types.RESET_GET_QUERY,
     // });
   }
-  const [newAPIEndpoint, setNewAPIEndpoint] = useState('');
 
   const handleSubmit = () => {
     event.preventDefault();
     // old way
     // const urlToSend = newAPIEndpoint || endpoint;
     // new way
+    // console.log('new api endpoint: ', newAPIEndpoint);
+    // console.log('history endpoint: ', endpointHistory[stateTabReference]);
+    // console.log('new api endpoint: ', defaultEndpoint);
     const urlToSend = newAPIEndpoint || endpointHistory[stateTabReference] || defaultEndpoint;
 
+    // console.log('url being sent: ', urlToSend);
     try {
       gql([`${textValue}`]);
     } catch (err) {
@@ -97,7 +103,13 @@ const QueryInput = (props) => {
         newHeadersKey: modalOptions.newHeadersKey,
         newAPIKey: modalOptions.newAPIKey,
       }),
+      setModalOptions({
+        ...modalOptions,
+        newHeadersKey: '',
+        newAPIKey: '',
+      }),
     ])
+
       // .then(() => console.log('DB entry added and dispatch successful.'))
       .catch(e => console.log('Error in DB add/dispatch chain: ', e));
   };
