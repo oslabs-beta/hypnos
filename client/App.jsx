@@ -47,8 +47,8 @@ const App = () => {
   };
 
   if (apiKey !== '' && headersKey !== '') {
-    // console.log('apiKey: ', apiKey);
-    // console.log('headersKey: ', headersKey);
+    console.log('apiKey: ', apiKey);
+    console.log('headersKey: ', headersKey);
     headersOptions[headersKey] = apiKey;
     // console.log('headersOptions ', headersOptions);
   }

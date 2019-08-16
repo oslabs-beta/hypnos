@@ -65,8 +65,7 @@ const reducer = (state, action) => {
       };
     case types.RUN_QUERY:
       // when query is run, on button press, endpoint is assigned the dynamically changing url
-      // console.log('run query fired, reducer', action);
-      console.log('headers: ', action.newHeadersKey, action.newAPIKey);
+
       return {
         ...state,
         // if a query is run, that means no 404 happened
@@ -78,8 +77,8 @@ const reducer = (state, action) => {
           ranQueryTab: action.ranQueryTab,
         },
         // sets endpoint history, for other tabs being able to run their old queries
-        headersKey: action.newHeadersKey,
-        apiKey: action.newAPIKey,
+        headersKey: action.newEndpoint === state.endpoint && action.newHeadersKey === '' ? state.headersKey : action.newHeadersKey,
+        apiKey: action.newEndpoint === state.endpoint && action.newAPIKey === '' ? state.apiKey : action.newAPIKey,
         endpointHistory: {
           ...state.endpointHistory,
           [action.ranQueryTab]: action.newEndpoint ? action.newEndpoint : state.endpoint,

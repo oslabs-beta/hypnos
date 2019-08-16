@@ -103,7 +103,13 @@ const QueryInput = (props) => {
         newHeadersKey: modalOptions.newHeadersKey,
         newAPIKey: modalOptions.newAPIKey,
       }),
+      setModalOptions({
+        ...modalOptions,
+        newHeadersKey: '',
+        newAPIKey: '',
+      }),
     ])
+
       // .then(() => console.log('DB entry added and dispatch successful.'))
       .catch(e => console.log('Error in DB add/dispatch chain: ', e));
   };
