@@ -64,7 +64,7 @@ export const reducer = (state, action) => {
     //   };
     case types.RUN_QUERY:
       // when query is run, on button press, endpoint is assigned the dynamically changing url
-
+      // console.log('action object, in run query: ', action);
       return {
         ...state,
         // if a query is run, that means no 404 happened
@@ -72,7 +72,7 @@ export const reducer = (state, action) => {
         endpointFromDB: '',
         queryResultObject: action.queryResultObject,
         query: {
-          query: Object.assign({}, action.query),
+          query: { ...action.query },
           ranQueryTab: action.ranQueryTab
         },
         // sets endpoint history, for other tabs being able to run their old queries
