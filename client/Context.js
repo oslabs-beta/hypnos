@@ -50,18 +50,18 @@ export const initialState = {
 export const reducer = (state, action) => {
   switch (action.type) {
     // ! NOT BEING USED ANYMORE
-    case types.SUBMIT_ENDPOINT:
-      return {
-        ...state,
-        // if user changes endpoint, want to make sure query is valid
-        endpoint: action.submitEndpoint,
-        query: {
-          query: '',
-          ranQueryTab: -1
-        },
-        queryResultObject: '',
-        historyTextValue: ''
-      };
+    // case types.SUBMIT_ENDPOINT:
+    //   return {
+    //     ...state,
+    //     // if user changes endpoint, want to make sure query is valid
+    //     endpoint: action.submitEndpoint,
+    //     query: {
+    //       query: '',
+    //       ranQueryTab: -1
+    //     },
+    //     queryResultObject: '',
+    //     historyTextValue: ''
+    //   };
     case types.RUN_QUERY:
       // when query is run, on button press, endpoint is assigned the dynamically changing url
 
