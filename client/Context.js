@@ -25,7 +25,7 @@ export const useStateValue = () => useContext(StateContext);
 //   },
 // };
 
-const initialState = {
+export const initialState = {
   query: {
     // MADE QUERY AN OBJ WITH QUERY PROP. ADDED RAN QUERYTAB ON IT TO KNOW WHERE QUERY CAME FROM
     query: '',
@@ -47,7 +47,7 @@ const initialState = {
   }
 };
 
-const reducer = (state, action) => {
+export const reducer = (state, action) => {
   switch (action.type) {
     // ! NOT BEING USED ANYMORE
     case types.SUBMIT_ENDPOINT:
