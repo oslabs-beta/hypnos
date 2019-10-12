@@ -17,7 +17,6 @@ export const StateProvider = ({ children }) => (
 
 export const useStateValue = () => useContext(StateContext);
 
-
 // const initialEndpointHistory = {
 //   endpoint: 'https://pokeapi.co/api/v2/pokemon/',
 //   headers: {
@@ -30,7 +29,7 @@ const initialState = {
   query: {
     // MADE QUERY AN OBJ WITH QUERY PROP. ADDED RAN QUERYTAB ON IT TO KNOW WHERE QUERY CAME FROM
     query: '',
-    ranQueryTab: -1,
+    ranQueryTab: -1
   },
   queryResultObject: '',
   queryGQLError: '',
@@ -44,8 +43,8 @@ const initialState = {
   apiKey: '',
   endpointFromDB: '',
   endpointHistory: {
-    0: 'https://pokeapi.co/api/v2/pokemon/',
-  },
+    0: 'https://pokeapi.co/api/v2/pokemon/'
+  }
 };
 
 const reducer = (state, action) => {
@@ -58,10 +57,10 @@ const reducer = (state, action) => {
         endpoint: action.submitEndpoint,
         query: {
           query: '',
-          ranQueryTab: -1,
+          ranQueryTab: -1
         },
         queryResultObject: '',
-        historyTextValue: '',
+        historyTextValue: ''
       };
     case types.RUN_QUERY:
       // when query is run, on button press, endpoint is assigned the dynamically changing url
@@ -74,17 +73,23 @@ const reducer = (state, action) => {
         queryResultObject: action.queryResultObject,
         query: {
           query: Object.assign({}, action.query),
-          ranQueryTab: action.ranQueryTab,
+          ranQueryTab: action.ranQueryTab
         },
         // sets endpoint history, for other tabs being able to run their old queries
-        headersKey: action.newEndpoint === state.endpoint && action.newHeadersKey === '' ? state.headersKey : action.newHeadersKey,
-        apiKey: action.newEndpoint === state.endpoint && action.newAPIKey === '' ? state.apiKey : action.newAPIKey,
+        headersKey:
+          action.newEndpoint === state.endpoint && action.newHeadersKey === ''
+            ? state.headersKey
+            : action.newHeadersKey,
+        apiKey:
+          action.newEndpoint === state.endpoint && action.newAPIKey === ''
+            ? state.apiKey
+            : action.newAPIKey,
         endpointHistory: {
           ...state.endpointHistory,
-          [action.ranQueryTab]: action.newEndpoint ? action.newEndpoint : state.endpoint,
+          [action.ranQueryTab]: action.newEndpoint ? action.newEndpoint : state.endpoint
         },
         endpoint: action.newEndpoint ? action.newEndpoint : state.endpoint,
-        historyTextValue: '',
+        historyTextValue: ''
       };
     // needs to send whatever was in intial state at the very beginning of the app
     case types.RESET_STATE:
@@ -93,8 +98,8 @@ const reducer = (state, action) => {
         // this might not be needed below
         endpointHistory: {
           ...state.endpointHistory,
-          [action.currentTab]: 'https://pokeapi.co/api/v2/pokemon/',
-        },
+          [action.currentTab]: 'https://pokeapi.co/api/v2/pokemon/'
+        }
       };
     case types.GQL_ERROR:
       // console.log('gql error fired: ', action);
@@ -103,11 +108,11 @@ const reducer = (state, action) => {
         // on a 404, reset query. no query is actually run
         query: {
           query: '',
-          ranQueryTab: -1,
+          ranQueryTab: -1
         },
         queryResultObject: '',
         queryGQLError: action.gqlError,
-        historyTextValue: '',
+        historyTextValue: ''
       };
     case types.EDIT_QUERY_FROM_DB:
       return {
@@ -117,8 +122,8 @@ const reducer = (state, action) => {
         endpoint: action.endpoint,
         endpointHistory: {
           ...state.endpointHistory,
-          [action.currentTabID]: action.endpoint,
-        },
+          [action.currentTabID]: action.endpoint
+        }
       };
     case types.RESET_GET_QUERY:
       // console.log('running reset get query');
@@ -126,7 +131,7 @@ const reducer = (state, action) => {
         ...state,
         historyTextValue: '',
         // reset to a number that will never exist
-        historyIdx: -1,
+        historyIdx: -1
       };
     default:
       return state;
