@@ -3,7 +3,7 @@
  *
  */
 
-export const jsonFormatter = (obj) => {
+export const jsonFormatter = obj => {
   const strObj = JSON.stringify(obj);
   let resultStr = '';
   const tab = '  ';
