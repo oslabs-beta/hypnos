@@ -18,7 +18,7 @@ describe('front end renders', () => {
   });
 
   describe('Initial display', () => {
-    xit('queries container loads successfully', async () => {
+    it('queries container loads successfully', async () => {
       // We navigate to the page at the beginning of each case so we have a
       // fresh start
       await page.goto(APP);
@@ -27,14 +27,14 @@ describe('front end renders', () => {
       expect(queriesContainer).toBe(true);
     });
 
-    xit('query input loads successfully', async () => {
+    it('query input loads successfully', async () => {
       await page.goto(APP);
       await page.waitForSelector('#query-input');
       const queriesInput = await page.$eval('#query-input', el => !!el);
       expect(queriesInput).toBe(true);
     });
 
-    xit('query output loads successfully', async () => {
+    it('query output loads successfully', async () => {
       await page.goto(APP);
       await page.waitForSelector('#query-output');
       const queriesOutput = await page.$eval('#query-output', el => !!el);
