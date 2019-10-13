@@ -13,14 +13,17 @@ describe('React Context reducer tests', () => {
 
   describe('default state', () => {
     it("reducer should return same state when there's no type property in action parameter", () => {
+      // strict equality in this instance
       expect(reducer(state, {})).toBe(state);
     });
     it('reducer should return same state when given unknown action type', () => {
+      // strict equality in this instance
       expect(reducer(state, { type: 'test', payload: 'test' })).toBe(state);
     });
   });
 
   describe('action type tests', () => {
+    // mock/lite version of payload from running a succesful query
     const mockPayload = {
       newAPIKey: '',
       newEndpoint: 'https://api.tvmaze.com/',
@@ -41,6 +44,7 @@ describe('React Context reducer tests', () => {
 
     describe('RUN_QUERY case', () => {
       beforeAll(() => {
+        // receive new state after reducer has been run
         newState = reducer(state, mockPayload);
       });
 
@@ -77,13 +81,8 @@ describe('React Context reducer tests', () => {
       beforeAll(() => {
         // run a query on tab '1'
         newState = reducer(state, mockPayload);
-        // change
-        // mockPayload.ranQueryTab = '2';
-
         // run a new query from a new tab
         newState = reducer(newState, { ...mockPayload, ranQueryTab: '2' });
-        // clean up
-        // mockPayload.ranQueryTab = '1';
         // reset on the secondary tab
         newState = reducer(newState, { type: types.RESET_STATE, currentTab: '2' });
       });
@@ -98,16 +97,21 @@ describe('React Context reducer tests', () => {
         expect(newState.headersKey).toBe(initialState.headersKey);
         expect(newState.apiKey).toBe(initialState.apiKey);
         expect(newState.endpointFromDB).toBe(initialState.endpointFromDB);
+        // this is the only data point that should NOT match the initial state
         expect(newState.endpointHistory[mockPayload.ranQueryTab]).toBe(mockPayload.newEndpoint);
         expect(newState.endpointHistory['2']).toBe(initialState.endpoint);
       });
     });
 
     describe('GQL_ERROR case', () => {
+      // when a query is not constrcucted correctly
       beforeAll(() => {
+        // run one successful query
         newState = reducer(state, mockPayload);
+        // query construction errored out
         newState = reducer(newState, {
           type: types.GQL_ERROR,
+          // picked one specific error -- dispatch format is the same for any of these cases
           gqlError: errorResponse.queryMethodError
         });
       });
