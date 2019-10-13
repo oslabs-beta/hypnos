@@ -1,71 +1,68 @@
 #API-key-modal {
-    display: grid;
-    grid-area: modal;
-    width: 100%;
-    justify-content: stretch;
+  display: grid;
+  grid-area: modal;
+  width: 100%;
+  justify-content: stretch;
 
-    button {
-        background-color: $loading-color;
-        font-family: system-ui;
-        font-size: 13px;
-        font-weight: bold;
-        color: white;
-        box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  button {
+    background-color: $loading-color;
+    font-family: system-ui;
+    font-size: 13px;
+    font-weight: bold;
+    color: white;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 
-        &:focus {
-            outline: 0;
-        }
+    &:focus {
+      outline: 0;
     }
+  }
 
-    button:hover {
-        background-color: $loading-color-hover;
-    }
-
-    
+  button:hover {
+    background-color: $loading-color-hover;
+  }
 }
 
 #modal-instructions {
-    font-family: system-ui;
-    color: white;
+  font-family: system-ui;
+  color: white;
 }
 
 #api-key-input {
-    font-family: system-ui;
+  font-family: system-ui;
 }
-    
+
 #headers-key-input {
-    font-family: system-ui;
+  font-family: system-ui;
 }
 
 #api-key-form {
+  background-color: $dark-color;
 
-    background-color: $dark-color;
+  label {
+    font-family: system-ui;
+    color: white;
+    padding-bottom: 5px;
+  }
 
-    label {
-        font-family: system-ui;
-        color: white;
-        padding-bottom: 5px;
-    }
+  input {
+    height: 30px;
+    margin: 0px 5px;
+    margin-right: 20px;
+  }
 
-    input {
-        height: 30px;
-        margin: 0px 5px;
-        margin-right: 20px;
-    }
+  button {
+    color: $dark-color;
+    background-color: white;
+    height: 35px;
+    width: 50px;
+    margin-top: 10px;
+    font-size: 13px;
+    // color: $highlight-color;
+    font-weight: bold;
+    font-family: system-ui;
+  }
 
-    button {
-        color: $dark-color;
-        background-color: white;
-        height: 35px;
-        width: 50px;
-        margin-top: 10px;
-        font-size: 13px;
-        // color: $highlight-color;
-        font-weight: bold;
-        font-family: system-ui;
-    }
-
-    button:hover {
-        background-color: #e5e5e5;
-    }
+  button:hover {
+    background-color: #e5e5e5;
+  }
 }

@@ -4,11 +4,9 @@ import APIModal from './APIKeyModal';
 
 import defaultEndpoint from '../Constants/defaultEndpoint';
 
-const EndpointField = (props) => {
+const EndpointField = props => {
   // streamlined to not use local state from queryInput component
-  const {
-    setNewAPIEndpoint, stateTabReference, modalOptions, setModalOptions,
-  } = props;
+  const { setNewAPIEndpoint, stateTabReference, modalOptions, setModalOptions } = props;
   // 8/12: deleted endpoint from useStateValue below
   const [{ endpointHistory }] = useStateValue();
 
@@ -17,7 +15,7 @@ const EndpointField = (props) => {
       <input
         type="text"
         placeholder={`Current endpoint: ${endpointHistory[stateTabReference] || defaultEndpoint}`}
-        onChange={(e) => {
+        onChange={e => {
           // have to assign value from text area instead of local state, since state setter
           // and dispatch are async
 
@@ -29,6 +27,5 @@ const EndpointField = (props) => {
     </article>
   );
 };
-
 
 export default EndpointField;

@@ -1,7 +1,7 @@
 /**
-* ERROR CHECKING FOR FETCH REQ IN QUERY INPUT. IMPORTED TO HANDLE QUERY FETCH
-*
-*/
+ * ERROR CHECKING FOR FETCH REQ IN QUERY INPUT. IMPORTED TO HANDLE QUERY FETCH
+ *
+ */
 
 import * as errorMsg from '../../Constants/errors/errorStrings';
 import * as dispatchObj from '../../Constants/errors/errorDispatchObjects';
@@ -14,7 +14,9 @@ const fetchErrorCheck = (error, dispatch) => {
   if (error.message.slice(0, errorMsg.queryMethodError.length) === errorMsg.queryMethodError) {
     dispatch(dispatchObj.queryMethodError);
     // throw new Error(errorReponse.queryMethodError);
-  } else if (error.message.slice(0, errorMsg.multipleQueriesError.length) === errorMsg.multipleQueriesError) {
+  } else if (
+    error.message.slice(0, errorMsg.multipleQueriesError.length) === errorMsg.multipleQueriesError
+  ) {
     dispatch(dispatchObj.multipleQueriesError);
     // throw new Error(errorReponse.multipleQueriesError);
     // if the variable before @rest does not exist
@@ -24,7 +26,11 @@ const fetchErrorCheck = (error, dispatch) => {
     // throw new Error(errorReponse.varBeforeRestError);
     // if query does not have proper curly brackets
     // ! TODO: this didn't look like it fired for inner right bracket being closed. Or final right bracket
-  } else if (error.message === errorMsg.curlyBracketError1 || error.message.slice(0, errorMsg.curlyBracketError2.length) === errorMsg.curlyBracketError2 || error.message.slice(0, errorMsg.curlyBracketError3.length) === errorMsg.curlyBracketError3) {
+  } else if (
+    error.message === errorMsg.curlyBracketError1 ||
+    error.message.slice(0, errorMsg.curlyBracketError2.length) === errorMsg.curlyBracketError2 ||
+    error.message.slice(0, errorMsg.curlyBracketError3.length) === errorMsg.curlyBracketError3
+  ) {
     dispatch(dispatchObj.curlyBracketError);
     // throw new Error(errorReponse.curlyBracketError);
     // if the query fields are blank
@@ -39,10 +45,14 @@ const fetchErrorCheck = (error, dispatch) => {
   } else if (error.message === errorMsg.noRestCallError) {
     dispatch(dispatchObj.noRestCallError);
     // throw new Error(errorReponse.noRestCallError);
-  } else if (error.message.slice(0, errorMsg.badArgumentOrFieldError.length) === errorMsg.badArgumentOrFieldError) {
+  } else if (
+    error.message.slice(0, errorMsg.badArgumentOrFieldError.length) ===
+    errorMsg.badArgumentOrFieldError
+  ) {
     // two known cases for this error: either it's an invalid type/path argument
     // !  NOTE: THE STACK CHECKING METHOD DOES NOT WORK ON BUILD, AS THE STACK TRACE IS DIFFERENT
-    if (error.stack.slice(0, 300).includes('parseArgument')) dispatch(dispatchObj.noPathOrTypeError);
+    if (error.stack.slice(0, 300).includes('parseArgument'))
+      dispatch(dispatchObj.noPathOrTypeError);
     // or a field has quotes around it
     else if (error.stack.slice(0, 300).includes('parseField')) dispatch(dispatchObj.badFieldError);
     else dispatch(dispatchObj.genericError);

@@ -10,12 +10,11 @@ import indexedDB from 'fake-indexeddb';
 import HistoryDisplay from '../client/Components/HistoryDisplay';
 import App from '../client/App';
 
-
 configure({ adapter: new Adapter() });
 
 const db = new Dexie('testHistoryDB', { indexedDB });
 db.version(1).stores({
-  history: '++id, query, endpoint',
+  history: '++id, query, endpoint'
 });
 
 describe('First React component test with Enzyme', () => {
@@ -28,15 +27,15 @@ describe('React unit tests', () => {
   beforeAll(() => {
     db.history.put({
       query: 'query1',
-      endpoint: 'endpoint1',
+      endpoint: 'endpoint1'
     });
     db.history.put({
       query: 'query2',
-      endpoint: 'endpoint2',
+      endpoint: 'endpoint2'
     });
     db.history.put({
       query: 'query3',
-      endpoint: 'endpoint3',
+      endpoint: 'endpoint3'
     });
   });
 
@@ -50,7 +49,9 @@ describe('React unit tests', () => {
     it('database returns an array of queries', () => {
       console.log('in db test');
       let array = [1, 2, 3];
-      db.history.toArray().then(queries => array = queries);
+      db.history.toArray().then(queries => {
+        array = queries;
+      });
       expect(array).toHaveLength(3);
     });
   });

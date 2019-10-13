@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Modal from 'react-modal';
 import { apiKeyModalStyle as styleObj } from '../Constants/inlineComponentStyle';
 
-const APIModal = (props) => {
+const APIModal = props => {
   const { modalOptions, setModalOptions } = props;
 
   const [apiTextValue, setApiTextValue] = useState('');
@@ -11,7 +11,7 @@ const APIModal = (props) => {
   const openModal = () => {
     setModalOptions({
       ...modalOptions,
-      isModalOpen: true,
+      isModalOpen: true
     });
   };
 
@@ -21,10 +21,9 @@ const APIModal = (props) => {
       ...modalOptions,
       newHeadersKey: headerValue.trim(),
       newAPIKey: apiTextValue.trim(),
-      isModalOpen: false,
+      isModalOpen: false
     });
   };
-
 
   return (
     <section id="API-key-modal">
@@ -40,7 +39,6 @@ const APIModal = (props) => {
         style={styleObj}
         contentLabel="API Key"
       >
-
         <p id="modal-instructions">If your endpoint requires an API key, please enter it here.</p>
         <br />
         <form id="api-key-form">
@@ -49,7 +47,7 @@ const APIModal = (props) => {
             <input
               type="text"
               id="headers-key-field"
-              onChange={(e) => {
+              onChange={e => {
                 const header = e.target.value;
                 setHeaderValue(header);
               }}
@@ -60,13 +58,15 @@ const APIModal = (props) => {
             <input
               type="text"
               id="api-key-field"
-              onChange={(e) => {
+              onChange={e => {
                 const api = e.target.value;
                 setApiTextValue(api);
               }}
             />
           </label>
-          <button id="modal-submit-button" onClick={() => closeModal()}>Add</button>
+          <button id="modal-submit-button" onClick={() => closeModal()}>
+            Add
+          </button>
         </form>
       </Modal>
     </section>
@@ -75,6 +75,5 @@ const APIModal = (props) => {
 
 // this is supposed to be down here, but it looks weird. commented out for now
 // Modal.setAppElement('#root');
-
 
 export default APIModal;

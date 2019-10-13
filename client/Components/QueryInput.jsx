@@ -31,34 +31,38 @@ query ditto {
   }
 }`;
 
-
-const QueryInput = (props) => {
+const QueryInput = props => {
   const { stateTabReference } = props;
 
   // deleted endpoint from useStateValue below
-  const [{
-    historyTextValue, isModalOpen, endpointHistory, historyIdx,
-  }, dispatch] = useStateValue();
+  const [
+    { historyTextValue, isModalOpen, endpointHistory, historyIdx },
+    dispatch
+  ] = useStateValue();
   const [textValue, setTextValue] = useState(exampleQuery);
 
   const [modalOptions, setModalOptions] = useState({
     isModalOpen: false,
     newHeadersKey: '',
-    newAPIKey: '',
+    newAPIKey: ''
   });
   // if edit button has been clicked, then historyTextValue exists in state. reassigned to fill out
   // code mirror text area
 
   const [newAPIEndpoint, setNewAPIEndpoint] = useState('');
 
-  if (historyTextValue !== '' && textValue !== historyTextValue && historyIdx === stateTabReference) {
+  if (
+    historyTextValue !== '' &&
+    textValue !== historyTextValue &&
+    historyIdx === stateTabReference
+  ) {
     // if a user has asked for an old query, repopulate
 
     setTextValue(historyTextValue);
     setNewAPIEndpoint(endpointHistory[stateTabReference]);
 
     dispatch({
-      type: types.RESET_GET_QUERY,
+      type: types.RESET_GET_QUERY
     });
     // once history is assigned down here, reset it in context
     // dispatch({
@@ -91,23 +95,26 @@ const QueryInput = (props) => {
 
     // console.log('regex test: ', textValue.match(/(?<=\{\W)(.*?)(?=\@)/g));
     const regexResult = textValue.match(/(?<=\{\W)(.*?)(?=\@)/g);
-    Promise.all([addQueryToDB(textValue, urlToSend),
+    Promise.all([
+      addQueryToDB(textValue, urlToSend),
       dispatch({
         type: types.RUN_QUERY,
         // decontructed using of gql tag to make query object. need to pass in a stringliteral.
         query: gql([`${textValue}`]),
         // pulls of key for where data will be in result obj
-        queryResultObject: regexResult ? textValue.match(/(?<=\{\W)(.*?)(?=\@)/g)[0].trim() : 'null',
+        queryResultObject: regexResult
+          ? textValue.match(/(?<=\{\W)(.*?)(?=\@)/g)[0].trim()
+          : 'null',
         newEndpoint: urlToSend,
         ranQueryTab: stateTabReference,
         newHeadersKey: modalOptions.newHeadersKey,
-        newAPIKey: modalOptions.newAPIKey,
+        newAPIKey: modalOptions.newAPIKey
       }),
       setModalOptions({
         ...modalOptions,
         newHeadersKey: '',
-        newAPIKey: '',
-      }),
+        newAPIKey: ''
+      })
     ])
 
       // .then(() => console.log('DB entry added and dispatch successful.'))
@@ -116,9 +123,18 @@ const QueryInput = (props) => {
 
   return (
     <>
-      <EndpointField modalOptions={modalOptions} setModalOptions={setModalOptions} setNewAPIEndpoint={setNewAPIEndpoint} stateTabReference={stateTabReference} />
+      <EndpointField
+        modalOptions={modalOptions}
+        setModalOptions={setModalOptions}
+        setNewAPIEndpoint={setNewAPIEndpoint}
+        stateTabReference={stateTabReference}
+      />
       <article id="query-input">
-        <form id="query-input-form" style={modalOptions.isModalOpen ? { visibility: 'hidden' } : { visibility: 'visible' }} onSubmit={() => handleSubmit()}>
+        <form
+          id="query-input-form"
+          style={modalOptions.isModalOpen ? { visibility: 'hidden' } : { visibility: 'visible' }}
+          onSubmit={() => handleSubmit()}
+        >
           <CodeMirror
             id="code-mirror"
             value={textValue}
@@ -136,7 +152,7 @@ const QueryInput = (props) => {
               tabSize: 2,
               lineWrapping: true,
               autoRefresh: true,
-              mode: 'javascript',
+              mode: 'javascript'
             }}
           />
           <section id="buttons">
@@ -150,14 +166,16 @@ const QueryInput = (props) => {
               onClick={() => {
                 dispatch({
                   type: types.RESET_STATE,
-                  currentTab: stateTabReference,
+                  currentTab: stateTabReference
                 });
                 // after reseting state, reset endpoint field to empty string. in state,
                 // it will be POKEAPI
 
                 // vanilla DOM manipulation was the best way to change the input field value
                 // only resets current tab's endpoint field
-                const inputField = document.querySelector(`#endpoint-field[input-field-tab-id ="${stateTabReference}"] input`);
+                const inputField = document.querySelector(
+                  `#endpoint-field[input-field-tab-id ="${stateTabReference}"] input`
+                );
                 inputField.value = '';
                 // reset textValue field to exampleQuery
                 setTextValue(exampleQuery);
