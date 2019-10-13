@@ -4,12 +4,12 @@ export const tabsDeleteButtonStyle = {
   fontSize: '10px',
   backgroundColor: '#f7f9fb',
   // isHidden must be handled at component level
-  visibility: 'visible',
+  visibility: 'visible'
 };
 
 export const tabsDeleteButtonMainStyle = {
   ...tabsDeleteButtonStyle,
-  visibility: 'hidden',
+  visibility: 'hidden'
 };
 
 export const apiKeyModalStyle = {
@@ -22,18 +22,18 @@ export const apiKeyModalStyle = {
     transform: 'translate(-50%, -50%)',
     backgroundColor: '#31708b',
     // width: '100px',
-    borderRadius: '5px',
-  },
+    borderRadius: '5px'
+  }
 };
 
 export const tabStyle = {
   fontFamily: 'Helvetica, sans-serif',
   fontSize: '12px',
-  backgroundColor: '#f7f9fb',
+  backgroundColor: '#f7f9fb'
 };
 
 export const tabStyleMain = {
-  ...tabStyle,
+  ...tabStyle
   // height: '13px',
   // marginBottom used to be needed. now it's not
   // marginBottom: '1px',
@@ -46,5 +46,5 @@ export const addButtonStyle = {
   paddingBottom: '-6px',
   backgroundColor: '#f7f9fb',
   outline: 'none',
-  alignSelf: 'center',
+  alignSelf: 'center'
 };

@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
-import {
-  Tab, Tabs, TabList, TabPanel,
-} from 'react-tabs';
+import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import QueriesContainer from './QueriesContainer';
 import DeleteButton from '../Components/MiniComponents/TabsDeleteButton';
 import HistoryDisplay from '../Components/HistoryDisplay';
@@ -17,15 +15,15 @@ const TabsManager = () => {
   const [{ endpointHistory }] = useStateValue();
 
   const [queriesTabs, setQueriesTabs] = useState({
-    tabsListLabels: [0],
+    tabsListLabels: [0]
   });
   const [currentTab, setCurrentTab] = useState({ tabIndex: 0 });
 
-  const deleteTab = (tabId) => {
+  const deleteTab = tabId => {
     // delete tabs by checking tabId, which is passed as a prop upon creation of tab
     // let tabIdx;
     setQueriesTabs({
-      tabsListLabels: queriesTabs.tabsListLabels.filter((el, idx) => el !== tabId),
+      tabsListLabels: queriesTabs.tabsListLabels.filter((el, idx) => el !== tabId)
     });
   };
 
@@ -43,7 +41,7 @@ const TabsManager = () => {
     // console.log('new tabs: ', newTabsListLabels);
 
     setQueriesTabs({
-      tabsListLabels: newTabsListLabels,
+      tabsListLabels: newTabsListLabels
     });
   };
 
@@ -68,31 +66,42 @@ const TabsManager = () => {
           }}
         >
           <TabList id="tabs-list">
-            {queriesTabs.tabsListLabels.map((el, idx) => (idx !== 0
-              ? (
+            {queriesTabs.tabsListLabels.map((el, idx) =>
+              idx !== 0 ? (
                 <Tab key={`tab-${el}`} tab-id={el} style={tabStyle}>
                   {endpointHistory[el] ? endpointHistory[el] : defaultEndpoint}
-                  <DeleteButton className="delete-button" key={`del-btn-${el}`} tabId={el} deleteTab={deleteTab} />
+                  <DeleteButton
+                    className="delete-button"
+                    key={`del-btn-${el}`}
+                    tabId={el}
+                    deleteTab={deleteTab}
+                  />
                 </Tab>
-              )
-              : (
+              ) : (
                 <Tab key={`tab-${el}`} tab-id={el} style={tabStyleMain}>
                   {endpointHistory[el]}
-                  <DeleteButton id="main-tab-delete" className="delete-button" key={`del-btn-${el}`} tabId={el} deleteTab={() => { }} isHidden />
+                  <DeleteButton
+                    id="main-tab-delete"
+                    className="delete-button"
+                    key={`del-btn-${el}`}
+                    tabId={el}
+                    deleteTab={() => {}}
+                    isHidden
+                  />
                 </Tab>
-              )))}
+              )
+            )}
             {/* {<button type="button" onClick={deleteTab}>x</button>} */}
-            <button
-              type="button"
-              id="add-tab-button"
-              style={addButtonStyle}
-              onClick={addNewTab}
-            >
+            <button type="button" id="add-tab-button" style={addButtonStyle} onClick={addNewTab}>
               +
             </button>
           </TabList>
           {/* {queriesTabs.queriesContainers} */}
-          {queriesTabs.tabsListLabels.map((el, idx) => <TabPanel id="tab-panel" key={`tab-panel-${el}`} tab-panel-id={el}><QueriesContainer stateTabReference={el} key={`qc-${el}`} /></TabPanel>)}
+          {queriesTabs.tabsListLabels.map((el, idx) => (
+            <TabPanel id="tab-panel" key={`tab-panel-${el}`} tab-panel-id={el}>
+              <QueriesContainer stateTabReference={el} key={`qc-${el}`} />
+            </TabPanel>
+          ))}
         </Tabs>
       </>
     </>

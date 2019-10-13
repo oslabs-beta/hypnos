@@ -1,43 +1,42 @@
-
 @import 'variables';
 @import '_queryInput.scss';
 @import '_queriesContainer.scss';
-@import "_queryInput.scss";
-@import "_queryOutputDisplay.scss";
-@import "_endpointField.scss";
-@import "_header.scss";
-@import "_buttons.scss";
-@import "_spinner.scss";
-@import "_historyDisplay.scss";
-@import "_APIKeyModal.scss";
+@import '_queryInput.scss';
+@import '_queryOutputDisplay.scss';
+@import '_endpointField.scss';
+@import '_header.scss';
+@import '_buttons.scss';
+@import '_spinner.scss';
+@import '_historyDisplay.scss';
+@import '_APIKeyModal.scss';
 
 * {
-    margin: 0;
-    padding: 0;
+  margin: 0;
+  padding: 0;
 }
 
 body {
-    font: $font-stack;
+  font: $font-stack;
 }
 
 #app {
-    min-width: 100vw;
-    min-height: 100vh;
-    display: grid;
-    grid-template-rows: 45px 35px 1fr;
-    grid-template-columns: 15% 1fr;
-    grid-template-areas: 
-        "header header"
-        "historyDisplay reactTabs"
-        "historyDisplay reactTabs";
-    font: $font-stack;
-    background-color: $background-color;
-    // NOT SURE WHAT ELSE THE BELOW MIGHT CAUSE, BUT THIS FIXES WHITESPACE ON BOTTOM
-    overflow: hidden;
+  min-width: 100vw;
+  min-height: 100vh;
+  display: grid;
+  grid-template-rows: 45px 35px 1fr;
+  grid-template-columns: 15% 1fr;
+  grid-template-areas:
+    'header header'
+    'historyDisplay reactTabs'
+    'historyDisplay reactTabs';
+  font: $font-stack;
+  background-color: $background-color;
+  // NOT SURE WHAT ELSE THE BELOW MIGHT CAUSE, BUT THIS FIXES WHITESPACE ON BOTTOM
+  overflow: hidden;
 }
 
 %input-fields {
-    border-left: 1px solid $highlight-color;
+  border-left: 1px solid $highlight-color;
 }
 
 // @-webkit-keyframes colorchange
@@ -58,10 +57,9 @@ body {
 // 100% {background: #E5446D;}
 // }
 
-
 %headers {
-    background-color: $dark-color;
-    // -webkit-animation: colorchange 20s;
-    // animation: colorchange 20s;
-    // animation-iteration-count: infinite;
+  background-color: $dark-color;
+  // -webkit-animation: colorchange 20s;
+  // animation: colorchange 20s;
+  // animation-iteration-count: infinite;
 }

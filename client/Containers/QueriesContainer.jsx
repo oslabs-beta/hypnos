@@ -10,10 +10,17 @@ import { multipleQueriesError as multipleQueriesDispatchObj } from '../Constants
 // import APIModal from '../Components/APIKeyModal';
 // Modal.setAppElement('#root')
 
-const QueriesContainer = (props) => {
+const QueriesContainer = props => {
   const { stateTabReference } = props;
 
-  const [{ query: { query, ranQueryTab }, queryResultObject, queryGQLError }, dispatch] = useStateValue();
+  const [
+    {
+      query: { query, ranQueryTab },
+      queryResultObject,
+      queryGQLError
+    },
+    dispatch
+  ] = useStateValue();
 
   // error thrown because it evals before anything is in query
   let OutputOfQuery;
@@ -34,7 +41,7 @@ const QueriesContainer = (props) => {
       dispatch(multipleQueriesDispatchObj);
 
       OutputOfQuery = graphql(query, {
-        onError: (e) => {
+        onError: e => {
           // not working
           console.log('Too many queries being run.', e);
         },
@@ -44,14 +51,15 @@ const QueriesContainer = (props) => {
           if (data.loading) {
             return {
               stateTabReference,
-              loading: data.loading,
+              loading: data.loading
             };
           }
           return {
             stateTabReference,
-            error: 'Currently attempting to run multiple queries, but only one query, subscription, or mutation may be run at one time',
+            error:
+              'Currently attempting to run multiple queries, but only one query, subscription, or mutation may be run at one time'
           };
-        },
+        }
       })(QueryOutputDisplay);
     } else {
       OutputOfQuery = graphql(query, {
@@ -62,31 +70,30 @@ const QueriesContainer = (props) => {
           if (data.loading) {
             return {
               stateTabReference,
-              loading: data.loading,
+              loading: data.loading
             };
           }
           if (data.error) {
             // console.log('error inside QC: ', data.error);
             return {
               stateTabReference,
-              error: data.error,
+              error: data.error
             };
           }
           // if query successful, instantiate result obj.
           const resultObj = {
             stateTabReference,
-            loading: false,
+            loading: false
           };
           // separately assign queryResultVar to output obj
           resultObj[queryResultObject] = data[queryResultObject];
           return resultObj;
-        },
+        }
         // render QOD with props from GraphQL query
       })(QueryOutputDisplay);
       // console.log(query, 'this is query after QOD')
     }
   }
-
 
   // NOTE: moved endpoint field to inside query
   // NOTE: ERRORS ARE MOSTLY BEING RENDERED HERE, NOT INSIDE QUERY OUTPUT DISPLAY.
@@ -103,7 +110,6 @@ const QueriesContainer = (props) => {
         {queryGQLError !== '' && <p className="error">{queryGQLError}</p>}
       </article>
     </section>
-
   );
 };
 
