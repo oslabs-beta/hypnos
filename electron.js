@@ -18,12 +18,14 @@ app.on('ready', () => {
   mainWindow = new BrowserWindow({ width: 1170, height: 800 });
   // load html into the window
   console.log('Dev environment on: ', isDev);
-  mainWindow.loadURL(url.format({
-    // ssiwtched back to 3000 from 8080 because no longer using server
-    pathname: isDev ? '//localhost:3000' : path.join(__dirname, './build/index.html'),
-    protocol: isDev ? 'http:' : 'file:',
-    slashes: true,
-  }));
+  mainWindow.loadURL(
+    url.format({
+      // ssiwtched back to 3000 from 8080 because no longer using server
+      pathname: isDev ? '//localhost:3000' : path.join(__dirname, './build/index.html'),
+      protocol: isDev ? 'http:' : 'file:',
+      slashes: true
+    })
+  );
 
   // build menu from template
   if (isDev) mainMenuTemplate.push(devToolsMenu);
@@ -42,9 +44,9 @@ const mainMenuTemplate = [
         click() {
           app.quit();
         },
-        accelerator: 'CommandOrControl+Q',
-      },
-    ],
+        accelerator: 'CommandOrControl+Q'
+      }
+    ]
   },
   {
     label: 'Edit',
@@ -55,11 +57,10 @@ const mainMenuTemplate = [
       { label: 'Cut', accelerator: 'CmdOrCtrl+X', selector: 'cut:' },
       { label: 'Copy', accelerator: 'CmdOrCtrl+C', selector: 'copy:' },
       { label: 'Paste', accelerator: 'CmdOrCtrl+V', selector: 'paste:' },
-      { label: 'Select All', accelerator: 'CmdOrCtrl+A', selector: 'selectAll:' },
-    ],
-  },
+      { label: 'Select All', accelerator: 'CmdOrCtrl+A', selector: 'selectAll:' }
+    ]
+  }
 ];
-
 
 const devToolsMenu = {
   label: 'View',
@@ -77,7 +78,7 @@ const devToolsMenu = {
           this.open = false;
         }
       },
-      accelerator: 'f12',
-    },
-  ],
+      accelerator: 'f12'
+    }
+  ]
 };

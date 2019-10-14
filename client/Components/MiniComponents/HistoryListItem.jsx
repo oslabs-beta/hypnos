@@ -4,11 +4,9 @@ import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash, faPen } from '@fortawesome/free-solid-svg-icons';
 
-const HistoryListItem = (props) => {
+const HistoryListItem = props => {
   const [isHovering, toggleHover] = useState(false);
-  const {
-    id, queryText, endpoint, onDelete, onEdit,
-  } = props;
+  const { id, queryText, endpoint, onDelete, onEdit } = props;
 
   const pathRegex = queryText.match(/(?<=path:\W*\")\S*(?=\")/gi);
   const path = pathRegex ? pathRegex[0] : 'invalid';
@@ -23,14 +21,10 @@ const HistoryListItem = (props) => {
         onMouseLeave={() => toggleHover(false)}
       >
         <p>
-          <span>Endpoint:</span>
-          {' '}
-          {endpoint}
+          <span>Endpoint:</span> {endpoint}
         </p>
         <p>
-          <span>Path:</span>
-          {' '}
-          {path}
+          <span>Path:</span> {path}
         </p>
         {isHovering && (
           <span id="button-hover">

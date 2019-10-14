@@ -1,122 +1,108 @@
 #history-display {
+  grid-area: historyDisplay;
+  overflow: scroll;
+  // will adds
+  overflow-x: hidden;
+  // W: box-sizing doesn't seem needed
+  // box-sizing: border-box;
+  // end of will adds
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-rows: 37px 20px 1fr;
+  grid-template-areas:
+    'historyHeader'
+    'clearHistory'
+    'historyList';
+  height: 88vh;
+  // width: 90%;
+  font-family: system-ui;
+  background-color: #f7f7f7;
+  resize: none;
+  // margin-left: 10px;
+  // padding: 20px 10px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 
-    grid-area: historyDisplay;
-    overflow: scroll;
-    // will adds
-    overflow-x: hidden;
-    // W: box-sizing doesn't seem needed
-    // box-sizing: border-box;
-    // end of will adds
-    display: grid; 
-    grid-template-columns: minmax(0, 1fr);
-    grid-template-rows: 37px 20px 1fr;
-    grid-template-areas:
-    "historyHeader"
-    "clearHistory"
-    "historyList" ;
-    height: 88vh;
-    // width: 90%;
-    font-family: system-ui;
-    background-color: #f7f7f7;
-    resize: none;
-    // margin-left: 10px;
-    // padding: 20px 10px;
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  ul {
+    list-style-type: none;
+    font-size: 13px;
+    // margin-bottom: 43px;
 
+    li {
+      border-bottom: 1px solid $dark-color;
+      padding-top: 5px;
 
-    ul {
-        list-style-type: none;
-        font-size: 13px;
-        // margin-bottom: 43px;
+      // Added in to word wrap endpoints
+      word-break: break-word;
 
-
-        li {
-            border-bottom: 1px solid $dark-color;
-            padding-top: 5px;
-
-            // Added in to word wrap endpoints
-            word-break: break-word;
-
-            span {
-                font-weight: 700;
-            }
-        }
-
+      span {
+        font-weight: 700;
+      }
     }
+  }
 
-
-    .history-delete {
-
-        svg {
-            color: $dark-color;
-        }
-        
+  .history-delete {
+    svg {
+      color: $dark-color;
     }
+  }
 
-    .history-edit {
-
-        svg {
-            color: $loading-color;
-            
-        }
-
+  .history-edit {
+    svg {
+      color: $loading-color;
     }
+  }
 
-    #history-header {
-        display: grid;
-        grid-area: historyHeader;
-        background-color: $loading-color;
-        color: $highlight-color;
-        // height: 5vh;
-        padding-left: 10px;
-        // box-shadow: 0 2px 4px 0 rgba(0,0,0,0.2);
-        align-items: center;
-        font-weight: bold;
-        width: 100%;
-    }
-    
-    #history-list {
-        // border-top-color: black;
-        grid-area: historyList;
-        padding: 20px 10px;
-        // max-height: 90%;
-        // margin-bottom: 50px;
+  #history-header {
+    display: grid;
+    grid-area: historyHeader;
+    background-color: $loading-color;
+    color: $highlight-color;
+    // height: 5vh;
+    padding-left: 10px;
+    // box-shadow: 0 2px 4px 0 rgba(0,0,0,0.2);
+    align-items: center;
+    font-weight: bold;
+    width: 100%;
+  }
 
-    }
+  #history-list {
+    // border-top-color: black;
+    grid-area: historyList;
+    padding: 20px 10px;
+    // max-height: 90%;
+    // margin-bottom: 50px;
+  }
 
-    #clear-history {
-        // display: grid;
-        // grid-area: clearHistory;
-        // border-style: none;
-        // background-color: $loading-color;
-        // color: $highlight-color;
-        align-items: left;
-        // padding-left: 10px;
-        height: 33px;
-        border-bottom: 1px solid $loading-color;
+  #clear-history {
+    // display: grid;
+    // grid-area: clearHistory;
+    // border-style: none;
+    // background-color: $loading-color;
+    // color: $highlight-color;
+    align-items: left;
+    // padding-left: 10px;
+    height: 33px;
+    border-bottom: 1px solid $loading-color;
 
-        // border-bottom-color: black;
+    // border-bottom-color: black;
+  }
 
-        
-    }
+  #clear-history-button {
+    // border-style: none;
+    height: 33px;
+    width: 100px;
+    background-color: $background-color;
+    font-size: 13px;
+    border-right: 1px solid $loading-color;
+    border-top: none;
+    border-bottom: none;
+  }
 
-    #clear-history-button {
-        // border-style: none;
-        height: 33px;
-        width: 100px;
-        background-color: $background-color;
-        font-size: 13px;
-        border-right: 1px solid $loading-color;
-        border-top: none;
-        border-bottom: none;
-    }
+  #clear-history-button:hover {
+    background-color: #d3d3d3;
+  }
 
-    #clear-history-button:hover {
-        background-color: #D3D3D3;
-    }
-
-    button:focus {
-        outline: 0;
-    }
-
+  button:focus {
+    outline: 0;
+  }
 }

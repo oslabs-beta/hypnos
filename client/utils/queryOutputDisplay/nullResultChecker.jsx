@@ -13,7 +13,10 @@ const nullResultCheck = (object, errorPath = '') => {
     if (object[key] === null) nullVals.push(<li key={errorPath + key}>{errorPath + key}</li>);
     else if (Array.isArray(object[key])) {
       for (let i = 0; i < object[key].length; i += 1) {
-        if (object[key][i] === null) nullVals.push(<li key={`${errorPath + key}at index ${i}`}>{`${errorPath + key}at index ${i}`}</li>);
+        if (object[key][i] === null)
+          nullVals.push(
+            <li key={`${errorPath + key}at index ${i}`}>{`${errorPath + key}at index ${i}`}</li>
+          );
         else if (!Array.isArray(object[key][i]) && typeof object[key][i] === 'object') {
           nullPath = nullResultCheck(object[key][i], `${errorPath + key} at index ${i} => `);
           // ensure nullPath is not an empty string, in that there's a new nullpath to add
@@ -21,11 +24,7 @@ const nullResultCheck = (object, errorPath = '') => {
             // nullVals is always an array. so if path is an array of strings, flatten vals out
             // before pushing
             nullPath.forEach((curNullPath, idx) => {
-              nullVals.push(
-                <li key={`null-path-li-${idx}-index-${i}`}>
-                  {curNullPath}
-                </li>,
-              );
+              nullVals.push(<li key={`null-path-li-${idx}-index-${i}`}>{curNullPath}</li>);
             });
             // nullVals.push(...nullPath);
           }
@@ -40,11 +39,7 @@ const nullResultCheck = (object, errorPath = '') => {
         // nullVals is always an array. so if path is an array of strings, flatten vals out
         // before pushing
         nullPath.forEach((curNullPath, idx) => {
-          nullVals.push(
-            <li key={`null-path-li-${idx}`}>
-              {curNullPath}
-            </li>,
-          );
+          nullVals.push(<li key={`null-path-li-${idx}`}>{curNullPath}</li>);
         });
         // nullVals.push(...nullPath);
       }
@@ -55,7 +50,6 @@ const nullResultCheck = (object, errorPath = '') => {
   return nullVals;
 };
 
-
 const objectTest = {
   name: 'Will',
   testNull: {
@@ -63,15 +57,14 @@ const objectTest = {
     moreNull: null,
     superNull: {
       pong: null,
-      bed: 'yes',
-    },
+      bed: 'yes'
+    }
   },
   flatNull: null,
-  age: 90,
+  age: 90
 };
 
 // should be array of strings
 // console.log(nullResultCheck(objectTest));
-
 
 export default nullResultCheck;

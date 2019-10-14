@@ -1,7 +1,10 @@
 import React from 'react';
-import { tabsDeleteButtonStyle, tabsDeleteButtonMainStyle } from '../../Constants/inlineComponentStyle';
+import {
+  tabsDeleteButtonStyle,
+  tabsDeleteButtonMainStyle
+} from '../../Constants/inlineComponentStyle';
 
-const DeleteButton = (props) => {
+const DeleteButton = props => {
   const { tabId, deleteTab, isHidden } = props;
 
   return (

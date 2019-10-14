@@ -1,7 +1,7 @@
 import React from 'react';
 import nullResultChecker from '../../utils/queryOutputDisplay/nullResultChecker';
 
-const NullResultCheck = (props) => {
+const NullResultCheck = props => {
   const { isHovering, toggleHover, result } = props;
 
   return (
@@ -11,15 +11,14 @@ const NullResultCheck = (props) => {
         <br />
         Please double check your query.
         <br />
-        <span onMouseEnter={() => toggleHover(true)} onMouseLeave={() => toggleHover(false)}>Hover for details.</span>
+        <span onMouseEnter={() => toggleHover(true)} onMouseLeave={() => toggleHover(false)}>
+          Hover for details.
+        </span>
         {isHovering && (
           <article id="tooltip">
-            <ul>
-              {nullResultChecker(result)}
-            </ul>
+            <ul>{nullResultChecker(result)}</ul>
           </article>
-        )
-        }
+        )}
         <br />
         <br />
       </aside>

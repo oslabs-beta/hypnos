@@ -1,5 +1,5 @@
 /* eslint-disable no-restricted-syntax */
-const nullChecker = (object) => {
+const nullChecker = object => {
   // pull keys off object passed in
   const objKeys = Object.keys(object);
   let nullCheck;
@@ -31,7 +31,6 @@ const nullChecker = (object) => {
   return false;
 };
 
-
 const objectTest = {
   name: 'Will',
   // testNull: {
@@ -46,11 +45,9 @@ const objectTest = {
   // age: 90,
   test: {
     once: {
-      array: [
-        null,
-      ],
-    },
-  },
+      array: [null]
+    }
+  }
 };
 
 const officeCheck = {
@@ -61,60 +58,59 @@ const officeCheck = {
       number: 1,
       image: null,
       summary: null,
-      __typename: 'Season',
+      __typename: 'Season'
     },
     {
       number: 2,
       image: null,
       summary: null,
-      __typename: 'Season',
+      __typename: 'Season'
     },
     {
       number: 3,
       image: null,
       summary: null,
-      __typename: 'Season',
+      __typename: 'Season'
     },
     {
       number: 4,
       image: null,
       summary: null,
-      __typename: 'Season',
+      __typename: 'Season'
     },
     {
       number: 5,
       image: null,
       summary: null,
-      __typename: 'Season',
+      __typename: 'Season'
     },
     {
       number: 6,
       image: null,
       summary: null,
-      __typename: 'Season',
+      __typename: 'Season'
     },
     {
       number: 7,
       image: null,
       summary: null,
-      __typename: 'Season',
+      __typename: 'Season'
     },
     {
       number: 8,
       image: null,
       summary: null,
-      __typename: 'Season',
+      __typename: 'Season'
     },
     {
       number: 9,
       image: null,
       summary: null,
-      __typename: 'Season',
-    },
+      __typename: 'Season'
+    }
   ],
-  __typename: 'Show',
+  __typename: 'Show'
 };
-
 
 // should be boolean
 // console.log(nullChecker(officeCheck));
