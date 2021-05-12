@@ -54,7 +54,7 @@
     "apollo-link-rest": "^0.7.3",
     "babel-core": "^6.26.3",
     "babel-jest": "^24.8.0",
-    "codemirror": "^5.48.2",
+    "codemirror": "^5.58.2",
     "context": "0.0.1",
     "css-loader": "^3.1.0",
     "dexie": "^2.0.4",
