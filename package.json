@@ -57,7 +57,7 @@
     "codemirror": "^5.48.2",
     "context": "0.0.1",
     "css-loader": "^3.1.0",
-    "dexie": "^2.0.4",
+    "dexie": "^3.2.2",
     "dotenv": "^8.0.0",
     "electron-is-dev": "^1.1.0",
     "fake-indexeddb": "^2.1.1",
